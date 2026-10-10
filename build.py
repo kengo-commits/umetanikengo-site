@@ -226,7 +226,7 @@ def profile(root):
           ('2020', '株式会社U&amp;K CREATIVE VISIONS 代表取締役CEOに就任', 'Appointed Representative Director and CEO of U&amp;K CREATIVE VISIONS Inc.')]
     career = ''.join(f'<li><span>{j}<span class="sub" lang="en">{e}</span></span><span class="b">{y}</span></li>' for y, j, e in tl)
     direction = ''.join(f'<li><span>{esc(n)}<span class="sub">{esc(r)}</span></span></li>' for n, r in D['DIRECTION'])
-    kpg = ''.join(f'<li><span>{esc(n)}</span></li>' for n, u in D['KPGWORKS'])
+    kpg = ''.join(f'<li><span>{esc(n)}' + (f'<span class="sub">{esc(r)}</span>' if r else '') + '</span></li>' for n, u, r in D['KPGWORKS'])
     b = []
     portrait = '<div class="frame mono" style="margin-top:24px">' + pic('top-model', '梅谷 憲吾 / KENGO UMETANI', root, lazy=False, prio=True) + '</div>'
     b.append(row('<h1 class="label big">PROFILE<span>梅谷 憲吾 / KENGO UMETANI</span></h1>' + portrait, bi(BIO_JP, BIO_EN), 'text first'))
@@ -237,7 +237,7 @@ def profile(root):
     b.append(row('<h2 class="label">MODEL WORKS</h2>',
                  '<ul class="list norm gap"><li><span>HERMÈS, GUCCI, ARMANI, KENZO, ETRO, MARC JACOBS and more<span class="sub" lang="ja">HERMÈS、GUCCI、ARMANI、KENZO、ETRO、MARC JACOBS 等</span></span><span class="b">OVERSEAS<span class="sub" lang="ja">海外</span></span></li><li><span>Tokyo Collection, advertisements for Johnson &amp; Johnson and others, TV commercials for AOKI and others, various magazines, and more<span class="sub" lang="ja">東京コレクション、ジョンソン・エンド・ジョンソンなどの広告、AOKIなどのテレビCM、各種雑誌 等</span></span><span class="b">JAPAN<span class="sub" lang="ja">国内</span></span></li></ul>', 'text'))
     b.append(row('<h2 class="label">CREATIVE DIRECTION WORKS</h2>', f'<ul class="list gap">{direction}<li><span>ETC.</span></li></ul>', 'text'))
-    b.append(row('<h2 class="label">KATO PLEASURE GROUP WORKS</h2>', f'<ul class="list">{kpg}<li><span>ETC.</span></li></ul>', 'text'))
+    b.append(row('<h2 class="label">KATO PLEASURE GROUP WORKS</h2>', f'<ul class="list gap">{kpg}<li><span>ETC.</span></li></ul>', 'text'))
     return page('PROFILE', 'PROFILE | KENGO UMETANI OFFICIAL', '梅谷 憲吾 プロフィール。1985年大阪府生まれ。近畿大学理工学部建築学科卒業。カトープレジャーグループ クリエイティブディレクター。', '\n'.join(b), root)
 
 
