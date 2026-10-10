@@ -1,0 +1,4 @@
+{
+ "noindex": true,
+ "_note": "公開（検索に出す）ときは noindex を false にする"
+}

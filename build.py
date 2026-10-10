@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parent
 
 D = json.load(open(ROOT / 'data/content.json', encoding='utf-8'))
 META = json.load(open(ROOT / 'data/imgmeta.json'))
+SITE = json.load(open(ROOT / 'data/site-settings.json', encoding='utf-8'))
 IGDATA = json.load(open(ROOT / 'data/instagram.json', encoding='utf-8'))
 for _p in IGDATA['posts']:
     META[_p['image']] = {'ws': _p['ws'], 'fw': _p['fw'], 'fh': _p['fh']}
@@ -76,7 +77,7 @@ def page(key, title, desc, body, root, skeleton=True):
     body = en_first(body)
     nav = ''.join(f'<a href="{root}{href}"{" class=\"on\" aria-current=\"page\"" if k == key else ""}>{k}</a>' for k, href in NAV)
     head = f'''<title>{esc(title)}</title>
-<meta name="description" content="{esc(desc)}">
+<meta name="description" content="{esc(desc)}">{'\n<meta name="robots" content="noindex, nofollow">' if SITE.get('noindex') else ''}
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:site_name" content="KENGO UMETANI OFFICIAL">
 <meta property="og:description" content="{esc(desc)}">
@@ -348,7 +349,7 @@ if __name__ == '__main__':
     shutil.copytree(ROOT / 'images', OUT + '/images')
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
-    open(OUT + '/CNAME', 'w').write('www.umetanikengo.com\n')
+    open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else 'User-agent: *\nAllow: /\n')
     open(OUT + '/.nojekyll', 'w').write('')
     open(OUT + '/index.html', 'w', encoding='utf-8').write(home(''))
     for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie)]:
