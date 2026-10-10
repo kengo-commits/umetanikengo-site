@@ -6,6 +6,8 @@ ROOT = Path(__file__).resolve().parent
 D = json.load(open(ROOT / 'data/content.json', encoding='utf-8'))
 META = json.load(open(ROOT / 'data/imgmeta.json'))
 SITE = json.load(open(ROOT / 'data/site-settings.json', encoding='utf-8'))
+import hashlib
+ASSET_V = hashlib.sha1((ROOT / 'assets/site.css').read_bytes() + (ROOT / 'assets/site.js').read_bytes()).hexdigest()[:8]
 IGDATA = json.load(open(ROOT / 'data/instagram.json', encoding='utf-8'))
 for _p in IGDATA['posts']:
     META[_p['image']] = {'ws': _p['ws'], 'fw': _p['fw'], 'fh': _p['fh']}
@@ -86,7 +88,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&amp;display=swap">
-<link rel="stylesheet" href="{root}assets/site.css">'''
+<link rel="stylesheet" href="{root}assets/site.css?v={ASSET_V}">'''
     content = f'''<header class="top">
   <a class="mark" href="{root}index.html">KENGO UMETANI OFFICIAL<span>梅谷 憲吾 公式サイト</span></a>
   <nav class="nav" aria-label="Main">{nav}</nav>
@@ -100,7 +102,7 @@ def page(key, title, desc, body, root, skeleton=True):
   <nav class="nav-foot" aria-label="Legal"><a href="{root}about/index.html"{" class=\"on\"" if key=="ABOUT" else ""}>ABOUT / 概要</a><a href="{root}privacy/index.html"{" class=\"on\"" if key=="PRIVACY" else ""}>PRIVACY POLICY / プライバシーポリシー</a><a href="{root}cookie/index.html"{" class=\"on\"" if key=="COOKIE" else ""}>COOKIE POLICY / COOKIE 設定</a></nav>
   <span>© KENGO UMETANI</span>
 </footer>
-<script src="{root}assets/site.js" defer></script>'''
+<script src="{root}assets/site.js?v={ASSET_V}" defer></script>'''
     if not skeleton:
         return head + '\n' + content
     return f'''<!doctype html>
