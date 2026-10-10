@@ -206,7 +206,7 @@ main{display:grid}
 /* HOME: from INFORMATION down, the page turns black (full width, including the footer) */
 .home-ig{background:#000;color:#808080;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);padding-top:clamp(56px,8vw,96px);--sub:#5c5c5c;--mute:#555;--rule:#262626;--ink:#808080}
 .home-ig .ig-tile{background:#1a1a1a}
-.home-ig .ig-tile img{filter:brightness(.42);transition:opacity .9s ease,transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease}
+.home-ig .ig-tile img{filter:brightness(.25);transition:opacity .9s ease,transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease}
 .home-ig .ig-post:hover .ig-tile img{filter:brightness(.95)}
 .home-ig a:hover{color:#808080}
 .home-ig .sns-icons a:hover{color:#fff;opacity:1}
