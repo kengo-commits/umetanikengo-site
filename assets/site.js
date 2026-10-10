@@ -24,7 +24,8 @@ document.querySelectorAll('.show').forEach(show=>{
   frame.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.5){swiped=true;set(i+(dx<0?1:-1))}},{passive:true});
   frame.addEventListener('click',e=>{if(swiped){swiped=false;return}const img=e.target.closest('img');if(!img)return;const r=img.getBoundingClientRect();set(i+(e.clientX<r.left+r.width*.3?-1:1))});
   /* HOME: auto-advance, and the index links preview their page's photo */
-  const auto=+show.dataset.auto||0;
+  /* phones show each top photo for 4 seconds instead of 8 */
+  const auto=(show.classList.contains('hero')&&matchMedia('(max-width: 600px)').matches)?4000:(+show.dataset.auto||0);
   if(auto&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     let held=false;
     let last=Date.now();
