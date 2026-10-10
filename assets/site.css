@@ -128,6 +128,8 @@ main{display:grid}
 .mono img{filter:grayscale(1) sepia(.14) hue-rotate(178deg) saturate(1.35) contrast(1.16) brightness(.94)}
 /* top slideshow: deeper blacks and stronger contrast */
 .hero .frame img{filter:grayscale(1) sepia(.12) hue-rotate(178deg) saturate(1.4) contrast(1.45) brightness(.8)}
+/* AQUASENSE is a bright daytime shot: push it darker and harder than the others */
+.hero .frame img[src*="aquasense-1"]{filter:grayscale(1) sepia(.12) hue-rotate(178deg) saturate(1.4) contrast(1.8) brightness(.62)}
 .hero-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;text-transform:uppercase;color:var(--sub);font-variant-numeric:tabular-nums}
 .hero-cap .num{flex-shrink:0}
 .home-ig{margin-top:clamp(80px,14svh,160px)}
