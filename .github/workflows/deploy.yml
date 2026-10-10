@@ -61,8 +61,11 @@ jobs:
         with:
           path: dist
 
+  # Publishing is switched off while the site is being edited.
+  # To publish: Settings → Secrets and variables → Actions → Variables → add PUBLISH = true
   deploy:
     needs: build
+    if: vars.PUBLISH == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
