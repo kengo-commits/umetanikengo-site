@@ -171,6 +171,12 @@ KPG_GLC = (['私たちカトープレジャーグループは、「日本のレ�
             'As Good Leisure Creators, we bring together the times, places and people with new value, and with the highest standard of hospitality, we create "fun" for our guests.'])
 
 
+ICON_IG = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">'
+           '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>')
+ICON_FB = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">'
+           '<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M15.5 7.6h-1.6c-1.3 0-1.9.8-1.9 2V21M9.6 12.6h5.4"/></svg>')
+
+
 def ig_grid(root):
     def igcap(t):
         return esc(t).replace('\n', '<br>')
@@ -202,7 +208,7 @@ def home(root, skeleton=True):
             f'<div class="hero-cap"><span class="cap">{esc(HOME_SLIDES[0][1])}</span><span class="num">01 / {n:02d}</span></div></section>')
     ig = ('<section class="home-ig wide" aria-label="Information">'
           '<div class="ig-head"><h2 class="h2">INFORMATION</h2>'
-          f'<nav class="nav-foot"><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a></nav></div>'
+          f'<nav class="sns-icons"><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">{ICON_IG}</a><a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">{ICON_FB}</a></nav></div>'
           + ig_grid(root).replace("sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px'", "") + '</section>')
     h1 = '<h1 class="visually-hidden">KENGO UMETANI OFFICIAL / 梅谷憲吾 公式サイト</h1>'
     return page('HOME', 'KENGO UMETANI OFFICIAL',

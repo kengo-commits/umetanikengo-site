@@ -149,6 +149,10 @@ main{display:grid}
 .home-ig.wide{contain:inline-size;width:auto}
 .ig-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px;flex-wrap:wrap}
 .ig-head .h2{margin-bottom:0}
+.sns-icons{display:flex;gap:18px;align-items:center}
+.sns-icons a{display:block;line-height:0;color:var(--ink);transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1)}
+.sns-icons a:hover{opacity:.5;transform:translateY(-2px)}
+.sns-icons svg{display:block}
 .home-ig.wide .ig-grid{max-width:none;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px 12px}
 
 /* touch: larger tap targets */
