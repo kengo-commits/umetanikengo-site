@@ -218,7 +218,8 @@ def profile(root):
     direction = ''.join(f'<li><span>{esc(n)}<span class="sub">{esc(r)}</span></span></li>' for n, r in D['DIRECTION'])
     kpg = ''.join(f'<li><a class="row-a" href="{u}" target="_blank" rel="noopener"><span>{esc(n)}</span><span>SITE ↗</span></a></li>' for n, u in D['KPGWORKS'])
     b = []
-    b.append(row('<h1 class="label big">PROFILE<span>梅谷 憲吾 / KENGO UMETANI</span></h1>', bi(BIO_JP, BIO_EN), 'text first'))
+    portrait = '<div class="frame mono">' + pic('top-model', 'Kengo Umetani / 梅谷憲吾', root, lazy=False, prio=True) + '</div>'
+    b.append(row(portrait, '<h1 class="label big" style="margin-bottom:18px">PROFILE<span>梅谷 憲吾 / KENGO UMETANI</span></h1>' + bi(BIO_JP, BIO_EN), 'first'))
     b.append(row('<h2 class="label">現職<span>CURRENT POSITION</span></h2>', current_block(), 'text'))
     b.append(row('<h2 class="label">次代のクリエイティブへのアプローチ<span>AN APPROACH TO THE NEXT GENERATION OF CREATIVITY</span></h2>', bi(*APPROACH), 'text'))
     b.append(row('<h2 class="label">学歴<span>EDUCATION</span></h2>',
