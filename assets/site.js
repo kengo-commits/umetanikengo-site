@@ -47,13 +47,22 @@ document.querySelectorAll('.show').forEach(show=>{
 
 /* ---------- quiet motion across the site ---------- */
 (()=>{
-  /* phones: a touch brightens the Instagram photo under the finger */
+  /* phones: a touch brightens the Instagram photo under the finger.
+     The first tap only brightens it; tapping the same photo again opens Instagram. */
+  const touchOnly=matchMedia('(hover: none)').matches;
+  let armed=null;
+  const disarm=()=>{if(armed){armed.classList.remove('lit','armed');armed=null}};
   document.querySelectorAll('.home-ig .ig-post').forEach(a=>{
     let t;
     a.addEventListener('touchstart',()=>{clearTimeout(t);a.classList.add('lit')},{passive:true});
-    const off=()=>{clearTimeout(t);t=setTimeout(()=>a.classList.remove('lit'),900)};
+    const off=()=>{clearTimeout(t);t=setTimeout(()=>{if(a!==armed)a.classList.remove('lit')},900)};
     a.addEventListener('touchend',off,{passive:true});a.addEventListener('touchcancel',off,{passive:true});
+    a.addEventListener('click',e=>{
+      if(!touchOnly||a===armed)return;      /* second tap: open Instagram */
+      e.preventDefault();disarm();armed=a;a.classList.add('lit','armed');
+    });
   });
+  document.addEventListener('click',e=>{if(armed&&!armed.contains(e.target))disarm()});
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* photos fade in once they have loaded */
   document.querySelectorAll('img.ph').forEach(img=>{
