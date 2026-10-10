@@ -13,7 +13,7 @@ for _p in IGDATA['posts']:
     META[_p['image']] = {'ws': _p['ws'], 'fw': _p['fw'], 'fh': _p['fh']}
 OUT = str(ROOT / 'dist')
 WORKS = {w['id']: w for w in D['WORKS']}
-ORDER = ['aquasense', 'peaks', 'island', 'synesthesia', 'glamday', 'grandmer', 'tsurutontan', 'nomado', 'fufusel']  # same order as the current CREATIVE page
+ORDER = ['aquasense', 'peaks', 'island', 'synesthesia', 'fufusel', 'glamday', 'grandmer', 'tsurutontan', 'nomado']  # same order as the current CREATIVE page
 
 MAIN_SIZES = '(max-width: 480px) 100vw, (max-width: 900px) 560px, (max-width: 1024px) and (orientation: portrait) 560px, min(44vw, 820px)'
 
