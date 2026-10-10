@@ -39,6 +39,7 @@ h1,h2{margin:0;font-size:inherit}
 .top{position:sticky;top:0;z-index:10;background:var(--bg);display:flex;justify-content:space-between;align-items:flex-start;gap:var(--gap);padding-block:calc(env(safe-area-inset-top,0px) + 22px) 18px;min-height:var(--hdr)}
 .mark{font-weight:700;text-transform:uppercase;align-self:start;font-size:calc(var(--fs) * 1.4);letter-spacing:.02em;line-height:1.3}
 .mark span{display:block;font-weight:400}
+.mark .l2{display:inline;font-weight:inherit}
 .nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px clamp(16px,2.4vw,40px);text-transform:uppercase}
 .nav a{width:max-content;max-width:100%}
 .nav a.on{font-weight:700}
@@ -171,6 +172,7 @@ main{display:grid}
   .home-ig.wide .ig-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (max-width:480px){
+  .mark .l2{display:block}
   :root{--fs:10.5px;--fs-body:11.5px}
   .frame img{width:100%;max-height:none}
   .frame img[data-tall]{width:auto;max-height:64svh}
@@ -193,7 +195,7 @@ main{display:grid}
 @media (max-width:600px) and (orientation:portrait){
   .home-col{width:auto}
   .home-col .hero,.hero{width:auto;max-width:none;margin:0 calc(-1 * var(--gut));position:relative}
-  .hero .frame{height:calc(100svh - 55px)}
+  .hero .frame{height:calc(100svh - 60px)}
   .hero .frame > picture{width:100%;height:100%}
   .hero .frame img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center}
   .hero-cap{position:absolute;left:var(--gut);right:var(--gut);bottom:calc(env(safe-area-inset-bottom,0px) + 20px);margin:0;color:#fff;text-shadow:0 0 14px rgba(0,0,0,.45);z-index:2;pointer-events:none}
