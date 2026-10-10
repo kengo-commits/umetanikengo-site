@@ -176,10 +176,14 @@ def ig_grid(root):
 
 
 # ---------- HOME: one screen, minimal ----------
-HOME_SLIDES = [('home-hero', 'Waterside at dusk', '夕暮れの水辺の風景'),
-               ('top-model', 'Kengo Umetani', '梅谷憲吾 ポートレート'),
-               ('aquasense-1', 'AQUASENSE Hotel & Resort, Okinawa', 'アクアセンス ホテル＆リゾート'),
-               ('model-3', 'Model', 'モデル作品')]
+# One photo per CREATIVE work, in the CREATIVE page order
+HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort — Onna, Okinawa', 'アクアセンス ホテル＆リゾート'),
+               ('island-1', 'i+Land nagasaki — Iojima, Nagasaki', 'アイランド ナガサキ'),
+               ('synesthesia-1', 'SYNESTHESIA HILLS — Nantan, Kyoto', 'シナスタジアヒルズ'),
+               ('glamday-1', 'GLAMDAY STYLE', 'グランデイスタイル'),
+               ('grandmer-2', 'OKINAWA GRAND MER RESORT — Okinawa City, Okinawa', '沖縄グランメールリゾート'),
+               ('tsurutontan-2', 'TSURUTONTAN', 'つるとんたん'),
+               ('nomado-1', 'NOMADO — Daikokucho, Osaka', '九州の地酒と肴 呑窓')]
 
 
 def home(root, skeleton=True):
