@@ -1,0 +1,72 @@
+name: Update Instagram and publish
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 */3 * * *'   # every 3 hours
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install
+        run: pip install pillow requests
+
+      - name: Fetch latest Instagram posts
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: python scripts/fetch_instagram.py
+
+      - name: Save refreshed token
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          if [ -f .ig_token_new ] && [ -n "$GH_TOKEN" ]; then
+            gh secret set IG_TOKEN --repo "$GITHUB_REPOSITORY" < .ig_token_new
+            echo "IG_TOKEN updated"
+          fi
+          rm -f .ig_token_new
+
+      - name: Commit updated posts
+        run: |
+          git config user.name "site-bot"
+          git config user.email "site-bot@users.noreply.github.com"
+          git add data/instagram.json images/instagram
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Instagram posts"
+            git push
+          fi
+
+      - name: Build site
+        run: python build.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
