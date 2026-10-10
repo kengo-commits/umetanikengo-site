@@ -48,9 +48,9 @@ document.querySelectorAll('.show').forEach(show=>{
 /* ---------- quiet motion across the site ---------- */
 (()=>{
   /* phones: a touch brightens the Instagram photo under the finger.
-     Holding it for 2.5 seconds opens the post on Instagram (a thin line fills up while you hold). */
+     Holding it for 1 second opens the post on Instagram (a thin line fills up while you hold). */
   const touchOnly=matchMedia('(hover: none)').matches;
-  const HOLD=2500;
+  const HOLD=1000;
   document.querySelectorAll('.home-ig .ig-post').forEach(a=>{
     let t,start=0,sx=0,sy=0,moved=false;
     a.addEventListener('touchstart',e=>{

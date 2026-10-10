@@ -209,11 +209,11 @@ main{display:grid}
 .home-ig .ig-tile img{filter:brightness(.25);transition:opacity .9s ease,transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s ease}
 .home-ig .ig-post:hover .ig-tile img,.home-ig .ig-post.lit .ig-tile img{filter:brightness(.95)}
 .home-ig .ig-post.lit .ig-title{color:#fff;transition:color .1s}
-/* phones: hold a photo to open it — a thin line fills over 2.5 seconds */
+/* phones: hold a photo to open it — a thin line fills over 1 second */
 .home-ig .ig-post{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .home-ig .ig-tile{position:relative}
 .home-ig .ig-tile::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:#fff;transform:scaleX(0);transform-origin:left;opacity:0;transition:transform .2s ease,opacity .2s ease}
-.home-ig .ig-post.holding .ig-tile::after{transform:scaleX(1);opacity:.9;transition:transform 2.5s linear,opacity .2s ease}
+.home-ig .ig-post.holding .ig-tile::after{transform:scaleX(1);opacity:.9;transition:transform 1s linear,opacity .2s ease}
 .home-ig .ig-post.lit .ig-tile img{transition:opacity .9s ease,transform 1.2s cubic-bezier(.2,.7,.2,1),filter .12s ease-out}
 .home-ig a:hover{color:#808080}
 .home-ig .sns-icons a:hover{color:#fff;opacity:1}
