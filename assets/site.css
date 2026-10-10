@@ -136,18 +136,14 @@ main{display:grid}
 .hero .frame > picture{display:block;grid-area:1/1;position:relative;opacity:0;transition:opacity 0s linear .85s}
 .hero .frame > picture.on{opacity:1;transition:opacity 0s linear .85s}
 /* photos change through black: the outgoing photo sinks to black, then the next one rises out of black.
-   A layer of black is multiplied over each photo (40% while it is showing) */
+   The photos themselves are graded like the reference print (silver black & white with film grain) */
 .hero .frame > picture::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,1);mix-blend-mode:multiply;pointer-events:none;transition:background-color .85s ease-in}
-.hero .frame > picture.on::after{background:rgba(0,0,0,.4);transition:background-color .85s ease-out .85s}
+.hero .frame > picture.on::after{background:rgba(0,0,0,0);transition:background-color .85s ease-out .85s}
 .hero:not(.ready) .frame > picture:first-child{opacity:1}
-.hero:not(.ready) .frame > picture:first-child::after{background:rgba(0,0,0,.4)}
+.hero:not(.ready) .frame > picture:first-child::after{background:rgba(0,0,0,0)}
 .hero .frame img{animation:none}
 /* black & white with a faint cold tone and deeper contrast */
 .mono img{filter:grayscale(1) sepia(.14) hue-rotate(178deg) saturate(1.35) contrast(1.16) brightness(.94)}
-/* top slideshow: deeper blacks and stronger contrast */
-.hero .frame img{filter:grayscale(1) sepia(.12) hue-rotate(178deg) saturate(1.4) contrast(1.45) brightness(.8)}
-/* AQUASENSE is a bright daytime shot: push it darker and harder than the others */
-.hero .frame img[src*="aquasense-1"]{filter:grayscale(1) sepia(.12) hue-rotate(178deg) saturate(1.4) contrast(1.8) brightness(.62)}
 .hero-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;text-transform:uppercase;color:var(--sub);font-variant-numeric:tabular-nums}
 .hero-cap .num{flex-shrink:0}
 .home-ig{margin-top:clamp(80px,14svh,160px)}
