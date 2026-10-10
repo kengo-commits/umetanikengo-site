@@ -249,7 +249,7 @@ def creative(root):
 
 # ---------- MODEL (same eight photos) ----------
 def model(root):
-    names = [f'model-{n}' for n in range(1, 9)]
+    names = ['model-sts1', 'model-sts2'] + [f'model-{n}' for n in range(1, 9)]
     thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-go="{i}" aria-label="写真 {i+1} / Photo {i+1}">{pic(n, "", root, sizes="120px")}</button>' for i, n in enumerate(names))
     b = [row(show(names, '梅谷憲吾 モデル / Kengo Umetani, model', root, first_lazy=False, prio=True),
              f'<h1 class="h2">MODEL<span>KENGO UMETANI</span></h1><div class="thumbs">{thumbs}</div>'
