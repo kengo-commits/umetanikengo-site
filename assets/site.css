@@ -88,6 +88,7 @@ main{display:grid}
 .list li > *:last-child:not(:first-child){text-align:right;flex-shrink:0}
 .list .row-a{display:flex;justify-content:space-between;gap:16px;width:100%}
 .list .sub{display:block;color:var(--mute);text-transform:none}
+.list .sub[lang="ja"]{color:var(--ink)}
 
 .video{display:block;position:relative}
 .video img{display:block;max-width:100%;height:auto}
