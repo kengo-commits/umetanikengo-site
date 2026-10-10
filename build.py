@@ -226,7 +226,7 @@ def profile(root):
           ('2020', '株式会社U&amp;K CREATIVE VISIONS 代表取締役CEOに就任', 'Appointed Representative Director and CEO of U&amp;K CREATIVE VISIONS Inc.')]
     career = ''.join(f'<li><span>{j}<span class="sub" lang="en">{e}</span></span><span class="b">{y}</span></li>' for y, j, e in tl)
     direction = ''.join(f'<li><span>{esc(n)}<span class="sub">{esc(r)}</span></span></li>' for n, r in D['DIRECTION'])
-    kpg = ''.join(f'<li><a class="row-a" href="{u}" target="_blank" rel="noopener"><span>{esc(n)}</span><span>SITE ↗</span></a></li>' for n, u in D['KPGWORKS'])
+    kpg = ''.join(f'<li><span>{esc(n)}</span></li>' for n, u in D['KPGWORKS'])
     b = []
     portrait = '<div class="frame mono" style="margin-top:24px">' + pic('top-model', '梅谷 憲吾 / KENGO UMETANI', root, lazy=False, prio=True) + '</div>'
     b.append(row('<h1 class="label big">PROFILE<span>梅谷 憲吾 / KENGO UMETANI</span></h1>' + portrait, bi(BIO_JP, BIO_EN), 'text first'))
