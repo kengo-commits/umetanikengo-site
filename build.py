@@ -90,7 +90,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&amp;display=swap">
 <link rel="stylesheet" href="{root}assets/site.css?v={ASSET_V}">'''
     content = f'''<header class="top">
-  <a class="mark" href="{root}index.html">KENGO UMETANI OFFICIAL<span>梅谷 憲吾 公式サイト</span></a>
+  <a class="mark" href="{root}index.html">KENGO UMETANI OFFICIAL</a>
   <nav class="nav" aria-label="Main">{nav}</nav>
 </header>
 <main>
