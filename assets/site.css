@@ -131,12 +131,12 @@ main{display:grid}
 .hero .frame img{max-width:min(100%, 1200px);max-height:calc(100svh - var(--hdr) - 150px);object-position:center top}
 /* slow dissolve: photos are stacked and cross-fade */
 .hero .frame{display:grid;justify-items:center;align-items:start}
-.hero .frame > picture{display:block;grid-area:1/1;position:relative;opacity:0;transition:opacity 0s linear 1.2s}
-.hero .frame > picture.on{opacity:1;transition:opacity 0s linear 1.2s}
+.hero .frame > picture{display:block;grid-area:1/1;position:relative;opacity:0;transition:opacity 0s linear .85s}
+.hero .frame > picture.on{opacity:1;transition:opacity 0s linear .85s}
 /* photos change through black: the outgoing photo sinks to black, then the next one rises out of black.
    A layer of black is multiplied over each photo (40% while it is showing) */
-.hero .frame > picture::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,1);mix-blend-mode:multiply;pointer-events:none;transition:background-color 1.2s ease-in}
-.hero .frame > picture.on::after{background:rgba(0,0,0,.4);transition:background-color 1.2s ease-out 1.2s}
+.hero .frame > picture::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,1);mix-blend-mode:multiply;pointer-events:none;transition:background-color .85s ease-in}
+.hero .frame > picture.on::after{background:rgba(0,0,0,.4);transition:background-color .85s ease-out .85s}
 .hero:not(.ready) .frame > picture:first-child{opacity:1}
 .hero:not(.ready) .frame > picture:first-child::after{background:rgba(0,0,0,.4)}
 .hero .frame img{animation:none}
