@@ -106,6 +106,8 @@ def page(key, title, desc, body, root, skeleton=True):
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="https://{DOMAIN}/images/aquasense-1.jpg">
 <meta property="og:locale" content="ja_JP">
+<meta name="theme-color" content="#f7f5ee">
+<meta name="color-scheme" content="only light">
 <meta name="twitter:card" content="summary_large_image">{ld}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

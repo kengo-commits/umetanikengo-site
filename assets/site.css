@@ -17,7 +17,7 @@
   --hdr:118px;
   --img-w:clamp(420px, 44vw, 820px);
   --img-h:68svh;
-  color-scheme:light;
+  color-scheme:only light;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:var(--hdr)}
