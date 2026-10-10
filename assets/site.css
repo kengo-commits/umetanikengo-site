@@ -160,7 +160,7 @@ main{display:grid}
 @media (max-width:900px), (max-width:1024px) and (orientation:portrait){
   :root{--fs:10.5px;--fs-body:11.5px;--hdr:0px}
   .top{position:static;gap:16px;min-height:0;padding-block:calc(env(safe-area-inset-top,0px) + 18px) 4px}
-  .nav{gap:2px 14px;max-width:60%}
+  .nav{display:grid;grid-template-columns:repeat(2,max-content);justify-content:end;gap:2px 16px;max-width:60%}
   .row{grid-template-columns:1fr;gap:18px;padding-top:56px}
   .row .r{position:static;max-width:640px}
   .frame img{max-height:62svh}
@@ -193,7 +193,7 @@ main{display:grid}
 @media (max-width:600px) and (orientation:portrait){
   .home-col{width:auto}
   .home-col .hero,.hero{width:auto;max-width:none;margin:0 calc(-1 * var(--gut));position:relative}
-  .hero .frame{height:calc(100svh - 60px)}
+  .hero .frame{height:calc(100svh - 55px)}
   .hero .frame > picture{width:100%;height:100%}
   .hero .frame img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center}
   .hero-cap{position:absolute;left:var(--gut);right:var(--gut);bottom:calc(env(safe-area-inset-bottom,0px) + 20px);margin:0;color:#fff;text-shadow:0 0 14px rgba(0,0,0,.45);z-index:2;pointer-events:none}

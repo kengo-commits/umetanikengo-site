@@ -57,7 +57,7 @@ def bi(jp, en):
 
 FB = 'https://www.facebook.com/umetani'
 IG = 'https://www.instagram.com/kengo_umetani/'
-NAV = [('HOME', 'index.html'), ('PROFILE', 'profile/index.html'), ('CREATIVE', 'creative/index.html'), ('MODEL', 'model/index.html'), ('VISION', 'vision/index.html')]
+NAV = [('PROFILE', 'profile/index.html'), ('CREATIVE', 'creative/index.html'), ('MODEL', 'model/index.html'), ('VISION', 'vision/index.html')]
 
 
 import re
@@ -91,7 +91,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&amp;display=swap">
 <link rel="stylesheet" href="{root}assets/site.css?v={ASSET_V}">'''
     content = f'''<header class="top">
-  <a class="mark" href="{root}index.html">KENGO UMETANI OFFICIAL</a>
+  <a class="mark" href="{root}index.html"{' aria-current="page"' if key == 'HOME' else ''}>KENGO UMETANI OFFICIAL</a>
   <nav class="nav" aria-label="Main">{nav}</nav>
 </header>
 <main>
