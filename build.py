@@ -145,51 +145,63 @@ def current_block():
 
 
 # ---------- HOME (same sections and order as the current top page) ----------
-def home(root, skeleton=True):
-    b = []
-    b.append(row(show(['home-hero'], '夕暮れの水辺の風景 / Waterside at dusk', root, first_lazy=False, prio=True),
-                 '''<h1 class="name">梅谷 憲吾<span>KENGO UMETANI</span></h1>
-<ul class="list"><li><span>KATO PLEASURE GROUP</span><span>CREATIVE DIRECTOR</span></li><li><span>U&amp;K CREATIVE VISIONS</span><span>COO</span></li></ul>''' + more(root + 'profile/index.html', 'PROFILE'), 'first'))
-    b.append(row(show(['home-creative'], 'CREATIVE', root),
-                 '<h2 class="h2">CREATIVE</h2>' + bi(
-                     ['建築設計からウェブデザイン、DTPデザインまで幅広く携わるクリエイティブディレクター。国内の大型ホテルや宿泊施設、飲食店から、アートディレクション、プロモーション計画、ブランドの企画・開発まで、デザインを軸にボーダレスに携わる。'],
-                     ['A creative director whose work spans architectural design, web design and print design. With design at the core, he works across boundaries on projects ranging from large hotels, accommodation facilities and restaurants in Japan to art direction, promotional planning, and brand planning and development.']) + more(root + 'creative/index.html')))
-    b.append(row(show(['top-model'], 'Portrait of Kengo Umetani / 梅谷憲吾 ポートレート', root),
-                 '<h2 class="h2">MODEL</h2>' + bi(
-                     ['学生時代からモデルとして活動し、海外ではHERMÈS、GUCCI、ARMANI、KENZOなどのコレクションに出演。国内では東京コレクションをはじめ、数多くの広告・雑誌に出演。'],
-                     ['Active as a model since his student days, he has walked in collections for HERMÈS, GUCCI, ARMANI, KENZO and others overseas. In Japan, he has appeared in Tokyo Collection shows and in numerous advertisements and magazines.'])
-                 + '<div class="h">過去所属 / FORMER AGENCIES</div><ul class="list"><li><span>ELITE</span></li><li><span>BARK IN STYLE</span></li></ul>' + more(root + 'model/index.html')))
-    b.append(row(show(['home-vision'], '長崎 伊王島の空撮 / Aerial view of Iojima, Nagasaki', root),
-                 '<h2 class="h2">VISION</h2><p class="lead">クリエイティブな視点で、<br>新しい価値を創造する。</p><p class="lead en" lang="en">Creating new value from a creative perspective.</p>' + bi(
-                     ['業界の持続可能な成長を目指し、クリエイティブチームや外部の専門家と協力しながら、新たな挑戦に取り組んでいます。'],
-                     ['Aiming to support the sustainable growth of the industry, we take on new challenges in collaboration with our creative team and outside experts.']) + more(root + 'vision/index.html')))
-    b.append(row('<h2 class="label">梅谷憲吾プロフィール<span>PROFILE</span></h2>', bi(BIO_JP, BIO_EN) + more(root + 'profile/index.html'), 'text'))
-    b.append(row('<h2 class="label">現職<span>CURRENT POSITION</span></h2>', current_block(), 'text'))
-    b.append(row('<h2 class="label">次代のクリエイティブへのアプローチ<span>AN APPROACH TO THE NEXT GENERATION OF CREATIVITY</span></h2>',
-                 bi(['最新の技術を取り入れたプロジェクトに積極的に取り組み、市場のニーズに即応するフレキシビリティを保っています。革新的なアプローチを通じてデザイン設計とクリエイティブな発想の融合を実現し、数々のプロジェクトで高い評価をいただいております。',
-                     '常に新しいアイデアや技術を取り入れ、それを踏まえた実用的なデザインを構築することに重点を置いています。これにより、従来の枠にとどまらない新たな表現方法を生み出し続けています。'],
-                    ['We actively take on projects that incorporate the latest technologies, keeping the flexibility to respond quickly to market needs. Through innovative approaches, we fuse design planning with creative ideas, and our work has been highly regarded across numerous projects.',
-                     'We place emphasis on constantly incorporating new ideas and technologies and building practical designs based on them. In this way, we continue to create new forms of expression that go beyond conventional boundaries.']), 'text'))
+CREATIVE_LEDE = (['建築設計からウェブデザイン、DTPデザインまで幅広く携わるクリエイティブディレクター。国内の大型ホテルや宿泊施設、飲食店から、アートディレクション、プロモーション計画、ブランドの企画・開発まで、デザインを軸にボーダレスに携わる。'],
+                 ['A creative director whose work spans architectural design, web design and print design. With design at the core, he works across boundaries on projects ranging from large hotels, accommodation facilities and restaurants in Japan to art direction, promotional planning, and brand planning and development.'])
+MODEL_TEXT = (['学生時代からモデルとして活動し、海外ではHERMÈS、GUCCI、ARMANI、KENZOなどのコレクションに出演。国内では東京コレクションをはじめ、数多くの広告・雑誌に出演。'],
+              ['Active as a model since his student days, he has walked in collections for HERMÈS, GUCCI, ARMANI, KENZO and others overseas. In Japan, he has appeared in Tokyo Collection shows and in numerous advertisements and magazines.'])
+VISION_FIRST = (['業界の持続可能な成長を目指し、クリエイティブチームや外部の専門家と協力しながら、新たな挑戦に取り組んでいます。'],
+                ['Aiming to support the sustainable growth of the industry, we take on new challenges in collaboration with our creative team and outside experts.'])
+VISION_LEAD = '<p class="lead">クリエイティブな視点で、<br>新しい価値を創造する。</p><p class="lead en" lang="en">Creating new value from a creative perspective.</p>'
+APPROACH = (['最新の技術を取り入れたプロジェクトに積極的に取り組み、市場のニーズに即応するフレキシビリティを保っています。革新的なアプローチを通じてデザイン設計とクリエイティブな発想の融合を実現し、数々のプロジェクトで高い評価をいただいております。',
+             '常に新しいアイデアや技術を取り入れ、それを踏まえた実用的なデザインを構築することに重点を置いています。これにより、従来の枠にとどまらない新たな表現方法を生み出し続けています。'],
+            ['We actively take on projects that incorporate the latest technologies, keeping the flexibility to respond quickly to market needs. Through innovative approaches, we fuse design planning with creative ideas, and our work has been highly regarded across numerous projects.',
+             'We place emphasis on constantly incorporating new ideas and technologies and building practical designs based on them. In this way, we continue to create new forms of expression that go beyond conventional boundaries.'])
+KPG_INTRO = (['カトープレジャーグループは「日本のレジャーをもっと楽しく！」をテーマとし、ホテル、リゾート、レストラン、エンターテインメント、リバークルーズなど、多岐にわたる事業の開発や運営を行うトータルプロデュースカンパニーです。'],
+             ['Under the theme "Making leisure in Japan more fun!", Kato Pleasure Group handles everything from planning to operation, developing and running a wide range of businesses, including hotels, resorts, restaurants, entertainment and river cruises.'])
+KPG_GLC = (['私たちカトープレジャーグループは、「日本のレジャーをもっと楽しく！」をテーマとし、お客さまに感動のひとときをお届けします。',
+            '私たちはグッドレジャークリエイターとして、時代、地、人と新しい価値を掛け合わせ、最高のホスピタリティマインドを持って、お客さまの「楽しい」を創造します。'],
+           ['Under the theme "Making leisure in Japan more fun!", we at Kato Pleasure Group bring our guests moments that move them.',
+            'As Good Leisure Creators, we bring together the times, places and people with new value, and with the highest standard of hospitality, we create "fun" for our guests.'])
+
+
+def ig_grid(root):
     def igcap(t):
         return esc(t).replace('\n', '<br>')
-    tiles = ''.join(
+    return '<div class="ig-grid">' + ''.join(
         f'<a class="ig-post" href="{p["permalink"]}" target="_blank" rel="noopener">'
         f'<span class="ig-tile">' + pic(p['image'], 'Instagram: ' + (p['title'].splitlines() or [''])[0], root, sizes='(max-width: 480px) 50vw, (max-width: 900px) 140px, 205px') + '</span>'
         + (f'<span class="ig-title">{igcap(p["title"])}</span>' if p['title'] else '')
         + (f'<span class="ig-text">{igcap(p["text"])}</span>' if p['text'] else '') + '</a>'
-        for p in IGDATA['posts'])
-    b.append(row(f'<div class="ig-grid">{tiles}</div>',
-                 '<h2 class="h2">SNS<span>INSTAGRAM / FACEBOOK</span></h2>' + f'<ul class="list"><li><a class="row-a" href="{FB}" target="_blank" rel="noopener"><span>FACEBOOK</span><span>FACEBOOK.COM/UMETANI ↗</span></a></li><li><a class="row-a" href="{IG}" target="_blank" rel="noopener"><span>INSTAGRAM</span><span>@KENGO_UMETANI ↗</span></a></li></ul>' + f'<a class="more" href="{IG}" target="_blank" rel="noopener">VIEW ON INSTAGRAM ↗</a>'))
-    b.append(row('<h2 class="label">KATO PLEASURE GROUP<span>カトープレジャーグループ</span></h2>',
-                 bi(
-                     ['カトープレジャーグループは「日本のレジャーをもっと楽しく！」をテーマとし、ホテル、リゾート、レストラン、エンターテインメント、リバークルーズなど、多岐にわたる事業の開発や運営を行うトータルプロデュースカンパニーです。'],
-                     ['Under the theme "Making leisure in Japan more fun!", Kato Pleasure Group handles everything from planning to operation, developing and running a wide range of businesses, including hotels, resorts, restaurants, entertainment and river cruises.']), 'text'))
-    b.append(row('<h2 class="label">GOOD LEISURE CREATOR<span>KATO PLEASURE GROUP</span></h2>',
-                 bi(['私たちカトープレジャーグループは、「日本のレジャーをもっと楽しく！」をテーマとし、お客さまに感動のひとときをお届けします。',
-                     '私たちはグッドレジャークリエイターとして、時代、地、人と新しい価値を掛け合わせ、最高のホスピタリティマインドを持って、お客さまの「楽しい」を創造します。'],
-                    ['Under the theme "Making leisure in Japan more fun!", we at Kato Pleasure Group bring our guests moments that move them.',
-                     'As Good Leisure Creators, we bring together the times, places and people with new value, and with the highest standard of hospitality, we create "fun" for our guests.'])
-                 + '<a class="more" href="https://www.kpg.gr.jp/" target="_blank" rel="noopener">VIEW MORE / 詳しく見る ↗</a>', 'text'))
+        for p in IGDATA['posts']) + '</div>'
+
+
+# ---------- HOME: one screen, minimal ----------
+HOME_SLIDES = [('top-model', 'Portrait of Kengo Umetani / 梅谷憲吾 ポートレート'),
+               ('aquasense-1', 'AQUASENSE Hotel & Resort'),
+               ('model-3', 'Modeling work / モデル作品'),
+               ('home-hero', 'Waterside at dusk / 夕暮れの水辺の風景')]
+
+
+def home(root, skeleton=True):
+    slides = ''.join(pic(n, alt, root, lazy=i > 0, hidden=i > 0, prio=i == 0) for i, (n, alt) in enumerate(HOME_SLIDES))
+    stage = f'<div class="show" data-count="{len(HOME_SLIDES)}" data-auto="5000"><div class="frame">{slides}</div></div>'
+    idx = [('CREATIVE', 'クリエイティブ', f'{len(ORDER):02d} WORKS', 'creative/index.html', 1),
+           ('MODEL', 'モデル', '2001 —', 'model/index.html', 2),
+           ('PROFILE', 'プロフィール', 'OSAKA, 1985', 'profile/index.html', 0),
+           ('VISION', 'ビジョン', '', 'vision/index.html', 3)]
+    index = '<ul class="list index">' + ''.join(
+        f'<li><a class="row-a" href="{root}{h}" data-slide="{s}"><span>{en}<span class="sub" lang="ja">{ja}</span></span><span>{v}</span></a></li>'
+        for en, ja, v, h, s in idx) + '</ul>'
+    right = ('<h1 class="name">KENGO UMETANI<span lang="ja">梅谷 憲吾</span></h1>'
+             '<ul class="list"><li><span>KATO PLEASURE GROUP</span><span>CREATIVE DIRECTOR</span></li>'
+             '<li><span>U&amp;K CREATIVE VISIONS</span><span>COO</span></li></ul>'
+             + index
+             + '<p class="home-lead" lang="en">Creating new value from a creative perspective.<span lang="ja">クリエイティブな視点で、新しい価値を創造する。</span></p>')
+    b = [row(stage, right, 'first home'),
+         row(ig_grid(root),
+             '<h2 class="h2">INSTAGRAM<span>@KENGO_UMETANI</span></h2>'
+             f'<ul class="list"><li><a class="row-a" href="{IG}" target="_blank" rel="noopener"><span>INSTAGRAM</span><span>↗</span></a></li>'
+             f'<li><a class="row-a" href="{FB}" target="_blank" rel="noopener"><span>FACEBOOK</span><span>↗</span></a></li></ul>')]
     return page('HOME', 'KENGO UMETANI OFFICIAL',
                 '梅谷 憲吾 KENGO UMETANI. KATO PLEASURE GROUP CREATIVE DIRECTOR / U&K CREATIVE VISIONS COO', '\n'.join(b), root, skeleton)
 
@@ -210,6 +222,7 @@ def profile(root):
     b = []
     b.append(row('<h1 class="label big">PROFILE<span>梅谷 憲吾 / KENGO UMETANI</span></h1>', bi(BIO_JP, BIO_EN), 'text first'))
     b.append(row('<h2 class="label">現職<span>CURRENT POSITION</span></h2>', current_block(), 'text'))
+    b.append(row('<h2 class="label">次代のクリエイティブへのアプローチ<span>AN APPROACH TO THE NEXT GENERATION OF CREATIVITY</span></h2>', bi(*APPROACH), 'text'))
     b.append(row('<h2 class="label">学歴<span>EDUCATION</span></h2>',
                  '<ul class="list norm"><li><span>近畿大学理工学部建築学科 卒業<span class="sub" lang="en">Graduated from the Department of Architecture, Faculty of Science and Engineering, Kindai University</span></span></li></ul>', 'text'))
     b.append(row('<h2 class="label">職歴<span>CAREER</span></h2>', f'<ul class="list norm gap">{career}</ul>', 'text'))
@@ -217,12 +230,14 @@ def profile(root):
                  '<ul class="list norm gap"><li><span>HERMÈS、GUCCI、ARMANI、KENZO、ETRO、MARC JACOBS etc.</span><span class="b">海外 / OVERSEAS</span></li><li><span>東京コレクション、ジョンソン・エンド・ジョンソン等の広告、AOKI等のCM、各種雑誌媒体 etc.<span class="sub" lang="en">Tokyo Collection, advertisements for Johnson &amp; Johnson and others, TV commercials for AOKI and others, various magazines, and more</span></span><span class="b">国内 / JAPAN</span></li></ul>', 'text'))
     b.append(row('<h2 class="label">CREATIVE DIRECTION WORKS</h2>', f'<ul class="list gap">{direction}<li><span>ETC.</span></li></ul>', 'text'))
     b.append(row('<h2 class="label">KATO PLEASURE GROUP WORKS</h2>', f'<ul class="list">{kpg}<li><span>ETC.</span></li></ul>', 'text'))
+    b.append(row('<h2 class="label">KATO PLEASURE GROUP<span>カトープレジャーグループ</span></h2>', bi(*KPG_INTRO), 'text'))
+    b.append(row('<h2 class="label">GOOD LEISURE CREATOR<span>KATO PLEASURE GROUP</span></h2>', bi(*KPG_GLC) + '<a class="more" href="https://www.kpg.gr.jp/" target="_blank" rel="noopener">VIEW MORE / 詳しく見る ↗</a>', 'text'))
     return page('PROFILE', 'PROFILE | KENGO UMETANI OFFICIAL', '梅谷 憲吾 プロフィール。1985年大阪府生まれ。近畿大学理工学部建築学科卒業。カトープレジャーグループ クリエイティブディレクター。', '\n'.join(b), root)
 
 
 # ---------- CREATIVE (same seven works, four photos each) ----------
 def creative(root):
-    b = [row('<h1 class="label big">CREATIVE WORKS</h1>', '', 'text first')]
+    b = [row('<h1 class="label big">CREATIVE WORKS</h1>', bi(*CREATIVE_LEDE), 'text first')]
     for i, k in enumerate(ORDER):
         w = WORKS[k]
         name = esc(w['name'])
@@ -240,20 +255,22 @@ def model(root):
     names = [f'model-{n}' for n in range(1, 9)]
     thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-go="{i}" aria-label="写真 {i+1} / Photo {i+1}">{pic(n, "", root, sizes="120px")}</button>' for i, n in enumerate(names))
     b = [row(show(names, '梅谷憲吾 モデル / Kengo Umetani, model', root, first_lazy=False, prio=True),
-             f'<h1 class="h2">MODEL<span>KENGO UMETANI</span></h1><div class="thumbs">{thumbs}</div>', 'first gallery')]
+             f'<h1 class="h2">MODEL<span>KENGO UMETANI</span></h1><div class="thumbs">{thumbs}</div>'
+             + '<div style="margin-top:28px">' + bi(*MODEL_TEXT) + '</div>'
+             + '<div class="h">FORMER AGENCIES<span class="sub" lang="ja" style="display:inline;margin-left:8px;font-weight:400">過去所属</span></div><ul class="list"><li><span>ELITE</span></li><li><span>BARK IN STYLE</span></li><li><span>FOLIO MANAGEMENT</span></li></ul>', 'first gallery')]
     return page('MODEL', 'MODEL | KENGO UMETANI OFFICIAL', '梅谷 憲吾 モデル作品。HERMÈS、GUCCI、ARMANI、KENZO などのコレクションに出演。', '\n'.join(b), root)
 
 
 # ---------- VISION (same text and photo) ----------
 def vision(root):
     b = [row(show(['vision-1'], '夕暮れの水辺の風景 / Waterside at dusk', root, first_lazy=False, prio=True),
-             '<h1 class="h2">VISION</h1>' + bi(
+             '<h1 class="h2">VISION</h1>' + VISION_LEAD + bi(*VISION_FIRST) + '<div style="margin-top:22px">' + bi(
                  ['ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。',
                   '革新的なアプローチとクリエイティブな視点を持ち、クリエイティブチームや外部の専門家と協力しながら、常に新たな挑戦に取り組んでいます。',
                   'そして業界の持続可能な成長のために、新しい価値を創造し続けます。'],
                  ['We provide comprehensive creative direction, handling everything from brand concept design to marketing, creative and promotion in one seamless process.',
                   'With innovative approaches and a creative perspective, we work alongside our creative team and outside experts, always taking on new challenges.',
-                  'And we will continue to create new value for the sustainable growth of the industry.']), 'first')]
+                  'And we will continue to create new value for the sustainable growth of the industry.']) + '</div>', 'first')]
     return page('VISION', 'VISION | KENGO UMETANI OFFICIAL', 'VISION. ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。', '\n'.join(b), root)
 
 

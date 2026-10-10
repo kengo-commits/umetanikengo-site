@@ -113,6 +113,17 @@ main{display:grid}
 
 @media (min-width:1800px){:root{--fs:10.5px;--fs-body:11.5px}}
 
+/* HOME */
+.row.home .frame img{max-height:min(78svh, calc(100svh - var(--hdr) - 60px))}
+.index{margin-top:34px;border-top:1px solid var(--rule)}
+.index li{border-bottom:1px solid var(--rule)}
+.index .row-a{padding-block:9px;align-items:baseline}
+.index .row-a > span:first-child{font-weight:700}
+.index .sub{display:inline;margin-left:8px;font-weight:400}
+.index .row-a:hover{color:var(--mute)}
+.home-lead{margin-top:34px;text-transform:uppercase}
+.home-lead span{display:block;text-transform:none;color:var(--sub);margin-top:4px}
+
 /* touch: larger tap targets */
 @media (pointer:coarse){
   .nav{gap:0}
