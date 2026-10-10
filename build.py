@@ -176,34 +176,27 @@ def ig_grid(root):
 
 
 # ---------- HOME: one screen, minimal ----------
-HOME_SLIDES = [('top-model', 'Portrait of Kengo Umetani / 梅谷憲吾 ポートレート'),
-               ('aquasense-1', 'AQUASENSE Hotel & Resort'),
-               ('model-3', 'Modeling work / モデル作品'),
-               ('home-hero', 'Waterside at dusk / 夕暮れの水辺の風景')]
+HOME_SLIDES = [('home-hero', 'Waterside at dusk', '夕暮れの水辺の風景'),
+               ('top-model', 'Kengo Umetani', '梅谷憲吾 ポートレート'),
+               ('aquasense-1', 'AQUASENSE Hotel & Resort, Okinawa', 'アクアセンス ホテル＆リゾート'),
+               ('model-3', 'Model', 'モデル作品')]
 
 
 def home(root, skeleton=True):
-    slides = ''.join(pic(n, alt, root, lazy=i > 0, hidden=i > 0, prio=i == 0) for i, (n, alt) in enumerate(HOME_SLIDES))
-    stage = f'<div class="show" data-count="{len(HOME_SLIDES)}" data-auto="5000"><div class="frame">{slides}</div></div>'
-    idx = [('CREATIVE', 'クリエイティブ', f'{len(ORDER):02d} WORKS', 'creative/index.html', 1),
-           ('MODEL', 'モデル', '2001 —', 'model/index.html', 2),
-           ('PROFILE', 'プロフィール', 'OSAKA, 1985', 'profile/index.html', 0),
-           ('VISION', 'ビジョン', '', 'vision/index.html', 3)]
-    index = '<ul class="list index">' + ''.join(
-        f'<li><a class="row-a" href="{root}{h}" data-slide="{s}"><span>{en}<span class="sub" lang="ja">{ja}</span></span><span>{v}</span></a></li>'
-        for en, ja, v, h, s in idx) + '</ul>'
-    right = ('<h1 class="name">KENGO UMETANI<span lang="ja">梅谷 憲吾</span></h1>'
-             '<ul class="list"><li><span>KATO PLEASURE GROUP</span><span>CREATIVE DIRECTOR</span></li>'
-             '<li><span>U&amp;K CREATIVE VISIONS</span><span>COO</span></li></ul>'
-             + index
-             + '<p class="home-lead" lang="en">Creating new value from a creative perspective.<span lang="ja">クリエイティブな視点で、新しい価値を創造する。</span></p>')
-    b = [row(stage, right, 'first home'),
-         row(ig_grid(root),
+    n = len(HOME_SLIDES)
+    slides = ''.join(pic(img, f'{cap} / {ja}', root, lazy=i > 0, hidden=i > 0, prio=i == 0, sizes='(max-width: 900px) 100vw, min(80vw, 1200px)')
+                     for i, (img, cap, ja) in enumerate(HOME_SLIDES))
+    caps = json.dumps([esc(c) for _, c, _ in HOME_SLIDES])
+    hero = (f'<section class="hero show" data-count="{n}" data-auto="5000" data-caps=\'{caps}\' aria-label="Photographs">'
+            f'<div class="frame">{slides}</div>'
+            f'<div class="hero-cap"><span class="cap">{esc(HOME_SLIDES[0][1])}</span><span class="num">01 / {n:02d}</span></div></section>')
+    ig = row(ig_grid(root),
              '<h2 class="h2">INSTAGRAM<span>@KENGO_UMETANI</span></h2>'
              f'<ul class="list"><li><a class="row-a" href="{IG}" target="_blank" rel="noopener"><span>INSTAGRAM</span><span>↗</span></a></li>'
-             f'<li><a class="row-a" href="{FB}" target="_blank" rel="noopener"><span>FACEBOOK</span><span>↗</span></a></li></ul>')]
+             f'<li><a class="row-a" href="{FB}" target="_blank" rel="noopener"><span>FACEBOOK</span><span>↗</span></a></li></ul>', 'home-ig')
+    h1 = '<h1 class="visually-hidden">KENGO UMETANI OFFICIAL / 梅谷憲吾 公式サイト</h1>'
     return page('HOME', 'KENGO UMETANI OFFICIAL',
-                '梅谷 憲吾 KENGO UMETANI. KATO PLEASURE GROUP CREATIVE DIRECTOR / U&K CREATIVE VISIONS COO', '\n'.join(b), root, skeleton)
+                '梅谷 憲吾 KENGO UMETANI. KATO PLEASURE GROUP CREATIVE DIRECTOR / U&K CREATIVE VISIONS COO', h1 + hero + '\n' + ig, root, skeleton)
 
 
 # ---------- PROFILE (same items as the current PROFILE page) ----------

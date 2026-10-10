@@ -10,6 +10,7 @@ document.querySelectorAll('.show').forEach(show=>{
     i=(n+pics.length)%pics.length;
     pics.forEach((p,k)=>p.hidden=k!==i);
     if(num)num.textContent=String(i+1).padStart(2,'0')+' / '+String(pics.length).padStart(2,'0');
+    const capEl=show.querySelector('.cap');if(capEl&&show.dataset.caps){try{capEl.innerHTML=JSON.parse(show.dataset.caps)[i]}catch(e){}}
     thumbs.forEach((t,k)=>t.classList.toggle('on',k===i));
     const nx=pics[(i+1)%pics.length].querySelector('img');if(nx)nx.loading='eager';
   };
