@@ -182,7 +182,6 @@ HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort — Onna, Okinawa', '�
                ('synesthesia-1', 'SYNESTHESIA HILLS — Nantan, Kyoto', 'シナスタジアヒルズ'),
                ('glamday-1', 'GLAMDAY STYLE', 'グランデイスタイル'),
                ('grandmer-2', 'OKINAWA GRAND MER RESORT — Okinawa City, Okinawa', '沖縄グランメールリゾート'),
-               ('tsurutontan-2', 'TSURUTONTAN', 'つるとんたん'),
                ('nomado-1', 'NOMADO — Daikokucho, Osaka', '九州の地酒と肴 呑窓')]
 
 
