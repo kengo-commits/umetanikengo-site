@@ -147,8 +147,8 @@ def current_block():
 
 
 # ---------- HOME (same sections and order as the current top page) ----------
-CREATIVE_LEDE = (['建築設計からウェブデザイン、DTPデザインまで幅広く携わるクリエイティブディレクター。国内の大型ホテルや宿泊施設、飲食店から、アートディレクション、プロモーション計画、ブランドの企画・開発まで、デザインを軸にボーダレスに携わる。'],
-                 ['A creative director whose work spans architectural design, web design and print design. With design at the core, he works across boundaries on projects ranging from large hotels, accommodation facilities and restaurants in Japan to art direction, promotional planning, and brand planning and development.'])
+CREATIVE_LEDE = (['企画・開発、設計からデジタルマーケティング、グラフィックデザインまで幅広く携わるクリエイティブディレクター。国内の大型ホテルや宿泊施設、飲食店から、アートディレクション、プロモーション計画、ブランディングまで、ボーダレスに携わる。'],
+                 ['A creative director whose work spans planning and development, architectural design, digital marketing and graphic design. He works across boundaries on projects ranging from large hotels, accommodation facilities and restaurants in Japan to art direction, promotional planning and branding.'])
 MODEL_TEXT = (['学生時代からモデルとして活動し、海外ではHERMÈS、GUCCI、ARMANI、KENZOなどのコレクションに出演。国内では東京コレクションをはじめ、数多くの広告・雑誌に出演。'],
               ['Active as a model since his student days, he has walked in collections for HERMÈS, GUCCI, ARMANI, KENZO and others overseas. In Japan, he has appeared in Tokyo Collection shows and in numerous advertisements and magazines.'])
 VISION_FIRST = (['業界の持続可能な成長を目指し、クリエイティブチームや外部の専門家と協力しながら、新たな挑戦に取り組んでいます。'],
