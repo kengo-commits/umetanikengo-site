@@ -180,16 +180,16 @@ main{display:grid}
   .nav{display:flex;flex-wrap:nowrap;gap:0 clamp(8px,3.2vw,14px);max-width:none;white-space:nowrap}
   .top{gap:12px;align-items:center}
   .mark{white-space:nowrap;align-self:center}
-}
-@media (max-width:380px){
-  .mark{font-size:13px}
-  .nav{font-size:9.5px;gap:0 8px}
-  .home-col .hero .frame{height:calc(100svh - 74px)}
   :root{--fs:10.5px;--fs-body:11.5px}
   .frame img{width:100%;max-height:none}
   .frame img[data-tall]{width:auto;max-height:64svh}
   .thumbs{grid-template-columns:repeat(4,minmax(0,1fr))}
   .ig-grid,.home-ig.wide .ig-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 10px}
+}
+@media (max-width:380px){
+  .mark{font-size:13px}
+  .nav{font-size:9.5px;gap:0 8px}
+  .home-col .hero .frame{height:calc(100svh - 74px)}
 }
 /* phone landscape and other short screens */
 @media (min-width:640px) and (max-height:560px) and (orientation:landscape){
@@ -202,6 +202,15 @@ main{display:grid}
   .thumbs{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (prefers-reduced-motion:reduce){.frame img{animation:none}.hero .frame > picture{transition:none}}
+
+/* HOME: from INFORMATION down, the page turns black (full width, including the footer) */
+.home-ig{background:#000;color:#fff;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);padding-top:clamp(56px,8vw,96px);--sub:#b4b4b4;--mute:#8c8c8c;--rule:#262626;--ink:#fff}
+.home-ig .ig-tile{background:#1a1a1a}
+.home-ig a:hover{color:#fff}
+body:has(.home-ig) .foot{background:#000;color:#fff;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);--mute:#8c8c8c;--ink:#fff}
+body:has(.home-ig) .foot a:hover{color:#fff}
+body:has(.home-ig) .top{box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
+body:has(.home-ig) .top.scrolled{box-shadow:0 0 0 100vmax var(--bg);background:linear-gradient(var(--rule),var(--rule)) bottom/100% 1px no-repeat,var(--bg)}
 
 /* HOME on phones (portrait): the photo fills the screen below the header, caption laid over it */
 @media (max-width:600px) and (orientation:portrait){
