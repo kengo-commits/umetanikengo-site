@@ -204,10 +204,12 @@ main{display:grid}
 @media (prefers-reduced-motion:reduce){.frame img{animation:none}.hero .frame > picture{transition:none}}
 
 /* HOME: from INFORMATION down, the page turns black (full width, including the footer) */
-.home-ig{background:#000;color:#fff;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);padding-top:clamp(56px,8vw,96px);--sub:#b4b4b4;--mute:#8c8c8c;--rule:#262626;--ink:#fff}
+.home-ig{background:#000;color:#a6a6a6;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);padding-top:clamp(56px,8vw,96px);--sub:#777;--mute:#666;--rule:#262626;--ink:#a6a6a6}
 .home-ig .ig-tile{background:#1a1a1a}
-.home-ig a:hover{color:#fff}
-body:has(.home-ig) .foot{background:#000;color:#fff;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);--mute:#8c8c8c;--ink:#fff}
+.home-ig a:hover{color:#a6a6a6}
+.home-ig .sns-icons a:hover{color:#fff;opacity:1}
+.home-ig .ig-post:hover .ig-title{color:#fff}
+body:has(.home-ig) .foot{background:#000;color:#a6a6a6;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);--mute:#666;--ink:#a6a6a6}
 body:has(.home-ig) .foot a:hover{color:#fff}
 body:has(.home-ig) .top{box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
 body:has(.home-ig) .top.scrolled{box-shadow:0 0 0 100vmax var(--bg);background:linear-gradient(var(--rule),var(--rule)) bottom/100% 1px no-repeat,var(--bg)}
