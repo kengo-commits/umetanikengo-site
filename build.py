@@ -229,8 +229,6 @@ def profile(root):
                  '<ul class="list norm gap"><li><span>HERMÈS, GUCCI, ARMANI, KENZO, ETRO, MARC JACOBS and more<span class="sub" lang="ja">HERMÈS、GUCCI、ARMANI、KENZO、ETRO、MARC JACOBS ほか</span></span><span class="b">OVERSEAS<span class="sub" lang="ja">海外</span></span></li><li><span>Tokyo Collection, advertisements for Johnson &amp; Johnson and others, TV commercials for AOKI and others, various magazines, and more<span class="sub" lang="ja">東京コレクション、ジョンソン・エンド・ジョンソンなどの広告、AOKIなどのテレビCM、各種雑誌 ほか</span></span><span class="b">JAPAN<span class="sub" lang="ja">国内</span></span></li></ul>', 'text'))
     b.append(row('<h2 class="label">CREATIVE DIRECTION WORKS</h2>', f'<ul class="list gap">{direction}<li><span>ETC.</span></li></ul>', 'text'))
     b.append(row('<h2 class="label">KATO PLEASURE GROUP WORKS</h2>', f'<ul class="list">{kpg}<li><span>ETC.</span></li></ul>', 'text'))
-    b.append(row('<h2 class="label">KATO PLEASURE GROUP<span>カトープレジャーグループ</span></h2>', bi(*KPG_INTRO), 'text'))
-    b.append(row('<h2 class="label">GOOD LEISURE CREATOR<span>KATO PLEASURE GROUP</span></h2>', bi(*KPG_GLC) + '<a class="more" href="https://www.kpg.gr.jp/" target="_blank" rel="noopener">VIEW MORE / 詳しく見る ↗</a>', 'text'))
     return page('PROFILE', 'PROFILE | KENGO UMETANI OFFICIAL', '梅谷 憲吾 プロフィール。1985年大阪府生まれ。近畿大学理工学部建築学科卒業。カトープレジャーグループ クリエイティブディレクター。', '\n'.join(b), root)
 
 
