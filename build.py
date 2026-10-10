@@ -129,11 +129,11 @@ def more(href, label='VIEW MORE / 詳しく見る'):
 # ---------- PROFILE TEXT (shared by HOME and PROFILE) ----------
 BIO_JP = ['1985年大阪府生まれ。趣味は芸術鑑賞。近畿大学理工学部建築学科卒業。',
           '2001年よりモデル活動を開始し、elite、bark in style、FOLIO MANAGEMENTに所属。海外に活動の拠点を置き、ARMANI、HERMÈS、GUCCI、KENZO、ETRO、MARC JACOBSをはじめとするハイブランドのコレクションショーを中心に、モデルとして活動する。世界最高峰のクリエイティブの現場に身を置きながら、並行して建築とデザインを学ぶ。',
-          '大学卒業後は設計事務所に勤務。2011年に独立して株式会社VIDAを設立し、代表取締役に就任。同年、有限会社オガワジュンゾウ・クリエイツの取締役に就任。2013年には故・堺屋太一氏のもとで総合調整局補佐として多角的なプロジェクトに携わり、クリエイティブの知見を養う。',
+          '大学卒業後は設計事務所DEJAVUに勤務。2011年に独立して株式会社VIDAを設立し、代表取締役に就任。同年、有限会社オガワジュンゾウ・クリエイツの取締役に就任。2013年には故・堺屋太一氏のもとで総合調整局補佐として多角的なプロジェクトに携わり、クリエイティブの知見を養う。',
           '2016年にカトープレジャーグループに入社し、2020年にグループ全体のクリエイティブディレクターに就任。同年、株式会社U&amp;K CREATIVE VISIONS 代表取締役CEOに就任する。']
 BIO_EN = ['Born in Osaka in 1985. In his free time, he enjoys appreciating art. Graduated from the Department of Architecture, Faculty of Science and Engineering, Kindai University.',
           'He began modeling in 2001 and was represented by elite, bark in style and FOLIO MANAGEMENT. Based overseas, he worked primarily on the runway, walking in collection shows for leading luxury brands including ARMANI, HERMÈS, GUCCI, KENZO, ETRO and MARC JACOBS. While immersed in the world\'s foremost creative environments, he studied architecture and design in parallel.',
-          'After graduating, he worked at an architectural design firm. In 2011, he went independent and founded VIDA Inc., serving as its CEO. In the same year, he became a director of Ogawa Junzo Creates Ltd. In 2013, he served as an assistant in the General Coordination Bureau under the late Taichi Sakaiya, where he was involved in a diverse range of projects and broadened his creative insight.',
+          'After graduating, he worked at the architectural design firm DEJAVU. In 2011, he went independent and founded VIDA Inc., serving as its CEO. In the same year, he became a director of Ogawa Junzo Creates Ltd. In 2013, he served as an assistant in the General Coordination Bureau under the late Taichi Sakaiya, where he was involved in a diverse range of projects and broadened his creative insight.',
           'He joined Kato Pleasure Group in 2016 and was appointed Creative Director of the entire group in 2020. In the same year, he became Representative Director and CEO of U&amp;K CREATIVE VISIONS Inc.']
 NOW_JP = ['モデルとして世界の現場で培ったグローバルな審美眼と、建築・デザイン・イベントプロデュースの経験を融合させ、高級温泉旅館「ふふ」シリーズをはじめとするラグジュアリーリゾートの開発、商業空間や住宅のデザイン統括、企業ブランディングまで、幅広いトータルクリエイティブを指揮している。']
 NOW_EN = ['Combining the global aesthetic sense he cultivated as a model with his experience in architecture, design and event production, he leads comprehensive creative direction across a wide range of fields: from the development of luxury resorts, including the FUFU series of high-end hot spring ryokan, to design supervision for commercial spaces and residences, and corporate branding.']
@@ -207,7 +207,7 @@ def home(root, skeleton=True):
 # ---------- PROFILE (same items as the current PROFILE page) ----------
 def profile(root):
     tl = [('2001', 'モデル活動を開始。元所属：elite、bark in style、FOLIO MANAGEMENT', 'Began his career as a model. Former agencies: elite, bark in style, FOLIO MANAGEMENT'),
-          ('—', '大学卒業後、設計事務所に勤務', 'Worked at an architectural design firm after graduating'),
+          ('2008', '大学卒業後、設計事務所<a class="u" href="https://dejavu-d.com/" target="_blank" rel="noopener">DEJAVU</a>に勤務', 'Joined the architectural design firm <a class="u" href="https://dejavu-d.com/" target="_blank" rel="noopener">DEJAVU</a> after graduating'),
           ('2011', '株式会社VIDA 設立、代表取締役', 'Founded VIDA Inc. and became its CEO'),
           ('2011', '有限会社<a class="u" href="http://www.ogawajunzo.jp/" target="_blank" rel="noopener">オガワジュンゾウ・クリエイツ</a> 取締役', 'Director, Ogawa Junzo Creates Ltd.'),
           ('2013', '故 堺屋太一氏（経済企画庁長官〈第55・56・57代〉、内閣特別顧問、内閣官房参与などを歴任）のもと、総合調整局補佐として従事', 'Served as an assistant in the General Coordination Bureau under the late Taichi Sakaiya, former Director-General of the Economic Planning Agency (55th–57th), Special Advisor to the Cabinet and Special Advisor to the Cabinet Secretariat'),
