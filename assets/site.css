@@ -135,6 +135,11 @@ main{display:grid}
 .hero-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;text-transform:uppercase;color:var(--sub);font-variant-numeric:tabular-nums}
 .hero-cap .num{flex-shrink:0}
 .home-ig{margin-top:clamp(80px,14svh,160px)}
+/* Instagram spans the same width as the top photo */
+.home-ig.wide{width:min(100%, 1200px);margin-inline:auto}
+.ig-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.ig-head .h2{margin-bottom:0}
+.home-ig.wide .ig-grid{max-width:none;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px 12px}
 
 /* touch: larger tap targets */
 @media (pointer:coarse){
@@ -154,13 +159,14 @@ main{display:grid}
   .hero .frame img{max-height:70svh}
   :root{--img-w:min(100%, 560px)}
   .thumbs{grid-template-columns:repeat(8,minmax(0,1fr))}
+  .home-ig.wide .ig-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media (max-width:480px){
   :root{--fs:10.5px;--fs-body:11.5px}
   .frame img{width:100%;max-height:none}
   .frame img[data-tall]{width:auto;max-height:64svh}
   .thumbs{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .ig-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 10px}
+  .ig-grid,.home-ig.wide .ig-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 10px}
 }
 /* phone landscape and other short screens */
 @media (min-width:640px) and (max-height:560px) and (orientation:landscape){

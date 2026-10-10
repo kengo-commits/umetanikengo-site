@@ -171,7 +171,7 @@ def ig_grid(root):
         return esc(t).replace('\n', '<br>')
     return '<div class="ig-grid">' + ''.join(
         f'<a class="ig-post" href="{p["permalink"]}" target="_blank" rel="noopener">'
-        f'<span class="ig-tile">' + pic(p['image'], 'Instagram: ' + (p['title'].splitlines() or [''])[0], root, sizes='(max-width: 480px) 50vw, (max-width: 900px) 140px, 205px') + '</span>'
+        f'<span class="ig-tile">' + pic(p['image'], 'Instagram: ' + (p['title'].splitlines() or [''])[0], root, sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px') + '</span>'
         + (f'<span class="ig-title">{igcap(p["title"])}</span>' if p['title'] else '')
         + (f'<span class="ig-text">{igcap(p["text"])}</span>' if p['text'] else '') + '</a>'
         for p in IGDATA['posts']) + '</div>'
@@ -189,16 +189,16 @@ HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort — Onna, Okinawa', '�
 
 def home(root, skeleton=True):
     n = len(HOME_SLIDES)
-    slides = ''.join(pic(img, f'{cap} / {ja}', root, lazy=i > 0, hidden=i > 0, prio=i == 0, sizes='(max-width: 900px) 100vw, min(80vw, 1200px)')
+    slides = ''.join(pic(img, f'{cap} / {ja}', root, lazy=False, hidden=i > 0, prio=i == 0, sizes='(max-width: 900px) 100vw, min(80vw, 1200px)')
                      for i, (img, cap, ja) in enumerate(HOME_SLIDES))
     caps = json.dumps([esc(c) for _, c, _ in HOME_SLIDES])
     hero = (f'<section class="hero show" data-count="{n}" data-auto="8000" data-caps=\'{caps}\' aria-label="Photographs">'
             f'<div class="frame">{slides}</div>'
             f'<div class="hero-cap"><span class="cap">{esc(HOME_SLIDES[0][1])}</span><span class="num">01 / {n:02d}</span></div></section>')
-    ig = row(ig_grid(root),
-             '<h2 class="h2">INSTAGRAM<span>@KENGO_UMETANI</span></h2>'
-             f'<ul class="list"><li><a class="row-a" href="{IG}" target="_blank" rel="noopener"><span>INSTAGRAM</span><span>↗</span></a></li>'
-             f'<li><a class="row-a" href="{FB}" target="_blank" rel="noopener"><span>FACEBOOK</span><span>↗</span></a></li></ul>', 'home-ig')
+    ig = ('<section class="home-ig wide" aria-label="Instagram">'
+          '<div class="ig-head"><h2 class="h2">INSTAGRAM<span>@KENGO_UMETANI</span></h2>'
+          f'<nav class="nav-foot"><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a></nav></div>'
+          + ig_grid(root).replace("sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px'", "") + '</section>')
     h1 = '<h1 class="visually-hidden">KENGO UMETANI OFFICIAL / 梅谷憲吾 公式サイト</h1>'
     return page('HOME', 'KENGO UMETANI OFFICIAL',
                 '梅谷 憲吾 KENGO UMETANI. KATO PLEASURE GROUP CREATIVE DIRECTOR / U&K CREATIVE VISIONS COO', h1 + hero + '\n' + ig, root, skeleton)
