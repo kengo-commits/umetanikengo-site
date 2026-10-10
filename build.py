@@ -194,8 +194,7 @@ HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort', 'アクアセンス �
                ('peaks-6', 'PEAKS', 'PEAKS'),
                ('island-1', 'i+Land nagasaki', 'アイランド ナガサキ'),
                ('synesthesia-1', 'SYNESTHESIA HILLS', 'シナスタジアヒルズ'),
-               ('glamday-1', 'GLAMDAY STYLE', 'グランデイスタイル'),
-               ('grandmer-2', 'OKINAWA GRAND MER RESORT', '沖縄グランメールリゾート')]
+               ('glamday-1', 'GLAMDAY STYLE', 'グランデイスタイル')]
 
 
 def home(root, skeleton=True):
