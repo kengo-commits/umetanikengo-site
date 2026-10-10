@@ -173,6 +173,14 @@ main{display:grid}
 }
 @media (max-width:480px){
   .mark .l2{display:block}
+  .nav{display:flex;flex-wrap:nowrap;gap:0 clamp(8px,3.2vw,14px);max-width:none;white-space:nowrap}
+  .top{gap:12px}
+  .mark{white-space:nowrap}
+}
+@media (max-width:380px){
+  .mark{font-size:13px}
+  .nav{font-size:9.5px;gap:0 8px}
+  .home-col .hero .frame{height:calc(100svh - 56px)}
   :root{--fs:10.5px;--fs-body:11.5px}
   .frame img{width:100%;max-height:none}
   .frame img[data-tall]{width:auto;max-height:64svh}
