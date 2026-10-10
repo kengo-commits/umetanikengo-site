@@ -245,14 +245,16 @@ body:has(.home-ig) .top.scrolled{box-shadow:0 0 0 100vmax var(--bg);background:l
   .hero .frame img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center}
 }
 
-/* HOME on phones (portrait): the photo fills the screen below the header, caption laid over it */
+/* HOME on phones (portrait): the photo fills the height below the header, with side margins like the
+   reference book cover (about 5.5% of the width); caption laid over it */
 @media (max-width:600px) and (orientation:portrait){
+  :root:has(.home-ig){--gut:5.5vw}
   .home-col{width:auto}
-  .home-col .hero,.hero{width:auto;max-width:none;margin:18px calc(-1 * var(--gut)) 0;position:relative}
+  .home-col .hero,.hero{width:auto;max-width:none;margin:18px 0 0;position:relative}
   .hero .frame{height:calc(100svh - 78px);grid-template:100% / 100%;overflow:hidden}
   .hero .frame > picture{width:100%;height:100%}
   .hero .frame img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center}
-  .hero-cap{position:absolute;left:var(--gut);right:var(--gut);bottom:calc(env(safe-area-inset-bottom,0px) + 20px);margin:0;color:#fff;text-shadow:0 0 14px rgba(0,0,0,.45);z-index:2;pointer-events:none}
+  .hero-cap{position:absolute;left:14px;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);margin:0;color:#fff;text-shadow:0 0 14px rgba(0,0,0,.45);z-index:2;pointer-events:none}
 }
 
 /* ---------- UX: quiet motion ----------
