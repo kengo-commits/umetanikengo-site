@@ -194,7 +194,7 @@ HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort â€” Onna, Okinawa', 'ã‚
 
 def home(root, skeleton=True):
     n = len(HOME_SLIDES)
-    slides = ''.join(pic(img, f'{cap} / {ja}', root, lazy=False, hidden=i > 0, prio=i == 0, sizes='(max-width: 900px) 100vw, min(80vw, 1200px)')
+    slides = ''.join(pic(img, f'{cap} / {ja}', root, lazy=False, hidden=i > 0, prio=i == 0, sizes='(max-width: 600px) and (orientation: portrait) 130vh, (max-width: 900px) 100vw, min(80vw, 1200px)')
                      for i, (img, cap, ja) in enumerate(HOME_SLIDES))
     caps = json.dumps([esc(c) for _, c, _ in HOME_SLIDES])
     hero = (f'<section class="hero show" data-count="{n}" data-auto="8000" data-caps=\'{caps}\' aria-label="Photographs">'

@@ -189,6 +189,16 @@ main{display:grid}
 }
 @media (prefers-reduced-motion:reduce){.frame img{animation:none}.hero .frame > picture{transition:none}}
 
+/* HOME on phones (portrait): the photo fills the screen below the header, caption laid over it */
+@media (max-width:600px) and (orientation:portrait){
+  .home-col{width:auto}
+  .home-col .hero,.hero{width:auto;max-width:none;margin:0 calc(-1 * var(--gut));position:relative}
+  .hero .frame{height:calc(100svh - 60px)}
+  .hero .frame > picture{width:100%;height:100%}
+  .hero .frame img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center}
+  .hero-cap{position:absolute;left:var(--gut);right:var(--gut);bottom:calc(env(safe-area-inset-bottom,0px) + 20px);margin:0;color:#fff;text-shadow:0 0 14px rgba(0,0,0,.45);z-index:2;pointer-events:none}
+}
+
 /* ---------- UX: quiet motion ----------
    Pages fade in, sections rise gently into view, photos fade in once loaded,
    links draw a thin underline, and internal links fade the page out before leaving.
