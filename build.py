@@ -13,7 +13,7 @@ for _p in IGDATA['posts']:
     META[_p['image']] = {'ws': _p['ws'], 'fw': _p['fw'], 'fh': _p['fh']}
 OUT = str(ROOT / 'dist')
 WORKS = {w['id']: w for w in D['WORKS']}
-ORDER = ['aquasense', 'peaks', 'island', 'synesthesia', 'glamday', 'grandmer', 'tsurutontan', 'nomado']  # same order as the current CREATIVE page
+ORDER = ['aquasense', 'peaks', 'island', 'synesthesia', 'glamday', 'grandmer', 'tsurutontan', 'nomado', 'fufusel']  # same order as the current CREATIVE page
 
 MAIN_SIZES = '(max-width: 480px) 100vw, (max-width: 900px) 560px, (max-width: 1024px) and (orientation: portrait) 560px, min(44vw, 820px)'
 
@@ -239,11 +239,11 @@ def creative(root):
         w = WORKS[k]
         name = esc(w['name'])
         sub = f'<span>{esc(w["nameEn"])}</span>' if w.get('nameEn') else ''
-        label = 'ONLINE SHOP' if k == 'tsurutontan' else 'OFFICIAL HP'
+        label = 'ONLINE SHOP' if k in ('tsurutontan', 'fufusel') else 'OFFICIAL HP'
         right = (f'<h2 class="h2">{name}{sub}</h2><div class="loc">{esc(w["loc"])} / {esc(w["locEn"])}</div>'
                  + bi(w['jp'], [esc(t) for t in w['en']])
                  + (f'<a class="more" href="{w["url"]}" target="_blank" rel="noopener">{label} ↗</a>' if w.get('url') else ''))
-        photos = {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
+        photos = {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in range(1, 8)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
         b.append(row(show(photos, w['name'], root), right, '' if i else ''))
     return page('CREATIVE', 'CREATIVE | KENGO UMETANI OFFICIAL', 'CREATIVE WORKS — AQUASENSE Hotel & Resort, i+Land nagasaki, SYNESTHESIA HILLS, GLAMDAY STYLE, OKINAWA GRAND MER RESORT, つるとんたん, 呑窓', '\n'.join(b), root)
 
