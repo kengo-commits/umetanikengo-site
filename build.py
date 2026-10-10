@@ -273,7 +273,7 @@ def model(root):
 def vision(root):
     b = [row(show(['vision-1'], '夕暮れの水辺の風景 / Waterside at dusk', root, first_lazy=False, prio=True),
              '<h1 class="h2">VISION</h1>' + VISION_LEAD + bi(*VISION_FIRST), 'first')]
-    b.append(row('<h2 class="label">次代のクリエイティブへのアプローチ<span>AN APPROACH TO THE NEXT GENERATION OF CREATIVITY</span></h2>', bi(*APPROACH), 'text'))
+    b.append(row('', '<h2 class="label" style="margin-bottom:18px">AN APPROACH TO THE NEXT GENERATION OF CREATIVITY<span lang="ja">次代のクリエイティブへのアプローチ</span></h2>' + bi(*APPROACH), 'text'))
     return page('VISION', 'VISION | KENGO UMETANI OFFICIAL', 'VISION. ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。', '\n'.join(b), root)
 
 
