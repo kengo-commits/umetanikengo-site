@@ -48,21 +48,29 @@ document.querySelectorAll('.show').forEach(show=>{
 /* ---------- quiet motion across the site ---------- */
 (()=>{
   /* phones: a touch brightens the Instagram photo under the finger.
-     The first tap only brightens it; tapping the same photo again opens Instagram. */
+     Holding it for 2.5 seconds opens the post on Instagram (a thin line fills up while you hold). */
   const touchOnly=matchMedia('(hover: none)').matches;
-  let armed=null;
-  const disarm=()=>{if(armed){armed.classList.remove('lit','armed');armed=null}};
+  const HOLD=2500;
   document.querySelectorAll('.home-ig .ig-post').forEach(a=>{
-    let t;
-    a.addEventListener('touchstart',()=>{clearTimeout(t);a.classList.add('lit')},{passive:true});
-    const off=()=>{clearTimeout(t);t=setTimeout(()=>{if(a!==armed)a.classList.remove('lit')},900)};
-    a.addEventListener('touchend',off,{passive:true});a.addEventListener('touchcancel',off,{passive:true});
-    a.addEventListener('click',e=>{
-      if(!touchOnly||a===armed)return;      /* second tap: open Instagram */
-      e.preventDefault();disarm();armed=a;a.classList.add('lit','armed');
-    });
+    let t,start=0,sx=0,sy=0,moved=false;
+    a.addEventListener('touchstart',e=>{
+      clearTimeout(t);const p=e.touches[0];sx=p.clientX;sy=p.clientY;moved=false;start=Date.now();
+      a.classList.add('lit','holding');
+    },{passive:true});
+    a.addEventListener('touchmove',e=>{
+      const p=e.touches[0];
+      if(!moved&&Math.hypot(p.clientX-sx,p.clientY-sy)>10){moved=true;a.classList.remove('holding')}
+    },{passive:true});
+    const end=e=>{
+      const held=!moved&&Date.now()-start>=HOLD;
+      a.classList.remove('holding');
+      clearTimeout(t);t=setTimeout(()=>a.classList.remove('lit'),900);
+      if(e.type==='touchend'&&held){e.preventDefault();window.open(a.href,'_blank','noopener')}
+    };
+    a.addEventListener('touchend',end);a.addEventListener('touchcancel',end,{passive:true});
+    a.addEventListener('contextmenu',e=>{if(touchOnly)e.preventDefault()});
+    a.addEventListener('click',e=>{if(touchOnly)e.preventDefault()});   /* a short tap only brightens */
   });
-  document.addEventListener('click',e=>{if(armed&&!armed.contains(e.target))disarm()});
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* photos fade in once they have loaded */
   document.querySelectorAll('img.ph').forEach(img=>{
