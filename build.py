@@ -240,7 +240,8 @@ def creative(root):
         name = esc(w['name'])
         sub = f'<span>{esc(w["nameEn"])}</span>' if w.get('nameEn') else ''
         label = 'ONLINE SHOP' if k in ('tsurutontan', 'fufusel') else 'OFFICIAL HP'
-        right = (f'<h2 class="h2">{name}{sub}</h2><div class="loc">{esc(w["loc"])} / {esc(w["locEn"])}</div>'
+        role = (f'<div class="role">{" / ".join(esc(r) for r in w["role"])}<span class="sub" lang="ja">{esc(w.get("roleJa", ""))}</span></div>' if w.get('role') else '')
+        right = (f'<h2 class="h2">{name}{sub}</h2><div class="loc">{esc(w["loc"])} / {esc(w["locEn"])}</div>' + role
                  + bi(w['jp'], [esc(t) for t in w['en']])
                  + (f'<a class="more" href="{w["url"]}" target="_blank" rel="noopener">{label} ↗</a>' if w.get('url') else ''))
         photos = {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in (3, 1, 2, 4, 5, 6, 7)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])

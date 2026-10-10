@@ -66,6 +66,8 @@ main{display:grid}
 .label{font-weight:700;text-transform:uppercase}
 .label span{display:block;font-weight:400}
 .loc{text-transform:uppercase;margin:-10px 0 16px}
+.role{margin:-8px 0 16px;font-weight:700;text-transform:uppercase}
+.role .sub{display:block;font-weight:400;color:var(--mute);text-transform:none}
 .lead{font-weight:700;font-size:12px;line-height:1.5;margin-bottom:6px;text-transform:uppercase}
 .lead.ja{font-weight:400;font-size:var(--fs-body);line-height:1.6;margin-bottom:18px;text-transform:none}
 .h{text-transform:uppercase;margin:26px 0 10px;font-weight:700}
