@@ -133,6 +133,9 @@ main{display:grid}
 .hero .frame{display:grid;justify-items:center;align-items:start}
 .hero .frame > picture{display:block;grid-area:1/1;opacity:0;transition:opacity 2.4s ease-in-out}
 .hero .frame > picture.on{opacity:1}
+/* a layer of black multiplied over each top photo to sink it darker */
+.hero .frame > picture{position:relative}
+.hero .frame > picture::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4);mix-blend-mode:multiply;pointer-events:none}
 .hero:not(.ready) .frame > picture:first-child{opacity:1}
 .hero .frame img{animation:none}
 /* black & white with a faint cold tone and deeper contrast */
