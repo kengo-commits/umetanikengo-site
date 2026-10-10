@@ -243,8 +243,8 @@ def creative(root):
         right = (f'<h2 class="h2">{name}{sub}</h2><div class="loc">{esc(w["loc"])} / {esc(w["locEn"])}</div>'
                  + bi(w['jp'], [esc(t) for t in w['en']])
                  + (f'<a class="more" href="{w["url"]}" target="_blank" rel="noopener">{label} ↗</a>' if w.get('url') else ''))
-        count = 6 if k == 'peaks' else 4
-        b.append(row(show([f'{k}-{n}' for n in range(1, count + 1)], w['name'], root), right, '' if i else ''))
+        photos = {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in range(1, 6)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
+        b.append(row(show(photos, w['name'], root), right, '' if i else ''))
     return page('CREATIVE', 'CREATIVE | KENGO UMETANI OFFICIAL', 'CREATIVE WORKS — AQUASENSE Hotel & Resort, i+Land nagasaki, SYNESTHESIA HILLS, GLAMDAY STYLE, OKINAWA GRAND MER RESORT, つるとんたん, 呑窓', '\n'.join(b), root)
 
 
