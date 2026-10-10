@@ -48,22 +48,30 @@ document.querySelectorAll('.show').forEach(show=>{
 /* ---------- quiet motion across the site ---------- */
 (()=>{
   /* phones: a touch brightens the Instagram photo under the finger.
-     Holding it for 1 second opens the post on Instagram (a thin line fills up while you hold). */
+     Holding it for 1 second opens the post on Instagram (a glowing line runs around the photo while you hold). */
   const touchOnly=matchMedia('(hover: none)').matches;
   const HOLD=1000;
   document.querySelectorAll('.home-ig .ig-post').forEach(a=>{
-    let t,start=0,sx=0,sy=0,moved=false;
+    let t,r,start=0,sx=0,sy=0,moved=false;
+    const tile=a.querySelector('.ig-tile');
+    if(tile){
+      tile.insertAdjacentHTML('beforeend','<svg class="ig-trace" aria-hidden="true"><rect pathLength="100"/></svg>');
+      const svg=tile.lastElementChild,rect=svg.firstElementChild;
+      const fit=()=>{const w=tile.clientWidth,h=tile.clientHeight;if(!w||!h)return;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);rect.setAttribute('x',1.5);rect.setAttribute('y',1.5);rect.setAttribute('width',w-3);rect.setAttribute('height',h-3)};
+      fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(tile);
+    }
     a.addEventListener('touchstart',e=>{
-      clearTimeout(t);const p=e.touches[0];sx=p.clientX;sy=p.clientY;moved=false;start=Date.now();
-      a.classList.add('lit','holding');
+      clearTimeout(t);clearTimeout(r);const p=e.touches[0];sx=p.clientX;sy=p.clientY;moved=false;start=Date.now();
+      a.classList.remove('ready');a.classList.add('lit','holding');
+      r=setTimeout(()=>{if(!moved)a.classList.add('ready')},HOLD);
     },{passive:true});
     a.addEventListener('touchmove',e=>{
       const p=e.touches[0];
-      if(!moved&&Math.hypot(p.clientX-sx,p.clientY-sy)>10){moved=true;a.classList.remove('holding')}
+      if(!moved&&Math.hypot(p.clientX-sx,p.clientY-sy)>10){moved=true;clearTimeout(r);a.classList.remove('holding','ready')}
     },{passive:true});
     const end=e=>{
       const held=!moved&&Date.now()-start>=HOLD;
-      a.classList.remove('holding');
+      clearTimeout(r);a.classList.remove('holding','ready');
       clearTimeout(t);t=setTimeout(()=>a.classList.remove('lit'),900);
       if(e.type==='touchend'&&held){e.preventDefault();window.open(a.href,'_blank','noopener')}
     };
