@@ -12,7 +12,7 @@ document.querySelectorAll('.show').forEach(show=>{
     if(dissolve){pics.forEach((p,k)=>{p.hidden=false;p.classList.toggle('on',k===i)})}
     else pics.forEach((p,k)=>p.hidden=k!==i);
     if(num)num.textContent=String(i+1).padStart(2,'0')+' / '+String(pics.length).padStart(2,'0');
-    const capEl=show.querySelector('.cap');if(capEl&&show.dataset.caps){try{capEl.innerHTML=JSON.parse(show.dataset.caps)[i]}catch(e){}}
+    const capEl=show.querySelector('.cap');if(capEl&&show.dataset.caps){try{const txt=JSON.parse(show.dataset.caps)[i];if(capEl.innerHTML!==txt){if(show.classList.contains('ready')){capEl.classList.add('swap');setTimeout(()=>{capEl.innerHTML=txt;capEl.classList.remove('swap')},700)}else capEl.innerHTML=txt}}catch(e){}}
     thumbs.forEach((t,k)=>t.classList.toggle('on',k===i));
     const nx=pics[(i+1)%pics.length].querySelector('img');if(nx)nx.loading='eager';
   };
@@ -44,3 +44,44 @@ document.querySelectorAll('.show').forEach(show=>{
   set(0);
   show.classList.add('ready');
 });
+
+/* ---------- quiet motion across the site ---------- */
+(()=>{
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* photos fade in once they have loaded */
+  document.querySelectorAll('img.ph').forEach(img=>{
+    if(img.complete&&img.naturalWidth)return;
+    img.classList.add('wait');
+    const done=()=>img.classList.remove('wait');
+    img.addEventListener('load',done,{once:true});img.addEventListener('error',done,{once:true});
+  });
+  /* the header gets a hairline once the page scrolls */
+  const top=document.querySelector('.top');
+  const onScroll=()=>top&&top.classList.toggle('scrolled',scrollY>8);
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  /* PAGE TOP */
+  document.querySelectorAll('.to-top').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();scrollTo({top:0,behavior:still?'auto':'smooth'})}));
+  if(still||!('IntersectionObserver' in window))return;
+  /* sections and Instagram posts rise gently into view */
+  const items=[...document.querySelectorAll('main > .row:not(.first), .home-ig .ig-head, .ig-post, .foot')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.06});
+  items.forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.92)return; /* already on screen: leave it */
+    el.classList.add('reveal');
+    if(el.classList.contains('ig-post')){const k=[...el.parentNode.children].indexOf(el);el.style.transitionDelay=(k%6)*90+'ms'}
+    io.observe(el);
+  });
+  /* internal links fade the page out before leaving */
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href]');
+    if(!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    if(a.target&&a.target!=='_self')return;
+    const href=a.getAttribute('href');
+    if(!href||href.startsWith('#')||/^(https?:|mailto:|tel:)/i.test(href))return;
+    e.preventDefault();
+    document.body.classList.add('leaving');
+    setTimeout(()=>{location.href=a.href},320);
+  });
+  addEventListener('pageshow',()=>document.body.classList.remove('leaving'));
+})();
