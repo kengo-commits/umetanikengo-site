@@ -76,16 +76,37 @@ def en_first(h):
     return h
 
 
+DOMAIN = SITE.get('domain', 'www.kengo-umetani.com')
+PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/'}
+# structured data so search engines and AI tools understand who the site is about
+PERSON_LD = {
+    '@context': 'https://schema.org', '@type': 'Person',
+    'name': 'Kengo Umetani', 'alternateName': '梅谷憲吾',
+    'url': f'https://{DOMAIN}/', 'image': f'https://{DOMAIN}/images/top-model.jpg',
+    'jobTitle': 'Creative Director', 'birthPlace': 'Osaka, Japan',
+    'alumniOf': 'Kindai University, Department of Architecture',
+    'worksFor': [{'@type': 'Organization', 'name': 'Kato Pleasure Group', 'url': 'https://www.kpg.gr.jp/'},
+                 {'@type': 'Organization', 'name': 'U&K CREATIVE VISIONS Inc.'}],
+    'sameAs': ['https://www.instagram.com/kengo_umetani/', 'https://www.facebook.com/umetani'],
+}
+
+
 def page(key, title, desc, body, root, skeleton=True):
     body = en_first(body)
     nav = ''.join(f'<a href="{root}{href}"{" class=\"on\" aria-current=\"page\"" if k == key else ""}>{k}</a>' for k, href in NAV)
+    url = f'https://{DOMAIN}/' + PATHS.get(key, '')
+    ld = ('\n<script type="application/ld+json">' + json.dumps(PERSON_LD, ensure_ascii=False) + '</script>') if key in ('HOME', 'PROFILE') else ''
     head = f'''<title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">{'\n<meta name="robots" content="noindex, nofollow">' if SITE.get('noindex') else ''}
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:site_name" content="KENGO UMETANI OFFICIAL">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="{url}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="https://{DOMAIN}/images/aquasense-1.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">{ld}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&amp;display=swap">
@@ -286,7 +307,7 @@ def about(root):
     b = [row('<h1 class="label big">概要<span>ABOUT THIS SITE</span></h1>', '', 'text first')]
     b.append(row('<h2 class="label">運営者情報<span>SITE OPERATOR</span></h2>', f"""<ul class="list norm gap">
 <li><span>サイト名<span class="sub" lang="en">Site name</span></span><span>KENGO UMETANI OFFICIAL<span class="sub">梅谷憲吾 公式サイト</span></span></li>
-<li><span>URL</span><span>https://www.umetanikengo.com</span></li>
+<li><span>URL</span><span>https://{DOMAIN}</span></li>
 <li><span>運営者<span class="sub" lang="en">Operator</span></span><span>梅谷 憲吾<span class="sub" lang="en">Kengo Umetani</span></span></li>
 <li><span>所属<span class="sub" lang="en">Affiliation</span></span><span>Creative Director, Kato Pleasure Group<span class="sub" lang="ja">カトープレジャーグループ クリエイティブディレクター</span>Director and COO, U&amp;K CREATIVE VISIONS Inc.<span class="sub" lang="ja">株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO</span></span></li>
 <li><span>お問い合わせ<span class="sub" lang="en">Contact</span></span><span><a class="u" href="{FB}" target="_blank" rel="noopener">Facebook</a> / <a class="u" href="{IG}" target="_blank" rel="noopener">Instagram</a></span></li>
@@ -309,7 +330,7 @@ def about(root):
 
 def privacy(root):
     b = [row('<h1 class="label big">プライバシーポリシー<span>PRIVACY POLICY</span></h1>',
-             bi(['梅谷憲吾（以下「当サイト運営者」）は、本サイト（https://www.umetanikengo.com）における個人情報の取り扱いについて、以下のとおり定めます。'], ['Kengo Umetani (the "Site Operator") sets out the following policy on the handling of personal information on this website (https://www.umetanikengo.com).']), 'text first')]
+             bi([f'梅谷憲吾（以下「当サイト運営者」）は、本サイト（https://{DOMAIN}）における個人情報の取り扱いについて、以下のとおり定めます。'], [f'Kengo Umetani (the "Site Operator") sets out the following policy on the handling of personal information on this website (https://{DOMAIN}).']), 'text first')]
     b.append(sec('1. 取得する情報', '1. INFORMATION WE COLLECT', [
         '本サイトには、お問い合わせフォームや会員登録の機能はありません。',
         'SNSなどを通じてお問い合わせをいただいた場合、お名前、連絡先、お問い合わせ内容など、ご本人が提供された情報を取得します。',
@@ -369,7 +390,10 @@ if __name__ == '__main__':
     shutil.copytree(ROOT / 'images', OUT + '/images')
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
-    open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else 'User-agent: *\nAllow: /\n')
+    open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\n\nSitemap: https://{DOMAIN}/sitemap.xml\n')
+    open(OUT + '/CNAME', 'w').write(DOMAIN + '\n')
+    open(OUT + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc></url>\n' for p in PATHS.values()) + '</urlset>\n')
     open(OUT + '/.nojekyll', 'w').write('')
     open(OUT + '/index.html', 'w', encoding='utf-8').write(home(''))
     for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie)]:
