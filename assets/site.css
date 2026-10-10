@@ -122,6 +122,7 @@ main{display:grid}
 .hero .frame{display:grid;justify-items:center;align-items:start}
 .hero .frame > picture{display:block;grid-area:1/1;opacity:0;transition:opacity 2.4s ease-in-out}
 .hero .frame > picture.on{opacity:1}
+.hero:not(.ready) .frame > picture:first-child{opacity:1}
 .hero .frame img{animation:none}
 /* black & white with a faint cold tone and deeper contrast */
 .hero .frame img{filter:grayscale(1) sepia(.14) hue-rotate(178deg) saturate(1.35) contrast(1.16) brightness(.94)}

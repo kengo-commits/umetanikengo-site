@@ -38,4 +38,5 @@ document.querySelectorAll('.show').forEach(show=>{
   show.tabIndex=0;
   show.addEventListener('keydown',e=>{if(e.key==='ArrowRight')set(i+1);if(e.key==='ArrowLeft')set(i-1)});
   set(0);
+  show.classList.add('ready');
 });
