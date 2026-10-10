@@ -151,12 +151,10 @@ CREATIVE_LEDE = (['企画・開発、設計からデジタルマーケティン�
                  ['A creative director whose work spans planning and development, architectural design, digital marketing and graphic design. He works across boundaries on projects ranging from large hotels, accommodation facilities and restaurants in Japan to art direction, promotional planning and branding.'])
 MODEL_TEXT = (['学生時代からモデルとして活動し、海外ではHERMÈS、GUCCI、ARMANI、KENZOなどのコレクションに出演。国内では東京コレクションをはじめ、数多くの広告・雑誌に出演。'],
               ['Active as a model since his student days, he has walked in collections for HERMÈS, GUCCI, ARMANI, KENZO and others overseas. In Japan, he has appeared in Tokyo Collection shows and in numerous advertisements and magazines.'])
-VISION_FIRST = (['梅谷憲吾は、ブランドのコンセプト設計からマーケティング、クリエイティブ制作、プロモーションまでを一貫して手がける、総合的なクリエイティブディレクションを行っています。',
-                 'プロジェクトでは、社内のクリエイティブチームに加え、新進気鋭の外部プロフェッショナルや専門家と協力し、革新的なアプローチで新たな挑戦に取り組んでいます。',
-                 '目指すのは、日本から世界に届くクリエイティブを生み出し、業界の持続可能な成長に向けて新しい価値を創造し続けることです。'],
-                ['Kengo Umetani provides comprehensive creative direction, handling everything from brand concept design to marketing, creative production and promotion in one seamless process.',
-                 'On each project, he works with his in-house creative team as well as talented, up-and-coming outside professionals and specialists, taking on new challenges with innovative approaches.',
-                 'His aim is to create work that reaches the world from Japan, and to keep creating new value for the sustainable growth of the creative industry.'])
+VISION_FIRST = (['ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。',
+                 '日本から世界に届くよう、クリエイティブ業界の持続可能な成長を目指し、常に新進気鋭の外部プロフェッショナルとも協力しながら、新たな挑戦に取り組み続けています。'],
+                ['We provide comprehensive creative direction, handling everything from brand concept design to marketing, creative and promotion in one seamless process.',
+                 'With the aim of reaching the world from Japan and supporting the sustainable growth of the creative industry, we continue to take on new challenges, always working alongside talented, up-and-coming professionals from outside our team.'])
 VISION_LEAD = '<p class="lead">クリエイティブな視点で、<br>新しい価値を創造する。</p><p class="lead en" lang="en">Creating new value from a creative perspective.</p>'
 APPROACH = (['最新の技術を取り入れたプロジェクトに積極的に取り組み、市場のニーズに即応するフレキシビリティを保っています。革新的なアプローチを通じてデザイン設計とクリエイティブな発想の融合を実現し、数々のプロジェクトで高い評価をいただいております。',
              '常に新しいアイデアや技術を取り入れ、それを踏まえた実用的なデザインを構築することに重点を置いています。これにより、従来の枠にとどまらない新たな表現方法を生み出し続けています。'],
@@ -268,7 +266,7 @@ def model(root):
 def vision(root):
     b = [row(show(['vision-1'], '夕暮れの水辺の風景 / Waterside at dusk', root, first_lazy=False, prio=True),
              '<h1 class="h2">VISION</h1>' + VISION_LEAD + bi(*VISION_FIRST), 'first')]
-    return page('VISION', 'VISION | KENGO UMETANI OFFICIAL', 'VISION. 梅谷憲吾は、ブランドのコンセプト設計からマーケティング、クリエイティブ制作、プロモーションまでを一貫して手がける、総合的なクリエイティブディレクションを行っています。', '\n'.join(b), root)
+    return page('VISION', 'VISION | KENGO UMETANI OFFICIAL', 'VISION. ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。', '\n'.join(b), root)
 
 
 # ---------- LEGAL ----------
