@@ -114,6 +114,13 @@ main{display:grid}
 .ig-title{font-weight:400;line-height:1.5;overflow-wrap:anywhere}
 .ig-text{color:var(--sub);line-height:1.5;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden}
 
+/* CREATIVE: photos change slowly on their own with a soft cross-fade */
+.fade .frame{display:grid;justify-items:start;align-items:start}
+.fade .frame > picture{display:block;grid-area:1/1;opacity:0;transition:opacity 1.8s ease-in-out}
+.fade .frame > picture.on{opacity:1}
+.fade:not(.ready) .frame > picture:first-child{opacity:1}
+.fade .frame img{animation:none}
+
 @media (min-width:1800px){:root{--fs:10.5px;--fs-body:11.5px}}
 
 /* HOME: one centered photo, caption left / number right */

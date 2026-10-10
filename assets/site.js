@@ -6,7 +6,7 @@ document.querySelectorAll('.show').forEach(show=>{
   const row=show.closest('.row');
   const thumbs=row?[...row.querySelectorAll('.thumb')]:[];
   let i=0;
-  const dissolve=show.classList.contains('hero');
+  const dissolve=show.classList.contains('hero')||show.classList.contains('fade');
   const set=n=>{
     i=(n+pics.length)%pics.length;
     if(dissolve){pics.forEach((p,k)=>{p.hidden=false;p.classList.toggle('on',k===i)})}
@@ -27,7 +27,11 @@ document.querySelectorAll('.show').forEach(show=>{
   const auto=+show.dataset.auto||0;
   if(auto&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     let held=false;
-    setInterval(()=>{if(!held&&!document.hidden)set(i+1)},auto);
+    let last=Date.now();
+    const go=n=>{last=Date.now();set(n)};
+    show.addEventListener('click',()=>{last=Date.now()},true);
+    show.addEventListener('touchend',()=>{last=Date.now()},{passive:true,capture:true});
+    setInterval(()=>{if(!held&&!document.hidden&&Date.now()-last>=auto-50)go(i+1)},auto);
     document.querySelectorAll('[data-slide]').forEach(a=>{
       a.addEventListener('mouseenter',()=>{held=true;set(+a.dataset.slide)});
       a.addEventListener('mouseleave',()=>{held=false});

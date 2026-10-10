@@ -36,13 +36,14 @@ def pic(name, alt, root, sizes=MAIN_SIZES, lazy=True, hidden=False, cls='ph', pr
     return f'<picture{h}><source type="image/webp" srcset="{ss}" sizes="{sizes}"><img {attrs}></picture>'
 
 
-def show(names, alt, root, first_lazy=True, prio=False):
+def show(names, alt, root, first_lazy=True, prio=False, auto=0):
     """A slideshow: all slides are real <picture> elements; only the first is visible until JS advances."""
     slides = ''.join(pic(n, f'{alt} {i+1}' if len(names) > 1 else alt, root, lazy=(first_lazy or i > 0), hidden=i > 0, prio=(prio and i == 0)) for i, n in enumerate(names))
     counter = ''
     if len(names) > 1:
         counter = f'<div class="counter"><span class="num">01 / {len(names):02d}</span><button type="button" data-d="-1">PREV</button><button type="button" data-d="1">NEXT</button></div>'
-    return f'<div class="show" data-count="{len(names)}"><div class="frame">{slides}</div>{counter}</div>'
+    fade = f' fade" data-auto="{auto}' if auto and len(names) > 1 else ''
+    return f'<div class="show{fade}" data-count="{len(names)}"><div class="frame">{slides}</div>{counter}</div>'
 
 
 def P(lines, cls='txt', lang=None):
@@ -249,7 +250,7 @@ def creative(root):
                  + bi(w['jp'], [esc(t) for t in w['en']])
                  + (f'<a class="more" href="{w["url"]}" target="_blank" rel="noopener">{label} ↗</a>' if w.get('url') else ''))
         photos = {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in (3, 1, 2, 4, 5, 6, 7)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
-        b.append(row(show(photos, w['name'], root), right, '' if i else ''))
+        b.append(row(show(photos, w['name'], root, auto=6000), right, '' if i else ''))
     return page('CREATIVE', 'CREATIVE | KENGO UMETANI OFFICIAL', 'CREATIVE WORKS — AQUASENSE Hotel & Resort, i+Land nagasaki, SYNESTHESIA HILLS, GLAMDAY STYLE, OKINAWA GRAND MER RESORT, つるとんたん, 呑窓', '\n'.join(b), root)
 
 
