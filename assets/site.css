@@ -212,11 +212,11 @@ main{display:grid}
 /* phones: hold a photo to open it — a glowing line runs around the photo in 1 second */
 .home-ig .ig-post{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .home-ig .ig-tile{position:relative}
-.ig-trace{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 0 3px rgba(255,255,255,.9)) drop-shadow(0 0 8px rgba(255,255,255,.5))}
-.ig-trace rect{fill:none;stroke:#fff;stroke-width:2;stroke-dasharray:100 100;stroke-dashoffset:100;opacity:0;transition:stroke-dashoffset .25s ease,opacity .25s ease}
+.ig-trace{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 0 2px rgba(255,255,255,1)) drop-shadow(0 0 6px rgba(255,255,255,.8)) drop-shadow(0 0 14px rgba(255,255,255,.45))}
+.ig-trace rect{fill:none;stroke:#fff;stroke-width:.75;stroke-dasharray:100 100;stroke-dashoffset:100;opacity:0;transition:stroke-dashoffset .25s ease,opacity .25s ease}
 .home-ig .ig-post.holding .ig-trace rect{stroke-dashoffset:0;opacity:1;transition:stroke-dashoffset 1s linear,opacity .12s ease}
 .home-ig .ig-post.ready .ig-trace{animation:trace-glow .6s ease-out}
-@keyframes trace-glow{0%{filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px rgba(255,255,255,.5))}40%{filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 18px rgba(255,255,255,.9))}100%{filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px rgba(255,255,255,.5))}}
+@keyframes trace-glow{0%{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px rgba(255,255,255,.8)) drop-shadow(0 0 14px rgba(255,255,255,.45))}40%{filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 10px #fff) drop-shadow(0 0 24px rgba(255,255,255,.8))}100%{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px rgba(255,255,255,.8)) drop-shadow(0 0 14px rgba(255,255,255,.45))}}
 .home-ig .ig-post.lit .ig-tile img{transition:opacity .9s ease,transform 1.2s cubic-bezier(.2,.7,.2,1),filter .12s ease-out}
 .home-ig a:hover{color:#808080}
 .home-ig .sns-icons a:hover{color:#fff;opacity:1}

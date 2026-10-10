@@ -57,7 +57,7 @@ document.querySelectorAll('.show').forEach(show=>{
     if(tile){
       tile.insertAdjacentHTML('beforeend','<svg class="ig-trace" aria-hidden="true"><rect pathLength="100"/></svg>');
       const svg=tile.lastElementChild,rect=svg.firstElementChild;
-      const fit=()=>{const w=tile.clientWidth,h=tile.clientHeight;if(!w||!h)return;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);rect.setAttribute('x',1.5);rect.setAttribute('y',1.5);rect.setAttribute('width',w-3);rect.setAttribute('height',h-3)};
+      const fit=()=>{const w=tile.clientWidth,h=tile.clientHeight;if(!w||!h)return;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);rect.setAttribute('x',1);rect.setAttribute('y',1);rect.setAttribute('width',w-2);rect.setAttribute('height',h-2)};
       fit();if('ResizeObserver' in window)new ResizeObserver(fit).observe(tile);
     }
     a.addEventListener('touchstart',e=>{
