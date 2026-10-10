@@ -184,12 +184,12 @@ def ig_grid(root):
 
 # ---------- HOME: one screen, minimal ----------
 # One photo per CREATIVE work, in the CREATIVE page order
-HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort — Onna, Okinawa', 'アクアセンス ホテル＆リゾート'),
-               ('peaks-6', 'PEAKS — Shinsaibashi, Osaka', 'PEAKS 大阪 心斎橋'),
-               ('island-1', 'i+Land nagasaki — Iojima, Nagasaki', 'アイランド ナガサキ'),
-               ('synesthesia-1', 'SYNESTHESIA HILLS — Nantan, Kyoto', 'シナスタジアヒルズ'),
+HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort', 'アクアセンス ホテル＆リゾート'),
+               ('peaks-6', 'PEAKS', 'PEAKS'),
+               ('island-1', 'i+Land nagasaki', 'アイランド ナガサキ'),
+               ('synesthesia-1', 'SYNESTHESIA HILLS', 'シナスタジアヒルズ'),
                ('glamday-1', 'GLAMDAY STYLE', 'グランデイスタイル'),
-               ('grandmer-2', 'OKINAWA GRAND MER RESORT — Okinawa City, Okinawa', '沖縄グランメールリゾート')]
+               ('grandmer-2', 'OKINAWA GRAND MER RESORT', '沖縄グランメールリゾート')]
 
 
 def home(root, skeleton=True):
