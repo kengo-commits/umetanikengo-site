@@ -47,6 +47,13 @@ document.querySelectorAll('.show').forEach(show=>{
 
 /* ---------- quiet motion across the site ---------- */
 (()=>{
+  /* phones: a touch brightens the Instagram photo under the finger */
+  document.querySelectorAll('.home-ig .ig-post').forEach(a=>{
+    let t;
+    a.addEventListener('touchstart',()=>{clearTimeout(t);a.classList.add('lit')},{passive:true});
+    const off=()=>{clearTimeout(t);t=setTimeout(()=>a.classList.remove('lit'),900)};
+    a.addEventListener('touchend',off,{passive:true});a.addEventListener('touchcancel',off,{passive:true});
+  });
   const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* photos fade in once they have loaded */
   document.querySelectorAll('img.ph').forEach(img=>{
