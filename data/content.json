@@ -20,10 +20,12 @@
    ],
    "role": [
     "CONCEPT",
-    "DESIGN",
-    "LOGO"
+    "PLANNING",
+    "CREATIVE DIRECTION",
+    "LOGO",
+    "ETC."
    ],
-   "roleJa": "コンセプト・デザイン・ロゴ"
+   "roleJa": "コンセプト・企画・クリエイティブディレクション・ロゴ ほか"
   },
   {
    "id": "island",
@@ -38,7 +40,15 @@
    "en": [
     "SUP, sea kayaking, snorkeling, jet skiing, Peiron dragon boat rowing, Gunkanjima cruises, and rental bikes to ride with the sea breeze: this island is packed with more activities than you can enjoy in a single day.",
     "Stay at a hotel or lodge facing the sea, savor the flavors of Nagasaki at the BBQ and restaurants, and unwind in natural hot springs flowing directly from the source. An entertainment resort for everyone to enjoy, whether with your children and family, your dog, your partner or your friends."
-   ]
+   ],
+   "role": [
+    "CONCEPT",
+    "PLANNING",
+    "CREATIVE DIRECTION",
+    "LOGO",
+    "ETC."
+   ],
+   "roleJa": "コンセプト・企画・クリエイティブディレクション・ロゴ ほか"
   },
   {
    "id": "synesthesia",
@@ -53,7 +63,15 @@
    "en": [
     "Created as a year-round night destination based on the concept of synesthesia.",
     "Light art merges with sweeping music, making you feel as if you had wandered into a forest of light. A new kind of illumination that lets you experience, with all five senses, a world of light in harmony with the nature of Rurikei."
-   ]
+   ],
+   "role": [
+    "CONCEPT",
+    "PLANNING",
+    "CREATIVE DIRECTION",
+    "LOGO",
+    "ETC."
+   ],
+   "roleJa": "コンセプト・企画・クリエイティブディレクション・ロゴ ほか"
   },
   {
    "id": "glamday",
@@ -124,7 +142,15 @@
     "Symbolized by its colorful lanterns, Nomado is a Kyushu-style izakaya where you can savor carefully selected local sake and cuisine from Kyushu.",
     "Alongside renowned Kyushu dishes such as motsunabe and kamadaki rice, the menu offers original dishes that put a twist on Kyushu cuisine, all making the most of the region's diverse ingredients. Guests can also enjoy local drinks from Kyushu selected by a sommelière, including shochu and sake from Kyoya Shuzo and seasonal cocktails.",
     "In a lively space reminiscent of a Kyushu street stall, enjoy to your heart's content the flavors of Kyushu that only Nomado can offer."
-   ]
+   ],
+   "role": [
+    "CONCEPT",
+    "PLANNING",
+    "CREATIVE DIRECTION",
+    "LOGO",
+    "ETC."
+   ],
+   "roleJa": "コンセプト・企画・クリエイティブディレクション・ロゴ ほか"
   },
   {
    "id": "peaks",
@@ -140,10 +166,12 @@
    ],
    "role": [
     "CONCEPT",
-    "DESIGN",
-    "LOGO"
+    "PLANNING",
+    "CREATIVE DIRECTION",
+    "LOGO",
+    "ETC."
    ],
-   "roleJa": "コンセプト・デザイン・ロゴ"
+   "roleJa": "コンセプト・企画・クリエイティブディレクション・ロゴ ほか"
   },
   {
    "id": "fufusel",
