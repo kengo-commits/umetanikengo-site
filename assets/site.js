@@ -94,16 +94,33 @@ document.querySelectorAll('.show').forEach(show=>{
   /* PAGE TOP */
   document.querySelectorAll('.to-top').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();scrollTo({top:0,behavior:still?'auto':'smooth'})}));
   if(still||!('IntersectionObserver' in window))return;
-  /* sections and Instagram posts rise gently into view */
-  const items=[...document.querySelectorAll('main > .row:not(.first), .home-ig .ig-head, .ig-post, .foot')];
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.06});
+  /* everything below the first screen rises gently into view as you scroll:
+     photos, headings, each paragraph and each list line, one after another */
+  const pick=[
+    'main > .row .l',
+    'main > .row .r > :not(.txt):not(.list):not(.thumbs)',
+    'main > .row .r .txt > p',
+    'main > .row .r .list > li',
+    'main > .row .r .thumbs',
+    '.home-ig .ig-head','.ig-post','.foot > *'
+  ].join(',');
+  const items=[...document.querySelectorAll(pick)];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.01});
+  const groupCount=new Map();
   items.forEach(el=>{
     const r=el.getBoundingClientRect();
-    if(r.top<innerHeight*.92)return; /* already on screen: leave it */
+    if(r.top<innerHeight*.94)return; /* already on screen: leave it */
     el.classList.add('reveal');
-    if(el.classList.contains('ig-post')){const k=[...el.parentNode.children].indexOf(el);el.style.transitionDelay=(k%6)*90+'ms'}
+    if(el.matches('.row .l')&&el.querySelector('.frame'))el.classList.add('reveal-img');
+    /* stagger lines that belong together */
+    const g=el.classList.contains('ig-post')?el.parentNode:(el.closest('.list,.txt,.foot')||el.closest('.row')||el.parentNode);
+    const k=groupCount.get(g)||0;groupCount.set(g,k+1);
+    el.style.transitionDelay=(el.classList.contains('ig-post')?([...g.children].indexOf(el)%6)*90:Math.min(k,8)*70)+'ms';
     io.observe(el);
   });
+  /* at the very bottom of the page, show whatever is left (it can't scroll any higher) */
+  const atEnd=()=>{if(innerHeight+scrollY>=document.documentElement.scrollHeight-4)document.querySelectorAll('.reveal:not(.in)').forEach(el=>{el.classList.add('in');io.unobserve(el)})};
+  addEventListener('scroll',atEnd,{passive:true});
   /* internal links fade the page out before leaving */
   document.addEventListener('click',e=>{
     const a=e.target.closest('a[href]');
