@@ -209,6 +209,9 @@ main{display:grid}
 }
 @media (prefers-reduced-motion:reduce){.frame img{animation:none}.hero .frame > picture,.hero .frame > picture::after{transition:none}}
 
+/* HOME: warm uncoated-paper white instead of pure white (taken from the reference book cover) */
+:root:has(.home-ig){--bg:#f7f5ee}
+
 /* HOME: from INFORMATION down, the page turns black (full width, including the footer) */
 .home-ig{background:#000;color:#808080;box-shadow:0 0 0 100vmax #000;clip-path:inset(0 -100vmax);padding-top:clamp(56px,8vw,96px);--sub:#5c5c5c;--mute:#555;--rule:#262626;--ink:#808080}
 .home-ig .ig-tile{background:#1a1a1a}
