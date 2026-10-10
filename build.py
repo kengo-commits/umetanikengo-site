@@ -180,6 +180,7 @@ def ig_grid(root):
 # ---------- HOME: one screen, minimal ----------
 # One photo per CREATIVE work, in the CREATIVE page order
 HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort — Onna, Okinawa', 'アクアセンス ホテル＆リゾート'),
+               ('peaks-6', 'PEAKS — Shinsaibashi, Osaka', 'PEAKS 大阪 心斎橋'),
                ('island-1', 'i+Land nagasaki — Iojima, Nagasaki', 'アイランド ナガサキ'),
                ('synesthesia-1', 'SYNESTHESIA HILLS — Nantan, Kyoto', 'シナスタジアヒルズ'),
                ('glamday-1', 'GLAMDAY STYLE', 'グランデイスタイル'),
