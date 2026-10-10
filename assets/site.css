@@ -100,7 +100,7 @@ main{display:grid}
 .nav-foot{display:flex;gap:6px 16px;flex-wrap:wrap}
 .nav-foot a.on{font-weight:700}
 .foot > span{width:100%}
-.list li > span:last-child .sub{text-align:right}
+.list li > span:last-child:not(:first-child) .sub{text-align:right}
 
 .ig-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 10px;max-width:var(--img-w);align-items:start}
 .ig-post{display:grid;gap:4px;min-width:0}
