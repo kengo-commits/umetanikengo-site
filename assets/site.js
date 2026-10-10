@@ -6,9 +6,11 @@ document.querySelectorAll('.show').forEach(show=>{
   const row=show.closest('.row');
   const thumbs=row?[...row.querySelectorAll('.thumb')]:[];
   let i=0;
+  const dissolve=show.classList.contains('hero');
   const set=n=>{
     i=(n+pics.length)%pics.length;
-    pics.forEach((p,k)=>p.hidden=k!==i);
+    if(dissolve){pics.forEach((p,k)=>{p.hidden=false;p.classList.toggle('on',k===i)})}
+    else pics.forEach((p,k)=>p.hidden=k!==i);
     if(num)num.textContent=String(i+1).padStart(2,'0')+' / '+String(pics.length).padStart(2,'0');
     const capEl=show.querySelector('.cap');if(capEl&&show.dataset.caps){try{capEl.innerHTML=JSON.parse(show.dataset.caps)[i]}catch(e){}}
     thumbs.forEach((t,k)=>t.classList.toggle('on',k===i));

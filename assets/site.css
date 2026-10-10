@@ -118,6 +118,11 @@ main{display:grid}
 .hero{width:fit-content;max-width:100%;margin:clamp(24px,6svh,80px) auto 0;cursor:pointer}
 .hero .frame{justify-content:center}
 .hero .frame img{max-width:min(100%, 1200px);max-height:calc(100svh - var(--hdr) - 150px);object-position:center top}
+/* slow dissolve: photos are stacked and cross-fade */
+.hero .frame{display:grid;justify-items:center;align-items:start}
+.hero .frame > picture{display:block;grid-area:1/1;opacity:0;transition:opacity 2.4s ease-in-out}
+.hero .frame > picture.on{opacity:1}
+.hero .frame img{animation:none}
 /* black & white with a faint cold tone and deeper contrast */
 .hero .frame img{filter:grayscale(1) sepia(.14) hue-rotate(178deg) saturate(1.35) contrast(1.16) brightness(.94)}
 .hero-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;text-transform:uppercase;color:var(--sub);font-variant-numeric:tabular-nums}
@@ -160,4 +165,4 @@ main{display:grid}
   :root{--img-w:min(100%, 520px)}
   .thumbs{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
-@media (prefers-reduced-motion:reduce){.frame img{animation:none}}
+@media (prefers-reduced-motion:reduce){.frame img{animation:none}.hero .frame > picture{transition:none}}

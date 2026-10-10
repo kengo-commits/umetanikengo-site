@@ -192,7 +192,7 @@ def home(root, skeleton=True):
     slides = ''.join(pic(img, f'{cap} / {ja}', root, lazy=i > 0, hidden=i > 0, prio=i == 0, sizes='(max-width: 900px) 100vw, min(80vw, 1200px)')
                      for i, (img, cap, ja) in enumerate(HOME_SLIDES))
     caps = json.dumps([esc(c) for _, c, _ in HOME_SLIDES])
-    hero = (f'<section class="hero show" data-count="{n}" data-auto="5000" data-caps=\'{caps}\' aria-label="Photographs">'
+    hero = (f'<section class="hero show" data-count="{n}" data-auto="8000" data-caps=\'{caps}\' aria-label="Photographs">'
             f'<div class="frame">{slides}</div>'
             f'<div class="hero-cap"><span class="cap">{esc(HOME_SLIDES[0][1])}</span><span class="num">01 / {n:02d}</span></div></section>')
     ig = row(ig_grid(root),
