@@ -231,7 +231,6 @@ def profile(root):
     portrait = '<div class="frame mono" style="margin-top:24px">' + pic('top-model', '梅谷 憲吾 / KENGO UMETANI', root, lazy=False, prio=True) + '</div>'
     b.append(row('<h1 class="label big">PROFILE<span>梅谷 憲吾 / KENGO UMETANI</span></h1>' + portrait, bi(BIO_JP, BIO_EN), 'text first'))
     b.append(row('<h2 class="label">現職<span>CURRENT POSITION</span></h2>', current_block(), 'text'))
-    b.append(row('<h2 class="label">次代のクリエイティブへのアプローチ<span>AN APPROACH TO THE NEXT GENERATION OF CREATIVITY</span></h2>', bi(*APPROACH), 'text'))
     b.append(row('<h2 class="label">学歴<span>EDUCATION</span></h2>',
                  '<ul class="list norm"><li><span>近畿大学理工学部建築学科 卒業<span class="sub" lang="en">Graduated from the Department of Architecture, Faculty of Science and Engineering, Kindai University</span></span></li></ul>', 'text'))
     b.append(row('<h2 class="label">職歴<span>CAREER</span></h2>', f'<ul class="list norm gap">{career}</ul>', 'text'))
@@ -274,6 +273,7 @@ def model(root):
 def vision(root):
     b = [row(show(['vision-1'], '夕暮れの水辺の風景 / Waterside at dusk', root, first_lazy=False, prio=True),
              '<h1 class="h2">VISION</h1>' + VISION_LEAD + bi(*VISION_FIRST), 'first')]
+    b.append(row('<h2 class="label">次代のクリエイティブへのアプローチ<span>AN APPROACH TO THE NEXT GENERATION OF CREATIVITY</span></h2>', bi(*APPROACH), 'text'))
     return page('VISION', 'VISION | KENGO UMETANI OFFICIAL', 'VISION. ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。', '\n'.join(b), root)
 
 
