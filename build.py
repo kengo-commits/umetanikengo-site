@@ -390,6 +390,7 @@ if __name__ == '__main__':
     shutil.copytree(ROOT / 'images', OUT + '/images')
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
+    shutil.copy(ROOT / 'assets/paper.png', OUT + '/assets/paper.png')
     open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\n\nSitemap: https://{DOMAIN}/sitemap.xml\n')
     open(OUT + '/CNAME', 'w').write(DOMAIN + '\n')
     open(OUT + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
