@@ -136,7 +136,9 @@ main{display:grid}
 .hero-cap .num{flex-shrink:0}
 .home-ig{margin-top:clamp(80px,14svh,160px)}
 /* Instagram spans the same width as the top photo */
-.home-ig.wide{width:min(100%, 1200px);margin-inline:auto}
+.home-col{width:fit-content;max-width:100%;margin-inline:auto}
+.home-col .hero{margin-inline:0}
+.home-ig.wide{contain:inline-size;width:auto}
 .ig-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px;flex-wrap:wrap}
 .ig-head .h2{margin-bottom:0}
 .home-ig.wide .ig-grid{max-width:none;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px 12px}

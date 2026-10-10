@@ -201,7 +201,7 @@ def home(root, skeleton=True):
           + ig_grid(root).replace("sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px'", "") + '</section>')
     h1 = '<h1 class="visually-hidden">KENGO UMETANI OFFICIAL / 梅谷憲吾 公式サイト</h1>'
     return page('HOME', 'KENGO UMETANI OFFICIAL',
-                '梅谷 憲吾 KENGO UMETANI. KATO PLEASURE GROUP CREATIVE DIRECTOR / U&K CREATIVE VISIONS COO', h1 + hero + '\n' + ig, root, skeleton)
+                '梅谷 憲吾 KENGO UMETANI. KATO PLEASURE GROUP CREATIVE DIRECTOR / U&K CREATIVE VISIONS COO', h1 + '<div class="home-col">' + hero + '\n' + ig + '</div>', root, skeleton)
 
 
 # ---------- PROFILE (same items as the current PROFILE page) ----------
