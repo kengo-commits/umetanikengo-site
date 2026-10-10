@@ -200,8 +200,8 @@ def home(root, skeleton=True):
     hero = (f'<section class="hero show" data-count="{n}" data-auto="8000" data-caps=\'{caps}\' aria-label="Photographs">'
             f'<div class="frame">{slides}</div>'
             f'<div class="hero-cap"><span class="cap">{esc(HOME_SLIDES[0][1])}</span><span class="num">01 / {n:02d}</span></div></section>')
-    ig = ('<section class="home-ig wide" aria-label="Instagram">'
-          '<div class="ig-head"><h2 class="h2">INSTAGRAM<span>@KENGO_UMETANI</span></h2>'
+    ig = ('<section class="home-ig wide" aria-label="Information">'
+          '<div class="ig-head"><h2 class="h2">INFORMATION</h2>'
           f'<nav class="nav-foot"><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a></nav></div>'
           + ig_grid(root).replace("sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px'", "") + '</section>')
     h1 = '<h1 class="visually-hidden">KENGO UMETANI OFFICIAL / 梅谷憲吾 公式サイト</h1>'
