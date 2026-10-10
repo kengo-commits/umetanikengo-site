@@ -151,8 +151,8 @@ CREATIVE_LEDE = (['企画・開発、設計からデジタルマーケティン�
                  ['A creative director whose work spans planning and development, architectural design, digital marketing and graphic design. He works across boundaries on projects ranging from large hotels, accommodation facilities and restaurants in Japan to art direction, promotional planning and branding.'])
 MODEL_TEXT = (['学生時代からモデルとして活動し、海外ではHERMÈS、GUCCI、ARMANI、KENZOなどのコレクションに出演。国内では東京コレクションをはじめ、数多くの広告・雑誌に出演。'],
               ['Active as a model since his student days, he has walked in collections for HERMÈS, GUCCI, ARMANI, KENZO and others overseas. In Japan, he has appeared in Tokyo Collection shows and in numerous advertisements and magazines.'])
-VISION_FIRST = (['業界の持続可能な成長を目指し、クリエイティブチームや外部の専門家と協力しながら、新たな挑戦に取り組んでいます。'],
-                ['Aiming to support the sustainable growth of the industry, we take on new challenges in collaboration with our creative team and outside experts.'])
+VISION_FIRST = (['日本から世界に届くよう、クリエイティブ業界の持続可能な成長を目指し、常に新進気鋭の外部のプロフェッショナルな専門家とも協力しながら、新たな挑戦に取り組み続けています。'],
+                ['With the aim of reaching the world from Japan and supporting the sustainable growth of the creative industry, we continue to take on new challenges, always working alongside talented, up-and-coming professionals from outside our team.'])
 VISION_LEAD = '<p class="lead">クリエイティブな視点で、<br>新しい価値を創造する。</p><p class="lead en" lang="en">Creating new value from a creative perspective.</p>'
 APPROACH = (['最新の技術を取り入れたプロジェクトに積極的に取り組み、市場のニーズに即応するフレキシビリティを保っています。革新的なアプローチを通じてデザイン設計とクリエイティブな発想の融合を実現し、数々のプロジェクトで高い評価をいただいております。',
              '常に新しいアイデアや技術を取り入れ、それを踏まえた実用的なデザインを構築することに重点を置いています。これにより、従来の枠にとどまらない新たな表現方法を生み出し続けています。'],
