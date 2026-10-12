@@ -139,7 +139,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="https://{DOMAIN}/images/aquasense-1.jpg">
 <meta property="og:locale" content="ja_JP">
-<meta name="theme-color" content="#f7f5ee">
+<meta name="theme-color" content="#f7f5ee">{f'\n<meta name="google-site-verification" content="{SITE["google_verification"]}">' if SITE.get('google_verification') else ''}
 <meta name="color-scheme" content="only light">
 <link rel="alternate" type="text/plain" title="Summary for AI assistants" href="https://{DOMAIN}/llms.txt">
 <meta name="twitter:card" content="summary_large_image">{ld}

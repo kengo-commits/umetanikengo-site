@@ -1,5 +1,6 @@
 {
  "noindex": false,
  "domain": "www.kengo-umetani.com",
- "_note": "公開（検索に出す）ときは noindex を false にする。domain はサイトのアドレス"
+ "_note": "公開（検索に出す）ときは noindex を false にする。domain はサイトのアドレス",
+ "google_verification": "IqKK-AHK0LvGrK2WAEbt1FZlswNzZe2CdVperHjCmyI"
 }
