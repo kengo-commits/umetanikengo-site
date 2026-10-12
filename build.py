@@ -491,7 +491,7 @@ def llms_txt():
           f'- [Creative]({SITE_URL}creative/): hotels, resorts, restaurants and brands he has worked on, with roles',
           f'- [Model]({SITE_URL}model/): model photographs and career',
           f'- [Vision]({SITE_URL}vision/): his approach to creative direction',
-          f'- [Synesthesia World]({SITE_URL}synesthesia-world/): his picks and thoughts on fashion, music and design, with daily news',
+          f"- [Kengo's Synesthesia]({SITE_URL}synesthesia-world/): his picks and thoughts on fashion, music and design, with daily news",
           f'- [About]({SITE_URL}about/): site operator information',
           '', '## Links',
           '- Instagram: https://www.instagram.com/kengo_umetani/',
