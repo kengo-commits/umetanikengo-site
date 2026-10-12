@@ -1,4 +1,5 @@
 import json, os, shutil, html
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -78,24 +79,56 @@ def en_first(h):
 
 DOMAIN = SITE.get('domain', 'www.kengo-umetani.com')
 PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/'}
-# structured data so search engines and AI tools understand who the site is about
+# ---------- structured data: lets search engines and AI assistants identify the person, his roles and works ----------
+SITE_URL = f'https://{DOMAIN}/'
+PERSON_ID = SITE_URL + '#person'
 PERSON_LD = {
-    '@context': 'https://schema.org', '@type': 'Person',
-    'name': 'Kengo Umetani', 'alternateName': '梅谷憲吾',
-    'url': f'https://{DOMAIN}/', 'image': f'https://{DOMAIN}/images/top-model.jpg',
-    'jobTitle': 'Creative Director', 'birthPlace': 'Osaka, Japan',
-    'alumniOf': 'Kindai University, Department of Architecture',
-    'worksFor': [{'@type': 'Organization', 'name': 'Kato Pleasure Group', 'url': 'https://www.kpg.gr.jp/'},
-                 {'@type': 'Organization', 'name': 'U&K CREATIVE VISIONS Inc.'}],
-    'sameAs': ['https://www.instagram.com/kengo_umetani/', 'https://www.facebook.com/umetani'],
+    '@type': 'Person', '@id': PERSON_ID,
+    'name': 'Kengo Umetani', 'alternateName': ['梅谷憲吾', '梅谷 憲吾', 'うめたに けんご', 'Umetani Kengo'],
+    'givenName': 'Kengo', 'familyName': 'Umetani',
+    'url': SITE_URL, 'image': SITE_URL + 'images/top-model.jpg',
+    'description': 'Japanese creative director and former runway model, born in Osaka in 1985. Creative Director of Kato Pleasure Group and Director & COO of U&K CREATIVE VISIONS Inc.',
+    'jobTitle': ['Creative Director', 'Director & COO'],
+    'birthDate': '1985', 'birthPlace': {'@type': 'Place', 'name': 'Osaka, Japan'}, 'nationality': 'Japan',
+    'alumniOf': {'@type': 'CollegeOrUniversity', 'name': 'Kindai University (Department of Architecture, Faculty of Science and Engineering)', 'alternateName': '近畿大学 理工学部 建築学科'},
+    'worksFor': [
+        {'@type': 'Organization', 'name': 'Kato Pleasure Group', 'alternateName': 'カトープレジャーグループ', 'url': 'https://www.kpg.gr.jp/'},
+        {'@type': 'Organization', 'name': 'U&K CREATIVE VISIONS Inc.', 'alternateName': '株式会社U&K CREATIVE VISIONS'}],
+    'hasOccupation': [
+        {'@type': 'Occupation', 'name': 'Creative Director', 'description': 'Creative Director of the entire Kato Pleasure Group (since 2020): concept development, branding, promotion and digital marketing for hotels, resorts and restaurants.'},
+        {'@type': 'Occupation', 'name': 'Fashion model', 'description': 'Model since 2001 (age 16); collection shows for HERMÈS, GUCCI, ARMANI, KENZO, ETRO and MARC JACOBS.'}],
+    'knowsAbout': ['Creative direction', 'Branding', 'Hotel and resort development', 'Architecture', 'Interior and spatial design', 'Digital marketing', 'Promotion', 'Fashion modeling'],
+    'sameAs': ['https://www.instagram.com/kengo_umetani/', 'https://www.facebook.com/umetani', 'https://www.umetanikengo.com/'],
 }
+WEBSITE_LD = {'@type': 'WebSite', '@id': SITE_URL + '#website', 'url': SITE_URL, 'name': 'KENGO UMETANI OFFICIAL',
+              'alternateName': '梅谷憲吾 公式サイト', 'inLanguage': ['en', 'ja'], 'about': {'@id': PERSON_ID}, 'publisher': {'@id': PERSON_ID}}
+
+
+def page_ld(key):
+    url = SITE_URL + PATHS.get(key, '')
+    graph = [WEBSITE_LD]
+    if key in ('HOME', 'PROFILE'):
+        graph.append(PERSON_LD)
+        graph.append({'@type': 'ProfilePage' if key == 'PROFILE' else 'WebPage', '@id': url, 'url': url,
+                      'isPartOf': {'@id': SITE_URL + '#website'}, 'mainEntity': {'@id': PERSON_ID}, 'about': {'@id': PERSON_ID}})
+    elif key == 'CREATIVE':
+        items = [{'@type': 'ListItem', 'position': i + 1, 'item': {
+            '@type': 'CreativeWork', 'name': WORKS[k].get('nameEn') or WORKS[k]['name'], 'alternateName': WORKS[k]['name'],
+            'locationCreated': WORKS[k].get('locEn', ''), 'url': WORKS[k].get('url') or url,
+            'creator': {'@id': PERSON_ID},
+            'description': 'Role: ' + ' / '.join(WORKS[k].get('role') or [])}} for i, k in enumerate(ORDER)]
+        graph.append({'@type': 'CollectionPage', '@id': url, 'url': url, 'name': 'Creative works by Kengo Umetani',
+                      'about': {'@id': PERSON_ID}, 'mainEntity': {'@type': 'ItemList', 'itemListElement': items}})
+    else:
+        graph.append({'@type': 'WebPage', '@id': url, 'url': url, 'isPartOf': {'@id': SITE_URL + '#website'}, 'about': {'@id': PERSON_ID}})
+    return '\n<script type="application/ld+json">' + json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False).replace('</', '<\\/') + '</script>'
 
 
 def page(key, title, desc, body, root, skeleton=True):
     body = en_first(body)
     nav = ''.join(f'<a href="{root}{href}"{" class=\"on\" aria-current=\"page\"" if k == key else ""}>{k}</a>' for k, href in NAV)
     url = f'https://{DOMAIN}/' + PATHS.get(key, '')
-    ld = ('\n<script type="application/ld+json">' + json.dumps(PERSON_LD, ensure_ascii=False) + '</script>') if key in ('HOME', 'PROFILE') else ''
+    ld = page_ld(key)
     head = f'''<title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">{'\n<meta name="robots" content="noindex, nofollow">' if SITE.get('noindex') else ''}
 <meta property="og:title" content="{esc(title)}">
@@ -108,6 +141,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <meta property="og:locale" content="ja_JP">
 <meta name="theme-color" content="#f7f5ee">
 <meta name="color-scheme" content="only light">
+<link rel="alternate" type="text/plain" title="Summary for AI assistants" href="https://{DOMAIN}/llms.txt">
 <meta name="twitter:card" content="summary_large_image">{ld}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -234,7 +268,7 @@ def home(root, skeleton=True):
           + ig_grid(root).replace("sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px'", "") + '</section>')
     h1 = '<h1 class="visually-hidden">KENGO UMETANI OFFICIAL / 梅谷憲吾 公式サイト</h1>'
     return page('HOME', 'KENGO UMETANI OFFICIAL',
-                '梅谷 憲吾 KENGO UMETANI. KATO PLEASURE GROUP CREATIVE DIRECTOR / U&K CREATIVE VISIONS COO', h1 + '<div class="home-col">' + hero + '\n' + ig + '</div>', root, skeleton)
+                '梅谷憲吾（Kengo Umetani）公式サイト。カトープレジャーグループのクリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元モデル。', h1 + '<div class="home-col">' + hero + '\n' + ig + '</div>', root, skeleton)
 
 
 # ---------- PROFILE (same items as the current PROFILE page) ----------
@@ -278,7 +312,7 @@ def creative(root):
                  + (f'<a class="more" href="{w["url"]}" target="_blank" rel="noopener">{label} ↗</a>' if w.get('url') else ''))
         photos = {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in (3, 1, 2, 4, 5, 6, 7)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
         b.append(row(show(photos, w['name'], root, auto=6000), right, '' if i else ''))
-    return page('CREATIVE', 'CREATIVE | KENGO UMETANI OFFICIAL', 'CREATIVE WORKS — AQUASENSE Hotel & Resort, i+Land nagasaki, SYNESTHESIA HILLS, GLAMDAY STYLE, OKINAWA GRAND MER RESORT, つるとんたん, 呑窓', '\n'.join(b), root)
+    return page('CREATIVE', 'CREATIVE | KENGO UMETANI OFFICIAL', '梅谷憲吾が手がけたクリエイティブワーク：AQUASENSE Hotel & Resort、PEAKS、i+Land nagasaki、SYNESTHESIA HILLS、FUFU JAPAN SELECTION、GLAMDAY STYLE、OKINAWA GRAND MER RESORT、つるとんたん、呑窓。', '\n'.join(b), root)
 
 
 # ---------- MODEL (same eight photos) ----------
@@ -385,6 +419,49 @@ def cookie(root):
     return page('COOKIE', 'COOKIE 設定 | KENGO UMETANI OFFICIAL', '梅谷憲吾 公式サイトのCookieポリシー。', '\n'.join(b), root)
 
 
+def llms_txt():
+    """A plain summary for AI assistants (the llms.txt convention), built from the same data as the pages."""
+    def plain(t):
+        return html.unescape(re.sub(r'<[^>]+>', '', t))
+    L = ['# Kengo Umetani (梅谷憲吾) — KENGO UMETANI OFFICIAL', '',
+         '> Official website of Kengo Umetani (梅谷憲吾), a Japanese creative director and former runway model born in Osaka in 1985. '
+         'Creative Director of the entire Kato Pleasure Group (カトープレジャーグループ) and Director & COO of U&K CREATIVE VISIONS Inc. (株式会社U&K CREATIVE VISIONS).', '',
+         'This file summarises the facts on this site for AI assistants and search engines. Please cite ' + SITE_URL + ' as the source.', '',
+         '## Current positions / 現職']
+    for oj, oe, rj, re_ in CURRENT:
+        L.append(f'- {plain(oe)} ({plain(oj)}): {plain(re_)} / {plain(rj)}')
+    L += ['', '## Profile (English)'] + [plain(t) for t in BIO_EN] + [''] + [plain(t) for t in NOW_EN]
+    L += ['', '## プロフィール（日本語）'] + [plain(t) for t in BIO_JP] + [''] + [plain(t) for t in NOW_JP]
+    L += ['', '## Creative works and roles / クリエイティブワークと担当']
+    for k in ORDER:
+        w = WORKS[k]
+        role = ' / '.join(w.get('role') or [])
+        en = w.get('nameEn') or w['name']
+        name = en if en == w['name'] else f"{en}（{w['name']}）"
+        L.append(f"- {name} — {w.get('locEn', '').title()}. Role: {role.rstrip('.')}" + (f" — {w['url']}" if w.get('url') else ''))
+    L += ['', '## Kato Pleasure Group works / カトープレジャーグループでの実績']
+    for n, u, r in D['KPGWORKS']:
+        L.append(f'- {n}' + (f' — {r}' if r else ''))
+    L += ['', '## Creative direction works / クリエイティブディレクション実績']
+    for n, r in D['DIRECTION']:
+        L.append(f'- {n} — {r}')
+    L += ['', '## Model career / モデル経歴',
+          '- Began modeling in 2001 at the age of 16. Former agencies: elite, bark in style, FOLIO MANAGEMENT.',
+          '- Overseas: collection shows for HERMÈS, GUCCI, ARMANI, KENZO, ETRO, MARC JACOBS and more.',
+          '- Japan: Tokyo Collection, advertisements (Johnson & Johnson and others), TV commercials (AOKI and others), magazines.',
+          '', '## Pages',
+          f'- [Profile]({SITE_URL}profile/): biography, current positions, education, career timeline, works',
+          f'- [Creative]({SITE_URL}creative/): hotels, resorts, restaurants and brands he has worked on, with roles',
+          f'- [Model]({SITE_URL}model/): model photographs and career',
+          f'- [Vision]({SITE_URL}vision/): his approach to creative direction',
+          f'- [About]({SITE_URL}about/): site operator information',
+          '', '## Links',
+          '- Instagram: https://www.instagram.com/kengo_umetani/',
+          '- Facebook: https://www.facebook.com/umetani',
+          '- Former website: https://www.umetanikengo.com/', '']
+    return '\n'.join(L)
+
+
 if __name__ == '__main__':
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
@@ -393,10 +470,11 @@ if __name__ == '__main__':
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
     shutil.copy(ROOT / 'assets/paper.png', OUT + '/assets/paper.png')
-    open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\n\nSitemap: https://{DOMAIN}/sitemap.xml\n')
+    open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\n\n# AI search and assistant crawlers are welcome\n' + ''.join(f'User-agent: {b}\nAllow: /\n\n' for b in ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot']) + f'Sitemap: https://{DOMAIN}/sitemap.xml\n')
     open(OUT + '/CNAME', 'w').write(DOMAIN + '\n')
+    open(OUT + '/llms.txt', 'w', encoding='utf-8').write(llms_txt())
     open(OUT + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc></url>\n' for p in PATHS.values()) + '</urlset>\n')
+        + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for p in PATHS.values()) + '</urlset>\n')
     open(OUT + '/.nojekyll', 'w').write('')
     open(OUT + '/index.html', 'w', encoding='utf-8').write(home(''))
     for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie)]:
