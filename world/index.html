@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>SYNESTHESIA WORLD | KENGO UMETANI OFFICIAL</title>
+<title>KENGO UMETANI presented by Synesthesia World</title>
 <meta name="description" content="Synesthesia World — 梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するページ。">
 <link rel="canonical" href="https://www.kengo-umetani.com/synesthesia-world/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="SYNESTHESIA WORLD | KENGO UMETANI OFFICIAL">
+<meta property="og:title" content="KENGO UMETANI presented by Synesthesia World">
 <meta property="og:description" content="Synesthesia World — 梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するページ。">
 <meta property="og:url" content="https://www.kengo-umetani.com/synesthesia-world/">
 <meta property="og:image" content="https://www.kengo-umetani.com/synesthesia-world/media/film-poster.jpg">
@@ -31,11 +31,11 @@ a:hover{opacity:.45}
 .lab{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
 .top{display:none}
 header.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:18px 14px}
-.mast{margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;line-height:1}
-.mast i{font-style:normal}
+.mast{margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;line-height:1.5}
+.mast i{font-style:normal;font-weight:400;text-transform:none;letter-spacing:.06em;color:var(--mute);margin-left:.4em}
 nav.nv{display:flex;gap:clamp(12px,2vw,28px);flex-wrap:wrap;text-transform:uppercase;font-size:10px;letter-spacing:.14em}
 .lede{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-block:48px 28px}
-.lede p{margin:0;max-width:52ch;font-family:var(--jp);font-size:11.5px;letter-spacing:.04em;line-height:1.9;color:var(--mute)}
+.lede p{margin:0;max-width:60ch;font-family:var(--jp);font-size:10px;letter-spacing:.03em;line-height:1.6;color:var(--mute)}
 .lede p span{display:block;font-family:var(--sans);color:var(--ink);text-transform:uppercase;font-size:10.5px;letter-spacing:.12em;margin-bottom:10px}
 .pick{text-align:right}
 .pick a{display:block;color:var(--ink);font-size:11px;letter-spacing:.14em;margin-top:6px}
@@ -66,6 +66,12 @@ h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
 .past{margin-top:20px}
 .past summary{cursor:pointer;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:flex;gap:12px;padding-block:6px}
 .past h4{margin:22px 0 0;font-size:10px;font-weight:400;letter-spacing:.14em;color:var(--mute)}
+.daily{border-top:1px solid var(--ink);margin-bottom:56px}
+.daily .past{margin-top:0;border-bottom:1px solid var(--rule)}
+.daily .past summary{padding-block:12px;justify-content:space-between;color:var(--ink)}
+.daily .past .news{border-top:none;margin-bottom:16px}
+.plh{margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;flex-wrap:wrap}
+.plh small{font-weight:400;color:var(--mute);letter-spacing:.12em}
 @media (max-width:900px){.news{grid-template-columns:minmax(0,1fr)}}
 .plates{columns:3 260px;column-gap:clamp(8px,1.4vw,18px)}
 figure{margin:0 0 clamp(18px,2.4vw,32px);break-inside:avoid}
@@ -131,7 +137,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
 <div class="wrap">
   <div class="top lab"><span>Issue 01 — Fashion / Music / Design / World</span><span id="date"></span></div>
-  <header class="hd"><h1 class="mast"><a href="#">Synesthesia World</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Sound</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
+  <header class="hd"><h1 class="mast"><a href="#">KENGO UMETANI <i>presented by</i><br>Synesthesia World</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Sound</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
   <div class="lede">
     <p><span>Kengo Umetani's tastes and thoughts on fashion, sound and form, sent out to the world.</span>シナスタジアワールドは、梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するサイトです。世界中のパブリックドメインの写真・映像と、このサイトのためのオリジナル音楽を添えています。</p>
     <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
@@ -149,17 +155,156 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <h2>Today <small id="todayDate"></small></h2>
     <p class="intro">Fashion, music and design news from around the world, refreshed every morning. 世界のファッション・音楽・デザインのニュースを毎朝更新しています。見出しから元の記事へ移動できます。</p>
     <div class="news" id="newsToday"></div>
-    <details class="past" id="pastWrap" hidden>
-      <summary>Previous days <span class="lab">過去のニュース</span></summary>
-      <div id="newsPast"></div>
-    </details>
   </section>
 <script type="application/json" id="news-data">
-{"updated": "2026-10-13", "days": [{"date": "2026-10-13", "items": [{"cat": "fashion", "title": "Anthony Vaccarello leaves Saint Laurent after ten years", "ja": "サンローランは、2016年にエディ・スリマンの後を継いだアンソニー・ヴァカレロがクリエイティブ・ディレクターを退任すると発表しました。9月にパリで発表した2027年春夏が最後のショーとなり、後任は近く発表されます。", "source": "FashionUnited", "url": "https://fashionunited.com/news/people/saint-laurent-confirms-anthony-vaccarellos-departure-after-a-decade/2026100975116"}, {"cat": "fashion", "title": "Jil Sander takes its icon bags on a Japan tour", "ja": "ジル サンダーが10月14日から伊勢丹新宿、阪急うめだ、岩田屋で順にポップアップを開きます。LINEAやTANGLEなどのバッグが並び、ソフトスエードのLINEAショルダーが限定で登場します。", "source": "FASHIONSNAP", "url": "https://www.fashionsnap.com/article/2026-10-11/jilsander-icon-popup/"}, {"cat": "fashion", "title": "Akira Takahashi's first show of shoes and paintings", "ja": "ここのがっこうで学ぶ高橋耀が、初の個展「滲んだ足元」を東京・自由が丘のart space trafficで11月23日まで開いています。玄関をテーマに、履ける革靴9点とアクリル画5点を展示しています。", "source": "FASHIONSNAP", "url": "https://www.fashionsnap.com/article/2026-10-10/akira-takahashi-blurred-feet/"}, {"cat": "music", "title": "Blackhaine's debut album lands on XL", "ja": "マンチェスターのブラックヘインが、初のフルアルバム『Saints In The Wethouse』を11月13日にXL Recordingsから発表します。インダストリアルやノイズと静かな場面を行き来する12曲で、スペース・アフリカらが制作に参加しています。", "source": "The Quietus", "url": "https://thequietus.com/news/blackhaine-signs-to-xl-recordings-for-new-album-saints-in-the-wethouse/"}, {"cat": "music", "title": "Anna Meredith announces DARLING", "ja": "スコットランドの作曲家アナ・メレディスが、サウンドトラック以外では2021年以来となるアルバム『DARLING』を2027年2月12日にMercury KXから出します。全11曲で、先行曲「Dusky」はストップモーションの映像付きです。", "source": "The Quietus", "url": "https://thequietus.com/news/anna-meredith-reveals-new-album-darling/"}, {"cat": "music", "title": "Throbbing Gristle's 50th marked at the ICA", "ja": "スロッビング・グリッスル結成50周年のイベントが10月18日にロンドンのICAで開かれます。クリス・カーターとコージー・ファニ・トゥッティの対談や1981年のライブ映像の上映があり、1976年のICA公演を収めた50枚限定の盤も用意されます。", "source": "The Quietus", "url": "https://thequietus.com/news/further-details-of-tg50-event-at-londons-ica-emerge/"}, {"cat": "design", "title": "A theatre-curtained restaurant in a Covent Garden workshop", "ja": "ロンドンのGundry & Duckerが、コヴェント・ガーデンの19世紀ゴシック様式の工房をレストラン「Cassette」に改装しました。吹き抜けの客席を劇場の幕のような吸音カーテンが囲み、サペリ材やステンレスで仕上げています。", "source": "Dezeen", "url": "https://www.dezeen.com/2026/10/12/gundry-ducker-french-dining-culture-london-cassette/"}, {"cat": "design", "title": "BIG lifts a mixed-use block above a park in Tirana", "ja": "BIGがアルバニア・ティラナのリニア公園に建つ複合施設のコンペで1等を得ました。建物を細い白い柱で持ち上げて地上を公園として開き、既存のプールや噴水も残す計画です。", "source": "Dezeen", "url": "https://www.dezeen.com/2026/10/12/tirana-fountain-tower-big-albania/"}, {"cat": "design", "title": "Teak and concrete in a compact Mexico City flat", "ja": "メキシコシティのMariel Lozano Studioが、ローマ・ノルテ地区の約50平方メートルのアパートを内装しました。打ち放しの壁にチーク材の造作家具を組み込み、ヘッドボードにはスピーカーを内蔵しています。", "source": "Dezeen", "url": "https://www.dezeen.com/2026/10/10/mad-monk-studios-san-luis-stays-mariel-lozano-studio/"}]}, {"date": "2026-10-12", "items": [{"cat": "fashion", "title": "Kim Jones brings back his own label", "ja": "ルイ・ヴィトン、ディオール、フェンディを率いてきたキム・ジョーンズが、自身のブランド「キム ジョーンズ」を再始動します。2027-28年秋冬が最初のコレクションで、香港のセントラル・ヤードに店を開き、服の多くは日本で生産されます。", "source": "WWDJAPAN", "url": "https://www.wwdjapan.com/articles/2524673"}, {"cat": "fashion", "title": "Masaco Teranishi shows spring 2027 in Tokyo", "ja": "マサコ テラニシが楽天 ファッション ウィーク 東京で2027年春夏コレクションを発表しました。全17ルックが公開されています。", "source": "WWDJAPAN", "url": "https://www.wwdjapan.com/articles/2522106"}, {"cat": "fashion", "title": "Limi Feu teams up with graphic artist HIROTTON", "ja": "ヨウジヤマモトのリミ フゥが、グラフィックアーティストのHIROTTONとのコラボアイテムを発売しました。Tシャツやスーベニアジャケット、スケートボードなどがそろい、10月16日から全国の取扱店でも販売されます。", "source": "WWDJAPAN", "url": "https://www.wwdjapan.com/articles/2524571"}, {"cat": "music", "title": "Ryuichi Sakamoto's 1996 reissued for its 30th anniversary", "ja": "坂本龍一がピアノ、チェロ、バイオリンの三重奏で自作を演奏したアルバム『1996』が、新たなリマスターで12月11日にMilan Recordsから2枚組LPとカセットで再発されます。", "source": "The Quietus", "url": "https://thequietus.com/news/ryuichi-sakamotos-1996-set-for-30th-anniversary-reissue/"}, {"cat": "music", "title": "Björk releases her 2021 concert with the Hamrahlíð Choir", "ja": "ビョークが2021年にレイキャビクのハルパで50人のハムラリーズ合唱団と行った公演が、ライブアルバムとして11月27日にOne Little Independentから出ます。『Medúlla』の曲が中心です。", "source": "The Quietus", "url": "https://thequietus.com/news/bjork-details-live-orchestral-album-bjork-orkestral-with-the-hamrahlid-choir/"}, {"cat": "music", "title": "Loraine James and Warp's Providenza Ensemble head to the Barbican", "ja": "ロレイン・ジェームスやピュース・メアリーら6人の作曲家による新しい管弦楽作品が、2027年1月24日にロンドンのバービカンでシンフォニエッタ・クラコヴィアの演奏により初演されます。Unsoundの主催です。", "source": "The Quietus", "url": "https://thequietus.com/news/loraine-james-puce-mary-and-more-to-debut-orchestral-works-at-londons-barbican/"}, {"cat": "design", "title": "A red metal extension for a former pigsty home in Czechia", "ja": "プラハのFacha Architektiが、豚小屋を改装したチェコの住宅に赤い波板の増築部を加えました。内装はパイン合板で、収納を家具に組み込み、玄関と浴室を広げています。", "source": "Dezeen", "url": "https://www.dezeen.com/2026/10/11/facha-architekti-red-extension-czech-pigsty-home/"}, {"cat": "design", "title": "Grimshaw's rammed-earth visitor centre at the Twelve Apostles", "ja": "オーストラリア・ビクトリア州の名所トゥエルブ・アポストルズに、グリムショウとAspect Studiosが版築の壁を使ったビジターセンターを完成させました。屋上は海を望む展望台になっています。", "source": "Dezeen", "url": "https://www.dezeen.com/2026/10/12/grimshaw-visitor-centre-twelve-apostles-australia/"}, {"cat": "design", "title": "A concrete house in India inspired by rock-cut monasteries", "ja": "インドのRoomoorが、バレシュワルのジャイナ教寺院の敷地に打ち放しコンクリートの住宅を建てました。デカン高原の石窟僧院を参考に、天窓の光を中心に据えた設計です。", "source": "Dezeen", "url": "https://www.dezeen.com/2026/10/11/monastic-field-roomoor-india/"}]}]}
+{
+ "updated": "2026-10-13",
+ "days": [
+  {
+   "date": "2026-10-13",
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Anthony Vaccarello leaves Saint Laurent after ten years",
+     "ja": "サンローランは、2016年にエディ・スリマンの後を継いだアンソニー・ヴァカレロがクリエイティブ・ディレクターを退任すると発表しました。9月にパリで発表した2027年春夏が最後のショーとなり、後任は近く発表されます。",
+     "source": "FashionUnited",
+     "url": "https://fashionunited.com/news/people/saint-laurent-confirms-anthony-vaccarellos-departure-after-a-decade/2026100975116"
+    },
+    {
+     "cat": "fashion",
+     "title": "Jil Sander takes its icon bags on a Japan tour",
+     "ja": "ジル サンダーが10月14日から伊勢丹新宿、阪急うめだ、岩田屋で順にポップアップを開きます。LINEAやTANGLEなどのバッグが並び、ソフトスエードのLINEAショルダーが限定で登場します。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-11/jilsander-icon-popup/"
+    },
+    {
+     "cat": "fashion",
+     "title": "Akira Takahashi's first show of shoes and paintings",
+     "ja": "ここのがっこうで学ぶ高橋耀が、初の個展「滲んだ足元」を東京・自由が丘のart space trafficで11月23日まで開いています。玄関をテーマに、履ける革靴9点とアクリル画5点を展示しています。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-10/akira-takahashi-blurred-feet/"
+    },
+    {
+     "cat": "music",
+     "title": "Blackhaine's debut album lands on XL",
+     "ja": "マンチェスターのブラックヘインが、初のフルアルバム『Saints In The Wethouse』を11月13日にXL Recordingsから発表します。インダストリアルやノイズと静かな場面を行き来する12曲で、スペース・アフリカらが制作に参加しています。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/blackhaine-signs-to-xl-recordings-for-new-album-saints-in-the-wethouse/"
+    },
+    {
+     "cat": "music",
+     "title": "Anna Meredith announces DARLING",
+     "ja": "スコットランドの作曲家アナ・メレディスが、サウンドトラック以外では2021年以来となるアルバム『DARLING』を2027年2月12日にMercury KXから出します。全11曲で、先行曲「Dusky」はストップモーションの映像付きです。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/anna-meredith-reveals-new-album-darling/"
+    },
+    {
+     "cat": "music",
+     "title": "Throbbing Gristle's 50th marked at the ICA",
+     "ja": "スロッビング・グリッスル結成50周年のイベントが10月18日にロンドンのICAで開かれます。クリス・カーターとコージー・ファニ・トゥッティの対談や1981年のライブ映像の上映があり、1976年のICA公演を収めた50枚限定の盤も用意されます。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/further-details-of-tg50-event-at-londons-ica-emerge/"
+    },
+    {
+     "cat": "design",
+     "title": "A theatre-curtained restaurant in a Covent Garden workshop",
+     "ja": "ロンドンのGundry & Duckerが、コヴェント・ガーデンの19世紀ゴシック様式の工房をレストラン「Cassette」に改装しました。吹き抜けの客席を劇場の幕のような吸音カーテンが囲み、サペリ材やステンレスで仕上げています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/12/gundry-ducker-french-dining-culture-london-cassette/"
+    },
+    {
+     "cat": "design",
+     "title": "BIG lifts a mixed-use block above a park in Tirana",
+     "ja": "BIGがアルバニア・ティラナのリニア公園に建つ複合施設のコンペで1等を得ました。建物を細い白い柱で持ち上げて地上を公園として開き、既存のプールや噴水も残す計画です。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/12/tirana-fountain-tower-big-albania/"
+    },
+    {
+     "cat": "design",
+     "title": "Teak and concrete in a compact Mexico City flat",
+     "ja": "メキシコシティのMariel Lozano Studioが、ローマ・ノルテ地区の約50平方メートルのアパートを内装しました。打ち放しの壁にチーク材の造作家具を組み込み、ヘッドボードにはスピーカーを内蔵しています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/10/mad-monk-studios-san-luis-stays-mariel-lozano-studio/"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-12",
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Kim Jones brings back his own label",
+     "ja": "ルイ・ヴィトン、ディオール、フェンディを率いてきたキム・ジョーンズが、自身のブランド「キム ジョーンズ」を再始動します。2027-28年秋冬が最初のコレクションで、香港のセントラル・ヤードに店を開き、服の多くは日本で生産されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2524673"
+    },
+    {
+     "cat": "fashion",
+     "title": "Masaco Teranishi shows spring 2027 in Tokyo",
+     "ja": "マサコ テラニシが楽天 ファッション ウィーク 東京で2027年春夏コレクションを発表しました。全17ルックが公開されています。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2522106"
+    },
+    {
+     "cat": "fashion",
+     "title": "Limi Feu teams up with graphic artist HIROTTON",
+     "ja": "ヨウジヤマモトのリミ フゥが、グラフィックアーティストのHIROTTONとのコラボアイテムを発売しました。Tシャツやスーベニアジャケット、スケートボードなどがそろい、10月16日から全国の取扱店でも販売されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2524571"
+    },
+    {
+     "cat": "music",
+     "title": "Ryuichi Sakamoto's 1996 reissued for its 30th anniversary",
+     "ja": "坂本龍一がピアノ、チェロ、バイオリンの三重奏で自作を演奏したアルバム『1996』が、新たなリマスターで12月11日にMilan Recordsから2枚組LPとカセットで再発されます。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/ryuichi-sakamotos-1996-set-for-30th-anniversary-reissue/"
+    },
+    {
+     "cat": "music",
+     "title": "Björk releases her 2021 concert with the Hamrahlíð Choir",
+     "ja": "ビョークが2021年にレイキャビクのハルパで50人のハムラリーズ合唱団と行った公演が、ライブアルバムとして11月27日にOne Little Independentから出ます。『Medúlla』の曲が中心です。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/bjork-details-live-orchestral-album-bjork-orkestral-with-the-hamrahlid-choir/"
+    },
+    {
+     "cat": "music",
+     "title": "Loraine James and Warp's Providenza Ensemble head to the Barbican",
+     "ja": "ロレイン・ジェームスやピュース・メアリーら6人の作曲家による新しい管弦楽作品が、2027年1月24日にロンドンのバービカンでシンフォニエッタ・クラコヴィアの演奏により初演されます。Unsoundの主催です。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/loraine-james-puce-mary-and-more-to-debut-orchestral-works-at-londons-barbican/"
+    },
+    {
+     "cat": "design",
+     "title": "A red metal extension for a former pigsty home in Czechia",
+     "ja": "プラハのFacha Architektiが、豚小屋を改装したチェコの住宅に赤い波板の増築部を加えました。内装はパイン合板で、収納を家具に組み込み、玄関と浴室を広げています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/11/facha-architekti-red-extension-czech-pigsty-home/"
+    },
+    {
+     "cat": "design",
+     "title": "Grimshaw's rammed-earth visitor centre at the Twelve Apostles",
+     "ja": "オーストラリア・ビクトリア州の名所トゥエルブ・アポストルズに、グリムショウとAspect Studiosが版築の壁を使ったビジターセンターを完成させました。屋上は海を望む展望台になっています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/12/grimshaw-visitor-centre-twelve-apostles-australia/"
+    },
+    {
+     "cat": "design",
+     "title": "A concrete house in India inspired by rock-cut monasteries",
+     "ja": "インドのRoomoorが、バレシュワルのジャイナ教寺院の敷地に打ち放しコンクリートの住宅を建てました。デカン高原の石窟僧院を参考に、天窓の光を中心に据えた設計です。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/11/monastic-field-roomoor-india/"
+    }
+   ]
+  }
+ ]
+}
 </script>
 
   <section id="archive">
-    <h2>Archive <small>パブリックドメイン / CC0 の作品</small></h2>
+    <h2>Archive <small>毎日の記録</small></h2>
+    <p class="intro">A daily record of every day's news, kept by date. 毎日のファッション・音楽・デザインのニュースを、日付ごとにすべて残しています。</p>
+    <div class="daily" id="daily"></div>
+    <h3 class="plh">Plates <small>パブリックドメイン / CC0 の作品</small></h3>
     <p class="intro">Plates from the world's open archives. 植物、鉄骨、砂丘、浮世絵、宇宙から見た地球。すべて著作権が切れた作品か、作者が権利を放棄した作品で、人物の肖像は含みません。触れると元の色に戻ります。</p>
     <div class="plates" id="plates"></div>
   </section>
@@ -308,12 +453,17 @@ const pk=all[doy%all.length]; $("#pick").textContent=pk[0]; $("#pick").href=pk[2
   function render(N){
     if(!N||!N.days||!N.days.length||(N.updated||"")<=shown)return;
     shown=N.updated||"0";
-    const t=document.getElementById("newsToday"), p=document.getElementById("newsPast");
-    t.innerHTML=""; t.className=""; p.innerHTML="";
+    const t=document.getElementById("newsToday"), a=document.getElementById("daily");
+    t.innerHTML=""; t.className=""; a.innerHTML="";
     document.getElementById("todayDate").textContent=fmt(N.days[0].date);
     block(N.days[0],t);
-    document.getElementById("pastWrap").hidden=N.days.length<2;
-    N.days.slice(1).forEach(d=>{const h=document.createElement("h4");h.textContent=fmt(d.date);p.appendChild(h);block(d,p)});
+    const days=N.days.slice().sort((x,y)=>x.date<y.date?1:-1);
+    days.forEach((d,i)=>{
+      const det=document.createElement("details"); det.className="past"; if(i===0)det.open=true;
+      const s=document.createElement("summary");
+      s.innerHTML=`<span>${esc(fmt(d.date))}</span><span class="lab">${d.items.length} stories</span>`;
+      det.appendChild(s); block(d,det); a.appendChild(det);
+    });
   }
   let N=null; try{N=JSON.parse(document.getElementById("news-data").textContent)}catch(e){}
   if(N&&N.days&&N.days.length)render(N); else document.getElementById("newsToday").innerHTML='<p class="intro">本日のニュースは準備中です。</p>';
