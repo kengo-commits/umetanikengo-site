@@ -58,7 +58,7 @@ def bi(jp, en):
 
 FB = 'https://www.facebook.com/umetani'
 IG = 'https://www.instagram.com/kengo_umetani/'
-NAV = [('PROFILE', 'profile/index.html'), ('CREATIVE', 'creative/index.html'), ('MODEL', 'model/index.html'), ('VISION', 'vision/index.html'), ('SYNESTHESIA WORLD', 'synesthesia-world/index.html')]
+NAV = [('PROFILE', 'profile/index.html'), ('CREATIVE', 'creative/index.html'), ('MODEL', 'model/index.html'), ('VISION', 'vision/index.html'), ("KENGO'S SYNESTHESIA", 'synesthesia-world/index.html')]
 
 
 import re
@@ -78,7 +78,7 @@ def en_first(h):
 
 
 DOMAIN = SITE.get('domain', 'www.kengo-umetani.com')
-PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/', 'SYNESTHESIA WORLD': 'synesthesia-world/'}
+PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/', "KENGO'S SYNESTHESIA": 'synesthesia-world/'}
 # ---------- structured data: lets search engines and AI assistants identify the person, his roles and works ----------
 SITE_URL = f'https://{DOMAIN}/'
 PERSON_ID = SITE_URL + '#person'
