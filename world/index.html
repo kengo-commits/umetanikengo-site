@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SYNESTHESIA WORLD | KENGO UMETANI OFFICIAL</title>
+<meta name="description" content="Synesthesia World — 梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するページ。">
+<link rel="canonical" href="https://www.kengo-umetani.com/synesthesia-world/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SYNESTHESIA WORLD | KENGO UMETANI OFFICIAL">
+<meta property="og:description" content="Synesthesia World — 梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するページ。">
+<meta property="og:url" content="https://www.kengo-umetani.com/synesthesia-world/">
+<meta property="og:image" content="https://www.kengo-umetani.com/synesthesia-world/media/film-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>
+/* Layout: white page, one thin header line, everything set small in uppercase grotesk; photographs carry the page */
+:root{
+  --paper:#ffffff; --ink:#000000; --mute:#8c8c8c; --rule:#e8e8e8; --hover:#f4f4f4; --night:#ffffff; --onnight:#000000;
+  --sans:"Helvetica Neue",Helvetica,Arial,"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  --jp:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:11px;line-height:1.6;letter-spacing:.06em;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.45}
+.wrap{max-width:none;margin:0;padding-inline:clamp(16px,3vw,40px);padding-block:0 64px}
+.lab{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.top{display:none}
+header.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:18px 14px}
+.mast{margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;line-height:1}
+.mast i{font-style:normal}
+nav.nv{display:flex;gap:clamp(12px,2vw,28px);flex-wrap:wrap;text-transform:uppercase;font-size:10px;letter-spacing:.14em}
+.lede{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-block:48px 28px}
+.lede p{margin:0;max-width:52ch;font-family:var(--jp);font-size:11.5px;letter-spacing:.04em;line-height:1.9;color:var(--mute)}
+.lede p span{display:block;font-family:var(--sans);color:var(--ink);text-transform:uppercase;font-size:10.5px;letter-spacing:.12em;margin-bottom:10px}
+.pick{text-align:right}
+.pick a{display:block;color:var(--ink);font-size:11px;letter-spacing:.14em;margin-top:6px}
+
+.film{position:relative;margin-inline:calc(-1*clamp(16px,3vw,40px));background:#000}
+.film video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;max-height:86vh}
+.film .ttl{display:none}
+.film .cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px clamp(16px,3vw,40px);background:var(--paper);color:var(--mute);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+
+.clocks{display:flex;flex-wrap:wrap;gap:6px 28px;padding-block:10px 0;border-top:1px solid var(--rule);margin-top:4px}
+.clocks div{display:flex;gap:8px;align-items:baseline}
+.clocks b{font-weight:400;font-size:10px;letter-spacing:.12em;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+section{margin-top:96px}
+h2{margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
+.intro{font-family:var(--jp);font-size:11px;letter-spacing:.04em;line-height:1.9;color:var(--mute);max-width:56ch;margin:6px 0 24px}
+
+#today{margin-top:56px}
+.news{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(16px,3vw,40px);border-top:1px solid var(--ink)}
+.news .col{min-width:0}
+.news .col>.lab{display:block;padding-block:10px 4px;color:var(--ink)}
+.news article{padding-block:12px;border-bottom:1px solid var(--rule)}
+.news article a{display:block}
+.news .hl{display:block;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;line-height:1.5}
+.news .sm{display:block;font-family:var(--jp);font-size:11px;letter-spacing:.03em;line-height:1.8;color:var(--mute);margin-top:4px}
+.news .src{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.past{margin-top:20px}
+.past summary{cursor:pointer;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:flex;gap:12px;padding-block:6px}
+.past h4{margin:22px 0 0;font-size:10px;font-weight:400;letter-spacing:.14em;color:var(--mute)}
+@media (max-width:900px){.news{grid-template-columns:minmax(0,1fr)}}
+.plates{columns:3 260px;column-gap:clamp(8px,1.4vw,18px)}
+figure{margin:0 0 clamp(18px,2.4vw,32px);break-inside:avoid}
+figure .im{overflow:hidden;background:var(--hover)}
+figure img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.08);transition:opacity .4s ease}
+figure:hover img{opacity:.85}
+figcaption{display:flex;gap:10px;padding-top:8px;text-transform:uppercase;font-size:10px;letter-spacing:.1em}
+figcaption .no{color:var(--mute)}
+figcaption .t{display:block;color:var(--ink)}
+figcaption .m{display:block;color:var(--mute);text-transform:none;letter-spacing:.04em;margin-top:1px}
+figcaption .m a{color:var(--mute);text-decoration:underline;text-underline-offset:2px}
+
+.sound{background:var(--paper);color:var(--ink);padding:0;margin-inline:0}
+.player{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;margin-top:8px;border-top:1px solid var(--ink);padding-top:16px}
+.play{background:none;border:none;color:var(--ink);padding:0;font:700 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;min-width:5em;text-align:left}
+.play:hover{opacity:.45}
+#scope{width:100%;height:56px;display:block}
+.trk{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px}
+.trk .t{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+
+.bar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 43px);background:var(--paper);z-index:5;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:10px;border-bottom:1px solid var(--rule)}
+.tabs{display:flex;gap:18px;flex-wrap:wrap}
+.tabs button{font:400 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;background:none;border:none;color:var(--mute);padding:6px 0;cursor:pointer}
+.tabs button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.search{flex:0 1 220px;font:400 11px var(--sans);letter-spacing:.06em;background:none;color:var(--ink);border:none;border-bottom:1px solid var(--rule);padding:6px 0;border-radius:0}
+.search:focus,button:focus-visible,a:focus-visible,input:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+.cat{margin-top:40px}
+.cat h3{margin:0;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;flex-wrap:wrap}
+.cat h3 small{font-weight:400;color:var(--mute);letter-spacing:.12em}
+.list{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(16px,3vw,40px)}
+.list li{min-width:0}
+.list a{display:grid;grid-template-columns:3.4em minmax(0,1fr);gap:8px;padding:7px 0;align-items:baseline}
+.no{font-size:10px;color:var(--mute);font-variant-numeric:tabular-nums}
+.nm{text-transform:uppercase;font-size:10.5px;letter-spacing:.12em}
+.ds{display:block;font-family:var(--jp);font-size:10.5px;color:var(--mute);letter-spacing:.03em;margin-top:1px}
+.tg{display:none}
+.empty{color:var(--mute);font-size:10.5px;padding:8px 0}
+form.add{display:grid;grid-template-columns:1fr 1.4fr auto;gap:16px;margin-top:12px;max-width:760px}
+form.add input{font:400 11px var(--sans);background:none;color:var(--ink);border:none;border-bottom:1px solid var(--rule);padding:6px 0;min-width:0;border-radius:0}
+form.add button{font:700 10px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;background:none;color:var(--ink);border:none;padding:6px 0;cursor:pointer}
+.mine li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+.rm{font:400 10px/1 var(--sans);letter-spacing:.12em;background:none;color:var(--mute);border:none;padding:6px 8px;cursor:pointer}
+.note{font-size:10px;color:var(--mute);margin-top:10px}
+
+.credits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(16px,3vw,40px);font-family:var(--jp);font-size:10.5px;letter-spacing:.03em;color:var(--mute);line-height:1.7;max-width:1100px}
+.credits p{margin:0;padding:5px 0;min-width:0}
+.credits b{color:var(--ink);font-weight:400;font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em}
+.credits a{text-decoration:underline;text-underline-offset:2px}
+footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media (max-width:900px){.list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  .list,.credits,.lede,.player{grid-template-columns:minmax(0,1fr)}
+  .pick{text-align:left}
+  form.add{grid-template-columns:minmax(0,1fr)}
+  .bar{position:static}
+  .film .cap span:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top lab"><span>Issue 01 — Fashion / Music / Design / World</span><span id="date"></span></div>
+  <header class="hd"><h1 class="mast"><a href="#">Synesthesia World</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Sound</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
+  <div class="lede">
+    <p><span>Kengo Umetani's tastes and thoughts on fashion, sound and form, sent out to the world.</span>シナスタジアワールドは、梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するサイトです。世界中のパブリックドメインの写真・映像と、このサイトのためのオリジナル音楽を添えています。</p>
+    <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
+  </div>
+
+  <div class="film">
+    <video id="film" src="media/film.mp4" poster="media/film-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="地球、パリ、砂漠、建築、江戸を巡るモノクロ映像"></video>
+    <div class="ttl">Film No. 01</div>
+    <div class="cap"><span>Earth — Paris — Utah — Kent — Edo</span><span>Edited from public-domain &amp; CC0 archives</span></div>
+  </div>
+
+  <div class="clocks" id="clocks" aria-label="世界のファッション都市の現在時刻"></div>
+
+  <section id="today">
+    <h2>Today <small id="todayDate"></small></h2>
+    <p class="intro">Fashion, music and design news from around the world, refreshed every morning. 世界のファッション・音楽・デザインのニュースを毎朝更新しています。見出しから元の記事へ移動できます。</p>
+    <div class="news" id="newsToday"></div>
+    <details class="past" id="pastWrap" hidden>
+      <summary>Previous days <span class="lab">過去のニュース</span></summary>
+      <div id="newsPast"></div>
+    </details>
+  </section>
+<script type="application/json" id="news-data">
+{"updated":"2026-10-12","days":[
+{"date":"2026-10-12","items":[
+{"cat":"fashion","title":"Anthony Vaccarello steps down at Saint Laurent","ja":"アンソニー・ヴァカレロがサンローランのクリエイティブディレクターを退任すると発表されました。後任の発表が注目されています。","source":"FASHIONSNAP","url":"https://www.fashionsnap.com/article/2026-10-09/saint-laurent-anthony-vaccarello-retirement/"},
+{"cat":"fashion","title":"Jil Sander pop-ups in Tokyo, Osaka and Fukuoka","ja":"ジル サンダーが東京・大阪・福岡でポップアップストアを開き、限定バッグなどを販売します。","source":"FASHIONSNAP","url":"https://www.fashionsnap.com/article/2026-10-11/jilsander-icon-popup/"},
+{"cat":"fashion","title":"Junya Watanabe MAN × New Balance P400 in leather","ja":"ジュンヤ ワタナベ マンとニューバランスの新作として、レザーアッパーの「P400」が発売されました。","source":"FASHIONSNAP","url":"https://www.fashionsnap.com/article/2026-10-09/junya-watanabe-man-new-balance-/"},
+{"cat":"music","title":"Rosalía stages songs from Lux on SNL","ja":"ロザリアが米SNLに出演し、アルバム『Lux』の曲をトウシューズでのパフォーマンスや雨の演出で披露しました。","source":"NME","url":"https://www.nme.com/news/music/watch-rosalia-reliquia-en-pointe-magnolias-rain-snl-3972886"},
+{"cat":"music","title":"The Raconteurs reunite on stage in Nashville","ja":"ジャック・ホワイトのナッシュビル公演でザ・ラカンターズが再集結し、2019年12月以来となる共演を果たしました。","source":"NME","url":"https://www.nme.com/news/music/watch-the-raconteurs-reunite-at-jack-whites-nashville-gig-3972890"},
+{"cat":"music","title":"Thom Yorke on advice from Michael Stipe","ja":"レディオヘッドのトム・ヨークが、1995年のR.E.M.のツアーで前座を務めた頃にマイケル・スタイプから受けた助言を振り返りました。","source":"NME","url":"https://www.nme.com/news/music/radiohead-thom-yorke-important-advice-rem-michael-stipe-3972855"},
+{"cat":"design","title":"Not a Hotel opens a museum inside Imperial Hotel Plaza before demolition","ja":"NOT A HOTEL が、取り壊しを控えた東京の帝国ホテルプラザで「Not a Museum」を開きます。","source":"Dezeen","url":"https://www.dezeen.com/2026/10/12/not-a-hotel-open-not-a-museum-imperial-plaza-hotel-tokyo/"},
+{"cat":"design","title":"BIG raises a cloud-like plaza above a park in Tirana","ja":"BIG がアルバニアの首都ティラナで、公園の上に浮かぶ雲のような広場を設計しました。","source":"Dezeen","url":"https://www.dezeen.com/2026/10/12/tirana-fountain-tower-big-albania/"},
+{"cat":"design","title":"A concrete house in India modelled on rock-cut monasteries","ja":"岩を掘って造られた僧院の住まいに着想を得た、インドの一枚岩のようなコンクリート住宅です。","source":"Dezeen","url":"https://www.dezeen.com/2026/10/11/monastic-field-roomoor-india/"}
+]}
+]}
+</script>
+
+  <section id="archive">
+    <h2>Archive <small>パブリックドメイン / CC0 の作品</small></h2>
+    <p class="intro">Plates from the world's open archives. 植物、鉄骨、砂丘、浮世絵、宇宙から見た地球。すべて著作権が切れた作品か、作者が権利を放棄した作品で、人物の肖像は含みません。触れると元の色に戻ります。</p>
+    <div class="plates" id="plates"></div>
+  </section>
+
+  <section class="sound" id="sound">
+    <h2>Sound <small>このサイトのためのオリジナル曲</small></h2>
+    <p class="intro">An original piece composed in code for this page. 低いサブベース、ゆっくり動くコード、声のように揺れるシンセ。ブラウザがその場で演奏するので、既存の楽曲や音源は一切使っていません。</p>
+    <div class="player">
+      <button class="play" id="playBtn" type="button" aria-pressed="false">Play</button>
+      <div>
+        <canvas id="scope" aria-hidden="true"></canvas>
+        <div class="trk"><span class="t">Night Signal</span><span class="lab" id="trkInfo">F minor — 70 BPM — Original</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="index">
+    <h2>Index <small>情報源へのリンク</small></h2>
+    <div class="bar">
+      <div class="tabs" role="group" aria-label="カテゴリ">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="fashion" aria-pressed="false">Fashion</button>
+        <button type="button" data-f="music" aria-pressed="false">Music</button>
+        <button type="button" data-f="design" aria-pressed="false">Design</button>
+        <button type="button" data-f="world" aria-pressed="false">Archives</button>
+        <button type="button" data-f="mine" aria-pressed="false">My Links</button>
+      </div>
+      <input id="q" class="search" type="search" placeholder="検索 — 例：Hedi、Warp、建築" aria-label="検索">
+    </div>
+    <div id="cats"></div>
+    <div class="cat" data-cat="mine">
+      <h3>My Links <small>自分で追加</small></h3>
+      <form class="add" id="addForm">
+        <input id="addName" placeholder="名前（例：好きなショップ）" required aria-label="名前">
+        <input id="addUrl" type="url" placeholder="https://" required aria-label="URL">
+        <button type="submit">Add</button>
+      </form>
+      <ul class="list mine" id="mineList"></ul>
+      <p class="note">追加したリンクはこのブラウザに保存されます。</p>
+    </div>
+  </section>
+
+  <section id="credits">
+    <h2>Credits <small>素材と権利</small></h2>
+    <p class="intro">掲載している写真・映像はすべて Wikimedia Commons でパブリックドメインまたは CC0 と表示されている作品です。映像はそれらの写真から編集したもので、音楽はこのページのオリジナルです。各リンク先は外部サイトで、ブランドやメディアの画像はこのページには載せていません。</p>
+    <div class="credits" id="creditList"></div>
+  </section>
+
+  <footer class="lab"><span>Synesthesia World — Kengo Umetani</span><span>Issue 01 — 2026</span></footer>
+</div>
+
+<script>
+const C="https://commons.wikimedia.org/wiki/File:";
+const PLATES=[
+ ["acanthus","Acanthus mollis","Karl Blossfeldt, 1928","Public domain","Karl_Blossfeldt._Acanthus_mollis,_1928.jpg","1400","1814"],
+ ["souseiffel","Sous la Tour Eiffel","Jebulon, Paris","CC0","Sous_la_Tour_Eiffel_1.jpg","1400","960"],
+ ["hiroshige","Sudden Shower over Shin-Ōhashi","歌川広重『名所江戸百景』1857","Public domain","Hiroshige,_Sudden_shower_over_Shin-Ōhashi_bridge_and_Atake,_1857.jpg","1280","1940"],
+ ["earth","The Blue Marble","NASA / Apollo 17, 1972","Public domain","The_Blue_Marble,_AS17-148-22727.jpg","1400","1400"],
+ ["eiffel1888","The Eiffel Tower, under construction","Louis-Émile Durandelle, 1888","Public domain","Louis-Emile_Durandelle,_The_Eiffel_Tower_-_State_of_the_Construction,_1888.jpg","1400","1782"],
+ ["brutal","Brutalist Architecture, Ashford","John K Thorne, Kent","CC0","Brutalist_architecture,_Ashford,_Kent.jpg","1400","934"],
+ ["cucurbita","Cucurbita","Karl Blossfeldt, 1928","Public domain","Karl_Blossfeldt._Cucurbita,_1928.jpg","1400","1782"],
+ ["dunes","Utah Dunes, West Desert","Bureau of Land Management / Bob Wick","Public domain","Utah_Dunes_Landscape_-_West_Desert_District.jpg","1400","920"]
+];
+const DATA={
+fashion:{t:"Fashion",jp:"ブランド・コレクション・雑誌",items:[
+["Hedi Slimane","写真と作品のアーカイブ","https://www.hedislimane.com","Photo"],
+["CELINE","公式サイト・コレクション","https://www.celine.com","Maison"],
+["Saint Laurent","公式サイト・コレクション","https://www.ysl.com","Maison"],
+["HERMÈS","公式サイト","https://www.hermes.com","Maison"],
+["GUCCI","公式サイト","https://www.gucci.com","Maison"],
+["KENZO","公式サイト","https://www.kenzo.com","Maison"],
+["Maison Margiela","公式サイト","https://www.maisonmargiela.com","Maison"],
+["Rick Owens","公式サイト","https://www.rickowens.eu","Designer"],
+["The Row","公式サイト","https://www.therow.com","Designer"],
+["Vogue Runway","世界のコレクション速報","https://www.vogue.com/fashion-shows","Runway"],
+["SSENSE","セレクト・エディトリアル","https://www.ssense.com","Shop"],
+["System Magazine","業界人の長編インタビュー誌","https://www.system-magazine.com","Magazine"],
+["Dazed","ファッション・カルチャー誌","https://www.dazeddigital.com","Magazine"],
+["i-D","ファッション・ユース・カルチャー","https://i-d.co","Magazine"],
+["032c","ベルリンのカルチャー誌","https://032c.com","Magazine"],
+["The Business of Fashion","業界ニュース・分析","https://www.businessoffashion.com","News"],
+["FASHIONSNAP","国内ファッションニュース","https://www.fashionsnap.com","News"],
+["WWDJAPAN","国内業界ニュース","https://www.wwdjapan.com","News"]
+]},
+music:{t:"Music",jp:"アーティスト・レーベル・ラジオ・メディア",items:[
+["James Blake","公式サイト","https://www.jamesblakemusic.com","Artist"],
+["James Blake on Spotify","すぐ聴く","https://open.spotify.com/search/James%20Blake","Listen"],
+["Bon Iver","公式サイト","https://www.boniver.org","Artist"],
+["Sampha","公式サイト","https://www.sampha.com","Artist"],
+["Ryuichi Sakamoto","公式サイト","https://www.sitesakamoto.com","Artist"],
+["Warp Records","Aphex Twin などのレーベル","https://warp.net","Label"],
+["XL Recordings","レーベル","https://www.xlrecordings.com","Label"],
+["4AD","レーベル","https://4ad.com","Label"],
+["Hyperdub","Burial などのレーベル","https://hyperdub.net","Label"],
+["NTS Radio","ロンドン発のオンラインラジオ","https://www.nts.live","Radio"],
+["Boiler Room","DJ・ライブ映像","https://boilerroom.tv","Live"],
+["Resident Advisor","電子音楽のニュース・イベント","https://ra.co","Media"],
+["Pitchfork","レビュー・ニュース","https://pitchfork.com","Media"],
+["Bandcamp Daily","インディーの深掘り記事","https://daily.bandcamp.com","Media"],
+["The Quietus","UKの音楽批評誌","https://thequietus.com","Media"]
+]},
+design:{t:"Design",jp:"建築・インテリア・デザイン",items:[
+["Dezeen","建築・デザインニュース","https://www.dezeen.com","News"],
+["designboom","建築・アート・デザイン","https://www.designboom.com","News"],
+["ArchDaily","建築作品データベース","https://www.archdaily.com","Archive"],
+["Wallpaper*","デザイン・ライフスタイル誌","https://www.wallpaper.com","Magazine"],
+["Casa BRUTUS","建築・デザイン誌","https://casabrutus.com","Magazine"],
+["Kinfolk","ライフスタイル誌","https://www.kinfolk.com","Magazine"]
+]},
+world:{t:"Open Archives",jp:"自由に使える世界の写真・映像・音楽",items:[
+["Wikimedia Commons","パブリックドメイン・CC作品の宝庫","https://commons.wikimedia.org","Archive"],
+["The Met Open Access","メトロポリタン美術館の公開画像","https://www.metmuseum.org/art/collection","Museum"],
+["Rijksmuseum Studio","アムステルダム国立美術館の高画質画像","https://www.rijksmuseum.nl/en/rijksstudio","Museum"],
+["Cleveland Museum of Art","CC0の所蔵作品","https://www.clevelandart.org/art/collection/search","Museum"],
+["NASA Image Library","宇宙・地球の写真と映像","https://images.nasa.gov","Space"],
+["Internet Archive","映画・音源のアーカイブ","https://archive.org","Archive"],
+["Musopen","著作権フリーのクラシック録音","https://musopen.org","Music"],
+["Free Music Archive","ライセンス明記の音楽","https://freemusicarchive.org","Music"]
+]}};
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const d=new Date();
+$("#date").textContent=d.toLocaleDateString("en-GB",{weekday:"short",day:"2-digit",month:"short",year:"numeric"});
+
+// Today's pick
+const all=Object.values(DATA).flatMap(c=>c.items);
+const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);
+const pk=all[doy%all.length]; $("#pick").textContent=pk[0]; $("#pick").href=pk[2];
+
+// Daily news (data block is refreshed every morning; a news.json beside the page wins when newer)
+(function(){
+  const CATS=[["fashion","Fashion"],["music","Music"],["design","Design"]];
+  const fmt=s=>new Date(s+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}).toUpperCase();
+  function block(day,target){
+    const g=document.createElement("div"); g.className="news";
+    CATS.forEach(([k,label])=>{
+      const items=day.items.filter(i=>i.cat===k); if(!items.length)return;
+      const col=document.createElement("div"); col.className="col";
+      col.innerHTML=`<span class="lab">${label}</span>`+items.map(i=>`<article><a href="${esc(i.url)}" target="_blank" rel="noopener"><span class="hl">${esc(i.title)}</span><span class="sm">${esc(i.ja)}</span><span class="src">${esc(i.source)}</span></a></article>`).join("");
+      g.appendChild(col);
+    });
+    target.appendChild(g);
+  }
+  let shown="";
+  function render(N){
+    if(!N||!N.days||!N.days.length||(N.updated||"")<=shown)return;
+    shown=N.updated||"0";
+    const t=document.getElementById("newsToday"), p=document.getElementById("newsPast");
+    t.innerHTML=""; t.className=""; p.innerHTML="";
+    document.getElementById("todayDate").textContent=fmt(N.days[0].date);
+    block(N.days[0],t);
+    document.getElementById("pastWrap").hidden=N.days.length<2;
+    N.days.slice(1).forEach(d=>{const h=document.createElement("h4");h.textContent=fmt(d.date);p.appendChild(h);block(d,p)});
+  }
+  let N=null; try{N=JSON.parse(document.getElementById("news-data").textContent)}catch(e){}
+  if(N&&N.days&&N.days.length)render(N); else document.getElementById("newsToday").innerHTML='<p class="intro">本日のニュースは準備中です。</p>';
+  try{fetch("news.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(render).catch(()=>{})}catch(e){}
+})();
+
+// World clocks
+const CITIES=[["Paris","Europe/Paris"],["Milan","Europe/Rome"],["London","Europe/London"],["New York","America/New_York"],["Seoul","Asia/Seoul"],["Tokyo","Asia/Tokyo"]];
+const ck=$("#clocks");
+CITIES.forEach(([n])=>{const e=document.createElement("div");e.innerHTML=`<span class="lab">${n}</span><b>--:--</b>`;ck.appendChild(e)});
+function tick(){const now=new Date();CITIES.forEach(([n,z],i)=>{ck.children[i].querySelector("b").textContent=now.toLocaleTimeString("en-GB",{timeZone:z,hour:"2-digit",minute:"2-digit"})})}
+tick();setInterval(tick,15000);
+
+// Archive plates + credits
+const pl=$("#plates"), cr=$("#creditList");
+PLATES.forEach((p,i)=>{
+  const f=document.createElement("figure");
+  f.innerHTML=`<div class="im"><img src="media/${p[0]}.webp" width="${p[5]}" height="${p[6]}" loading="lazy" alt="${esc(p[1]+" — "+p[2])}"></div>
+  <figcaption><span class="no">P.${String(i+1).padStart(2,"0")}</span><span><span class="t">${esc(p[1])}</span><span class="m">${esc(p[2])} · ${esc(p[3])} · <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Source</a></span></span></figcaption>`;
+  pl.appendChild(f);
+  const c=document.createElement("p");
+  c.innerHTML=`<b>P.${String(i+1).padStart(2,"0")} ${esc(p[1])}</b> — ${esc(p[2])}. ${esc(p[3])}. <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+  cr.appendChild(c);
+});
+[["Film No. 01","上記 P.02〜P.06 と P.08 の写真をモノクロ化して編集した映像"],["Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
+
+// Index lists
+const cats=$("#cats");
+for(const [k,c] of Object.entries(DATA)){
+  const s=document.createElement("div"); s.className="cat"; s.dataset.cat=k;
+  s.innerHTML=`<h3>${c.t} <small>${c.jp}</small></h3><ul class="list"></ul><p class="empty" hidden>一致する項目はありません。</p>`;
+  const ul=s.querySelector("ul");
+  c.items.forEach((it,i)=>{
+    const li=document.createElement("li"); li.dataset.s=it.join(" ").toLowerCase();
+    li.innerHTML=`<a href="${it[2]}" target="_blank" rel="noopener"><span class="no">${c.t[0]}.${String(i+1).padStart(2,"0")}</span><span><span class="nm">${esc(it[0])}</span><span class="ds">${esc(it[1])}</span></span><span class="tg">${it[3]}</span></a>`;
+    ul.appendChild(li);
+  });
+  cats.appendChild(s);
+}
+
+// My links
+let mine=[];
+try{mine=JSON.parse(localStorage.getItem("kengoIndexMine")||"[]")}catch(e){mine=[]}
+const save=()=>{try{localStorage.setItem("kengoIndexMine",JSON.stringify(mine))}catch(e){}};
+function renderMine(){
+  const ul=$("#mineList"); ul.innerHTML="";
+  if(!mine.length){ul.innerHTML='<li class="empty" style="display:block">まだありません。上のフォームから追加できます。</li>';return}
+  mine.forEach((m,i)=>{
+    const li=document.createElement("li"); li.dataset.s=(m.n+" "+m.u).toLowerCase();
+    li.innerHTML=`<a target="_blank" rel="noopener"><span class="no">M.${String(i+1).padStart(2,"0")}</span><span><span class="nm"></span><span class="ds"></span></span></a><button class="rm" type="button">削除</button>`;
+    li.querySelector("a").href=m.u; li.querySelector(".nm").textContent=m.n;
+    try{li.querySelector(".ds").textContent=new URL(m.u).hostname}catch(e){}
+    li.querySelector(".rm").onclick=()=>{mine.splice(i,1);save();renderMine();filter()};
+    ul.appendChild(li);
+  });
+}
+$("#addForm").addEventListener("submit",e=>{
+  e.preventDefault(); const u=$("#addUrl").value.trim(); if(!/^https?:\/\//.test(u))return;
+  mine.push({n:$("#addName").value.trim(),u}); save(); e.target.reset(); renderMine(); filter();
+});
+renderMine();
+
+let cat="all";
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
+  cat=b.dataset.f; document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-pressed",x===b)); filter();
+});
+$("#q").addEventListener("input",filter);
+function filter(){
+  const q=$("#q").value.trim().toLowerCase();
+  document.querySelectorAll(".cat[data-cat]").forEach(s=>{
+    s.hidden=!(cat==="all"||cat===s.dataset.cat);
+    let n=0; s.querySelectorAll("li[data-s]").forEach(li=>{const ok=!q||li.dataset.s.includes(q);li.hidden=!ok;if(ok)n++});
+    const em=s.querySelector("p.empty"); if(em)em.hidden=!(q&&n===0);
+  });
+}
+
+// Film: respect reduced motion
+try{if(matchMedia("(prefers-reduced-motion: reduce)").matches){const v=$("#film");v.removeAttribute("autoplay");v.pause()}}catch(e){}
+
+/* ---------- Night Signal: original composition, synthesized live ---------- */
+const BPM=70, BEAT=60/BPM, BAR=BEAT*4;
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+// chords (MIDI): Fm9, Dbmaj7, Abmaj7/C, Eb sus
+const CH=[[53,56,60,63,67],[49,53,56,60,65],[48,56,60,63,67],[51,56,58,63,70]];
+const ROOT=[29,25,24,27];
+// voice melody per 2-bar chord: [beatOffset, midi, lengthBeats]
+const MEL=[
+ [[1,72,1.5],[3,70,.5],[3.5,68,2],[6,67,1.5]],
+ [[1,68,1],[2,70,1],[3,72,2.5],[6,65,1.5]],
+ [[1,67,1.5],[3,68,.5],[3.5,70,2],[6,72,1.5]],
+ [[1,75,2],[3.5,72,1],[4.5,70,2.5]]
+];
+let ac,master,rev,dly,an,timer,next=0,step=0,playing=false;
+function impulse(sec,decay){const r=ac.sampleRate,l=r*sec,b=ac.createBuffer(2,l,r);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<l;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/l,decay)}return b}
+function setup(){
+  ac=new (window.AudioContext||window.webkitAudioContext)();
+  master=ac.createGain(); master.gain.value=.0001;
+  const comp=ac.createDynamicsCompressor(); comp.threshold.value=-16; comp.ratio.value=3;
+  an=ac.createAnalyser(); an.fftSize=2048;
+  master.connect(comp).connect(an).connect(ac.destination);
+  rev=ac.createConvolver(); rev.buffer=impulse(4.5,3); const rg=ac.createGain(); rg.gain.value=.5; rev.connect(rg).connect(master);
+  dly=ac.createDelay(2); dly.delayTime.value=BEAT*.75; const fb=ac.createGain(); fb.gain.value=.35; const df=ac.createBiquadFilter(); df.type="lowpass"; df.frequency.value=2400;
+  dly.connect(df).connect(fb).connect(dly); df.connect(master); df.connect(rev);
+}
+function pad(t,notes,dur){
+  const f=ac.createBiquadFilter(); f.type="lowpass"; f.frequency.setValueAtTime(500,t); f.frequency.linearRampToValueAtTime(1300,t+dur*.5); f.frequency.linearRampToValueAtTime(600,t+dur); f.Q.value=.7;
+  const g=ac.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.05,t+1.6); g.gain.setValueAtTime(.05,t+dur-1); g.gain.linearRampToValueAtTime(0,t+dur+.8);
+  f.connect(g); g.connect(master); g.connect(rev);
+  notes.forEach(n=>[-7,7].forEach(dt=>{const o=ac.createOscillator();o.type="sawtooth";o.frequency.value=mtof(n);o.detune.value=dt;o.connect(f);o.start(t);o.stop(t+dur+1)}));
+}
+function sub(t,n,dur){
+  const o=ac.createOscillator(); o.type="sine"; o.frequency.value=mtof(n+12);
+  const g=ac.createGain(); g.gain.setValueAtTime(0,t);
+  for(let b=0;b<dur/BEAT;b++){const bt=t+b*BEAT; g.gain.setValueAtTime(.02,bt); g.gain.linearRampToValueAtTime(.32,bt+.18)}
+  g.gain.linearRampToValueAtTime(0,t+dur);
+  o.connect(g).connect(master); o.start(t); o.stop(t+dur+.1);
+}
+function kick(t){const o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(38,t+.25);g.gain.setValueAtTime(.7,t);g.gain.exponentialRampToValueAtTime(.001,t+.5);o.connect(g).connect(master);o.start(t);o.stop(t+.55)}
+function noise(t,dur,freq,q,vol,wet){
+  const b=ac.createBuffer(1,ac.sampleRate*dur,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  const s=ac.createBufferSource();s.buffer=b;const f=ac.createBiquadFilter();f.type="bandpass";f.frequency.value=freq;f.Q.value=q;
+  const g=ac.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);
+  s.connect(f).connect(g);g.connect(master);if(wet){const w=ac.createGain();w.gain.value=wet;g.connect(w).connect(rev)}s.start(t);
+}
+function voice(t,n,len){
+  const dur=len*BEAT;
+  const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.setValueAtTime(mtof(n-1),t); o.frequency.exponentialRampToValueAtTime(mtof(n),t+.12);
+  const lfo=ac.createOscillator(),lg=ac.createGain(); lfo.frequency.value=5.2; lg.gain.setValueAtTime(0,t); lg.gain.linearRampToValueAtTime(14,t+dur*.6); lfo.connect(lg).connect(o.detune);
+  const g=ac.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.09,t+.15); g.gain.setValueAtTime(.09,t+dur*.7); g.gain.linearRampToValueAtTime(0,t+dur+.25);
+  // vowel formants ("ah" → "oh")
+  [[800,620,9,1],[1150,900,11,.6],[2800,2600,14,.18]].forEach(([a,b,q,v])=>{const f=ac.createBiquadFilter();f.type="bandpass";f.Q.value=q;f.frequency.setValueAtTime(a,t);f.frequency.linearRampToValueAtTime(b,t+dur);const fg=ac.createGain();fg.gain.value=v*3;o.connect(f).connect(fg).connect(g)});
+  g.connect(master); const w=ac.createGain(); w.gain.value=.8; g.connect(w).connect(rev); const s=ac.createGain(); s.gain.value=.4; g.connect(s).connect(dly);
+  o.start(t); lfo.start(t); o.stop(t+dur+.4); lfo.stop(t+dur+.4);
+}
+// one 2-bar section per scheduler step
+function section(t,i){
+  const c=i%4, cycle=Math.floor(i/4), dur=BAR*2;
+  pad(t,CH[c],dur);
+  if(cycle>=1){sub(t,ROOT[c],dur)}
+  if(cycle>=1){for(let bar=0;bar<2;bar++){const bt=t+bar*BAR;kick(bt);kick(bt+BEAT*2.5);noise(bt+BEAT*2,.35,1800,.9,.35,.6)}}
+  if(cycle>=2){for(let h=0;h<16;h++){if(h%2===1)noise(t+h*BEAT/2,.05,8000,1.5,h%4===3?.08:.04,0)}}
+  if(cycle>=1){MEL[c].forEach(([b,n,l])=>voice(t+b*BEAT,n,l))}
+}
+function sched(){while(next<ac.currentTime+1.5){section(next,step);next+=BAR*2;step++}}
+const cv=$("#scope"),cx=cv.getContext("2d");
+function sizeCv(){const r=cv.getBoundingClientRect(),p=Math.min(2,devicePixelRatio||1);cv.width=r.width*p;cv.height=r.height*p}
+sizeCv(); addEventListener("resize",sizeCv);
+function drawIdle(){cx.clearRect(0,0,cv.width,cv.height);cx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--onnight").trim()||"#ecece8";cx.globalAlpha=.4;cx.lineWidth=1;cx.beginPath();cx.moveTo(0,cv.height/2);cx.lineTo(cv.width,cv.height/2);cx.stroke();cx.globalAlpha=1}
+drawIdle();
+const buf=new Uint8Array(2048);
+function draw(){
+  if(!playing){drawIdle();return}
+  an.getByteTimeDomainData(buf); cx.clearRect(0,0,cv.width,cv.height);
+  cx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--onnight").trim()||"#ecece8"; cx.lineWidth=1.4*(devicePixelRatio||1); cx.beginPath();
+  for(let i=0;i<buf.length;i++){const x=i/buf.length*cv.width,y=(buf[i]/255)*cv.height;i?cx.lineTo(x,y):cx.moveTo(x,y)}
+  cx.stroke(); requestAnimationFrame(draw);
+}
+$("#playBtn").addEventListener("click",async()=>{
+  const btn=$("#playBtn");
+  try{
+    if(!ac)setup();
+    if(!playing){
+      await ac.resume(); next=ac.currentTime+.1; step=0; sched(); timer=setInterval(sched,250);
+      master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(.0001,ac.currentTime); master.gain.exponentialRampToValueAtTime(.9,ac.currentTime+1.5);
+      playing=true; btn.textContent="Stop"; btn.setAttribute("aria-pressed","true"); draw();
+    }else{
+      clearInterval(timer); master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(master.gain.value,ac.currentTime); master.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+1.2);
+      playing=false; btn.textContent="Play"; btn.setAttribute("aria-pressed","false");
+      const old=ac; ac=null; setTimeout(()=>{try{old.close()}catch(e){}},1400);
+    }
+  }catch(e){$("#trkInfo").textContent="このブラウザでは再生できませんでした。別のブラウザでお試しください。"}
+});
+</script>
+</body>
+</html>

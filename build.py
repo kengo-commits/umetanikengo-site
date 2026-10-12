@@ -58,7 +58,7 @@ def bi(jp, en):
 
 FB = 'https://www.facebook.com/umetani'
 IG = 'https://www.instagram.com/kengo_umetani/'
-NAV = [('PROFILE', 'profile/index.html'), ('CREATIVE', 'creative/index.html'), ('MODEL', 'model/index.html'), ('VISION', 'vision/index.html')]
+NAV = [('PROFILE', 'profile/index.html'), ('CREATIVE', 'creative/index.html'), ('MODEL', 'model/index.html'), ('VISION', 'vision/index.html'), ('SYNESTHESIA WORLD', 'synesthesia-world/index.html')]
 
 
 import re
@@ -78,7 +78,7 @@ def en_first(h):
 
 
 DOMAIN = SITE.get('domain', 'www.kengo-umetani.com')
-PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/'}
+PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/', 'SYNESTHESIA WORLD': 'synesthesia-world/'}
 # ---------- structured data: lets search engines and AI assistants identify the person, his roles and works ----------
 SITE_URL = f'https://{DOMAIN}/'
 PERSON_ID = SITE_URL + '#person'
@@ -454,6 +454,7 @@ def llms_txt():
           f'- [Creative]({SITE_URL}creative/): hotels, resorts, restaurants and brands he has worked on, with roles',
           f'- [Model]({SITE_URL}model/): model photographs and career',
           f'- [Vision]({SITE_URL}vision/): his approach to creative direction',
+          f'- [Synesthesia World]({SITE_URL}synesthesia-world/): his picks and thoughts on fashion, music and design, with daily news',
           f'- [About]({SITE_URL}about/): site operator information',
           '', '## Links',
           '- Instagram: https://www.instagram.com/kengo_umetani/',
@@ -467,6 +468,7 @@ if __name__ == '__main__':
         shutil.rmtree(OUT)
     os.makedirs(OUT + '/assets')
     shutil.copytree(ROOT / 'images', OUT + '/images')
+    shutil.copytree(ROOT / 'world', OUT + '/synesthesia-world')
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
     shutil.copy(ROOT / 'assets/paper.png', OUT + '/assets/paper.png')

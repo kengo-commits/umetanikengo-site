@@ -22,6 +22,7 @@ Instagram に接続できなかったときは、前回の投稿をそのまま�
 | `data/instagram-settings.json` | 先頭に固定する投稿・表示件数 |
 | `assets/` | 共通のデザイン（CSS）と動き（JS） |
 | `images/` | サイトの写真。`images/instagram/` は自動更新 |
+| `world/` | SYNESTHESIA WORLD のページ。`world/news.json` は毎朝のニュース |
 | `scripts/fetch_instagram.py` | Instagram から投稿を取得するプログラム |
 | `.github/workflows/deploy.yml` | 自動更新と公開の設定 |
 
