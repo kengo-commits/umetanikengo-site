@@ -104,6 +104,29 @@ WEBSITE_LD = {'@type': 'WebSite', '@id': SITE_URL + '#website', 'url': SITE_URL,
               'alternateName': '梅谷憲吾 公式サイト', 'inLanguage': ['en', 'ja'], 'about': {'@id': PERSON_ID}, 'publisher': {'@id': PERSON_ID}}
 
 
+NAME = '梅谷憲吾 Kengo Umetani'
+SEO_TITLE = {
+    'HOME': '梅谷憲吾 Kengo Umetani 公式サイト｜クリエイティブディレクター — KENGO UMETANI OFFICIAL',
+    'PROFILE': 'プロフィール PROFILE｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+    'CREATIVE': 'クリエイティブワーク CREATIVE｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+    'MODEL': 'モデル MODEL｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+    'VISION': 'ビジョン VISION｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+    'ABOUT': '概要 ABOUT｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+    'PRIVACY': 'プライバシーポリシー｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+    'COOKIE': 'Cookie 設定｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+}
+SEO_DESC = {
+    'HOME': '梅谷憲吾（うめたに けんご／Kengo Umetani）の公式サイト。カトープレジャーグループ全体のクリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元ファッションモデル。',
+    'PROFILE': '梅谷憲吾（Kengo Umetani）のプロフィール。1985年大阪府生まれ、近畿大学理工学部建築学科卒業。16歳でモデル活動を開始し、海外コレクションに出演。2020年よりカトープレジャーグループ全体のクリエイティブディレクター。経歴・現職・実績。',
+    'CREATIVE': '梅谷憲吾（Kengo Umetani）が手がけたホテル・リゾート・飲食店・ブランドのクリエイティブワークと担当領域：AQUASENSE Hotel & Resort、PEAKS、i+Land nagasaki、SYNESTHESIA HILLS、FUFU JAPAN SELECTION、GLAMDAY STYLE、OKINAWA GRAND MER RESORT、つるとんたん、呑窓。',
+    'MODEL': '梅谷憲吾（Kengo Umetani）のモデルとしての作品と経歴。16歳から活動し、HERMÈS、GUCCI、ARMANI、KENZO、ETRO、MARC JACOBS などのコレクションに出演。広告・雑誌の作品写真。',
+    'VISION': '梅谷憲吾（Kengo Umetani）のビジョン。ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担う総合的なクリエイティブディレクションと、次代のクリエイティブへのアプローチ。',
+    'ABOUT': '梅谷憲吾（Kengo Umetani）公式サイト KENGO UMETANI OFFICIAL の運営者情報、著作権、リンクについて。',
+}
+SEO_IMG = {'HOME': 'hero-aquasense-1.jpg', 'PROFILE': 'top-model.jpg', 'MODEL': 'model-sts1.jpg', 'CREATIVE': 'hero-aquasense-1.jpg', 'VISION': 'vision-1.jpg'}
+CRUMB = {'PROFILE': 'PROFILE', 'CREATIVE': 'CREATIVE', 'MODEL': 'MODEL', 'VISION': 'VISION', 'ABOUT': 'ABOUT', 'PRIVACY': 'PRIVACY POLICY', 'COOKIE': 'COOKIE'}
+
+
 def page_ld(key):
     url = SITE_URL + PATHS.get(key, '')
     graph = [WEBSITE_LD]
@@ -121,6 +144,10 @@ def page_ld(key):
                       'about': {'@id': PERSON_ID}, 'mainEntity': {'@type': 'ItemList', 'itemListElement': items}})
     else:
         graph.append({'@type': 'WebPage', '@id': url, 'url': url, 'isPartOf': {'@id': SITE_URL + '#website'}, 'about': {'@id': PERSON_ID}})
+    if key in CRUMB:
+        graph.append({'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'KENGO UMETANI OFFICIAL', 'item': SITE_URL},
+            {'@type': 'ListItem', 'position': 2, 'name': CRUMB[key], 'item': url}]})
     return '\n<script type="application/ld+json">' + json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False).replace('</', '<\\/') + '</script>'
 
 
@@ -128,6 +155,9 @@ def page(key, title, desc, body, root, skeleton=True):
     body = en_first(body)
     nav = ''.join(f'<a href="{root}{href}"{" class=\"on\" aria-current=\"page\"" if k == key else ""}>{k}</a>' for k, href in NAV)
     url = f'https://{DOMAIN}/' + PATHS.get(key, '')
+    title = SEO_TITLE.get(key, title)
+    desc = SEO_DESC.get(key, desc)
+    ogimg = f'https://{DOMAIN}/images/' + SEO_IMG.get(key, 'hero-aquasense-1.jpg')
     ld = page_ld(key)
     head = f'''<title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">{'\n<meta name="robots" content="noindex, nofollow">' if SITE.get('noindex') else ''}
@@ -137,12 +167,19 @@ def page(key, title, desc, body, root, skeleton=True):
 <meta property="og:type" content="website">
 <link rel="canonical" href="{url}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="https://{DOMAIN}/images/aquasense-1.jpg">
+<meta property="og:image" content="{ogimg}">
+<meta property="og:image:alt" content="{esc(title)}">
 <meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="author" content="梅谷憲吾 Kengo Umetani">
+<link rel="icon" href="https://{DOMAIN}/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f7f5ee">{f'\n<meta name="google-site-verification" content="{SITE["google_verification"]}">' if SITE.get('google_verification') else ''}
 <meta name="color-scheme" content="only light">
 <link rel="alternate" type="text/plain" title="Summary for AI assistants" href="https://{DOMAIN}/llms.txt">
-<meta name="twitter:card" content="summary_large_image">{ld}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(desc)}">
+<meta name="twitter:image" content="{ogimg}">{ld}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&amp;display=swap">
@@ -266,7 +303,7 @@ def home(root, skeleton=True):
           '<div class="ig-head"><h2 class="h2">INFORMATION</h2>'
           f'<nav class="sns-icons"><a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">{ICON_IG}</a><a href="{FB}" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">{ICON_FB}</a></nav></div>'
           + ig_grid(root).replace("sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px'", "") + '</section>')
-    h1 = '<h1 class="visually-hidden">KENGO UMETANI OFFICIAL / 梅谷憲吾 公式サイト</h1>'
+    h1 = '<h1 class="visually-hidden">梅谷憲吾 Kengo Umetani 公式サイト — クリエイティブディレクター / KENGO UMETANI OFFICIAL</h1>'
     return page('HOME', 'KENGO UMETANI OFFICIAL',
                 '梅谷憲吾（Kengo Umetani）公式サイト。カトープレジャーグループのクリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元モデル。', h1 + '<div class="home-col">' + hero + '\n' + ig + '</div>', root, skeleton)
 
@@ -319,7 +356,7 @@ def creative(root):
 def model(root):
     names = ['model-sts1', 'model-sts2', 'model-8', 'model-7', 'model-2', 'model-1', 'model-6', 'model-5', 'model-4', 'model-3'] + [f'model-{n}' for n in range(11, 19)]
     thumbs = ''.join(f'<button type="button" class="thumb{" on" if i == 0 else ""}" data-go="{i}" aria-label="写真 {i+1} / Photo {i+1}">{pic(n, "", root, sizes="120px")}</button>' for i, n in enumerate(names))
-    b = [row(show(names, '梅谷憲吾 モデル / Kengo Umetani, model', root, first_lazy=False, prio=True),
+    b = [row(show(names, '梅谷憲吾（Kengo Umetani）モデル作品 / model portfolio', root, first_lazy=False, prio=True),
              f'<h1 class="h2">MODEL<span>KENGO UMETANI</span></h1><div class="thumbs">{thumbs}</div>'
              + '<div style="margin-top:28px">' + bi(*MODEL_TEXT) + '</div>'
              + '<div class="h">FORMER AGENCIES<span class="sub" lang="ja" style="display:inline;margin-left:8px;font-weight:400">過去所属</span></div><ul class="list"><li><span>ELITE</span></li><li><span>BARK IN STYLE</span></li><li><span>FOLIO MANAGEMENT</span></li></ul>', 'first gallery')]
@@ -472,6 +509,9 @@ if __name__ == '__main__':
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
     shutil.copy(ROOT / 'assets/paper.png', OUT + '/assets/paper.png')
+    shutil.copy(ROOT / 'assets/favicon.svg', OUT + '/favicon.svg')
+    if SITE.get('indexnow_key'):
+        open(f"{OUT}/{SITE['indexnow_key']}.txt", 'w').write(SITE['indexnow_key'])
     open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\n\n# AI search and assistant crawlers are welcome\n' + ''.join(f'User-agent: {b}\nAllow: /\n\n' for b in ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot']) + f'Sitemap: https://{DOMAIN}/sitemap.xml\n')
     open(OUT + '/CNAME', 'w').write(DOMAIN + '\n')
     open(OUT + '/llms.txt', 'w', encoding='utf-8').write(llms_txt())
