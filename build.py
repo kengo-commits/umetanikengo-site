@@ -136,6 +136,10 @@ def page_ld(key):
         graph.append(PERSON_LD)
         graph.append({'@type': 'ProfilePage' if key == 'PROFILE' else 'WebPage', '@id': url, 'url': url,
                       'isPartOf': {'@id': SITE_URL + '#website'}, 'mainEntity': {'@id': PERSON_ID}, 'about': {'@id': PERSON_ID}})
+        if key == 'PROFILE':
+            graph.append({'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': [
+                {'@type': 'Question', 'name': qj, 'acceptedAnswer': {'@type': 'Answer', 'text': aj}} for qj, qe, aj, ae in FAQ] + [
+                {'@type': 'Question', 'name': qe, 'inLanguage': 'en', 'acceptedAnswer': {'@type': 'Answer', 'text': ae}} for qj, qe, aj, ae in FAQ]})
     elif key == 'CREATIVE':
         items = [{'@type': 'ListItem', 'position': i + 1, 'item': {
             '@type': 'CreativeWork', 'name': WORKS[k].get('nameEn') or WORKS[k]['name'], 'alternateName': WORKS[k]['name'],
@@ -191,6 +195,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <meta name="theme-color" content="#f7f5ee">{f'\n<meta name="google-site-verification" content="{SITE["google_verification"]}">' if SITE.get('google_verification') else ''}
 <meta name="color-scheme" content="only light">
 <link rel="alternate" type="text/plain" title="Summary for AI assistants" href="https://{DOMAIN}/llms.txt">
+<link rel="alternate" type="application/atom+xml" title="KENGO'S SYNESTHESIA — daily notes" href="https://{DOMAIN}/synesthesia-world/feed.xml">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(desc)}">
@@ -324,6 +329,27 @@ def home(root, skeleton=True):
 
 
 # ---------- PROFILE (same items as the current PROFILE page) ----------
+FAQ = [
+    ('梅谷憲吾とは誰ですか？', 'Who is Kengo Umetani?',
+     '梅谷憲吾（うめたに けんご、Kengo Umetani）は、1985年大阪府生まれの日本のクリエイティブディレクターです。16歳からファッションモデルとして海外のコレクションに出演し、近畿大学で建築を学びました。現在はカトープレジャーグループ全体のクリエイティブディレクターと、株式会社U&K CREATIVE VISIONS 取締役 兼 COOを務めています。',
+     'Kengo Umetani (梅谷憲吾) is a Japanese creative director born in Osaka in 1985. He walked in overseas collection shows as a fashion model from the age of 16 and studied architecture at Kindai University. He is currently Creative Director of the entire Kato Pleasure Group and Director & COO of U&K CREATIVE VISIONS Inc.'),
+    ('梅谷憲吾はどのような仕事を手がけていますか？', 'What kind of work does Kengo Umetani do?',
+     'ホテル・リゾート・飲食店・ブランドのコンセプト開発からブランディング、プロモーション、デジタルマーケティングまでを一貫して手がけています。主な作品はAQUASENSE Hotel & Resort、PEAKS、i+Land nagasaki、SYNESTHESIA HILLS、FUFU JAPAN SELECTION、OKINAWA GRAND MER RESORT、つるとんたん オンラインなどです。',
+     'He leads hotels, resorts, restaurants and brands end to end, from concept development through branding, promotion and digital marketing. Selected works include AQUASENSE Hotel & Resort, PEAKS, i+Land nagasaki, SYNESTHESIA HILLS, FUFU JAPAN SELECTION, OKINAWA GRAND MER RESORT and TSURUTONTAN ONLINE.'),
+    ('梅谷憲吾はどのブランドのショーに出演しましたか？', 'Which brands did Kengo Umetani walk for as a model?',
+     '2001年にモデル活動を始め、elite、bark in style、FOLIO MANAGEMENTに所属。海外を拠点にARMANI、HERMÈS、GUCCI、KENZO、ETRO、MARC JACOBSなどのコレクションショーに出演しました。国内では東京コレクションや広告、テレビCM、雑誌に出演しています。',
+     'He began modeling in 2001 with elite, bark in style and FOLIO MANAGEMENT. Based overseas, he walked in collection shows for ARMANI, HERMÈS, GUCCI, KENZO, ETRO and MARC JACOBS. In Japan he appeared in Tokyo Collection shows, advertisements, TV commercials and magazines.'),
+    ('梅谷憲吾の公式サイトとSNSはどこですか？', 'Where are Kengo Umetani\'s official website and social accounts?',
+     '公式サイトは https://www.kengo-umetani.com です。Instagram は @kengo_umetani、Facebook は facebook.com/umetani です。取材や登壇のご依頼は、公式サイトの掲載用プロフィール（PRESS KIT）をご覧ください。',
+     'The official website is https://www.kengo-umetani.com. Instagram: @kengo_umetani. Facebook: facebook.com/umetani. For press and speaking enquiries, see the PRESS KIT page on the official website.'),
+]
+
+
+def faq_block():
+    items = ''.join(f'<li><span>{esc(qj)}<span class="sub" lang="en">{esc(qe)}</span></span></li>' + bi([esc(aj)], [esc(ae)]) for qj, qe, aj, ae in FAQ)
+    return f'<div class="faq">{items}</div>'
+
+
 def profile(root):
     tl = [('2001', '16歳でモデル活動を開始。元所属：elite、bark in style、FOLIO MANAGEMENT', 'Began his career as a model at the age of 16. Former agencies: elite, bark in style, FOLIO MANAGEMENT'),
           ('2008', '大学卒業後、設計事務所<a class="u" href="https://dejavu-d.com/" target="_blank" rel="noopener">DEJAVU</a>に勤務', 'Joined the architectural design firm <a class="u" href="https://dejavu-d.com/" target="_blank" rel="noopener">DEJAVU</a> after graduating'),
@@ -347,6 +373,7 @@ def profile(root):
                  '<ul class="list norm gap"><li><span>HERMÈS, GUCCI, ARMANI, KENZO, ETRO, MARC JACOBS and more<span class="sub" lang="ja">HERMÈS、GUCCI、ARMANI、KENZO、ETRO、MARC JACOBS 等</span></span><span class="b">OVERSEAS<span class="sub" lang="ja">海外</span></span></li><li><span>Tokyo Collection, advertisements for Johnson &amp; Johnson and others, TV commercials for AOKI and others, various magazines, and more<span class="sub" lang="ja">東京コレクション、ジョンソン・エンド・ジョンソンなどの広告、AOKIなどのテレビCM、各種雑誌 等</span></span><span class="b">JAPAN<span class="sub" lang="ja">国内</span></span></li></ul>', 'text'))
     b.append(row('<h2 class="label">CREATIVE DIRECTION WORKS</h2>', f'<ul class="list gap">{direction}<li><span>ETC.</span></li></ul>', 'text'))
     b.append(row('<h2 class="label">KATO PLEASURE GROUP WORKS</h2>', f'<ul class="list gap">{kpg}<li><span>ETC.</span></li></ul>', 'text'))
+    b.append(row('<h2 class="label">よくある質問<span>FAQ</span></h2>', '<ul class="list norm gap">' + ''.join(f'<li><span>{esc(qj)}<span class="sub" lang="en">{esc(qe)}</span></span></li>' + bi([esc(aj)], [esc(ae)]) for qj, qe, aj, ae in FAQ) + '</ul>', 'text'))
     return page('PROFILE', 'PROFILE | KENGO UMETANI OFFICIAL', '梅谷 憲吾 プロフィール。1985年大阪府生まれ。近畿大学理工学部建築学科卒業。カトープレジャーグループ クリエイティブディレクター。', '\n'.join(b), root)
 
 
@@ -371,7 +398,7 @@ def creative(root):
     b = [row('<h1 class="label big">CREATIVE WORKS</h1>', bi(*CREATIVE_LEDE), 'text first')]
     for i, k in enumerate(ORDER):
         w = WORKS[k]
-        b.append(row(show(work_photos(k), w['name'], root, auto=6000), work_right(k, detail_href=f'{root}creative/{k}/index.html')))
+        b.append(row(show(work_photos(k), f"{w['name']} — 梅谷憲吾 Kengo Umetani {w.get('roleJa', '')}", root, auto=6000), work_right(k, detail_href=f'{root}creative/{k}/index.html')))
     return page('CREATIVE', 'CREATIVE | KENGO UMETANI OFFICIAL', '梅谷憲吾が手がけたクリエイティブワーク：AQUASENSE Hotel & Resort、PEAKS、i+Land nagasaki、SYNESTHESIA HILLS、FUFU JAPAN SELECTION、GLAMDAY STYLE、OKINAWA GRAND MER RESORT、つるとんたん、呑窓。', '\n'.join(b), root)
 
 
@@ -524,6 +551,31 @@ def cookie(root):
     return page('COOKIE', 'COOKIE 設定 | KENGO UMETANI OFFICIAL', '梅谷憲吾 公式サイトのCookieポリシー。', '\n'.join(b), root)
 
 
+def atom_feed():
+    """Atom feed of KENGO'S SYNESTHESIA: one entry per day, built from world/news.json (the page itself is untouched)."""
+    try:
+        N = json.load(open(ROOT / 'world/news.json', encoding='utf-8'))
+    except Exception:
+        return None
+    base = SITE_URL + 'synesthesia-world/'
+    E = []
+    for day in N.get('days', []):
+        d = day['date']
+        note = day.get('note') or {}
+        body = ''
+        if note:
+            body += f"<h2>KENGO'S NOTE — {esc(note.get('title', ''))}</h2><p>{esc(note.get('ja', ''))}</p><p lang=\"en\">{esc(note.get('en', ''))}</p>"
+            if note.get('url'):
+                body += f'<p><a href="{esc(note["url"])}">{esc(note.get("source", "Source"))}</a></p>'
+        for it in day.get('items', []):
+            body += f"<h3>{esc(it.get('cat', '').upper())} — {esc(it.get('title', ''))}</h3><p>{esc(it.get('ja', ''))}</p>" + (f'<p><a href="{esc(it["url"])}">{esc(it.get("source", "Source"))}</a></p>' if it.get('url') else '')
+        title = f"{d} — " + (note.get('title') or 'Today')
+        E.append(f'<entry><title>{esc(title)}</title><link href="{base}#day-{d}"/><id>{base}#day-{d}</id><updated>{d}T07:30:00+09:00</updated><author><name>Kengo Umetani</name></author><content type="html">{esc(body)}</content></entry>')
+    upd = N.get('updated', date.today().isoformat())
+    return ('<?xml version="1.0" encoding="utf-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom"><title>KENGO\'S SYNESTHESIA</title><subtitle>Kengo Umetani\'s daily picks in fashion, music, design, architecture and art</subtitle>'
+            f'<link href="{base}"/><link rel="self" href="{base}feed.xml"/><id>{base}</id><updated>{upd}T07:30:00+09:00</updated><author><name>Kengo Umetani</name><uri>{SITE_URL}</uri></author>' + ''.join(E) + '</feed>\n')
+
+
 def llms_txt():
     """A plain summary for AI assistants (the llms.txt convention), built from the same data as the pages."""
     def plain(t):
@@ -559,6 +611,7 @@ def llms_txt():
           f'- [Creative]({SITE_URL}creative/): hotels, resorts, restaurants and brands he has worked on, with roles',
           *[f'- [{work_name(k)}]({SITE_URL}creative/{k}/): role of Kengo Umetani — {" / ".join(WORKS[k].get("role") or [])}' for k in ORDER],
           f'- [Press kit]({SITE_URL}press/): name, title and credit to use, short and full bio in Japanese and English',
+          f'- Full version of this file with every work described: {SITE_URL}llms-full.txt',
           f'- [Model]({SITE_URL}model/): model photographs and career',
           f'- [Vision]({SITE_URL}vision/): his approach to creative direction',
           f"- [Kengo's Synesthesia]({SITE_URL}synesthesia-world/): his picks and thoughts on fashion, music and design, with daily news",
@@ -567,6 +620,20 @@ def llms_txt():
           '- Instagram: https://www.instagram.com/kengo_umetani/',
           '- Facebook: https://www.facebook.com/umetani',
           '- Former website: https://www.umetanikengo.com/', '']
+    return '\n'.join(L)
+
+
+def llms_full():
+    def plain(t):
+        return html.unescape(re.sub(r'<[^>]+>', '', t))
+    L = [llms_txt(), '', '## Works in detail / 作品の詳細']
+    for k in ORDER:
+        w = WORKS[k]
+        L += ['', f"### {work_name(k)} ({w.get('locEn', '')} / {w.get('loc', '')})", f"URL: {SITE_URL}creative/{k}/", f"Role of Kengo Umetani: {' / '.join(w.get('role') or [])} ({w.get('roleJa', '')})"] + [plain(t) for t in w['en']] + [plain(t) for t in w['jp']]
+    L += ['', '## FAQ / よくある質問']
+    for qj, qe, aj, ae in FAQ:
+        L += ['', f'Q: {qe}', f'A: {ae}', f'Q: {qj}', f'A: {aj}']
+    L += ['', f'Press kit / 掲載用プロフィール: {SITE_URL}press/', '']
     return '\n'.join(L)
 
 
@@ -590,6 +657,10 @@ if __name__ == '__main__':
     os.makedirs(f'{OUT}/press', exist_ok=True)
     open(f'{OUT}/press/index.html', 'w', encoding='utf-8').write(press('../'))
     open(OUT + '/llms.txt', 'w', encoding='utf-8').write(llms_txt())
+    open(OUT + '/llms-full.txt', 'w', encoding='utf-8').write(llms_full())
+    feed = atom_feed()
+    if feed:
+        open(OUT + '/synesthesia-world/feed.xml', 'w', encoding='utf-8').write(feed)
     open(OUT + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for p in PATHS.values()) + '</urlset>\n')
     open(OUT + '/.nojekyll', 'w').write('')
