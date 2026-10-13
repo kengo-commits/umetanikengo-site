@@ -43,6 +43,10 @@ nav.nv{display:flex;gap:clamp(12px,2vw,28px);flex-wrap:wrap;text-transform:upper
 .film{position:relative;margin-inline:calc(-1*clamp(16px,3vw,40px));background:#000}
 .film video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;max-height:86vh}
 .film .ttl{display:none}
+.film.signal canvas{display:block;width:100%;aspect-ratio:16/9;max-height:86vh;background:#000}
+.film.signal .cap b{font-weight:400;color:var(--ink)}
+@media (max-width:640px){.film.signal canvas{aspect-ratio:4/5}}
+
 .film .cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px clamp(16px,3vw,40px);background:var(--paper);color:var(--mute);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
 
 .clocks{display:flex;flex-wrap:wrap;gap:6px 28px;padding-block:10px 0;border-top:1px solid var(--rule);margin-top:4px}
@@ -151,10 +155,9 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
   </div>
 
-  <div class="film">
-    <video id="film" src="media/film.mp4" poster="media/film-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="地球、パリ、砂漠、建築、江戸を巡るモノクロ映像"></video>
-    <div class="ttl">Film No. 01</div>
-    <div class="cap"><span>Earth — Paris — Utah — Kent — Edo</span><span>Edited from public-domain &amp; CC0 archives</span></div>
+  <div class="film signal">
+    <canvas id="signal" aria-label="今日の9本のニュースの見出しと、6都市の時刻から描いたアニメーション"></canvas>
+    <div class="cap"><span>Signal — drawn live from today's 9 headlines and the time in 6 cities</span><span id="signalCap">今日のニュースから毎日生まれる絵 / <b id="signalDate"></b></span></div>
   </div>
 
   <div class="clocks" id="clocks" aria-label="世界のファッション都市の現在時刻"></div>
@@ -364,7 +367,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
   <section id="credits">
     <h2>Credits <small>素材と権利</small></h2>
-    <p class="intro">掲載している写真・映像はすべて Wikimedia Commons でパブリックドメインまたは CC0 と表示されている作品です。映像はそれらの写真から編集したもので、音楽はこのページのオリジナルです。各リンク先は外部サイトで、ブランドやメディアの画像はこのページには載せていません。</p>
+    <p class="intro">掲載している写真・映像はすべて Wikimedia Commons でパブリックドメインまたは CC0 と表示されている作品です。トップのアニメーションと音楽は、このページのオリジナルです。各リンク先は外部サイトで、ブランドやメディアの画像はこのページには載せていません。</p>
     <div class="credits" id="creditList"></div>
   </section>
 
@@ -511,7 +514,7 @@ PLATES.forEach((p,i)=>{
   c.innerHTML=`<b>P.${String(i+1).padStart(2,"0")} ${esc(p[1])}</b> — ${esc(p[2])}. ${esc(p[3])}. <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
   cr.appendChild(c);
 });
-[["Film No. 01","Apollo 17の地球（NASA）、エッフェル塔、ユタの砂丘、ケントの建築、歌川広重の浮世絵など、パブリックドメイン／CC0の写真をモノクロ化して編集した映像"],["Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
+[["Signal","その日の9本のニュースの見出しの言葉と、世界6都市の現在時刻をもとに、ページを開くたびにその場で描くオリジナルのアニメーション。ファッションは線、音楽は縦の波形、デザインは点で表し、SOUNDを再生すると音に合わせて揺れます"],["Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
 
 // Index lists
 const cats=$("#cats");
@@ -563,8 +566,6 @@ function filter(){
   });
 }
 
-// Film: respect reduced motion
-try{if(matchMedia("(prefers-reduced-motion: reduce)").matches){const v=$("#film");v.removeAttribute("autoplay");v.pause()}}catch(e){}
 
 /* ---------- Night Signal: original composition, synthesized live ---------- */
 const BPM=70, BEAT=60/BPM, BAR=BEAT*4;
@@ -659,6 +660,56 @@ $("#playBtn").addEventListener("click",async()=>{
     }
   }catch(e){$("#trkInfo").textContent="このブラウザでは再生できませんでした。別のブラウザでお試しください。"}
 });
+/* ---------- Signal: generative art drawn from today's headlines and the time in six cities ---------- */
+(function(){
+  const cv=document.getElementById("signal"); if(!cv)return;
+  const cx=cv.getContext("2d");
+  const ZONES=[["PAR","Europe/Paris"],["MIL","Europe/Rome"],["LDN","Europe/London"],["NYC","America/New_York"],["SEL","Asia/Seoul"],["TYO","Asia/Tokyo"]];
+  const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
+  let lines=[];
+  function load(N){
+    if(!N||!N.days||!N.days.length)return;
+    const day=N.days[0];
+    lines=day.items.map((it,i)=>{
+      const words=it.title.split(/\s+/).filter(Boolean);
+      const terms=words.slice(0,7).map((w,k)=>{const h=hash(w.toLowerCase());return{f:1+(h%9)+(k*0.37),a:1/(k+1.4),p:(h%628)/100,s:0.08+((h>>9)%40)/400}});
+      return{cat:it.cat,label:(it.cat[0]+"."+String(i+1).padStart(2,"0")).toUpperCase(),terms,len:it.title.length};
+    });
+    const cap=document.getElementById("signalDate"); if(cap)cap.textContent=day.date;
+  }
+  try{load(JSON.parse(document.getElementById("news-data").textContent))}catch(e){}
+  try{fetch("news.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(N=>{if(N)load(N)}).catch(()=>{})}catch(e){}
+  let W=0,H=0,dpr=1;
+  function size(){const r=cv.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+  size(); addEventListener("resize",size);
+  const buf=new Uint8Array(1024);
+  function level(){
+    try{if(typeof playing!=="undefined"&&playing&&an){an.getByteTimeDomainData(buf);let s=0;for(let i=0;i<buf.length;i+=4){const v=(buf[i]-128)/128;s+=v*v}return Math.min(1,Math.sqrt(s/(buf.length/4))*4)}}catch(e){}
+    return 0;
+  }
+  function frac(z){const p=new Intl.DateTimeFormat("en-GB",{timeZone:z,hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());const h=+p.find(x=>x.type==="hour").value%24,m=+p.find(x=>x.type==="minute").value;return(h*60+m)/1440}
+  let marks=[],lastMark=0;
+  function draw(ts){
+    const t=ts/1000;
+    if(!marks.length||ts-lastMark>30000){const g={};ZONES.forEach(([n,z])=>{const f=frac(z),k=Math.round(f*1440);(g[k]=g[k]||[f,[]])[1].push(n)});marks=Object.values(g).map(([f,ns])=>[ns.join("·"),f]);lastMark=ts}
+    cx.fillStyle="#000";cx.fillRect(0,0,W,H);
+    const padX=Math.max(16,W*0.04),padY=H*0.08,n=Math.max(1,lines.length),band=(H-padY*2)/n,amp=band*0.42*(1+level()*1.6);
+    // time of day in six cities: faint verticals
+    cx.font="500 9px Helvetica, Arial, sans-serif";cx.textBaseline="top";
+    let lastEnd=-1e9,row=0;marks.slice().sort((a,b)=>a[1]-b[1]).forEach(([name,f])=>{const x=padX+f*(W-padX*2);row=(x+4<lastEnd)?row+1:0;const ly=padY*0.55+row*12;cx.fillStyle="rgba(255,255,255,.14)";cx.fillRect(x,ly,1,H-padY*0.55-ly+padY*0.45);cx.fillStyle="rgba(255,255,255,.45)";cx.fillText(name,x+4,ly);lastEnd=Math.max(lastEnd,x+4+cx.measureText(name).width+6)});
+    lines.forEach((L,i)=>{
+      const y0=padY+band*(i+0.5),x0=padX+28,x1=W-padX;
+      cx.fillStyle="rgba(255,255,255,.45)";cx.textBaseline="middle";cx.fillText(L.label,padX,y0);
+      const y=x=>{const u=(x-x0)/(x1-x0);let v=0;for(const k of L.terms)v+=k.a*Math.sin(u*Math.PI*2*k.f+k.p+t*k.s*6);return y0+v*amp*Math.sin(Math.PI*u)};
+      if(L.cat==="fashion"){cx.strokeStyle="rgba(255,255,255,.92)";cx.lineWidth=1.1;cx.beginPath();for(let x=x0;x<=x1;x+=2){const yy=y(x);x===x0?cx.moveTo(x,yy):cx.lineTo(x,yy)}cx.stroke()}
+      else if(L.cat==="music"){cx.fillStyle="rgba(255,255,255,.8)";for(let x=x0;x<=x1;x+=4){const yy=y(x);cx.fillRect(x,Math.min(y0,yy),1,Math.abs(yy-y0)+0.5)}}
+      else{cx.fillStyle="rgba(255,255,255,.9)";for(let x=x0;x<=x1;x+=7){const yy=y(x);cx.fillRect(x-1,yy-1,2.2,2.2)}}
+    });
+  }
+  const still=matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function loop(ts){draw(ts);if(!still)requestAnimationFrame(loop)}
+  requestAnimationFrame(loop);
+})();
 </script>
 </body>
 </html>
