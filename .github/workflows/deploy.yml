@@ -73,3 +73,15 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Notify search engines (IndexNow)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: |
+          sleep 30
+          HOST=www.kengo-umetani.com
+          KEY=9dc82838f11c46ef8a532ce014911510
+          URLS=$(curl -s "https://$HOST/sitemap.xml" | grep -o '<loc>[^<]*</loc>' | sed 's/<[^>]*>//g' | python3 -c 'import sys,json;print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))')
+          curl -s -o /dev/null -w "IndexNow %{http_code}\n" -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"$HOST\",\"key\":\"$KEY\",\"keyLocation\":\"https://$HOST/$KEY.txt\",\"urlList\":$URLS}" \
+            https://api.indexnow.org/indexnow
