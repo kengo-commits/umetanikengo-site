@@ -87,15 +87,14 @@ PERSON_LD = {
     'name': 'Kengo Umetani', 'alternateName': ['梅谷憲吾', '梅谷 憲吾', 'うめたに けんご', 'Umetani Kengo'],
     'givenName': 'Kengo', 'familyName': 'Umetani',
     'url': SITE_URL, 'image': SITE_URL + 'images/top-model.jpg',
-    'description': 'Japanese creative director and former runway model, born in Osaka in 1985. Director and Group Creative Director of Kato Pleasure Group, and Director & COO of U&K CREATIVE VISIONS Inc.',
-    'jobTitle': ['Director, Kato Pleasure Group', 'Group Creative Director, Kato Pleasure Group', 'Director & COO, U&K CREATIVE VISIONS Inc.'],
+    'description': 'Japanese creative director and former runway model, born in Osaka in 1985. Creative Director of Kato Pleasure Group and Director & COO of U&K CREATIVE VISIONS Inc.',
+    'jobTitle': ['Creative Director', 'Director & COO'],
     'birthDate': '1985', 'birthPlace': {'@type': 'Place', 'name': 'Osaka, Japan'}, 'nationality': 'Japan',
     'alumniOf': {'@type': 'CollegeOrUniversity', 'name': 'Kindai University (Department of Architecture, Faculty of Science and Engineering)', 'alternateName': '近畿大学 理工学部 建築学科'},
     'worksFor': [
         {'@type': 'Organization', 'name': 'Kato Pleasure Group', 'alternateName': 'カトープレジャーグループ', 'url': 'https://www.kpg.gr.jp/'},
         {'@type': 'Organization', 'name': 'U&K CREATIVE VISIONS Inc.', 'alternateName': '株式会社U&K CREATIVE VISIONS'}],
     'hasOccupation': [
-        {'@type': 'Occupation', 'name': 'Company director', 'description': 'Director (取締役) of Kato Pleasure Group and Director & COO of U&K CREATIVE VISIONS Inc.'},
         {'@type': 'Occupation', 'name': 'Creative Director', 'description': 'Creative Director of the entire Kato Pleasure Group (since 2020): concept development, branding, promotion and digital marketing for hotels, resorts and restaurants.'},
         {'@type': 'Occupation', 'name': 'Fashion model', 'description': 'Model since 2001 (age 16); collection shows for HERMÈS, GUCCI, ARMANI, KENZO, ETRO and MARC JACOBS.'}],
     'knowsAbout': ['Creative direction', 'Branding', 'Hotel and resort development', 'Architecture', 'Interior and spatial design', 'Digital marketing', 'Promotion', 'Fashion modeling'],
@@ -118,7 +117,7 @@ SEO_TITLE = {
     'PRESS': 'プレスキット PRESS KIT｜梅谷憲吾 Kengo Umetani 掲載用プロフィール — KENGO UMETANI OFFICIAL',
 }
 SEO_DESC = {
-    'HOME': '梅谷憲吾（うめたに けんご／Kengo Umetani）の公式サイト。カトープレジャーグループ 取締役 兼 グループ全体のクリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元ファッションモデル。',
+    'HOME': '梅谷憲吾（うめたに けんご／Kengo Umetani）の公式サイト。カトープレジャーグループ全体のクリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元ファッションモデル。',
     'PROFILE': '梅谷憲吾（Kengo Umetani）のプロフィール。1985年大阪府生まれ、近畿大学理工学部建築学科卒業。16歳でモデル活動を開始し、海外コレクションに出演。2020年よりカトープレジャーグループ全体のクリエイティブディレクター。経歴・現職・実績。',
     'CREATIVE': '梅谷憲吾（Kengo Umetani）が手がけたホテル・リゾート・飲食店・ブランドのクリエイティブワークと担当領域：AQUASENSE Hotel & Resort、PEAKS、i+Land nagasaki、SYNESTHESIA HILLS、FUFU JAPAN SELECTION、GLAMDAY STYLE、OKINAWA GRAND MER RESORT、つるとんたん、呑窓。',
     'MODEL': '梅谷憲吾（Kengo Umetani）のモデルとしての作品と経歴。16歳から活動し、HERMÈS、GUCCI、ARMANI、KENZO、ETRO、MARC JACOBS などのコレクションに出演。広告・雑誌の作品写真。',
@@ -250,7 +249,7 @@ NOW_JP = ['モデルとして世界の現場で培ったグローバルな審美
           'クリエイティブディレクターとして、コンセプト開発からブランディング、プロモーションまで、幅広いトータルクリエイティブを実践いたします。']
 NOW_EN = ['Combining the global aesthetic sense he cultivated as a model with his experience in architecture, design and event production, he has been involved in the development of numerous hotels and restaurants at Kato Pleasure Group, including luxury resorts such as the FUFU series of high-end hot spring ryokan. In the field of digital marketing, he also directs online initiatives comprehensively, from design through to performance measurement.',
           'As Creative Director, he delivers total creative across a broad scope, from concept development through branding and promotion.']
-CURRENT = [('カトープレジャーグループ', 'Kato Pleasure Group', '取締役 兼 クリエイティブディレクター', 'DIRECTOR &amp; GROUP CREATIVE DIRECTOR'),
+CURRENT = [('カトープレジャーグループ', 'Kato Pleasure Group', 'クリエイティブディレクター', 'CREATIVE DIRECTOR'),
            ('株式会社U&amp;K CREATIVE VISIONS', 'U&amp;K CREATIVE VISIONS Inc.', '取締役 兼 COO', 'DIRECTOR &amp; COO')]
 
 
@@ -321,7 +320,7 @@ def home(root, skeleton=True):
           + ig_grid(root).replace("sizes='(max-width: 480px) 50vw, (max-width: 900px) 25vw, 200px'", "") + '</section>')
     h1 = '<h1 class="visually-hidden">梅谷憲吾 Kengo Umetani 公式サイト — クリエイティブディレクター / KENGO UMETANI OFFICIAL</h1>'
     return page('HOME', 'KENGO UMETANI OFFICIAL',
-                '梅谷憲吾（Kengo Umetani）公式サイト。カトープレジャーグループ 取締役 兼 クリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元モデル。', h1 + '<div class="home-col">' + hero + '\n' + ig + '</div>', root, skeleton)
+                '梅谷憲吾（Kengo Umetani）公式サイト。カトープレジャーグループのクリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元モデル。', h1 + '<div class="home-col">' + hero + '\n' + ig + '</div>', root, skeleton)
 
 
 # ---------- PROFILE (same items as the current PROFILE page) ----------
@@ -399,10 +398,10 @@ def work_page(k, root):
     return page(key, '', '', '\n'.join(body), root)
 
 
-PRESS_SHORT = ('クリエイティブディレクター／元ランウェイモデル。カトープレジャーグループ 取締役 兼 グループ全体のクリエイティブディレクター、株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO。',
-               'Creative director and former runway model. Director and Group Creative Director of Kato Pleasure Group, and Director &amp; COO of U&amp;K CREATIVE VISIONS Inc.')
-PRESS_MID = ('梅谷憲吾（うめたに けんご）。1985年大阪府生まれ。近畿大学理工学部建築学科卒業。2001年、16歳でモデル活動を始め、海外を拠点にARMANI、HERMÈS、GUCCIなどのコレクションショーに出演。設計事務所DEJAVUを経て2011年に独立。2016年カトープレジャーグループに入社し、2020年よりグループ全体のクリエイティブディレクター。現在はカトープレジャーグループ 取締役 兼 クリエイティブディレクター、株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO。「ふふ」シリーズ、AQUASENSE Hotel &amp; Resort、i+Land nagasaki、SYNESTHESIA HILLS、PEAKSなど、ホテル・リゾートのコンセプト開発からブランディング、プロモーションまでを手がける。',
-             'Kengo Umetani was born in Osaka in 1985 and studied architecture at Kindai University. He began modeling in 2001 at the age of 16 and, based overseas, walked in collection shows for ARMANI, HERMÈS, GUCCI and others. After working at the architectural design firm DEJAVU, he went independent in 2011. He joined Kato Pleasure Group in 2016 and has been Creative Director of the entire group since 2020, and now serves as a Director of Kato Pleasure Group; he is also Director &amp; COO of U&amp;K CREATIVE VISIONS Inc. He leads concept development, branding and promotion for hotels and resorts including the FUFU series, AQUASENSE Hotel &amp; Resort, i+Land nagasaki, SYNESTHESIA HILLS and PEAKS.')
+PRESS_SHORT = ('クリエイティブディレクター／元ランウェイモデル。カトープレジャーグループ全体のクリエイティブディレクター、株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO。',
+               'Creative director and former runway model. Creative Director of the entire Kato Pleasure Group and Director &amp; COO of U&amp;K CREATIVE VISIONS Inc.')
+PRESS_MID = ('梅谷憲吾（うめたに けんご）。1985年大阪府生まれ。近畿大学理工学部建築学科卒業。2001年、16歳でモデル活動を始め、海外を拠点にARMANI、HERMÈS、GUCCIなどのコレクションショーに出演。設計事務所DEJAVUを経て2011年に独立。2016年カトープレジャーグループに入社し、2020年よりグループ全体のクリエイティブディレクター。株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO。「ふふ」シリーズ、AQUASENSE Hotel &amp; Resort、i+Land nagasaki、SYNESTHESIA HILLS、PEAKSなど、ホテル・リゾートのコンセプト開発からブランディング、プロモーションまでを手がける。',
+             'Kengo Umetani was born in Osaka in 1985 and studied architecture at Kindai University. He began modeling in 2001 at the age of 16 and, based overseas, walked in collection shows for ARMANI, HERMÈS, GUCCI and others. After working at the architectural design firm DEJAVU, he went independent in 2011. He joined Kato Pleasure Group in 2016 and has been Creative Director of the entire group since 2020; he is also Director &amp; COO of U&amp;K CREATIVE VISIONS Inc. He leads concept development, branding and promotion for hotels and resorts including the FUFU series, AQUASENSE Hotel &amp; Resort, i+Land nagasaki, SYNESTHESIA HILLS and PEAKS.')
 
 
 def press(root):
@@ -451,7 +450,7 @@ def about(root):
 <li><span>サイト名<span class="sub" lang="en">Site name</span></span><span>KENGO UMETANI OFFICIAL<span class="sub">梅谷憲吾 公式サイト</span></span></li>
 <li><span>URL</span><span>https://{DOMAIN}</span></li>
 <li><span>運営者<span class="sub" lang="en">Operator</span></span><span>梅谷 憲吾<span class="sub" lang="en">Kengo Umetani</span></span></li>
-<li><span>所属<span class="sub" lang="en">Affiliation</span></span><span>Director &amp; Group Creative Director, Kato Pleasure Group<span class="sub" lang="ja">カトープレジャーグループ 取締役 兼 クリエイティブディレクター</span>Director and COO, U&amp;K CREATIVE VISIONS Inc.<span class="sub" lang="ja">株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO</span></span></li>
+<li><span>所属<span class="sub" lang="en">Affiliation</span></span><span>Creative Director, Kato Pleasure Group<span class="sub" lang="ja">カトープレジャーグループ クリエイティブディレクター</span>Director and COO, U&amp;K CREATIVE VISIONS Inc.<span class="sub" lang="ja">株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO</span></span></li>
 <li><span>お問い合わせ<span class="sub" lang="en">Contact</span></span><span><a class="u" href="{FB}" target="_blank" rel="noopener">Facebook</a> / <a class="u" href="{IG}" target="_blank" rel="noopener">Instagram</a></span></li>
 </ul>""", 'text'))
     b.append(sec('このサイトについて', 'ABOUT', [
@@ -531,7 +530,7 @@ def llms_txt():
         return html.unescape(re.sub(r'<[^>]+>', '', t))
     L = ['# Kengo Umetani (梅谷憲吾) — KENGO UMETANI OFFICIAL', '',
          '> Official website of Kengo Umetani (梅谷憲吾), a Japanese creative director and former runway model born in Osaka in 1985. '
-         'Director and Group Creative Director of Kato Pleasure Group (カトープレジャーグループ 取締役 兼 クリエイティブディレクター), and Director & COO of U&K CREATIVE VISIONS Inc. (株式会社U&K CREATIVE VISIONS).', '',
+         'Creative Director of the entire Kato Pleasure Group (カトープレジャーグループ) and Director & COO of U&K CREATIVE VISIONS Inc. (株式会社U&K CREATIVE VISIONS).', '',
          'This file summarises the facts on this site for AI assistants and search engines. Please cite ' + SITE_URL + ' as the source.', '',
          '## Current positions / 現職']
     for oj, oe, rj, re_ in CURRENT:
