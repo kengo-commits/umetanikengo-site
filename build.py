@@ -78,7 +78,7 @@ def en_first(h):
 
 
 DOMAIN = SITE.get('domain', 'www.kengo-umetani.com')
-PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/', "KENGO'S SYNESTHESIA": 'synesthesia-world/'}
+PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/', "KENGO'S SYNESTHESIA": 'synesthesia-world/', 'PRESS': 'press/'}
 # ---------- structured data: lets search engines and AI assistants identify the person, his roles and works ----------
 SITE_URL = f'https://{DOMAIN}/'
 PERSON_ID = SITE_URL + '#person'
@@ -114,6 +114,7 @@ SEO_TITLE = {
     'ABOUT': '概要 ABOUT｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
     'PRIVACY': 'プライバシーポリシー｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
     'COOKIE': 'Cookie 設定｜梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL',
+    'PRESS': 'プレスキット PRESS KIT｜梅谷憲吾 Kengo Umetani 掲載用プロフィール — KENGO UMETANI OFFICIAL',
 }
 SEO_DESC = {
     'HOME': '梅谷憲吾（うめたに けんご／Kengo Umetani）の公式サイト。カトープレジャーグループ全体のクリエイティブディレクター、株式会社U&K CREATIVE VISIONS 取締役 兼 COO。ホテル・リゾート・飲食店の開発からブランディング、プロモーションまでを手がける。元ファッションモデル。',
@@ -121,10 +122,11 @@ SEO_DESC = {
     'CREATIVE': '梅谷憲吾（Kengo Umetani）が手がけたホテル・リゾート・飲食店・ブランドのクリエイティブワークと担当領域：AQUASENSE Hotel & Resort、PEAKS、i+Land nagasaki、SYNESTHESIA HILLS、FUFU JAPAN SELECTION、GLAMDAY STYLE、OKINAWA GRAND MER RESORT、つるとんたん、呑窓。',
     'MODEL': '梅谷憲吾（Kengo Umetani）のモデルとしての作品と経歴。16歳から活動し、HERMÈS、GUCCI、ARMANI、KENZO、ETRO、MARC JACOBS などのコレクションに出演。広告・雑誌の作品写真。',
     'VISION': '梅谷憲吾（Kengo Umetani）のビジョン。ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担う総合的なクリエイティブディレクションと、次代のクリエイティブへのアプローチ。',
+    'PRESS': '梅谷憲吾（Kengo Umetani）の掲載用プロフィール。氏名・肩書き・クレジット表記、短い紹介文と詳しい紹介文（日本語・英語）、主な実績。メディア・登壇・資料でのご紹介にご利用ください。',
     'ABOUT': '梅谷憲吾（Kengo Umetani）公式サイト KENGO UMETANI OFFICIAL の運営者情報、著作権、リンクについて。',
 }
 SEO_IMG = {'HOME': 'hero-aquasense-1.jpg', 'PROFILE': 'top-model.jpg', 'MODEL': 'model-sts1.jpg', 'CREATIVE': 'hero-aquasense-1.jpg', 'VISION': 'vision-1.jpg'}
-CRUMB = {'PROFILE': 'PROFILE', 'CREATIVE': 'CREATIVE', 'MODEL': 'MODEL', 'VISION': 'VISION', 'ABOUT': 'ABOUT', 'PRIVACY': 'PRIVACY POLICY', 'COOKIE': 'COOKIE'}
+CRUMB = {'PROFILE': 'PROFILE', 'CREATIVE': 'CREATIVE', 'MODEL': 'MODEL', 'VISION': 'VISION', 'ABOUT': 'ABOUT', 'PRIVACY': 'PRIVACY POLICY', 'COOKIE': 'COOKIE', 'PRESS': 'PRESS KIT'}
 
 
 def page_ld(key):
@@ -142,12 +144,25 @@ def page_ld(key):
             'description': 'Role: ' + ' / '.join(WORKS[k].get('role') or [])}} for i, k in enumerate(ORDER)]
         graph.append({'@type': 'CollectionPage', '@id': url, 'url': url, 'name': 'Creative works by Kengo Umetani',
                       'about': {'@id': PERSON_ID}, 'mainEntity': {'@type': 'ItemList', 'itemListElement': items}})
+    elif key.startswith('WORK:'):
+        k = key[5:]
+        w = WORKS[k]
+        graph.append(PERSON_LD)
+        graph.append({'@type': 'WebPage', '@id': url, 'url': url, 'isPartOf': {'@id': SITE_URL + '#website'}, 'about': {'@id': url + '#work'}, 'mainEntity': {'@id': url + '#work'}})
+        graph.append({'@type': 'CreativeWork', '@id': url + '#work', 'name': w.get('nameEn') or w['name'], 'alternateName': w['name'],
+                      'locationCreated': w.get('locEn', ''), 'creator': {'@id': PERSON_ID}, 'image': SITE_URL + 'images/' + work_photos(k)[0] + '.jpg',
+                      'description': html.unescape(re.sub(r'<[^>]+>', '', ' '.join(w['en']))), 'abstract': 'Role of Kengo Umetani: ' + ' / '.join(w.get('role') or []),
+                      **({'sameAs': w['url']} if w.get('url') else {})})
+    elif key == 'PRESS':
+        graph.append(PERSON_LD)
+        graph.append({'@type': 'WebPage', '@id': url, 'url': url, 'isPartOf': {'@id': SITE_URL + '#website'}, 'about': {'@id': PERSON_ID}, 'mainEntity': {'@id': PERSON_ID}})
     else:
         graph.append({'@type': 'WebPage', '@id': url, 'url': url, 'isPartOf': {'@id': SITE_URL + '#website'}, 'about': {'@id': PERSON_ID}})
     if key in CRUMB:
         graph.append({'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'KENGO UMETANI OFFICIAL', 'item': SITE_URL},
-            {'@type': 'ListItem', 'position': 2, 'name': CRUMB[key], 'item': url}]})
+            *([{'@type': 'ListItem', 'position': 2, 'name': 'CREATIVE', 'item': SITE_URL + 'creative/'}] if key.startswith('WORK:') else []),
+            {'@type': 'ListItem', 'position': 3 if key.startswith('WORK:') else 2, 'name': CRUMB[key], 'item': url}]})
     return '\n<script type="application/ld+json">' + json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False).replace('</', '<\\/') + '</script>'
 
 
@@ -194,7 +209,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <footer class="foot">
   <nav class="nav-foot" aria-label="Footer">{nav}</nav>
   <nav class="nav-foot" aria-label="SNS"><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a></nav>
-  <nav class="nav-foot" aria-label="Legal"><a href="{root}about/index.html"{" class=\"on\"" if key=="ABOUT" else ""}>ABOUT / 概要</a><a href="{root}privacy/index.html"{" class=\"on\"" if key=="PRIVACY" else ""}>PRIVACY POLICY / プライバシーポリシー</a><a href="{root}cookie/index.html"{" class=\"on\"" if key=="COOKIE" else ""}>COOKIE POLICY / COOKIE 設定</a></nav>
+  <nav class="nav-foot" aria-label="Legal"><a href="{root}press/index.html"{" class=\"on\"" if key=="PRESS" else ""}>PRESS KIT / 掲載用プロフィール</a><a href="{root}about/index.html"{" class=\"on\"" if key=="ABOUT" else ""}>ABOUT / 概要</a><a href="{root}privacy/index.html"{" class=\"on\"" if key=="PRIVACY" else ""}>PRIVACY POLICY / プライバシーポリシー</a><a href="{root}cookie/index.html"{" class=\"on\"" if key=="COOKIE" else ""}>COOKIE POLICY / COOKIE 設定</a></nav>
   <div class="foot-end"><span>© KENGO UMETANI</span><a class="to-top" href="#">PAGE TOP ↑</a></div>
 </footer>
 <script src="{root}assets/site.js?v={ASSET_V}" defer></script>'''
@@ -336,20 +351,73 @@ def profile(root):
 
 
 # ---------- CREATIVE (same seven works, four photos each) ----------
+def work_photos(k):
+    return {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in (3, 1, 2, 4, 5, 6, 7)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
+
+
+def work_right(k, tag='h2', detail_href=None):
+    w = WORKS[k]
+    name = esc(w['name'])
+    sub = f'<span>{esc(w["nameEn"])}</span>' if w.get('nameEn') else ''
+    label = 'ONLINE SHOP' if k in ('tsurutontan', 'fufusel') else 'OFFICIAL HP'
+    role = (f'<div class="role">{" / ".join(esc(r) for r in w["role"])}<span class="sub" lang="ja">{esc(w.get("roleJa", ""))}</span></div>' if w.get('role') else '')
+    return (f'<{tag} class="h2">{name}{sub}</{tag}><div class="loc">{esc(w["loc"])} / {esc(w["locEn"])}</div>' + role
+            + bi(w['jp'], [esc(t) for t in w['en']])
+            + (f'<a class="more" href="{w["url"]}" target="_blank" rel="noopener">{label} ↗</a>' if w.get('url') else '')
+            + (f'<br>{more(detail_href, "WORK DETAIL / 詳細")}' if detail_href else ''))
+
+
 def creative(root):
     b = [row('<h1 class="label big">CREATIVE WORKS</h1>', bi(*CREATIVE_LEDE), 'text first')]
     for i, k in enumerate(ORDER):
         w = WORKS[k]
-        name = esc(w['name'])
-        sub = f'<span>{esc(w["nameEn"])}</span>' if w.get('nameEn') else ''
-        label = 'ONLINE SHOP' if k in ('tsurutontan', 'fufusel') else 'OFFICIAL HP'
-        role = (f'<div class="role">{" / ".join(esc(r) for r in w["role"])}<span class="sub" lang="ja">{esc(w.get("roleJa", ""))}</span></div>' if w.get('role') else '')
-        right = (f'<h2 class="h2">{name}{sub}</h2><div class="loc">{esc(w["loc"])} / {esc(w["locEn"])}</div>' + role
-                 + bi(w['jp'], [esc(t) for t in w['en']])
-                 + (f'<a class="more" href="{w["url"]}" target="_blank" rel="noopener">{label} ↗</a>' if w.get('url') else ''))
-        photos = {'peaks': [f'peaks-{n}' for n in range(1, 7)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in (3, 1, 2, 4, 5, 6, 7)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
-        b.append(row(show(photos, w['name'], root, auto=6000), right, '' if i else ''))
+        b.append(row(show(work_photos(k), w['name'], root, auto=6000), work_right(k, detail_href=f'{root}creative/{k}/index.html')))
     return page('CREATIVE', 'CREATIVE | KENGO UMETANI OFFICIAL', '梅谷憲吾が手がけたクリエイティブワーク：AQUASENSE Hotel & Resort、PEAKS、i+Land nagasaki、SYNESTHESIA HILLS、FUFU JAPAN SELECTION、GLAMDAY STYLE、OKINAWA GRAND MER RESORT、つるとんたん、呑窓。', '\n'.join(b), root)
+
+
+def work_name(k):
+    w = WORKS[k]
+    return w['name'] if not w.get('nameEn') else f"{w['nameEn']}（{w['name']}）"
+
+
+def work_page(k, root):
+    w = WORKS[k]
+    key = 'WORK:' + k
+    roleJa = w.get('roleJa') or ''
+    PATHS[key] = f'creative/{k}/'
+    CRUMB[key] = w.get('nameEn') or w['name']
+    SEO_TITLE[key] = f"{work_name(k)}｜{roleJa.split(' 等')[0]} 梅谷憲吾 Kengo Umetani — KENGO UMETANI OFFICIAL"
+    first = re.sub(r'<[^>]+>', '', w['jp'][0])
+    SEO_DESC[key] = f"{w['name']}（{w['loc']}）で梅谷憲吾（Kengo Umetani）が担当した{roleJa}。{first}"[:180]
+    SEO_IMG[key] = work_photos(k)[0] + '.jpg'
+    body = [row(show(work_photos(k), f"{w['name']} — 梅谷憲吾 {roleJa}", root, first_lazy=False, prio=True, auto=6000),
+                work_right(k, tag='h1') + '<br>' + more(f'{root}creative/index.html', 'ALL WORKS / 作品一覧'), 'first')]
+    others = [o for o in ORDER if o != k]
+    body.append(row('<h2 class="label">OTHER WORKS<span>その他の作品</span></h2>',
+                    '<ul class="list gap">' + ''.join(f'<li><a href="{root}creative/{o}/index.html"><span>{esc(WORKS[o].get("nameEn") or WORKS[o]["name"])}</span></a></li>' for o in others) + '</ul>', 'text'))
+    return page(key, '', '', '\n'.join(body), root)
+
+
+PRESS_SHORT = ('クリエイティブディレクター／元ランウェイモデル。カトープレジャーグループ全体のクリエイティブディレクター、株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO。',
+               'Creative director and former runway model. Creative Director of the entire Kato Pleasure Group and Director &amp; COO of U&amp;K CREATIVE VISIONS Inc.')
+PRESS_MID = ('梅谷憲吾（うめたに けんご）。1985年大阪府生まれ。近畿大学理工学部建築学科卒業。2001年、16歳でモデル活動を始め、海外を拠点にARMANI、HERMÈS、GUCCIなどのコレクションショーに出演。設計事務所DEJAVUを経て2011年に独立。2016年カトープレジャーグループに入社し、2020年よりグループ全体のクリエイティブディレクター。株式会社U&amp;K CREATIVE VISIONS 取締役 兼 COO。「ふふ」シリーズ、AQUASENSE Hotel &amp; Resort、i+Land nagasaki、SYNESTHESIA HILLS、PEAKSなど、ホテル・リゾートのコンセプト開発からブランディング、プロモーションまでを手がける。',
+             'Kengo Umetani was born in Osaka in 1985 and studied architecture at Kindai University. He began modeling in 2001 at the age of 16 and, based overseas, walked in collection shows for ARMANI, HERMÈS, GUCCI and others. After working at the architectural design firm DEJAVU, he went independent in 2011. He joined Kato Pleasure Group in 2016 and has been Creative Director of the entire group since 2020; he is also Director &amp; COO of U&amp;K CREATIVE VISIONS Inc. He leads concept development, branding and promotion for hotels and resorts including the FUFU series, AQUASENSE Hotel &amp; Resort, i+Land nagasaki, SYNESTHESIA HILLS and PEAKS.')
+
+
+def press(root):
+    b = [row('<h1 class="label big">PRESS KIT<span>掲載用プロフィール</span></h1>',
+             bi(['記事・紹介・登壇資料などで梅谷憲吾を紹介いただく際は、以下のプロフィールと表記をご利用ください。写真のご利用は事前にご相談ください。'],
+                ['When introducing Kengo Umetani in articles, features or event materials, please use the profile and credit below. Please contact us before using photographs.']), 'text first')]
+    b.append(row('<h2 class="label">表記<span>NAME &amp; CREDIT</span></h2>', '<ul class="list norm gap">'
+                 '<li><span>氏名<span class="sub" lang="en">Name</span></span><span>Kengo Umetani<span class="sub">梅谷憲吾（うめたに けんご）</span></span></li>'
+                 '<li><span>肩書き<span class="sub" lang="en">Title</span></span><span>Creative Director / Former runway model<span class="sub">クリエイティブディレクター／元ランウェイモデル</span></span></li>'
+                 '<li><span>クレジット<span class="sub" lang="en">Credit</span></span><span>Creative Direction: Kengo Umetani<span class="sub">クリエイティブディレクション：梅谷憲吾</span></span></li>'
+                 f'<li><span>公式サイト<span class="sub" lang="en">Website</span></span><span>{SITE_URL.rstrip("/")}</span></li></ul>', 'text'))
+    b.append(row('<h2 class="label">短いプロフィール<span>SHORT BIO</span></h2>', bi([PRESS_SHORT[0]], [PRESS_SHORT[1]]), 'text'))
+    b.append(row('<h2 class="label">プロフィール<span>BIO</span></h2>', bi([PRESS_MID[0]], [PRESS_MID[1]]), 'text'))
+    b.append(row('<h2 class="label">主な実績<span>SELECTED WORKS</span></h2>',
+                 '<ul class="list gap">' + ''.join(f'<li><a href="{root}creative/{k}/index.html"><span>{esc(WORKS[k].get("nameEn") or WORKS[k]["name"])}<span class="sub">{esc(" / ".join(WORKS[k].get("role") or []))}</span></span></a></li>' for k in ORDER) + '</ul>', 'text'))
+    return page('PRESS', '', '', '\n'.join(b), root)
 
 
 # ---------- MODEL (same eight photos) ----------
@@ -489,6 +557,8 @@ def llms_txt():
           '', '## Pages',
           f'- [Profile]({SITE_URL}profile/): biography, current positions, education, career timeline, works',
           f'- [Creative]({SITE_URL}creative/): hotels, resorts, restaurants and brands he has worked on, with roles',
+          *[f'- [{work_name(k)}]({SITE_URL}creative/{k}/): role of Kengo Umetani — {" / ".join(WORKS[k].get("role") or [])}' for k in ORDER],
+          f'- [Press kit]({SITE_URL}press/): name, title and credit to use, short and full bio in Japanese and English',
           f'- [Model]({SITE_URL}model/): model photographs and career',
           f'- [Vision]({SITE_URL}vision/): his approach to creative direction',
           f"- [Kengo's Synesthesia]({SITE_URL}synesthesia-world/): his picks and thoughts on fashion, music and design, with daily news",
@@ -514,13 +584,18 @@ if __name__ == '__main__':
         open(f"{OUT}/{SITE['indexnow_key']}.txt", 'w').write(SITE['indexnow_key'])
     open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\n\n# AI search and assistant crawlers are welcome\n' + ''.join(f'User-agent: {b}\nAllow: /\n\n' for b in ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot']) + f'Sitemap: https://{DOMAIN}/sitemap.xml\n')
     open(OUT + '/CNAME', 'w').write(DOMAIN + '\n')
+    for k in ORDER:
+        os.makedirs(f'{OUT}/creative/{k}', exist_ok=True)
+        open(f'{OUT}/creative/{k}/index.html', 'w', encoding='utf-8').write(work_page(k, '../../'))
+    os.makedirs(f'{OUT}/press', exist_ok=True)
+    open(f'{OUT}/press/index.html', 'w', encoding='utf-8').write(press('../'))
     open(OUT + '/llms.txt', 'w', encoding='utf-8').write(llms_txt())
     open(OUT + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for p in PATHS.values()) + '</urlset>\n')
     open(OUT + '/.nojekyll', 'w').write('')
     open(OUT + '/index.html', 'w', encoding='utf-8').write(home(''))
     for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie)]:
-        os.makedirs(f'{OUT}/{name}')
+        os.makedirs(f'{OUT}/{name}', exist_ok=True)
         open(f'{OUT}/{name}/index.html', 'w', encoding='utf-8').write(fn('../'))
     # artifact entry page: same HOME, without the document skeleton (the Artifact host adds it)
     if os.environ.get('ARTIFACT_OUT'):
