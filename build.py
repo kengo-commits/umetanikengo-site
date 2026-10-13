@@ -161,7 +161,13 @@ def page_ld(key):
         graph.append(PERSON_LD)
         graph.append({'@type': 'WebPage', '@id': url, 'url': url, 'isPartOf': {'@id': SITE_URL + '#website'}, 'about': {'@id': PERSON_ID}, 'mainEntity': {'@id': PERSON_ID}})
     else:
+        graph.append(PERSON_LD)
         graph.append({'@type': 'WebPage', '@id': url, 'url': url, 'isPartOf': {'@id': SITE_URL + '#website'}, 'about': {'@id': PERSON_ID}})
+    for g in graph:
+        if g.get('@type') in ('WebPage', 'ProfilePage', 'CollectionPage'):
+            g.setdefault('inLanguage', ['ja', 'en'])
+            g.setdefault('dateModified', date.today().isoformat())
+            g.setdefault('author', {'@id': PERSON_ID})
     if key in CRUMB:
         graph.append({'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'name': 'KENGO UMETANI OFFICIAL', 'item': SITE_URL},
@@ -191,6 +197,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <meta property="og:locale" content="ja_JP">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="author" content="梅谷憲吾 Kengo Umetani">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="icon" href="https://{DOMAIN}/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f7f5ee">{f'\n<meta name="google-site-verification" content="{SITE["google_verification"]}">' if SITE.get('google_verification') else ''}
 <meta name="color-scheme" content="only light">
