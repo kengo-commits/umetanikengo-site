@@ -45,6 +45,7 @@ nav.nv{display:flex;gap:clamp(12px,2vw,28px);flex-wrap:wrap;text-transform:upper
 .film .ttl{display:none}
 .film.signal canvas{display:block;width:100%;aspect-ratio:16/9;max-height:86vh;background:#000}
 .film.signal .cap b{font-weight:400;color:var(--ink)}
+.film.signal .cap #signalData{text-transform:none;letter-spacing:.06em}
 @media (max-width:640px){.film.signal canvas{aspect-ratio:4/5}}
 
 .film .cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px clamp(16px,3vw,40px);background:var(--paper);color:var(--mute);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
@@ -161,7 +162,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
   <div class="film signal">
     <canvas id="signal" aria-label="今日の9本のニュースの見出しと、6都市の時刻から描いたアニメーション"></canvas>
-    <div class="cap"><span>Signal — drawn live from today's 9 headlines and the time in 6 cities</span><span id="signalCap">今日のニュースから毎日生まれる絵 / <b id="signalDate"></b></span></div>
+    <div class="cap"><span><b id="signalName">SIGNAL</b> — <span id="signalData">Drawn from today's data.</span></span><span id="signalJa">毎日ちがうデータと表現で描いています。</span></div>
   </div>
 
   <div class="clocks" id="clocks" aria-label="世界のファッション都市の現在時刻"></div>
@@ -327,7 +328,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <p class="intro">A daily record of every day's news, kept by date. 毎日のファッション・音楽・デザインのニュースを、日付ごとにすべて残しています。</p>
     <div class="daily" id="daily"></div>
     <h3 class="plh">Signals <small>毎日のニュースから生まれたアート</small></h3>
-    <p class="intro">One still of SIGNAL for every day, drawn from that day's headlines and the time in six cities at 07:30 in Tokyo. その日のニュースの見出しと、東京の朝7時30分の6都市の時刻から描いた一枚を、日付ごとに残しています。</p>
+    <p class="intro">One SIGNAL for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
     <div class="signals" id="signals"></div>
     <h3 class="plh">Plates <small>パブリックドメイン / CC0 の作品</small></h3>
     <p class="intro">Architecture, painting and sculpture from the world's open collections. ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の最新の宇宙。どれも著作権が切れた作品か、権利を放棄した写真で、人物の肖像は含みません。触れると元の色が現れます。</p>
@@ -521,7 +522,7 @@ PLATES.forEach((p,i)=>{
   c.innerHTML=`<b>P.${String(i+1).padStart(2,"0")} ${esc(p[1])}</b> — ${esc(p[2])}. ${esc(p[3])}. <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
   cr.appendChild(c);
 });
-[["Signal","その日の9本のニュースの見出しの言葉と、世界6都市の現在時刻をもとに、ページを開くたびにその場で描くオリジナルのアニメーション。ファッションは線、音楽は縦の波形、デザインは点で表し、SOUNDを再生すると音に合わせて揺れます"],["Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
+[["Signal","毎日ちがうデータ（見出しの言葉、日本語要約の文字、月齢、6都市の時刻と日照時間、記事の出どころ、A〜Zの文字数、KENGO'S NOTEの文など）と、ちがう表現（波、輪、バーコード、星座、文字の格子、軌道、光の帯）を日替わりで組み合わせ、ページを開くたびにその場で描くオリジナルのアニメーション。SOUNDを再生すると音に合わせて揺れます"],["Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
 
 // Index lists
 const cats=$("#cats");
@@ -667,71 +668,7 @@ $("#playBtn").addEventListener("click",async()=>{
     }
   }catch(e){$("#trkInfo").textContent="このブラウザでは再生できませんでした。別のブラウザでお試しください。"}
 });
-/* ---------- Signal: generative art drawn from each day's headlines and the time in six cities ---------- */
-(function(){
-  const ZONES=[["PAR","Europe/Paris"],["MIL","Europe/Rome"],["LDN","Europe/London"],["NYC","America/New_York"],["SEL","Asia/Seoul"],["TYO","Asia/Tokyo"]];
-  const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
-  const linesOf=day=>day.items.map((it,i)=>{
-    const words=it.title.split(/\s+/).filter(Boolean);
-    const terms=words.slice(0,7).map((w,k)=>{const h=hash(w.toLowerCase());return{f:1+(h%9)+(k*0.37),a:1/(k+1.4),p:(h%628)/100,s:0.08+((h>>9)%40)/400}});
-    return{cat:it.cat,label:(it.cat[0]+"."+String(i+1).padStart(2,"0")).toUpperCase(),terms};
-  });
-  function frac(z,when){const p=new Intl.DateTimeFormat("en-GB",{timeZone:z,hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(when);const h=+p.find(x=>x.type==="hour").value%24,m=+p.find(x=>x.type==="minute").value;return(h*60+m)/1440}
-  function marksAt(when){const g={};ZONES.forEach(([n,z])=>{const f=frac(z,when),k=Math.round(f*1440);(g[k]=g[k]||[f,[]])[1].push(n)});return Object.values(g).map(([f,ns])=>[ns.join("·"),f])}
-  function paint(cx,W,H,lines,t,marks,lev,small){
-    cx.fillStyle="#000";cx.fillRect(0,0,W,H);
-    const padX=Math.max(small?10:16,W*0.04),padY=H*0.08,n=Math.max(1,lines.length),band=(H-padY*2)/n,amp=band*0.42*(1+lev*1.6);
-    cx.font=`500 ${small?7:9}px Helvetica, Arial, sans-serif`;cx.textBaseline="top";
-    let lastEnd=-1e9,row=0;
-    marks.slice().sort((a,b)=>a[1]-b[1]).forEach(([name,f])=>{const x=padX+f*(W-padX*2);row=(x+4<lastEnd)?row+1:0;const ly=padY*0.55+row*(small?9:12);cx.fillStyle="rgba(255,255,255,.14)";cx.fillRect(x,ly,1,H-padY*0.55-ly+padY*0.45);if(!small){cx.fillStyle="rgba(255,255,255,.45)";cx.fillText(name,x+4,ly)}lastEnd=Math.max(lastEnd,x+4+cx.measureText(name).width+6)});
-    lines.forEach((L,i)=>{
-      const y0=padY+band*(i+0.5),x0=padX+(small?4:28),x1=W-padX;
-      if(!small){cx.fillStyle="rgba(255,255,255,.45)";cx.textBaseline="middle";cx.fillText(L.label,padX,y0)}
-      const y=x=>{const u=(x-x0)/(x1-x0);let v=0;for(const k of L.terms)v+=k.a*Math.sin(u*Math.PI*2*k.f+k.p+t*k.s*6);return y0+v*amp*Math.sin(Math.PI*u)};
-      const st=small?1.5:2;
-      if(L.cat==="fashion"){cx.strokeStyle="rgba(255,255,255,.92)";cx.lineWidth=small?.8:1.1;cx.beginPath();for(let x=x0;x<=x1;x+=st){const yy=y(x);x===x0?cx.moveTo(x,yy):cx.lineTo(x,yy)}cx.stroke()}
-      else if(L.cat==="music"){cx.fillStyle="rgba(255,255,255,.8)";for(let x=x0;x<=x1;x+=st*2){const yy=y(x);cx.fillRect(x,Math.min(y0,yy),small?.7:1,Math.abs(yy-y0)+0.5)}}
-      else{cx.fillStyle="rgba(255,255,255,.9)";const d=small?1.4:2.2;for(let x=x0;x<=x1;x+=st*3.5){const yy=y(x);cx.fillRect(x-d/2,yy-d/2,d,d)}}
-    });
-  }
-  function fit(cv){const r=cv.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1);cv.width=Math.max(1,r.width*dpr);cv.height=Math.max(1,r.height*dpr);const cx=cv.getContext("2d");cx.setTransform(dpr,0,0,dpr,0,0);return[cx,r.width,r.height]}
-  const fmt=s=>new Date(s+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}).toUpperCase();
-
-  // live piece at the top
-  const cv=document.getElementById("signal");
-  let live=[],shown="",days=[];
-  function load(N){
-    if(!N||!N.days||!N.days.length||(N.updated||"")<shown)return;
-    shown=N.updated||"0";
-    days=N.days.slice().sort((a,b)=>a.date<b.date?1:-1);
-    live=linesOf(days[0]);
-    const dl=document.getElementById("signalDate"); if(dl)dl.textContent=days[0].date;
-    gallery();
-  }
-  // archive: one still per day, drawn as it stood at 07:30 in Tokyo that morning
-  function gallery(){
-    const g=document.getElementById("signals"); if(!g)return;
-    g.innerHTML="";
-    days.forEach((d,i)=>{
-      const f=document.createElement("figure"); f.className="sg";
-      f.innerHTML=`<canvas aria-label="Signal ${esc(d.date)}"></canvas><figcaption><span class="no">S.${String(days.length-i).padStart(3,"0")}</span><span class="t">${esc(fmt(d.date))}</span></figcaption>`;
-      g.appendChild(f);
-    });
-    requestAnimationFrame(()=>[...g.querySelectorAll("canvas")].forEach((c,i)=>{const d=days[i];const[cx,W,H]=fit(c);paint(cx,W,H,linesOf(d),0,marksAt(new Date(d.date+"T07:30:00+09:00")),0,true)}));
-  }
-  try{load(JSON.parse(document.getElementById("news-data").textContent))}catch(e){}
-  try{fetch("news.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(N=>{if(N)load(N)}).catch(()=>{})}catch(e){}
-  let gw=0;addEventListener("resize",()=>{const g=document.getElementById("signals");if(g&&Math.abs(g.clientWidth-gw)>40){gw=g.clientWidth;gallery()}});
-  if(!cv)return;
-  let ctx,W,H;
-  function size(){[ctx,W,H]=fit(cv)} size(); addEventListener("resize",size);
-  const buf=new Uint8Array(1024);
-  function level(){try{if(typeof playing!=="undefined"&&playing&&an){an.getByteTimeDomainData(buf);let s=0;for(let i=0;i<buf.length;i+=4){const v=(buf[i]-128)/128;s+=v*v}return Math.min(1,Math.sqrt(s/(buf.length/4))*4)}}catch(e){}return 0}
-  let marks=[],lastMark=-1e9;
-  const still=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function loop(ts){if(ts-lastMark>30000){marks=marksAt(new Date());lastMark=ts}paint(ctx,W,H,live,ts/1000,marks,level(),false);if(!still)requestAnimationFrame(loop)}
-  requestAnimationFrame(loop);
-})();
 </script>
+<script src="signal.js"></script>
 </body>
 </html>

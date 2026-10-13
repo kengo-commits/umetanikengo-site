@@ -3,10 +3,10 @@
 Reads the newest day in world/news.json and writes six 1080x1350 images plus
 a caption to ig-out/<date>/ :
 
-  1 cover (a public-domain plate from the page, changing each day)
+  1 cover: that day's SIGNAL (world/signal.js), a different data artwork every day
   2 Kengo's Note
   3 Fashion  4 Music  5 Design
-  6 link to the site, sources and photo credit
+  6 link to the site, sources and what the cover was drawn from
 
 Usage:  python scripts/make_instagram.py [YYYY-MM-DD]
 Needs Playwright with Chromium. Fonts are downloaded once into ig-out/fonts.
@@ -64,13 +64,13 @@ def frame(inner, n, total, stamp):
             f'<div class="ft"><span>kengo-umetani.com</span><span>{n:02d} / {total:02d}</span></div></div></body></html>')
 
 
-def build(day, plate):
+def build(day, sig):
     note = day.get('note')
     stamp = date.fromisoformat(day['date']).strftime('%d %b %Y').upper()
-    key, ptitle, pby, plic = plate[0], plate[1], plate[2], plate[3]
-    cover_src = (WORLD / 'media' / f'{key}.webp').as_uri()
-    slides = [f'''<div style="margin:44px -80px 0;height:760px;background:url({cover_src}) center/cover;filter:grayscale(1) contrast(1.08)"></div>
-<div style="margin-top:48px;font-size:76px;line-height:1.02;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Today</div>
+    js = (WORLD / 'signal.js').as_uri()
+    slides = [f'''<canvas id="sig" width="2160" height="1520" style="display:block;margin:44px -80px 0;width:1080px;height:760px;background:#000"></canvas>
+<script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);SIGNAL.draw(c,1080,760,{json.dumps(day, ensure_ascii=False)},0,{{}});</script>
+<div style="margin-top:44px;display:flex;justify-content:space-between;align-items:baseline;gap:20px"><div style="font-size:76px;line-height:1.02;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Today</div><div style="font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:#8c8c8c;text-align:right">{E(sig["label"])}</div></div>
 <div style="margin-top:18px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Fashion / Music / Design{' / Note' if note else ''}</div>
 <div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">世界のファッション・音楽・デザイン{'と、今日のノート' if note else ''}</div>''']
     if note:
@@ -84,7 +84,7 @@ def build(day, plate):
             slides.append(f'<div class="lab">{lab}</div>' + ''.join(
                 f'<div class="it"><h3>{E(i["title"])}</h3><p>{E(i["ja"])}</p><i>{E(i["source"])}</i></div>' for i in items))
     sources = sorted({i['source'] for i in day['items']} | ({note['source']} if note and note.get('source') else set()))
-    credit = f'Photo: {ptitle} — {pby}, {plic if plic.isupper() else plic.lower()}'
+    credit = f'Cover: {sig["label"]}, drawn from {sig["data"]}'
     slides.append(f'''<div style="margin-top:auto;margin-bottom:auto">
 <div style="font-size:64px;line-height:1.08;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Every story,<br>every morning.</div>
 <div style="font-family:Zen;font-size:28px;line-height:1.8;color:#555;margin-top:30px">元の記事へのリンクと過去のニュースは<br>プロフィールのリンクから。</div>
@@ -102,6 +102,17 @@ def build(day, plate):
             f'Sources: {" / ".join(sources)}', credit, '',
             '#kengossynesthesia #fashion #music #design #architecture #art #建築 #アート']
     return pages, '\n'.join(cap)
+
+
+async def signal_meta(d):
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        b = await p.chromium.launch()
+        pg = await b.new_page()
+        await pg.add_script_tag(path=str(WORLD / 'signal.js'))
+        m = await pg.evaluate(f'SIGNAL.meta("{d}")')
+        await b.close()
+    return m
 
 
 async def render(pages, outdir, stem):
@@ -131,9 +142,8 @@ def main():
     if not day:
         sys.exit(f'no news for {want}')
     fonts()
-    ps = plates()
-    plate = ps[date.fromisoformat(day['date']).toordinal() % len(ps)]
-    pages, caption = build(day, plate)
+    sig = asyncio.run(signal_meta(day['date']))
+    pages, caption = build(day, sig)
     outdir = OUT / day['date']
     outdir.mkdir(parents=True, exist_ok=True)
     files = asyncio.run(render(pages, outdir, f'kengos-synesthesia-{day["date"]}'))
