@@ -224,7 +224,21 @@ def page(key, title, desc, body, root, skeleton=True):
   <nav class="nav-foot" aria-label="Legal"><a href="{root}press/index.html"{" class=\"on\"" if key=="PRESS" else ""}>PRESS KIT / 掲載用プロフィール</a><a href="{root}about/index.html"{" class=\"on\"" if key=="ABOUT" else ""}>ABOUT / 概要</a><a href="{root}privacy/index.html"{" class=\"on\"" if key=="PRIVACY" else ""}>PRIVACY POLICY / プライバシーポリシー</a><a href="{root}cookie/index.html"{" class=\"on\"" if key=="COOKIE" else ""}>COOKIE POLICY / COOKIE 設定</a></nav>
   <div class="foot-end"><span>© KENGO UMETANI</span><a class="to-top" href="#">PAGE TOP ↑</a></div>
 </footer>
-<script src="{root}assets/site.js?v={ASSET_V}" defer></script>'''
+<script src="{root}assets/site.js?v={ASSET_V}" defer></script>''' + (f'''
+<script src="{root}synesthesia-world/signal.js" defer></script>
+<script>
+addEventListener("DOMContentLoaded",()=>{{
+  const cv=document.querySelector(".live-art");if(!cv||!window.SIGNAL)return;
+  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  fetch("{root}synesthesia-world/news.json",{{cache:"no-store"}}).then(r=>r.ok?r.json():null).then(N=>{{
+    if(!N||!N.days||!N.days.length)return;const day=N.days.slice().sort((a,b)=>a.date<b.date?1:-1)[0];
+    let ctx,W,H;const fit=()=>{{const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);ctx=cv.getContext("2d");ctx.setTransform(d,0,0,d,0,0);W=r.width;H=r.height}};
+    fit();addEventListener("resize",fit);let now=new Date(),last=0;
+    const loop=ts=>{{if(ts-last>30000){{now=new Date();last=ts}}SIGNAL.draw(ctx,W,H,day,ts/1000,{{when:now}});if(!still)requestAnimationFrame(loop)}};
+    requestAnimationFrame(loop);
+  }}).catch(()=>{{}});
+}});
+</script>''' if key == 'HOME' else '')
     if not skeleton:
         return head + '\n' + content
     return f'''<!doctype html>
@@ -323,6 +337,8 @@ def home(root, skeleton=True):
     n = len(HOME_SLIDES)
     slides = ''.join(pic('hero-' + img, f'{cap} / {ja}' if cap else ja, root, lazy=False, hidden=i > 0, prio=i == 0, sizes='(max-width: 600px) and (orientation: portrait) 130vh, (max-width: 900px) 100vw, min(80vw, 1200px)')
                      for i, (img, cap, ja) in enumerate(HOME_SLIDES))
+    # the first slide is drawn live: today's SYNESTHESIA DIGITAL ART by KENGO, from the same data and code as the KENGO'S SYNESTHESIA page (the still image stays underneath as a fallback)
+    slides = slides.replace('<picture>', '<picture class="live">', 1).replace('</picture>', '<canvas class="live-art" aria-label="SYNESTHESIA DIGITAL ART by KENGO"></canvas></picture>', 1)
     caps = json.dumps([esc(c) for _, c, _ in HOME_SLIDES])
     hero = (f'<section class="hero show" data-count="{n}" data-auto="8000" data-caps=\'{caps}\' aria-label="Photographs">'
             f'<div class="frame">{slides}<a class="hero-link on" data-slide="0" href="{root}synesthesia-world/index.html">KENGO\'S SYNESTHESIA</a></div>'

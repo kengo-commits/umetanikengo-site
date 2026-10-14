@@ -153,6 +153,7 @@ main{display:grid}
 @keyframes hero-link-pulse{0%,100%{border-color:rgba(255,255,255,.55)}50%{border-color:rgba(255,255,255,1)}}
 @keyframes hero-link-ring{0%{opacity:.7;transform:scale(1)}70%{opacity:0;transform:scale(1.22,1.9)}100%{opacity:0;transform:scale(1.22,1.9)}}
 @media (prefers-reduced-motion:reduce){.hero-link.on,.hero-link::after{animation:none}}
+.hero .frame > picture.live .live-art{position:absolute;inset:0;width:100%;height:100%;display:block;background:#000}
 .hero-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;text-transform:uppercase;color:var(--sub);font-variant-numeric:tabular-nums}
 .hero-cap .num{flex-shrink:0}
 .home-ig{margin-top:clamp(80px,14svh,160px)}
