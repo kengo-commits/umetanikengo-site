@@ -33,7 +33,9 @@ document.querySelectorAll('.show').forEach(show=>{
     const go=n=>{last=Date.now();set(n)};
     show.addEventListener('click',()=>{last=Date.now()},true);
     show.addEventListener('touchend',()=>{last=Date.now()},{passive:true,capture:true});
-    setInterval(()=>{if(!held&&!document.hidden&&Date.now()-last>=auto-50)go(i+1)},auto);
+    /* the first slide (today's digital art) stays three times as long as the photographs */
+    const dur=()=>i===0&&show.classList.contains('hero')?auto*3:auto;
+    setInterval(()=>{if(!held&&!document.hidden&&Date.now()-last>=dur()-50)go(i+1)},250);
     document.querySelectorAll('[data-slide]').forEach(a=>{
       a.addEventListener('mouseenter',()=>{held=true;set(+a.dataset.slide)});
       a.addEventListener('mouseleave',()=>{held=false});
