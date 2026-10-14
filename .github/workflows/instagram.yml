@@ -68,6 +68,7 @@ jobs:
 
       - name: Publish to Instagram
         env:
+          IG_POST_TOKEN: ${{ secrets.IG_POST_TOKEN }}
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
         run: python scripts/post_instagram.py publish
 

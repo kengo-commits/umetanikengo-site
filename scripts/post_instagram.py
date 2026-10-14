@@ -2,7 +2,8 @@
 
 Runs on GitHub Actions every morning after scripts/make_instagram.py.
 Uses the official Instagram API (Instagram API with Instagram Login) with the
-long-lived access token in IG_TOKEN — the same token fetch_instagram.py uses.
+long-lived access token in IG_POST_TOKEN (the posting account), falling back
+to IG_TOKEN (the account shown on the site) when both are the same account.
 
 Two stages, selected by the first argument:
 
@@ -116,9 +117,9 @@ def wait_container(cid, token, minutes=10):
 
 
 def publish(d):
-    token = os.environ.get('IG_TOKEN', '').strip()
+    token = (os.environ.get('IG_POST_TOKEN') or os.environ.get('IG_TOKEN') or '').strip()
     if not token:
-        log('IG_TOKEN is not set; nothing posted')
+        log('IG_POST_TOKEN is not set; nothing posted')
         return 0
     folder = IG / d
     receipt = folder / 'posted.json'
