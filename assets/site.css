@@ -313,4 +313,4 @@ img.ph.wait{opacity:0}
   .ig-post:hover .ig-tile img,.thumb:hover img{transform:none}
 }
 
-@media (max-width:600px){.hero-link{bottom:58px;font-size:9px;padding:9px 16px}}
+@media (max-width:600px){.hero-link{bottom:calc(env(safe-area-inset-bottom,0px) + 48px);font-size:7.5px;letter-spacing:.2em;padding:6px 11px}}
