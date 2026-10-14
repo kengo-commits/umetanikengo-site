@@ -144,6 +144,10 @@ main{display:grid}
 .hero .frame img{animation:none}
 /* black & white with a faint cold tone and deeper contrast */
 .mono img{filter:grayscale(1) sepia(.14) hue-rotate(178deg) saturate(1.35) contrast(1.16) brightness(.94)}
+.hero .frame{position:relative}
+.hero-link{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;color:#fff;font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:clamp(14px,1.6vw,22px);white-space:nowrap;padding:14px 22px;border:1px solid rgba(255,255,255,.55);background:rgba(0,0,0,.45);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .85s ease .85s,background .3s,letter-spacing .45s}
+.hero-link.on{opacity:1;pointer-events:auto}
+.hero-link:hover{background:#fff;color:#000;letter-spacing:.28em}
 .hero-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;text-transform:uppercase;color:var(--sub);font-variant-numeric:tabular-nums}
 .hero-cap .num{flex-shrink:0}
 .home-ig{margin-top:clamp(80px,14svh,160px)}

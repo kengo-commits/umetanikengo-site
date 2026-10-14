@@ -11,6 +11,7 @@ document.querySelectorAll('.show').forEach(show=>{
     i=(n+pics.length)%pics.length;
     if(dissolve){pics.forEach((p,k)=>{p.hidden=false;p.classList.toggle('on',k===i)})}
     else pics.forEach((p,k)=>p.hidden=k!==i);
+    show.querySelectorAll('.hero-link').forEach(a=>a.classList.toggle('on',String(i)===a.dataset.slide));
     if(num)num.textContent=String(i+1).padStart(2,'0')+' / '+String(pics.length).padStart(2,'0');
     const capEl=show.querySelector('.cap');if(capEl&&show.dataset.caps){try{const txt=JSON.parse(show.dataset.caps)[i];if(capEl.innerHTML!==txt){if(show.classList.contains('ready')){capEl.classList.add('swap');setTimeout(()=>{capEl.innerHTML=txt;capEl.classList.remove('swap')},700)}else capEl.innerHTML=txt}}catch(e){}}
     thumbs.forEach((t,k)=>t.classList.toggle('on',k===i));

@@ -325,7 +325,7 @@ def home(root, skeleton=True):
                      for i, (img, cap, ja) in enumerate(HOME_SLIDES))
     caps = json.dumps([esc(c) for _, c, _ in HOME_SLIDES])
     hero = (f'<section class="hero show" data-count="{n}" data-auto="8000" data-caps=\'{caps}\' aria-label="Photographs">'
-            f'<div class="frame">{slides}</div>'
+            f'<div class="frame">{slides}<a class="hero-link on" data-slide="0" href="{root}synesthesia-world/index.html">KENGO\'S SYNESTHESIA</a></div>'
             f'<div class="hero-cap"><span class="cap">{esc(HOME_SLIDES[0][1])}</span><span class="num">01 / {n:02d}</span></div></section>')
     ig = ('<section class="home-ig wide" aria-label="Information">'
           '<div class="ig-head"><h2 class="h2">INFORMATION</h2>'
