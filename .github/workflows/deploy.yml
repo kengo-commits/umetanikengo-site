@@ -34,6 +34,10 @@ jobs:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
         run: python scripts/fetch_instagram.py
 
+      - name: Add today's artwork to KENGO'S SYNESTHESIA
+        continue-on-error: true
+        run: python scripts/add_plate.py
+
       - name: Save refreshed token
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
@@ -48,9 +52,9 @@ jobs:
         run: |
           git config user.name "site-bot"
           git config user.email "site-bot@users.noreply.github.com"
-          git add data/instagram.json images/instagram
+          git add data/instagram.json images/instagram world/plates.json world/media
           if ! git diff --cached --quiet; then
-            git commit -m "Update Instagram posts"
+            git commit -m "Update Instagram posts and today's artwork"
             git push
           fi
 

@@ -406,7 +406,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <p class="intro">One SYNESTHESIA DIGITAL ART for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
     <div class="signals" id="signals"></div>
     <h3 class="plh">Plates <small>パブリックドメイン / CC0 の作品</small></h3>
-    <p class="intro">Architecture, painting and sculpture from the world's open collections. ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の最新の宇宙。どれも著作権が切れた作品か、権利を放棄した写真で、人物の肖像は含みません。触れると元の色が現れます。</p>
+    <p class="intro">One masterpiece a day from the world's open collections, newest first. 世界の美術館が公開するパブリックドメイン／CC0の名作を、毎日1点ずつ加えています（新しいものが上）。ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の宇宙から始まりました。どれも著作権が切れた作品か、権利を放棄した画像です。触れると元の色が現れます。</p>
     <div class="plates" id="plates"></div>
   </section>
 
@@ -597,6 +597,21 @@ PLATES.forEach((p,i)=>{
   c.innerHTML=`<b>P.${String(i+1).padStart(2,"0")} ${esc(p[1])}</b> — ${esc(p[2])}. ${esc(p[3])}. <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
   cr.appendChild(c);
 });
+// one new public-domain / CC0 masterpiece a day (plates.json), shown first, numbered on from the original nine
+try{fetch("plates.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(L=>{
+  if(!Array.isArray(L)||!L.length)return;
+  const cr0=cr.firstChild;
+  L.slice().sort((a,b)=>a.date<b.date?1:-1).forEach((p,k)=>{
+    const n=String(PLATES.length+L.length-k).padStart(2,"0"), meta=[p.artist,p.when].filter(Boolean).join(", ")+(p.medium?" — "+p.medium.toLowerCase():""), lic=`${p.license} · ${p.credit}`;
+    const f=document.createElement("figure");
+    f.innerHTML=`<div class="im"><img src="media/${esc(p.file)}" width="${p.w}" height="${p.h}" loading="lazy" alt="${esc(p.title+" — "+meta)}"></div>
+    <figcaption><span class="no">P.${n}</span><span><span class="t">${esc(p.title)}</span><span class="m">${esc(meta)} · ${esc(lic)} · <a href="${esc(p.url)}" target="_blank" rel="noopener">Source</a></span></span></figcaption>`;
+    pl.insertBefore(f,pl.children[k]||null);
+    const c=document.createElement("p");
+    c.innerHTML=`<b>P.${n} ${esc(p.title)}</b> — ${esc(meta)}. ${esc(lic)}. <a href="${esc(p.url)}" target="_blank" rel="noopener">Source</a>`;
+    cr.insertBefore(c,cr.children[k]||null);
+  });
+}).catch(()=>{})}catch(e){}
 [["SYNESTHESIA DIGITAL ART by KENGO","毎日ちがうデータ（見出しの言葉、日本語要約の文字、月齢、6都市の時刻と日照時間、記事の出どころ、A〜Zの文字数、KENGO'S NOTEの文など）と、ちがう表現（波、輪、バーコード、星座、文字の格子、軌道、光の帯）を日替わりで組み合わせ、ページを開くたびにその場で描くオリジナルのアニメーション。SYNESTHESIA MUSICを再生すると音に合わせて揺れます"],["SYNESTHESIA MUSIC by KENGO — Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
 
 // Index lists
