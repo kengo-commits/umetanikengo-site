@@ -59,7 +59,10 @@ h2{margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-tra
 h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
 .intro{font-family:var(--jp);font-size:11px;letter-spacing:.04em;line-height:1.9;color:var(--mute);max-width:56ch;margin:6px 0 24px}
 
-#today{margin-top:56px}
+#note{margin-top:56px}
+#note .knote .lab{display:none}
+#note .knote .kt{margin-top:0}
+#plates-sec h2{margin-bottom:4px}
 .news{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(16px,3vw,40px);border-top:1px solid var(--ink)}
 .news .col{min-width:0}
 .news .col>.lab{display:block;padding-block:10px 4px;color:var(--ink)}
@@ -154,7 +157,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
 <div class="wrap">
   <div class="top lab"><span>Issue 01 — Fashion / Music / Design / World</span><span id="date"></span></div>
-  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
+  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#note">Note</a><a href="#plates-sec">Plates</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
   <div class="lede">
     <p><span>Kengo Umetani's tastes and thoughts on fashion, music and design, sent out to the world — selected every day from the public domain around the globe, with SYNESTHESIA DIGITAL ART by KENGO and original music made for this site.</span>KENGO'S SYNESTHESIA は、梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するサイトです。それらは毎日世界中のパブリックドメインから厳選しています。SYNESTHESIA DIGITAL ART by KENGO と共に、このサイトのためのオリジナル音楽も発信しています。</p>
     <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
@@ -166,6 +169,17 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
   </div>
 
   <div class="clocks" id="clocks" aria-label="世界のファッション都市の現在時刻"></div>
+
+  <section id="note">
+    <h2>Kengo's Note <small id="noteDate"></small></h2>
+    <div id="noteToday"></div>
+  </section>
+
+  <section id="plates-sec">
+    <h2>Plates <small>パブリックドメイン / CC0 の作品</small></h2>
+    <p class="intro">One masterpiece a day from the world's open collections, newest first. 世界の美術館が公開するパブリックドメイン／CC0の名作を、毎日1点ずつ加えています（新しいものが上）。ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の宇宙から始まりました。どれも著作権が切れた作品か、権利を放棄した画像です。触れると元の色が現れます。</p>
+    <div class="plates" id="plates"></div>
+  </section>
 
   <section id="today">
     <h2>Today <small id="todayDate"></small></h2>
@@ -405,9 +419,6 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <h3 class="plh">Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small></h3>
     <p class="intro">One SYNESTHESIA DIGITAL ART for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
     <div class="signals" id="signals"></div>
-    <h3 class="plh">Plates <small>パブリックドメイン / CC0 の作品</small></h3>
-    <p class="intro">One masterpiece a day from the world's open collections, newest first. 世界の美術館が公開するパブリックドメイン／CC0の名作を、毎日1点ずつ加えています（新しいものが上）。ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の宇宙から始まりました。どれも著作権が切れた作品か、権利を放棄した画像です。触れると元の色が現れます。</p>
-    <div class="plates" id="plates"></div>
   </section>
 
   <section class="sound" id="sound">
@@ -547,8 +558,8 @@ const pk=all[doy%all.length]; $("#pick").textContent=pk[0]; $("#pick").href=pk[2
     w.innerHTML=`<div><span class="lab">Kengo's Note</span><span class="kt">${esc(n.title||"")}</span></div><div>${n.en?`<p class="ken">${esc(n.en)}</p>`:""}<p class="kja">${esc(n.ja)}</p>${n.url?`<a class="src" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.source||"Source")} ↗</a>`:""}</div>`;
     target.appendChild(w);
   }
-  function block(day,target){
-    noteBlock(day,target);
+  function block(day,target,withNote=true){
+    if(withNote)noteBlock(day,target);
     const g=document.createElement("div"); g.className="news";
     CATS.forEach(([k,label])=>{
       const items=day.items.filter(i=>i.cat===k); if(!items.length)return;
@@ -565,7 +576,8 @@ const pk=all[doy%all.length]; $("#pick").textContent=pk[0]; $("#pick").href=pk[2
     const t=document.getElementById("newsToday"), a=document.getElementById("daily");
     t.innerHTML=""; t.className=""; a.innerHTML="";
     document.getElementById("todayDate").textContent=fmt(N.days[0].date);
-    block(N.days[0],t);
+    const nt=document.getElementById("noteToday");if(nt){nt.innerHTML="";noteBlock(N.days[0],nt);const nd=document.getElementById("noteDate");if(nd)nd.textContent=fmt(N.days[0].date)}
+    block(N.days[0],t,false);
     const days=N.days.slice().sort((x,y)=>x.date<y.date?1:-1);
     days.forEach((d,i)=>{
       const det=document.createElement("details"); det.className="past"; if(i===0)det.open=true;
