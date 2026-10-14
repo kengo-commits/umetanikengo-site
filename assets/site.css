@@ -145,9 +145,14 @@ main{display:grid}
 /* black & white with a faint cold tone and deeper contrast */
 .mono img{filter:grayscale(1) sepia(.14) hue-rotate(178deg) saturate(1.35) contrast(1.16) brightness(.94)}
 .hero .frame{position:relative}
-.hero-link{position:absolute;left:50%;bottom:clamp(14px,2.4vw,28px);transform:translateX(-50%);z-index:3;color:#fff;font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:clamp(9px,.8vw,11px);white-space:nowrap;padding:6px 2px;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;opacity:0;pointer-events:none;transition:opacity .85s ease .85s,background-size .45s cubic-bezier(.2,.7,.2,1)}
-.hero-link.on{opacity:1;pointer-events:auto}
-.hero-link:hover{background-size:100% 1px}
+.hero-link{position:absolute;left:50%;bottom:clamp(14px,2.4vw,28px);transform:translateX(-50%);z-index:3;color:#fff;font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:clamp(9px,.8vw,11px);white-space:nowrap;padding:10px 18px;border:1px solid rgba(255,255,255,.7);opacity:0;pointer-events:none;transition:opacity .85s ease .85s,background-color .4s,color .4s,letter-spacing .5s cubic-bezier(.2,.7,.2,1)}
+.hero-link.on{opacity:1;pointer-events:auto;animation:hero-link-pulse 3.2s ease-in-out 1.8s infinite}
+.hero-link::after{content:"";position:absolute;inset:-1px;border:1px solid #fff;opacity:0;animation:hero-link-ring 3.2s ease-out 1.8s infinite}
+.hero-link:hover,.hero-link:focus-visible{background:#fff;color:#000;letter-spacing:.3em;animation:none}
+.hero-link:hover::after,.hero-link:focus-visible::after{animation:none}
+@keyframes hero-link-pulse{0%,100%{border-color:rgba(255,255,255,.55)}50%{border-color:rgba(255,255,255,1)}}
+@keyframes hero-link-ring{0%{opacity:.7;transform:scale(1)}70%{opacity:0;transform:scale(1.22,1.9)}100%{opacity:0;transform:scale(1.22,1.9)}}
+@media (prefers-reduced-motion:reduce){.hero-link.on,.hero-link::after{animation:none}}
 .hero-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px;text-transform:uppercase;color:var(--sub);font-variant-numeric:tabular-nums}
 .hero-cap .num{flex-shrink:0}
 .home-ig{margin-top:clamp(80px,14svh,160px)}
