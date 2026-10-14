@@ -147,7 +147,7 @@
     c.save(); p.recipe.draw(c, W, H, day, t || 0, k); c.restore();
     return p;
   }
-  function meta(date) { const p = pick(date); return { no: p.no, id: p.recipe.id, data: p.recipe.data, ja: p.recipe.ja, label: "SIGNAL No. " + String(p.no).padStart(3, "0") + " — " + p.recipe.id }; }
+  function meta(date) { const p = pick(date); return { no: p.no, id: p.recipe.id, data: p.recipe.data, ja: p.recipe.ja, label: "SYNESTHESIA DIGITAL ART by KENGO — No. " + String(p.no).padStart(3, "0") + " — " + p.recipe.id }; }
   window.SIGNAL = { draw, meta, recipes: R.map(r => r.id) };
 
   /* ---------- page: live piece at the top, one still per day in the archive ---------- */

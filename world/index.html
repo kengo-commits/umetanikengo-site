@@ -154,7 +154,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
 <div class="wrap">
   <div class="top lab"><span>Issue 01 — Fashion / Music / Design / World</span><span id="date"></span></div>
-  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Sound</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
+  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
   <div class="lede">
     <p><span>Kengo Umetani's tastes and thoughts on fashion, sound and form, sent out to the world.</span>KENGO'S SYNESTHESIA は、梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するサイトです。世界中のパブリックドメインの写真・映像と、このサイトのためのオリジナル音楽を添えています。</p>
     <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
@@ -162,7 +162,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
   <div class="film signal">
     <canvas id="signal" aria-label="今日の9本のニュースの見出しと、6都市の時刻から描いたアニメーション"></canvas>
-    <div class="cap"><span><b id="signalName">SIGNAL</b> — <span id="signalData">Drawn from today's data.</span></span><span id="signalJa">毎日ちがうデータと表現で描いています。</span></div>
+    <div class="cap"><span><b id="signalName">SYNESTHESIA DIGITAL ART by KENGO</b> — <span id="signalData">Drawn from today's data.</span></span><span id="signalJa">毎日ちがうデータと表現で描いています。</span></div>
   </div>
 
   <div class="clocks" id="clocks" aria-label="世界のファッション都市の現在時刻"></div>
@@ -402,8 +402,8 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <h2>Archive <small>毎日の記録</small></h2>
     <p class="intro">A daily record of every day's news, kept by date. 毎日のファッション・音楽・デザインのニュースを、日付ごとにすべて残しています。</p>
     <div class="daily" id="daily"></div>
-    <h3 class="plh">Signals <small>毎日のニュースから生まれたアート</small></h3>
-    <p class="intro">One SIGNAL for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
+    <h3 class="plh">Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small></h3>
+    <p class="intro">One SYNESTHESIA DIGITAL ART for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
     <div class="signals" id="signals"></div>
     <h3 class="plh">Plates <small>パブリックドメイン / CC0 の作品</small></h3>
     <p class="intro">Architecture, painting and sculpture from the world's open collections. ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の最新の宇宙。どれも著作権が切れた作品か、権利を放棄した写真で、人物の肖像は含みません。触れると元の色が現れます。</p>
@@ -411,7 +411,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
   </section>
 
   <section class="sound" id="sound">
-    <h2>Sound <small>このサイトのためのオリジナル曲</small></h2>
+    <h2>Synesthesia Music by Kengo <small>このサイトのためのオリジナル曲</small></h2>
     <p class="intro">An original piece composed in code for this page. 低いサブベース、ゆっくり動くコード、声のように揺れるシンセ。ブラウザがその場で演奏するので、既存の楽曲や音源は一切使っていません。</p>
     <div class="player">
       <button class="play" id="playBtn" type="button" aria-pressed="false">Play</button>
@@ -597,7 +597,7 @@ PLATES.forEach((p,i)=>{
   c.innerHTML=`<b>P.${String(i+1).padStart(2,"0")} ${esc(p[1])}</b> — ${esc(p[2])}. ${esc(p[3])}. <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
   cr.appendChild(c);
 });
-[["Signal","毎日ちがうデータ（見出しの言葉、日本語要約の文字、月齢、6都市の時刻と日照時間、記事の出どころ、A〜Zの文字数、KENGO'S NOTEの文など）と、ちがう表現（波、輪、バーコード、星座、文字の格子、軌道、光の帯）を日替わりで組み合わせ、ページを開くたびにその場で描くオリジナルのアニメーション。SOUNDを再生すると音に合わせて揺れます"],["Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
+[["SYNESTHESIA DIGITAL ART by KENGO","毎日ちがうデータ（見出しの言葉、日本語要約の文字、月齢、6都市の時刻と日照時間、記事の出どころ、A〜Zの文字数、KENGO'S NOTEの文など）と、ちがう表現（波、輪、バーコード、星座、文字の格子、軌道、光の帯）を日替わりで組み合わせ、ページを開くたびにその場で描くオリジナルのアニメーション。SYNESTHESIA MUSICを再生すると音に合わせて揺れます"],["SYNESTHESIA MUSIC by KENGO — Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
 
 // Index lists
 const cats=$("#cats");
