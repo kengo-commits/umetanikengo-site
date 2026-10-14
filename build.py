@@ -311,7 +311,8 @@ def ig_grid(root):
 
 # ---------- HOME: one screen, minimal ----------
 # One photo per CREATIVE work, in the CREATIVE page order
-HOME_SLIDES = [('aquasense-1', 'AQUASENSE Hotel & Resort', 'アクアセンス ホテル＆リゾート'),
+HOME_SLIDES = [('synart-1', 'SYNESTHESIA DIGITAL ART by KENGO', 'シナスタジア デジタルアート'),
+               ('aquasense-1', 'AQUASENSE Hotel & Resort', 'アクアセンス ホテル＆リゾート'),
                ('peaks-6', 'PEAKS', 'PEAKS'),
                ('island-1', 'i+Land nagasaki', 'アイランド ナガサキ'),
                ('synesthesia-1', 'SYNESTHESIA HILLS', 'シナスタジアヒルズ'),
