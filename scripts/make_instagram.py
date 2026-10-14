@@ -175,7 +175,9 @@ async def render_video(page_html, outdir, stem, seconds=10, fps=30):
     h.unlink()
     out = outdir / f'{stem}-1.mp4'
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(fps), '-i', str(frames / 'f%04d.jpg'),
-                    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-movflags', '+faststart', str(out)], check=True)
+                    '-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
+                    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-c:a', 'aac', '-shortest',
+                    '-movflags', '+faststart', str(out)], check=True)
     shutil.rmtree(frames)
     return out
 
