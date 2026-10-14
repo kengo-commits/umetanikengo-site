@@ -3,10 +3,11 @@
 Reads the newest day in world/news.json and writes six 1080x1350 images plus
 a caption to ig-out/<date>/ :
 
-  1 cover: that day's SIGNAL (world/signal.js), a different data artwork every day
+  1 cover: that day's SYNESTHESIA DIGITAL ART by KENGO (world/signal.js), a different data artwork every day
   2 Kengo's Note
-  3 Fashion  4 Music  5 Design
-  6 link to the site, sources and what the cover was drawn from
+  3 Plate: that day's public-domain / CC0 masterpiece (world/plates.json)
+  4 Fashion  5 Music  6 Design
+  7 link to the site, sources and what the cover was drawn from
 
 Usage:  python scripts/make_instagram.py [YYYY-MM-DD]
 Needs Playwright with Chromium. Fonts are downloaded once into ig-out/fonts.
@@ -64,20 +65,37 @@ def frame(inner, n, total, stamp):
             f'<div class="ft"><span>kengo-umetani.com</span><span>{n:02d} / {total:02d}</span></div></div></body></html>')
 
 
+def plate_for(d):
+    f = WORLD / 'plates.json'
+    if not f.exists():
+        return None
+    L = [p for p in json.loads(f.read_text(encoding='utf-8')) if p['date'] <= d]
+    return max(L, key=lambda p: p['date']) if L else None
+
+
 def build(day, sig):
     note = day.get('note')
+    plate = plate_for(day['date'])
     stamp = date.fromisoformat(day['date']).strftime('%d %b %Y').upper()
     js = (WORLD / 'signal.js').as_uri()
     slides = [f'''<canvas id="sig" width="2160" height="1520" style="display:block;margin:44px -80px 0;width:1080px;height:760px;background:#000"></canvas>
 <script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);SIGNAL.draw(c,1080,760,{json.dumps(day, ensure_ascii=False)},0,{{}});</script>
-<div style="margin-top:44px;display:flex;justify-content:space-between;align-items:baseline;gap:20px"><div style="font-size:76px;line-height:1.02;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Today</div><div style="font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:#8c8c8c;text-align:right">{E(sig["label"])}</div></div>
-<div style="margin-top:18px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Fashion / Music / Design{' / Note' if note else ''}</div>
-<div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">世界のファッション・音楽・デザイン{'と、今日のノート' if note else ''}</div>''']
+<div style="margin-top:44px;display:flex;justify-content:space-between;align-items:baseline;gap:20px"><div style="font-size:76px;line-height:1.02;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Today</div><div style="font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c8c;text-align:right;max-width:520px">{E(sig["label"])}</div></div>
+<div style="margin-top:18px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art{' / Note' if note else ''}{' / Plate' if plate else ''} / Fashion / Music / Design</div>
+<div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアート{'、ノート' if note else ''}{'、名作' if plate else ''}と、世界のファッション・音楽・デザイン</div>''']
     if note:
         slides.append(f'''<div class="lab">Kengo's Note</div><div style="font-size:30px;letter-spacing:.08em;text-transform:uppercase;font-weight:500">{E(note.get("title", ""))}</div>
 <p style="font-size:27px;line-height:1.6;margin-top:34px;letter-spacing:.01em">{E(note.get("en", ""))}</p>
 <p style="font-family:Zen;font-size:26px;line-height:1.85;margin-top:30px;color:#555;letter-spacing:.02em">{E(note["ja"])}</p>
 <div class="src">Source: {E(note.get("source", ""))}</div>''')
+    if plate:
+        meta = ', '.join(x for x in (plate.get('artist'), plate.get('when')) if x) + (' — ' + plate['medium'].lower() if plate.get('medium') else '')
+        img = (WORLD / 'media' / plate['file']).as_uri()
+        slides.append(f'''<div class="lab">Plate</div>
+<div style="margin-top:14px;height:820px;display:flex;align-items:center;justify-content:center;background:#f4f4f4"><img src="{img}" style="max-width:100%;max-height:100%;display:block"></div>
+<div style="margin-top:30px;font-size:30px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.3">{E(plate["title"])}</div>
+<div style="margin-top:10px;font-size:22px;letter-spacing:.04em;color:#555">{E(meta)}</div>
+<div class="src" style="margin-top:14px">{E(plate.get("license", ""))} · {E(plate.get("credit", ""))}</div>''')
     for cat, lab in (('fashion', 'Fashion'), ('music', 'Music'), ('design', 'Design')):
         items = [i for i in day['items'] if i['cat'] == cat]
         if items:
@@ -97,6 +115,8 @@ def build(day, sig):
     cap = [f'TODAY — {stamp}', '']
     if note:
         cap += [note.get('en', ''), '', note['ja'], '']
+    if plate:
+        cap += [f"Plate: {plate['title']} — {', '.join(x for x in (plate.get('artist'), plate.get('when')) if x)} ({plate.get('license', '')}, {plate.get('credit', '')})", '']
     cap += ['Also today / ほかに今日のニュース:'] + [f'— {t}' for t in others]
     cap += ['', '元の記事へのリンクと過去のニュースは、プロフィールのリンクから。', '',
             f'Sources: {" / ".join(sources)}', credit, '',
