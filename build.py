@@ -311,7 +311,7 @@ def ig_grid(root):
 
 # ---------- HOME: one screen, minimal ----------
 # One photo per CREATIVE work, in the CREATIVE page order
-HOME_SLIDES = [('synart-1', 'SYNESTHESIA DIGITAL ART by KENGO', 'シナスタジア デジタルアート'),
+HOME_SLIDES = [('synart-1', '', 'SYNESTHESIA DIGITAL ART by KENGO'),
                ('aquasense-1', 'AQUASENSE Hotel & Resort', 'アクアセンス ホテル＆リゾート'),
                ('peaks-6', 'PEAKS', 'PEAKS'),
                ('island-1', 'i+Land nagasaki', 'アイランド ナガサキ'),
@@ -321,7 +321,7 @@ HOME_SLIDES = [('synart-1', 'SYNESTHESIA DIGITAL ART by KENGO', 'シナスタジ
 
 def home(root, skeleton=True):
     n = len(HOME_SLIDES)
-    slides = ''.join(pic('hero-' + img, f'{cap} / {ja}', root, lazy=False, hidden=i > 0, prio=i == 0, sizes='(max-width: 600px) and (orientation: portrait) 130vh, (max-width: 900px) 100vw, min(80vw, 1200px)')
+    slides = ''.join(pic('hero-' + img, f'{cap} / {ja}' if cap else ja, root, lazy=False, hidden=i > 0, prio=i == 0, sizes='(max-width: 600px) and (orientation: portrait) 130vh, (max-width: 900px) 100vw, min(80vw, 1200px)')
                      for i, (img, cap, ja) in enumerate(HOME_SLIDES))
     caps = json.dumps([esc(c) for _, c, _ in HOME_SLIDES])
     hero = (f'<section class="hero show" data-count="{n}" data-auto="8000" data-caps=\'{caps}\' aria-label="Photographs">'
