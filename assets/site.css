@@ -145,7 +145,7 @@ main{display:grid}
 /* black & white with a faint cold tone and deeper contrast */
 .mono img{filter:grayscale(1) sepia(.14) hue-rotate(178deg) saturate(1.35) contrast(1.16) brightness(.94)}
 .hero .frame{position:relative}
-.hero-link{position:absolute;left:50%;bottom:clamp(14px,2.4vw,28px);transform:translateX(-50%);z-index:3;color:#fff;font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:clamp(9px,.8vw,11px);white-space:nowrap;padding:10px 18px;border:1px solid rgba(255,255,255,.7);opacity:0;pointer-events:none;transition:opacity .85s ease .85s,background-color .4s,color .4s,letter-spacing .5s cubic-bezier(.2,.7,.2,1)}
+.hero-link{position:absolute;left:50%;bottom:clamp(10px,1.2vw,16px);transform:translateX(-50%);z-index:3;color:#fff;font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:clamp(8px,.55vw,9px);white-space:nowrap;padding:7px 13px;border:1px solid rgba(255,255,255,.7);opacity:0;pointer-events:none;transition:opacity .85s ease .85s,background-color .4s,color .4s,letter-spacing .5s cubic-bezier(.2,.7,.2,1)}
 .hero-link.on{opacity:1;pointer-events:auto;animation:hero-link-pulse 3.2s ease-in-out 1.8s infinite}
 .hero-link::after{content:"";position:absolute;inset:-1px;border:1px solid #fff;opacity:0;animation:hero-link-ring 3.2s ease-out 1.8s infinite}
 .hero-link:hover,.hero-link:focus-visible{background:#fff;color:#000;letter-spacing:.3em;animation:none}
@@ -313,4 +313,4 @@ img.ph.wait{opacity:0}
   .ig-post:hover .ig-tile img,.thumb:hover img{transform:none}
 }
 
-@media (max-width:600px){.hero-link{bottom:58px}}
+@media (max-width:600px){.hero-link{bottom:58px;font-size:9px;padding:9px 16px}}
