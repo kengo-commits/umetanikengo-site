@@ -233,7 +233,7 @@ addEventListener("DOMContentLoaded",()=>{{
   fetch("{root}synesthesia-world/news.json",{{cache:"no-store"}}).then(r=>r.ok?r.json():null).then(N=>{{
     if(!N||!N.days||!N.days.length)return;const day=N.days.slice().sort((a,b)=>a.date<b.date?1:-1)[0];
     let ctx,W,H;const fit=()=>{{const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);ctx=cv.getContext("2d");ctx.setTransform(d,0,0,d,0,0);W=r.width;H=r.height}};
-    fit();addEventListener("resize",fit);let now=new Date(),last=0;
+    fit();addEventListener("resize",fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);let now=new Date(),last=0;
     const loop=ts=>{{if(ts-last>30000){{now=new Date();last=ts}}SIGNAL.draw(ctx,W,H,day,ts/1000,{{when:now}});if(!still)requestAnimationFrame(loop)}};
     requestAnimationFrame(loop);
   }}).catch(()=>{{}});
