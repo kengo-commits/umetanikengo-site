@@ -79,7 +79,7 @@ def build(day, sig):
     stamp = date.fromisoformat(day['date']).strftime('%d %b %Y').upper()
     js = (WORLD / 'signal.js').as_uri()
     slides = [f'''<canvas id="sig" width="2160" height="1520" style="display:block;margin:44px -80px 0;width:1080px;height:760px;background:#000"></canvas>
-<script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);SIGNAL.draw(c,1080,760,{json.dumps(day, ensure_ascii=False)},0,{{}});</script>
+<script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);const DAY={json.dumps(day, ensure_ascii=False)};window.drawFrame=t=>SIGNAL.draw(c,1080,760,DAY,t,{{}});drawFrame(0);</script>
 <div style="margin-top:44px;display:flex;justify-content:space-between;align-items:baseline;gap:20px"><div style="font-size:76px;line-height:1.02;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Today</div><div style="font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c8c;text-align:right;max-width:520px">{E(sig["label"])}</div></div>
 <div style="margin-top:18px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art{' / Plate' if plate else ''}{' / Note' if note else ''} / Fashion / Music / Design</div>
 <div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアート{'、名作' if plate else ''}{'、ノート' if note else ''}と、世界のファッション・音楽・デザイン</div>''']
@@ -155,6 +155,31 @@ async def render(pages, outdir, stem):
     return files
 
 
+async def render_video(page_html, outdir, stem, seconds=10, fps=30):
+    """Slide 1 as a 10-second MP4: the same page, with the artwork stepped frame by frame."""
+    import subprocess, shutil
+    from playwright.async_api import async_playwright
+    frames = outdir / '.frames'
+    frames.mkdir(exist_ok=True)
+    h = outdir / '.v.html'
+    h.write_text(page_html, encoding='utf-8')
+    async with async_playwright() as p:
+        b = await p.chromium.launch()
+        pg = await b.new_page(viewport={'width': 1080, 'height': 1350})
+        await pg.goto(h.as_uri())
+        await pg.wait_for_timeout(400)
+        for k in range(seconds * fps):
+            await pg.evaluate(f'drawFrame({k / fps:.4f})')
+            await pg.screenshot(path=str(frames / f'f{k:04d}.jpg'), type='jpeg', quality=92)
+        await b.close()
+    h.unlink()
+    out = outdir / f'{stem}-1.mp4'
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(fps), '-i', str(frames / 'f%04d.jpg'),
+                    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-movflags', '+faststart', str(out)], check=True)
+    shutil.rmtree(frames)
+    return out
+
+
 def main():
     news = json.loads((WORLD / 'news.json').read_text(encoding='utf-8'))
     want = sys.argv[1] if len(sys.argv) > 1 else None
@@ -168,6 +193,10 @@ def main():
     outdir.mkdir(parents=True, exist_ok=True)
     files = asyncio.run(render(pages, outdir, f'kengos-synesthesia-{day["date"]}'))
     (outdir / 'caption.txt').write_text(caption, encoding='utf-8')
+    try:
+        print(asyncio.run(render_video(pages[0], outdir, f'kengos-synesthesia-{day["date"]}')), 'video ok')
+    except Exception as e:
+        print('video skipped:', e)
     for f, over in files:
         print(f, 'TOO LONG' if over else 'ok')
     print(outdir / 'caption.txt')
