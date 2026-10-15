@@ -330,8 +330,7 @@ HOME_SLIDES = [('synart-1', '', 'SYNESTHESIA DIGITAL ART by KENGO'),
                ('peaks-9', 'PEAKS', 'PEAKS'),
                ('peaks-7', 'PEAKS', 'PEAKS'),
                ('island-1', 'i+Land nagasaki', 'アイランド ナガサキ'),
-               ('synesthesia-1', 'SYNESTHESIA HILLS', 'シナスタジアヒルズ'),
-               ('glamday-1', 'GLAMDAY STYLE', 'グランデイスタイル')]
+               ('synesthesia-1', 'SYNESTHESIA HILLS', 'シナスタジアヒルズ')]
 
 
 def home(root, skeleton=True):
