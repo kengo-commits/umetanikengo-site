@@ -191,7 +191,7 @@
   }
 }
 </style>
-  <link rel='stylesheet' href='assets/css/top2026.css?v=202610152335' media='all' />
+  <link rel='stylesheet' href='assets/css/top2026.css?v=202610160045' media='all' />
   <link rel='stylesheet' href='assets/css/gallery2026.css?v=202610152200' media='all' />
 </head>
 <body class="gd-page gd-gp">
@@ -526,7 +526,7 @@
   v.addEventListener('touchend', function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1); sx = null; });
 })();
 (function () {
-  if (!('IntersectionObserver' in window) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  if (!('IntersectionObserver' in window) || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches)) return;
   var items = document.querySelectorAll('.gd-gp-item, .gd-gp-other');
   var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
   items.forEach(function (el, k) { el.classList.add('gd-gp-rv'); el.style.setProperty('--gp-d', (k % 3) * 0.08 + 's'); io.observe(el); });
@@ -633,7 +633,7 @@
   function start() { stop(); timer = setInterval(function () { show(cur + 1); }, wait); }
   function stop() { if (timer) clearInterval(timer); timer = null; }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { show(i); start(); }); });
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches) return;
   window.addEventListener('load', function () { slides.forEach(function (s) { var i = s.querySelector('img'); if (i) i.loading = 'eager'; }); });
   document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
   start();
@@ -680,7 +680,7 @@
 
 (function () {
   if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches) return;
   var imgs = document.querySelectorAll('.gd-page main .gd-card__img img, .gd-page main .gd-about__photo img, .gd-page main .gd-svc__img img, .gd-page main .gd-eoc-hero > img, .gd-page main .gd-benefit__img img, .gd-page main .gd-photo img');
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
@@ -1629,7 +1629,7 @@ body.lineup-modal-open {
 <script>
 (function () {
   if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches) return;
   var root = document.documentElement;
   function init() {
     root.classList.add('gd-motion');

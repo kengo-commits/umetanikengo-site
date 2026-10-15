@@ -384,3 +384,6 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 .gd-lp-hero__label { top: calc(26px + var(--gd-hf, 0) * 28px); left: max(30px, (100vw - 1400px) / 2); }
 @media (max-width: 1460px) { .gd-lp-hero__label { left: calc(30px + var(--gd-hf, 0) * 30px + 10px); } }
 @media (max-width: 767px) { .gd-lp-hero__label { top: calc(14px + var(--gd-hf, 0) * 16px); left: calc(14px + var(--gd-hf, 0) * 16px); } }
+@media (max-width: 767px), (hover: none) {
+  .gd-page .gd-lp-hero .gd-hero__frame { clip-path: none !important; }
+}

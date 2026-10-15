@@ -212,8 +212,8 @@
   }
 }
 </style>
-  <link rel='stylesheet' href='assets/css/top2026.css?v=202610152335' media='all' />
-  <link rel='stylesheet' href='assets/css/lineup2026.css?v=202610152200' media='all' />
+  <link rel='stylesheet' href='assets/css/top2026.css?v=202610160045' media='all' />
+  <link rel='stylesheet' href='assets/css/lineup2026.css?v=202610160045' media='all' />
 </head>
 <body class="gd-page gd-lp">
 
@@ -944,8 +944,9 @@
 <script>
 (function () {
   var v = document.querySelector('.gd-lp-hero__video'); if (!v) return;
-  var sp = window.matchMedia('(max-width: 767px)').matches;
-  v.src = v.getAttribute(sp ? 'data-src-sp' : 'data-src-pc');
+  var sp = window.matchMedia('(max-width: 767px), (hover: none)').matches;
+  if (sp) { var im = document.createElement('img'); im.src = v.getAttribute('poster'); im.alt = ''; im.setAttribute('fetchpriority', 'high'); v.parentNode.insertBefore(im, v); v.parentNode.removeChild(v); return; }
+  v.src = v.getAttribute('data-src-pc');
   var p = v.play && v.play(); if (p && p.catch) p.catch(function () {});
 })();
 </script>
@@ -1050,7 +1051,7 @@
   function start() { stop(); timer = setInterval(function () { show(cur + 1); }, wait); }
   function stop() { if (timer) clearInterval(timer); timer = null; }
   dots.forEach(function (d, i) { d.addEventListener('click', function () { show(i); start(); }); });
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches) return;
   window.addEventListener('load', function () { slides.forEach(function (s) { var i = s.querySelector('img'); if (i) i.loading = 'eager'; }); });
   document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
   start();
@@ -1097,7 +1098,7 @@
 
 (function () {
   if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches) return;
   var imgs = document.querySelectorAll('.gd-page main .gd-card__img img, .gd-page main .gd-about__photo img, .gd-page main .gd-svc__img img, .gd-page main .gd-eoc-hero > img, .gd-page main .gd-benefit__img img, .gd-page main .gd-photo img');
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
@@ -2046,7 +2047,7 @@ body.lineup-modal-open {
 <script>
 (function () {
   if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches) return;
   var root = document.documentElement;
   function init() {
     root.classList.add('gd-motion');
