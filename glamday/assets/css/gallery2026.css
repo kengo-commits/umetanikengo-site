@@ -172,3 +172,4 @@ html.gd-gp-lock, html.gd-gp-lock body { overflow: hidden !important; }
 .gd-gp-intro__meta { margin-top: 0; }
 .gd-gp-other__now { top: 18px; transform: translateX(-50%); }
 @media (max-width: 767px) { .gd-gp-other__now { top: 12px; } }
+.gd-gp-viewer [hidden] { display: none !important; }

@@ -1,5 +1,3 @@
-/* チャットボットをヒーロー通過後に表示する（トップ／ヒーロー上では非表示）
-   index: #sales（現在販売中）が見え始めたら表示／他ページ: ヒーローを通過したら表示 */
 (function () {
   var style = document.createElement('style');
   style.textContent =

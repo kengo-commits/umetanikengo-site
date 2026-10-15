@@ -1569,3 +1569,10 @@ a.gd-benefit .gd-benefit__text { margin-bottom: 0; }
   .gd-page .gd-fade, .gd-page .gd-rv, .gd-page .gd-gp-rv { opacity: 1 !important; transform: none !important; translate: none !important; }
   .gd-page .mobile-floating-cta.is-visible { translate: none; }
 }
+.gd-page [id] { scroll-margin-top: var(--gd-header-h); }
+@media (max-width: 767px), (hover: none) {
+  .gd-page .gd-hero__frame { -webkit-transform: none; transform: none; isolation: auto; }
+  .gd-page .gd-hero__slide > picture img, .gd-page .gd-hero__slide > img, .gd-page .gd-hero__slide > video { -webkit-backface-visibility: visible; backface-visibility: visible; }
+  .gd-page .mobile-floating-cta { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
+@media (max-width: 767px) { .gd-page :is(th, td) { word-break: normal; overflow-wrap: anywhere; } }
