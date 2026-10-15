@@ -1552,3 +1552,9 @@ a.gd-benefit .gd-benefit__text { margin-bottom: 0; }
 .gd-page .gd-plan, .gd-page .gd-plan.is-eoc { translate: 0 0; display: flex; flex-direction: column; align-items: center; padding: 30px 20px; }
 .gd-page .gd-plan__logo { align-self: stretch; }
 .gd-page .gd-plan__list { width: fit-content; max-width: 100%; text-align: left; justify-items: start; }
+.gd-motion .gd-hero__slide > picture, .gd-motion .gd-hero__slide > video { translate: none; opacity: 1; }
+.gd-page .gd-hero__frame { -webkit-transform: translateZ(0); transform: translateZ(0); isolation: isolate; }
+.gd-hero__slide > picture img, .gd-hero__slide > img, .gd-hero__slide > video { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+@media (max-width: 767px), (hover: none) {
+  .gd-motion .gd-hero__slide { transform: none; }
+}
