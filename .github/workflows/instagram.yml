@@ -2,7 +2,7 @@ name: Post the daily set to Instagram
 
 on:
   schedule:
-    - cron: '10 23 * * *'   # 08:10 JST every day
+    - cron: '10 2 * * *'   # 11:10 JST every day (after the morning news has landed)
   workflow_dispatch:
     inputs:
       date:
@@ -39,8 +39,14 @@ jobs:
           pip install pillow requests playwright
           python -m playwright install --with-deps chromium
 
-      - name: Render today's set
-        run: python scripts/make_instagram.py ${IG_DATE:-$(TZ=Asia/Tokyo date +%F)}
+      - name: Pick the day
+        run: |
+          D=${IG_DATE:-$(python -c "import json;print(json.load(open('world/news.json'))['days'][0]['date'])")}
+          echo "IG_DATE=$D" >> $GITHUB_ENV
+          echo "posting $D"
+
+      - name: Render the set
+        run: python scripts/make_instagram.py "$IG_DATE"
 
       - name: Stage media on the site
         run: python scripts/post_instagram.py stage
