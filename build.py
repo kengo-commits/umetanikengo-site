@@ -403,7 +403,7 @@ def profile(root):
 
 # ---------- CREATIVE (same seven works, four photos each) ----------
 def work_photos(k):
-    return {'peaks': [f'peaks-{n}' for n in range(1, 16)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in (3, 1, 2, 4, 5, 6, 7)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
+    return {'peaks': [f'peaks-{n}' for n in (2, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15)], 'tsurutontan': [f'tsurutontan-k{n}' for n in (3, 1, 2, 4, 5)], 'fufusel': [f'fufusel-{n}' for n in (3, 1, 2, 4, 5, 6, 7)]}.get(k, [f'{k}-{n}' for n in range(1, 5)])
 
 
 def work_right(k, tag='h2', detail_href=None):
