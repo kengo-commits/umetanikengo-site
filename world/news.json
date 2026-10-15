@@ -1,6 +1,81 @@
 {
- "updated": "2026-10-15",
+ "updated": "2026-10-16",
  "days": [
+  {
+   "date": "2026-10-16",
+   "note": {
+    "title": "On Casa Ortega",
+    "en": "In Mexico City, the gardens of Luis Barragán's Casa Ortega are holding work by more than thirty designers, born from three years of residencies that paired French designers with Mexican artisans. The plinths are a deep red, made from panels of recycled laminated cardboard waste, and I find myself picturing that colour among the plants of a garden Barragán shaped in the 1940s. The same family has kept the house since 1947, and its caretakers call it his best-kept secret. A private place that opens for only a few weeks reminds me how much of a space lives in what is usually kept quiet.",
+    "ja": "メキシコシティにあるルイス・バラガンのカサ・オルテガの庭で、30人を超えるデザイナーの作品が展示されています。フランスのデザイナーとメキシコの職人が3年かけて取り組んだレジデンスから生まれたものだそうです。作品を載せる台は、積層段ボールの廃材を再生したパネルでつくられた深い赤色です。バラガンが1940年代に手がけた庭のなかに、その赤がどう置かれているのかを想像しています。1947年から同じ家族が守り、「バラガンのいちばんの秘密」と呼ばれる家が、10月25日までの短いあいだだけ開かれることにも、静かな意味を感じます。",
+    "source": "Dezeen",
+    "url": "https://www.dezeen.com/2026/10/14/design-week-mexico-2026-creative-immersions-casa-ortega/"
+   },
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Michiko Tsuda's windows at Maison Hermès Ginza",
+     "ja": "銀座メゾンエルメスのウィンドウを、アーティストの津田道子が11月24日まで手がけています。与那国島の馬や海の映像や、のぞき込む人を少し遅れて映すカメラを使い、年間テーマ「冒険の呼び声」を18のウィンドウで表現しています。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-14/hermes-lanterne-evening/"
+    },
+    {
+     "cat": "fashion",
+     "title": "Acne Studios revisits Hussein Chalayan",
+     "ja": "アクネ ストゥディオズが、フセイン・チャラヤンの2001〜2003年のコレクションをもとにした12型のコラボを発売しました。パッチワークのデニムやジャージーのドレス、だまし絵のようなレザーバッグのほか、1000部限定の作品集もあり、アクネ ストゥディオズ青山と公式オンラインで扱っています。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-14/acne-studios-hussein-chalayan/"
+    },
+    {
+     "cat": "fashion",
+     "title": "Junya Watanabe puts CW-X tights on the Paris runway",
+     "ja": "ジュンヤ ワタナベが10月3日にパリで発表した2027年春夏ウィメンズで、ワコールのコンディショニングウエア「CW-X」とのコラボを見せました。テーピングの原理を応用したタイツを漆黒に仕立て直したもので、長崎と福井の工場で生産されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2526166"
+    },
+    {
+     "cat": "music",
+     "title": "Justice scores GTA VI",
+     "ja": "ロックスター・ゲームスが『GTA VI』の発売トレーラーを公開し、ジャスティスがゲームの音楽を手がけることを明かしました。トレーラーではテーム・インパラ、SZA、キング・ギザード&ザ・リザード・ウィザードと組んだ新曲「Flower In A Hurricane」が流れ、34曲入りのアルバムとともに11月19日に発売されます。",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514667/justice-score-gta-vi-share-tame-impala-sza-king-gizzard-collab-flower-in-a-hurricane/music"
+    },
+    {
+     "cat": "music",
+     "title": "Marika Hackman plans False Dogs",
+     "ja": "マリカ・ハックマンが5作目のアルバム『False Dogs』を2027年2月19日にChrysalis Recordsから出します。ほぼすべての楽器を本人が演奏し、ラムズゲートのBig Jelly Studiosで仕上げた全12曲で、2月26日のロイヤル・フェスティバル・ホールからツアーが始まります。",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/marika-hackman-announces-new-album-false-dogs-single-33-tour-3973125"
+    },
+    {
+     "cat": "music",
+     "title": "Michael Stipe sets a date for his solo debut",
+     "ja": "R.E.M.のマイケル・スタイプが、初のソロアルバムを来年5月に出す予定だと明かしました。最初の曲と映像は大みそかに公開され、ピーチズがゲストで参加し、一部の曲はディスコ寄りだと話しています。",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514468/michael-stipe-shares-debut-solo-album-release-plan-talks-new-music-with-monica-lewinsky/news"
+    },
+    {
+     "cat": "design",
+     "title": "French-Mexican design in Barragán's Casa Ortega",
+     "ja": "デザインウィーク・メキシコ2026にあわせ、ルイス・バラガン設計のカサ・オルテガの庭で、フランスとメキシコの30人以上のデザイナーによる作品展が10月25日まで開かれています。展示台は段ボール積層材の廃材を再生した赤いパネルでつくられています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/14/design-week-mexico-2026-creative-immersions-casa-ortega/"
+    },
+    {
+     "cat": "design",
+     "title": "Behnaz Farahi projects an ocean onto Kendall Plaza",
+     "ja": "MITメディアラボのベナズ・ファラヒが、MIT初のフューチャー・フェストのため、MITミュージアムの上から広場に潮の流れの映像を投影しました。約264平方メートルの波の下には、400人以上が寄せたさまざまな言語の願いの言葉が浮かびます。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/14/behnaz-farahi-ocean-of-dreams-mit/"
+    },
+    {
+     "cat": "design",
+     "title": "A furniture maker's house and workshop on Prince Edward Island",
+     "ja": "カナダのオマー・ガンディー・アーキテクツが、プリンスエドワード島に家具職人ブロディ・チャペルの住まいと工房を完成させました。中庭を挟んだ2棟は淡いグレーの波板で覆われ、チャペル自身が家具をつくり、施工も率いました。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/14/omar-gandhi-brodye-chappell-prince-edwards-island/"
+    }
+   ]
+  },
   {
    "date": "2026-10-15",
    "note": {
