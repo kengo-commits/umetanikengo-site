@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="100" fill="#9F8B52"/>
+  <text x="100" y="56" text-anchor="middle" fill="#ffffff" stroke="#ffffff" stroke-width="0.7" paint-order="stroke" font-family="'Times New Roman','YuMincho',serif" font-size="24" letter-spacing="2">RESALE</text>
+  <g fill="#ffffff" stroke="#ffffff" stroke-width="2.2" paint-order="stroke" font-family="'游明朝','Yu Mincho',YuMincho,'Hiragino Mincho ProN','HGS明朝E',serif" text-anchor="middle">
+    <text x="100" y="110" font-size="36" letter-spacing="3">残り</text>
+    <text x="100" y="152" font-size="36" letter-spacing="3">わずか</text>
+  </g>
+</svg>

@@ -667,6 +667,7 @@ if __name__ == '__main__':
     os.makedirs(OUT + '/assets')
     shutil.copytree(ROOT / 'images', OUT + '/images')
     shutil.copytree(ROOT / 'world', OUT + '/synesthesia-world')
+    shutil.copytree(ROOT / 'glamday', OUT + '/glamday')
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
     shutil.copy(ROOT / 'assets/paper.png', OUT + '/assets/paper.png')

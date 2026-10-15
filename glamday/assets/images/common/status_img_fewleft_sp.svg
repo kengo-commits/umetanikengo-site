@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
+  <defs>
+    <style>
+      .cls-bg { fill: #9f8b52; }
+      .cls-tx {
+        fill: #fff;
+        font-family: "游ゴシック体","Yu Gothic",YuGothic,"ヒラギノ角ゴ ProN",sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.04em;
+      }
+    </style>
+  </defs>
+  <g id="_デザイン" data-name="デザイン">
+    <polygon class="cls-bg" points="0 150 0 0 150 0 0 150"/>
+    <text class="cls-tx" text-anchor="middle" dominant-baseline="middle" transform="translate(65 65) rotate(-45)">残りわずか</text>
+  </g>
+</svg>
