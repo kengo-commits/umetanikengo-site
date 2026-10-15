@@ -79,6 +79,9 @@ def en_first(h):
 
 DOMAIN = SITE.get('domain', 'www.kengo-umetani.com')
 PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/', "KENGO'S SYNESTHESIA": 'synesthesia-world/', 'PRESS': 'press/'}
+# pages that are published but kept out of the menu, the sitemap and search engines (invitation-only spaces)
+HIDDEN = {'FRIENDS': 'friends/'}
+FRIEND_SNS = 'https://claude.ai/artifact/GwgUJqQjiyiADDzm7YqJdL'
 # ---------- structured data: lets search engines and AI assistants identify the person, his roles and works ----------
 SITE_URL = f'https://{DOMAIN}/'
 PERSON_ID = SITE_URL + '#person'
@@ -179,13 +182,14 @@ def page_ld(key):
 def page(key, title, desc, body, root, skeleton=True):
     body = en_first(body)
     nav = ''.join(f'<a href="{root}{href}"{" class=\"on\" aria-current=\"page\"" if k == key else ""}>{k}</a>' for k, href in NAV)
-    url = f'https://{DOMAIN}/' + PATHS.get(key, '')
+    url = f'https://{DOMAIN}/' + (PATHS.get(key) or HIDDEN.get(key, ''))
     title = SEO_TITLE.get(key, title)
     desc = SEO_DESC.get(key, desc)
     ogimg = f'https://{DOMAIN}/images/' + SEO_IMG.get(key, 'hero-aquasense-1.jpg')
-    ld = page_ld(key)
+    ld = '' if key in HIDDEN else page_ld(key)
+    robots = 'noindex, nofollow' if (SITE.get('noindex') or key in HIDDEN) else 'index, follow, max-image-preview:large, max-snippet:-1'
     head = f'''<title>{esc(title)}</title>
-<meta name="description" content="{esc(desc)}">{'\n<meta name="robots" content="noindex, nofollow">' if SITE.get('noindex') else ''}
+<meta name="description" content="{esc(desc)}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:site_name" content="KENGO UMETANI OFFICIAL">
 <meta property="og:description" content="{esc(desc)}">
@@ -197,7 +201,7 @@ def page(key, title, desc, body, root, skeleton=True):
 <meta property="og:locale" content="ja_JP">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="author" content="梅谷憲吾 Kengo Umetani">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="robots" content="{robots}">
 <link rel="icon" href="https://{DOMAIN}/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f7f5ee">{f'\n<meta name="google-site-verification" content="{SITE["google_verification"]}">' if SITE.get('google_verification') else ''}
 <meta name="color-scheme" content="only light">
@@ -220,7 +224,7 @@ def page(key, title, desc, body, root, skeleton=True):
 </main>
 <footer class="foot">
   <nav class="nav-foot" aria-label="Footer">{nav}</nav>
-  <nav class="nav-foot" aria-label="SNS"><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a></nav>
+  <nav class="nav-foot" aria-label="SNS"><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a><a href="{root}friends/index.html"{" class=\"on\"" if key=="FRIENDS" else ""}>FRIEND SNS</a></nav>
   <nav class="nav-foot" aria-label="Legal"><a href="{root}press/index.html"{" class=\"on\"" if key=="PRESS" else ""}>PRESS KIT / 掲載用プロフィール</a><a href="{root}about/index.html"{" class=\"on\"" if key=="ABOUT" else ""}>ABOUT / 概要</a><a href="{root}privacy/index.html"{" class=\"on\"" if key=="PRIVACY" else ""}>PRIVACY POLICY / プライバシーポリシー</a><a href="{root}cookie/index.html"{" class=\"on\"" if key=="COOKIE" else ""}>COOKIE POLICY / COOKIE 設定</a></nav>
   <div class="foot-end"><span>© KENGO UMETANI</span><a class="to-top" href="#">PAGE TOP ↑</a></div>
 </footer>
@@ -490,6 +494,37 @@ def vision(root):
     return page('VISION', 'VISION | KENGO UMETANI OFFICIAL', 'VISION. ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。', '\n'.join(b), root)
 
 
+# ---------- FRIEND SNS (invitation only; not in the menu, the sitemap or search engines) ----------
+FRIENDS_INTRO = ([
+    'KENGO FRIEND SNS は、招待した友人だけが参加できるクローズドなタイムラインです。',
+    '写真や動画の投稿、24時間で消えるストーリーズ、リール、いいねとコメント、保存、フォロー、ハッシュタグ検索、お知らせ、ダイレクトメッセージとグループチャット。公開の場には出さない日常を、仲間とだけ共有します。'], [
+    'KENGO FRIEND SNS is a closed timeline open only to invited friends.',
+    'Photo and video posts, stories that disappear after 24 hours, reels, likes and comments, saves, follows, hashtag search, notifications, direct messages and group chats. Everyday moments that stay off the public feed, shared only with friends.'])
+FRIENDS_JOIN = ([
+    '1. 梅谷から届く招待メールを受け取ります。',
+    '2. 「SNSを開く」から、招待されたアカウントでサインインします。',
+    '3. ユーザー名とアイコンを設定すると、タイムラインが表示されます。'], [
+    '1. Receive the invitation email from Kengo.',
+    '2. Press "OPEN KENGO FRIEND SNS" and sign in with the invited account.',
+    '3. Set your username and profile picture, and the timeline appears.'])
+FRIENDS_NOTES = ([
+    'SNS本体は別のタブで開きます。招待されていないアカウントでは閲覧できません。',
+    '写真は自動で最適化されます。動画はMP4またはWebM形式で、1ファイル20MBまでです。',
+    'ストーリーズは投稿から24時間で自動的に消えます。'], [
+    'The SNS opens in a separate tab. Accounts without an invitation cannot view it.',
+    'Photos are optimised automatically. Videos must be MP4 or WebM, up to 20 MB per file.',
+    'Stories disappear automatically 24 hours after posting.'])
+
+
+def friends(root):
+    cta = f'<a class="more" href="{FRIEND_SNS}" target="_blank" rel="noopener">OPEN KENGO FRIEND SNS / SNSを開く ↗</a>'
+    b = [row(show(['friends-1', 'friends-2'], 'KENGO FRIEND SNS の画面 / KENGO FRIEND SNS screens', root, first_lazy=False, prio=True),
+             '<h1 class="h2">KENGO FRIEND SNS<span lang="ja">友人だけのクローズドなタイムライン</span></h1>' + bi(*FRIENDS_INTRO) + cta, 'first')]
+    b.append(row('<h2 class="label">参加方法<span>HOW TO JOIN</span></h2>', bi(*FRIENDS_JOIN) + cta, 'text'))
+    b.append(row('<h2 class="label">ご利用にあたって<span>NOTES</span></h2>', bi(*FRIENDS_NOTES), 'text'))
+    return page('FRIENDS', 'KENGO FRIEND SNS | KENGO UMETANI OFFICIAL', '招待した友人だけが参加できる、梅谷憲吾のクローズドなタイムライン。', '\n'.join(b), root)
+
+
 # ---------- LEGAL ----------
 def sec(label_jp, label_en, jp, en):
     return row(f'<h2 class="label">{label_jp}<span>{label_en}</span></h2>', bi(jp, en), 'text')
@@ -690,7 +725,7 @@ if __name__ == '__main__':
         + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for p in PATHS.values()) + '</urlset>\n')
     open(OUT + '/.nojekyll', 'w').write('')
     open(OUT + '/index.html', 'w', encoding='utf-8').write(home(''))
-    for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie)]:
+    for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie), ('friends', friends)]:
         os.makedirs(f'{OUT}/{name}', exist_ok=True)
         open(f'{OUT}/{name}/index.html', 'w', encoding='utf-8').write(fn('../'))
     # artifact entry page: same HOME, without the document skeleton (the Artifact host adds it)
