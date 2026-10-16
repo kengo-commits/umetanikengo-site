@@ -88,10 +88,12 @@ jobs:
           printf '{\n "url": "%s",\n "updated": "%s"\n}\n' "$API_URL" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > data/friends-api.json
           git config user.name "site-bot"
           git config user.email "site-bot@users.noreply.github.com"
+          git checkout -- friends-api/wrangler.toml
+          rm -f friends-api/deploy.log
           git add data/friends-api.json
           if ! git diff --cached --quiet; then
             git commit -m "Record FRIEND SNS API address"
-            git pull --rebase origin main
+            git pull --rebase --autostash origin main
             git push
           fi
 
