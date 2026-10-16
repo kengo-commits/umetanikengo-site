@@ -131,6 +131,8 @@ function renderStoriesTray(tray) {
   }
   tray.hidden = !tray.children.length;
 }
+const isTrackDoc = d => d && d.id && d.id[0] === 't' && d.media && d.media.type === 'audio';
+const feedCard = d => (isTrackDoc(d) ? trackCard(d) : postCard(d));
 function homeView() {
   const root = el('div');
   const banner = modeBanner(); if (banner) root.append(banner);
@@ -142,8 +144,8 @@ function homeView() {
   root.append(tray, feed, empty, sugDivider, sugFeed);
   const update = () => {
     renderStoriesTray(tray);
-    const { main, suggested } = feedPosts();
-    keyedList(feed, main, p => p.id, p => postCard(p), (n, p) => n._update(p));
+    const { main, suggested } = feedItems();
+    keyedList(feed, main, p => p.id, p => feedCard(p), (n, p) => n._update(p));
     clear(empty);
     if (!main.length) {
       if (!S.loaded.posts) empty.append(el('div', { class: 'empty' }, el('div', { class: 'spinner' })));
@@ -151,7 +153,7 @@ function homeView() {
       else if (S.uid) empty.append(emptyState('users', 'フォローして始めよう', '友人をフォローすると、その投稿がここに並びます。まずはおすすめの投稿をどうぞ。'));
     }
     sugDivider.hidden = !suggested.length || !S.loaded.posts;
-    keyedList(sugFeed, suggested.slice(0, 60), p => p.id, p => postCard(p), (n, p) => n._update(p));
+    keyedList(sugFeed, suggested.slice(0, 60), p => p.id, p => feedCard(p), (n, p) => n._update(p));
   };
   update();
   return { el: root, update, cls: 'flush' };

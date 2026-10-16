@@ -47,6 +47,14 @@ function feedPosts() {
   const all = Object.values(S.posts).filter(p => !hidden[p.id]).sort((a, b) => b.createdAt - a.createdAt);
   return { main: all.filter(p => fol.has(p.authorId)), suggested: all.filter(p => !fol.has(p.authorId)) };
 }
+function feedItems() {
+  const fol = new Set(followingOf(S.uid)); fol.add(S.uid);
+  const hidden = S.priv.hiddenPosts || {};
+  const posts = Object.values(S.posts).filter(p => !hidden[p.id]).map(p => ({ d: p, by: p.authorId }));
+  const tracks = Object.values(S.tracks).map(t => ({ d: t, by: t.ownerId }));
+  const all = posts.concat(tracks).sort((a, b) => b.d.createdAt - a.d.createdAt);
+  return { main: all.filter(x => fol.has(x.by)).map(x => x.d), suggested: all.filter(x => !fol.has(x.by)).map(x => x.d) };
+}
 function explorePosts() {
   const score = p => likeCount(p.id) * 3 + commentCount(p.id) * 2 + Math.max(0, 14 - (now() - p.createdAt) / 86400000);
   return Object.values(allPostsMap()).filter(p => p.authorId !== S.uid).sort((a, b) => score(b) - score(a));
@@ -76,7 +84,7 @@ function tagIndex() {
 function postsWithTag(tag) { return Object.values(allPostsMap()).filter(p => (p.tags || []).includes(tag)).sort((a, b) => b.createdAt - a.createdAt); }
 function notifications() {
   if (!S.uid) return [];
-  const mine = me(); const myName = mine ? mine.username : null; const out = [];
+  const out = [];
   const myPosts = new Set(Object.values(allPostsMap()).filter(p => p.authorId === S.uid).map(p => p.id));
   for (const l of Object.values(S.likes)) { if (l.id === S.uid) continue; for (const [pid, ts] of Object.entries(l.posts || {})) if (myPosts.has(pid)) out.push({ type: 'like', actor: l.id, postId: pid, ts }); }
   for (const c of Object.values(S.comments)) {
@@ -89,11 +97,9 @@ function notifications() {
       const parent = it.parentId ? byId[it.parentId] : null;
       if (parent && parent.authorId === S.uid) out.push({ type: 'reply', actor: it.authorId, postId: c.id, commentId: it.id, ts: it.createdAt, text: it.text });
       else if (p && p.authorId === S.uid) out.push({ type: 'comment', actor: it.authorId, postId: c.id, commentId: it.id, ts: it.createdAt, text: it.text });
-      else if (myName && (it.mentions || []).includes(myName)) out.push({ type: 'mention', actor: it.authorId, postId: c.id, commentId: it.id, ts: it.createdAt, text: it.text });
     }
   }
   for (const f of Object.values(S.follows)) { if (f.id === S.uid) continue; const ts = f.following && f.following[S.uid]; if (ts) out.push({ type: 'follow', actor: f.id, ts }); }
-  if (myName) for (const p of Object.values(allPostsMap())) if (p.authorId !== S.uid && (p.mentions || []).includes(myName)) out.push({ type: 'mention', actor: p.authorId, postId: p.id, ts: p.createdAt, text: p.caption });
   out.sort((a, b) => b.ts - a.ts);
   return out.slice(0, 300);
 }

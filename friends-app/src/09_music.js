@@ -23,8 +23,8 @@ const player = { audio: null, queue: [], index: -1, playing: false, el: null, sh
 function playerAudio() {
   if (player.audio) return player.audio;
   const a = new Audio(); a.preload = 'metadata';
-  a.addEventListener('play', () => { player.playing = true; renderPlayer(); });
-  a.addEventListener('pause', () => { player.playing = false; renderPlayer(); });
+  a.addEventListener('play', () => { player.playing = true; renderPlayer(); if (currentView && currentView.update) currentView.update(); });
+  a.addEventListener('pause', () => { player.playing = false; renderPlayer(); if (currentView && currentView.update) currentView.update(); });
   a.addEventListener('ended', () => { if (player.repeat) { a.currentTime = 0; a.play().catch(() => {}); } else playerStep(1); });
   a.addEventListener('timeupdate', () => playerTick());
   a.addEventListener('loadedmetadata', () => playerTick());
@@ -94,6 +94,37 @@ function renderPlayer() {
 }
 
 /* ---------- MUSIC view ---------- */
+function trackMenu(t) {
+  return [
+    { label: '次に再生', onClick: () => { if (!player.queue.length) { playTrack(t.id); return; } player.queue = player.queue.filter(x => x !== t.id); player.queue.splice(player.index + 1, 0, t.id); toast('次に再生します', 'check'); } },
+    { label: 'メッセージで送信', icon: 'send', onClick: () => pickRecipients({ title: 'シェア', okLabel: '送信' }, async ids => { for (const id of ids) { const tid = await getOrCreateThread([id]); await sendMessage(tid, { text: `♪ ${t.title}${t.artist ? ' / ' + t.artist : ''}（MUSIC に保存されています）` }); } toast('送信しました', 'check'); }) },
+    (t.ownerId === S.uid || S.isOwner) ? { label: '削除', danger: true, onClick: async () => { if (await confirmDialog({ title: `「${t.title}」を削除しますか？`, text: 'ライブラリから消え、元に戻せません。', okLabel: '削除', danger: true })) { if (currentTrack() && currentTrack().id === t.id) { playerAudio().pause(); player.index = -1; player.queue = []; renderPlayer(); } await run(() => deleteTrack(t.id), '削除できませんでした'); toast('削除しました'); } } } : null,
+  ];
+}
+const isTrackActive = t => !!(currentTrack() && currentTrack().id === t.id);
+function trackSig(t) { return [t.updatedAt || t.createdAt, t.title, t.artist, t.note, t.cover, isTrackActive(t), isTrackActive(t) && player.playing, userOf(t.ownerId).avatar, userOf(t.ownerId).username].join('|'); }
+function trackCard(t) {
+  const art = el('article', { class: 'post track-card', dataset: { id: t.id } });
+  const build = () => {
+    const owner = userOf(t.ownerId); const active = isTrackActive(t);
+    const who = el('div', { class: 'who' }, el('div', { class: 'row', style: 'gap:6px' }, userLink(owner), el('span', { class: 'time-dot' }, '· ' + timeAgo(t.createdAt, true))), el('div', { class: 'loc' }, 'MUSIC'));
+    const head = el('div', { class: 'post-head' }, ringEl(owner, 's', 'none', () => openProfile(owner.id)), who, el('button', { class: 'more', 'aria-label': 'オプション', html: iconHTML('more'), onclick: () => openSheet(trackMenu(t)) }));
+    const cover = el('button', { class: 'tc-art' + (active ? ' active' : ''), 'aria-label': active && player.playing ? '一時停止' : '再生', onclick: () => (active ? togglePlay() : playTrack(t.id)) });
+    if (t.cover) cover.append(el('img', { src: mediaUrl(t.cover), alt: '', loading: 'lazy' })); else { cover.style.background = `linear-gradient(135deg, hsl(${hueFor(t.id)} 45% 40%), hsl(${(hueFor(t.id) + 50) % 360} 45% 30%))`; cover.append(el('span', { class: 'tc-bg', html: iconHTML('music') })); }
+    cover.append(el('span', { class: 'tc-play', html: iconHTML(active && player.playing ? 'pause' : 'play') }));
+    const body = el('div', { class: 'post-body' },
+      el('div', { class: 'tc-title' }, t.title),
+      el('div', { class: 'tc-sub' }, [t.artist, fmtDur(t.media.duration)].filter(Boolean).join(' · ')),
+      t.note ? el('div', { class: 'post-caption' }, linkify(t.note)) : null,
+      el('div', { class: 'row', style: 'gap:8px;margin-top:6px' },
+        el('button', { class: 'btn primary sm', onclick: () => (active ? togglePlay() : playTrack(t.id)) }, icon(active && player.playing ? 'pause' : 'play'), active && player.playing ? '一時停止' : '再生'),
+        el('button', { class: 'btn sm', onclick: () => go('music') }, icon('music'), 'MUSIC で開く')));
+    art.replaceChildren(head, cover, body);
+  };
+  build(); art._sig = trackSig(t);
+  art._update = nt => { t = nt; const sig = trackSig(t); if (sig === art._sig) return; art._sig = sig; build(); };
+  return art;
+}
 function musicView() {
   const root = el('div');
   const head = el('div', { class: 'music-head' });
@@ -107,11 +138,7 @@ function musicView() {
     if (t.cover) art.append(el('img', { src: mediaUrl(t.cover), alt: '', loading: 'lazy' })); else { art.style.background = `hsl(${hueFor(t.id)} 40% 45%)`; art.append(icon('music')); }
     art.append(el('span', { class: 'tr-play', html: iconHTML(active && player.playing ? 'pause' : 'play') }));
     const info = el('div', { class: 'tr-info', onclick: () => (active ? togglePlay() : playTrack(t.id)) }, el('div', { class: 'tr-title trunc' }, t.title), el('div', { class: 'tr-sub trunc' }, [t.artist, displayName(owner), timeAgo(t.createdAt, true)].filter(Boolean).join(' · ')));
-    const more = el('button', { class: 'tr-more', 'aria-label': 'オプション', html: iconHTML('more'), onclick: () => openSheet([
-      { label: '次に再生', onClick: () => { if (!player.queue.length) { playTrack(t.id); return; } player.queue = player.queue.filter(x => x !== t.id); player.queue.splice(player.index + 1, 0, t.id); toast('次に再生します', 'check'); } },
-      { label: 'メッセージで送信', icon: 'send', onClick: () => pickRecipients({ title: 'シェア', okLabel: '送信' }, async ids => { for (const id of ids) { const tid = await getOrCreateThread([id]); await sendMessage(tid, { text: `♪ ${t.title}${t.artist ? ' / ' + t.artist : ''}（MUSIC に保存されています）` }); } toast('送信しました', 'check'); }) },
-      (t.ownerId === S.uid || S.isOwner) ? { label: '削除', danger: true, onClick: async () => { if (await confirmDialog({ title: `「${t.title}」を削除しますか？`, text: 'ライブラリから消え、元に戻せません。', okLabel: '削除', danger: true })) { if (currentTrack() && currentTrack().id === t.id) { playerAudio().pause(); player.index = -1; player.queue = []; renderPlayer(); } await run(() => deleteTrack(t.id), '削除できませんでした'); toast('削除しました'); } } } : null,
-    ]) });
+    const more = el('button', { class: 'tr-more', 'aria-label': 'オプション', html: iconHTML('more'), onclick: () => openSheet(trackMenu(t)) });
     row.append(art, info, el('span', { class: 'tr-dur num' }, fmtDur(t.media.duration)), more);
     return row;
   };

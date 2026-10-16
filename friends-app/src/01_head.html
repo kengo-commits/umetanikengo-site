@@ -587,9 +587,6 @@ textarea.input{height:auto;min-height:96px;padding:10px 12px;line-height:1.5}
 .create .side-sec h5{margin:0;font-size:13px;font-weight:700}
 .caption-wrap{position:relative}
 .caption-wrap textarea{min-height:140px;border:0;background:transparent;padding:0;outline:none;width:100%}
-.suggest{position:absolute;left:0;right:0;top:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);z-index:5;max-height:220px;overflow-y:auto}
-.suggest button{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;text-align:left}
-.suggest button:hover{background:var(--surface-2)}
 .upload-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:48px 24px;text-align:center}
 .story-compose{position:relative;background:#000;aspect-ratio:9/16;max-height:min(80vh,720px);width:auto;margin:0 auto;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .story-compose img,.story-compose video{width:100%;height:100%;object-fit:cover}
@@ -628,6 +625,18 @@ textarea.input{height:auto;min-height:96px;padding:10px 12px;line-height:1.5}
 .music-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
 .music-head .btn .ic{width:16px;height:16px}
 .tracks{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+/* track card in feed */
+.track-card .tc-art{position:relative;display:block;width:100%;aspect-ratio:1;max-height:420px;overflow:hidden;background:var(--surface-2);color:#fff;cursor:pointer}
+.track-card .tc-art img{width:100%;height:100%;object-fit:cover;display:block}
+.track-card .tc-bg{position:absolute;inset:0;display:grid;place-items:center;opacity:.35}
+.track-card .tc-bg .ic{width:96px;height:96px}
+.track-card .tc-play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);transition:transform .12s,background .15s}
+.track-card .tc-play .ic{width:30px;height:30px;fill:currentColor}
+.track-card .tc-art:hover .tc-play{background:rgba(0,0,0,.6);transform:scale(1.06)}
+.track-card .tc-art.active .tc-play{background:var(--accent)}
+.track-card .tc-title{font-weight:700;font-size:16px;margin-top:8px}
+.track-card .tc-sub{font-size:13px;color:var(--muted)}
+.track-card .post-head .loc{letter-spacing:.08em;font-size:11px}
 .track{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line)}
 .track:last-child{border-bottom:0}
 .track.active{background:var(--accent-soft)}
