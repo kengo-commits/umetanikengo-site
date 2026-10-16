@@ -223,7 +223,7 @@ def page(key, title, desc, body, root, skeleton=True):
 </main>
 <footer class="foot">
   <nav class="nav-foot" aria-label="Footer">{nav}</nav>
-  <nav class="nav-foot" aria-label="SNS"><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a><a href="{root}friends/index.html"{" class=\"on\"" if key=="FRIENDS" else ""}>FRIEND SNS</a></nav>
+  <nav class="nav-foot" aria-label="SNS"><a href="{FB}" target="_blank" rel="noopener">FACEBOOK ↗</a><a href="{IG}" target="_blank" rel="noopener">INSTAGRAM ↗</a><a href="{root}friends/app/index.html"{" class=\"on\"" if key=="FRIENDS" else ""}>KENGO FRIEND SNS</a></nav>
   <nav class="nav-foot" aria-label="Legal"><a href="{root}press/index.html"{" class=\"on\"" if key=="PRESS" else ""}>PRESS KIT / 掲載用プロフィール</a><a href="{root}about/index.html"{" class=\"on\"" if key=="ABOUT" else ""}>ABOUT / 概要</a><a href="{root}privacy/index.html"{" class=\"on\"" if key=="PRIVACY" else ""}>PRIVACY POLICY / プライバシーポリシー</a><a href="{root}cookie/index.html"{" class=\"on\"" if key=="COOKIE" else ""}>COOKIE POLICY / COOKIE 設定</a></nav>
   <div class="foot-end"><span>© KENGO UMETANI</span><a class="to-top" href="#">PAGE TOP ↑</a></div>
 </footer>
