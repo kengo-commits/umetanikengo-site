@@ -127,12 +127,11 @@ function ringEl(u, size = '', state = 'none', onClick = null) {
 function userLink(u, cls = 'u') { return el('button', { class: cls, onclick: e => { e.stopPropagation(); openProfile(u.id); } }, displayName(u)); }
 function linkify(text) {
   const f = document.createDocumentFragment(); const s = String(text || '');
-  const re = /(#[\p{L}\p{N}_]+|@[a-z0-9._]{2,30}|https?:\/\/[^\s<]+)/giu; let last = 0; let m;
+  const re = /(#[\p{L}\p{N}_]+|https?:\/\/[^\s<]+)/giu; let last = 0; let m;
   while ((m = re.exec(s))) {
     if (m.index > last) f.append(s.slice(last, m.index));
     const tok = m[0];
     if (tok[0] === '#') f.append(el('button', { class: 'tag-link', onclick: e => { e.stopPropagation(); openTag(tok.slice(1).toLowerCase()); } }, tok));
-    else if (tok[0] === '@') { const u = userByName(tok.slice(1)); if (u) f.append(el('button', { class: 'tag-link', onclick: e => { e.stopPropagation(); openProfile(u.id); } }, tok)); else f.append(tok); }
     else f.append(el('a', { href: tok, target: '_blank', rel: 'noopener noreferrer', class: 'tag-link', onclick: e => e.stopPropagation() }, tok));
     last = m.index + tok.length;
   }
@@ -243,7 +242,7 @@ function mediaFrame(post, opts = {}) {
 /* ---------- Post card ---------- */
 function postSig(p) {
   const a = userOf(p.authorId); const cs = commentsOf(p.id);
-  return [p.updatedAt || p.createdAt, likeCount(p.id), likedByMe(p.id), savedByMe(p.id), cs.length, cs.length ? cs[cs.length - 1].id : '', a.username, a.avatar, p.hideLikes, p.commentsOff, Object.keys(S.users).length].join('|');
+  return [p.updatedAt || p.createdAt, likeCount(p.id), likedByMe(p.id), cs.length, cs.length ? cs[cs.length - 1].id : '', a.username, a.avatar, p.hideLikes, p.commentsOff, Object.keys(S.users).length].join('|');
 }
 function postHead(p, opts = {}) {
   const a = userOf(p.authorId);
@@ -272,12 +271,11 @@ function captionBlock(p, expanded = false) {
 }
 function postFoot(p, opts = {}) {
   const foot = el('div', { class: 'post-foot' });
-  const liked = likedByMe(p.id), saved = savedByMe(p.id);
+  const liked = likedByMe(p.id);
   const actions = el('div', { class: 'post-actions' },
     el('button', { class: liked ? 'liked' : '', 'aria-label': 'いいね', html: iconHTML('heart', '', liked), onclick: () => toggleLike(p.id) }),
     el('button', { 'aria-label': 'コメント', html: iconHTML('comment'), onclick: () => openPost(p.id, { focus: true }) }),
     el('button', { 'aria-label': 'シェア', html: iconHTML('send'), onclick: () => shareSheet(p) }),
-    el('button', { class: 'save' + (saved ? ' saved' : ''), 'aria-label': '保存', html: iconHTML('bookmark', '', saved), onclick: () => toggleSave(p.id) }),
   );
   const body = el('div', { class: 'post-body' });
   const ll = likesLine(p); if (ll) body.append(ll);

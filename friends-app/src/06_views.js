@@ -209,12 +209,11 @@ function reelEl(p) {
   r.append(side, info);
   const draw = () => {
     clear(side); clear(info);
-    const liked = likedByMe(p.id), saved = savedByMe(p.id);
+    const liked = likedByMe(p.id);
     side.append(
       el('button', { class: liked ? 'liked' : '', onclick: () => toggleLike(p.id) }, icon('heart', '', liked), el('span', { class: 'num' }, fmtCount(likeCount(p.id)))),
       el('button', { onclick: () => openPost(p.id, { focus: true }) }, icon('comment'), el('span', { class: 'num' }, fmtCount(commentCount(p.id)))),
       el('button', { onclick: () => shareSheet(p) }, icon('send'), el('span', {}, 'シェア')),
-      el('button', { class: saved ? 'saved' : '', onclick: () => toggleSave(p.id) }, icon('bookmark', '', saved)),
       el('button', { onclick: () => postOptions(p) }, icon('more')),
     );
     const a = userOf(p.authorId);
@@ -299,7 +298,6 @@ function notifText(n) {
     case 'like': return 'があなたの投稿にいいね！しました';
     case 'comment': return `がコメントしました: ${(n.text || '').slice(0, 60)}`;
     case 'reply': return `が返信しました: ${(n.text || '').slice(0, 60)}`;
-    case 'mention': return `があなたをメンションしました: ${(n.text || '').slice(0, 60)}`;
     case 'commentlike': return 'があなたのコメントにいいね！しました';
     case 'follow': return 'があなたをフォローしました';
     default: return '';
@@ -374,21 +372,17 @@ function profileView(uidArg) {
     }
     clear(tabs);
     const tabDefs = [['posts', 'grid', '投稿'], ['reels', 'reels', 'リール']];
-    if (self) tabDefs.push(['saved', 'bookmark', '保存済み']);
-    tabDefs.push(['tagged', 'tag', 'タグ付け']);
     const cur = S.ui.profileTab && tabDefs.some(t => t[0] === S.ui.profileTab) ? S.ui.profileTab : 'posts';
     for (const [k, ic, label] of tabDefs) tabs.append(el('button', { class: k === cur ? 'active' : '', onclick: () => { S.ui.profileTab = k; update(); } }, icon(ic), el('span', { class: 'label' }, label)));
     let items = [];
     if (cur === 'posts') items = posts;
     else if (cur === 'reels') items = posts.filter(isVideoPost);
-    else if (cur === 'saved') items = Object.entries(S.priv.saves || {}).sort((a, b) => b[1] - a[1]).map(([id]) => postOf(id)).filter(Boolean);
-    else if (cur === 'tagged') items = Object.values(allPostsMap()).filter(p => p.authorId !== uidArg && (p.mentions || []).includes(u.username)).sort((a, b) => b.createdAt - a.createdAt);
     gridOf(grid, items);
     clear(empty);
     if (!items.length) {
-      const msgs = { posts: self ? ['写真や動画をシェアしよう', 'あなたの投稿はここに並びます。', el('button', { class: 'btn primary', onclick: () => openCreateMenu() }, '最初の投稿を作成')] : ['投稿はまだありません', ''], reels: ['リールはまだありません', ''], saved: ['保存した投稿', 'ブックマークした投稿は、あなただけが見られます。'], tagged: ['タグ付けされた投稿', `@${u.username} とメンションされた投稿がここに表示されます。`] };
+      const msgs = { posts: self ? ['写真や動画をシェアしよう', 'あなたの投稿はここに並びます。', el('button', { class: 'btn primary', onclick: () => openCreateMenu() }, '最初の投稿を作成')] : ['投稿はまだありません', ''], reels: ['リールはまだありません', ''] };
       const [t, d, a] = msgs[cur];
-      empty.append(emptyState(cur === 'posts' ? 'camera' : cur === 'reels' ? 'reels' : cur === 'saved' ? 'bookmark' : 'tag', t, d, a));
+      empty.append(emptyState(cur === 'posts' ? 'camera' : 'reels', t, d, a));
     }
   };
   update();
@@ -403,7 +397,6 @@ function settingsView() {
   const item = (ic, title, sub, onClick) => el('button', { class: 'item', onclick: onClick }, icon(ic), el('div', { class: 't' }, title, sub ? el('small', {}, sub) : null), icon('chevR', 's'));
   if (S.uid) {
     list.append(item('user', 'プロフィールを編集', 'ユーザー名・名前・自己紹介・アイコン', () => openEditProfile()));
-    list.append(item('bookmark', '保存済み', 'ブックマークした投稿', () => { S.ui.profileTab = 'saved'; openProfile(S.uid); }));
     list.append(item('heart', 'いいねした投稿', '', () => openLikedPosts()));
     list.append(item('eye', '非表示にした投稿', `${Object.keys(S.priv.hiddenPosts || {}).length}件`, () => openHiddenPosts()));
     list.append(item('bell', 'お知らせを既読にする', '', () => { markNotifsSeen(); toast('お知らせを既読にしました', 'check'); }));
@@ -452,7 +445,7 @@ function openAccessInfo() {
 }
 function openAbout() {
   const body = el('div', { class: 'about' });
-  body.append(el('b', {}, 'KENGO FRIEND SNS'), el('p', {}, '友人だけのクローズドなタイムライン。写真・動画の投稿、複数枚のカルーセル、フィルター、ストーリーズ、リール、いいね、コメントと返信、保存、フォロー、検索とハッシュタグ、お知らせ、ダイレクトメッセージとグループチャットに対応しています。'),
+  body.append(el('b', {}, 'KENGO FRIEND SNS'), el('p', {}, '友人だけのクローズドなタイムライン。写真・動画の投稿、複数枚のカルーセル、フィルター、ストーリーズ、リール、いいね、コメントと返信、フォロー、検索とハッシュタグ、お知らせ、ダイレクトメッセージとグループチャットに対応しています。'),
     el('dl', {}, el('dt', {}, 'メンバー'), el('dd', { class: 'num' }, `${Object.keys(S.users).length}人`), el('dt', {}, '投稿'), el('dd', { class: 'num' }, `${Object.keys(allPostsMap()).length}件`), el('dt', {}, 'ストーリーズ'), el('dd', {}, '投稿から24時間で自動的に消えます'), el('dt', {}, '保存先'), el('dd', {}, S.mode === 'api' ? '専用サーバー（参加者全員に同期）' : S.mode === 'cloud' ? '共有データベース（参加者全員に同期）' : 'このブラウザ（ローカルモード）')));
   const m = modalFrame({ title: 'このSNSについて', left: closeBtn(() => close()), body, size: 'md' });
   const close = openModal(m, { autofocus: false });
