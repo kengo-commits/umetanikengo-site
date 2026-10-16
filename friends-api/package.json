@@ -1,0 +1,15 @@
+{
+  "name": "kengo-friend-sns-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "KENGO FRIEND SNS backend: Cloudflare Worker + D1 + R2",
+  "scripts": {
+    "dev": "wrangler dev --local --port 8787",
+    "deploy": "wrangler deploy",
+    "migrate:local": "wrangler d1 migrations apply kengo-friend-sns --local",
+    "migrate:remote": "wrangler d1 migrations apply kengo-friend-sns --remote"
+  },
+  "devDependencies": {
+    "wrangler": "4.146.0"
+  }
+}

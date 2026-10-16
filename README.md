@@ -25,6 +25,9 @@ Instagram に接続できなかったときは、前回の投稿をそのまま�
 | `world/` | SYNESTHESIA WORLD のページ。`world/news.json` は毎朝のニュース |
 | `scripts/fetch_instagram.py` | Instagram から投稿を取得するプログラム |
 | `.github/workflows/deploy.yml` | 自動更新と公開の設定 |
+| `friends-app/` | KENGO FRIEND SNS（友人だけのSNS）の画面。`/friends/app/` として公開されます |
+| `friends-api/` | KENGO FRIEND SNS の裏側（Cloudflare Worker + D1 + R2）。`data/friends-api.json` に公開先のアドレスが記録されます |
+| `.github/workflows/friends-api.yml` | KENGO FRIEND SNS の裏側を Cloudflare に配備する設定 |
 
 ## 初回の設定（1回だけ）
 
@@ -73,3 +76,33 @@ Instagram アプリの「設定とアクティビティ」→「アカウント�
 - **先頭に固定する投稿**は、`data/instagram-settings.json` の `pinned` に投稿URLの `/p/` の後ろの文字列を並べます。Instagram のプロフィールで固定表示している投稿と同じものにしておくと、並び順がプロフィールとそろいます（API からは固定表示の情報が取れないため）。
 - **表示件数**は同じファイルの `count` で変えられます（初期値 12）。
 - 文章や写真を直したいときは、`data/` と `images/` を更新します。
+
+## KENGO FRIEND SNS（友人だけのSNS）
+
+`https://www.kengo-umetani.com/friends/` が入口ページ、`/friends/app/` が本体です。投稿やメッセージのデータは Cloudflare（D1）に、写真・動画は Cloudflare R2 に保存されます。無料枠（R2 は 10GB、Worker は1日10万リクエスト）の範囲なら料金はかかりません。
+
+### 初回の設定（1回だけ）
+
+1. https://dash.cloudflare.com/ でアカウントを作ります（無料）。
+2. 左メニューの **Workers & Pages** を開きます。初回はサブドメイン（例：`kengo-umetani`）を決める画面が出るので登録します。
+3. 左メニューの **R2 Object Storage** を開き、案内に従って R2 を有効にします（支払い情報の登録が求められますが、無料枠の範囲では請求されません）。
+4. 右上のプロフィール → **API Tokens** → **Create Token** → テンプレート **Edit Cloudflare Workers** を選び、権限に次の2つを追加して作成します。
+   - **Account / D1 / Edit**
+   - **Account / Workers R2 Storage / Edit**
+   表示されたトークンをコピーします（この画面を閉じると二度と表示されません）。
+5. ダッシュボードの **Workers & Pages** 右側（または **Overview**）にある **Account ID** をコピーします。
+6. GitHub のリポジトリで **Settings → Secrets and variables → Actions → New repository secret** から、次の2つを登録します。
+
+   | 名前 | 中身 |
+   |---|---|
+   | `CLOUDFLARE_API_TOKEN` | 手順4のトークン |
+   | `CLOUDFLARE_ACCOUNT_ID` | 手順5の Account ID |
+
+7. **Actions** タブで「Deploy FRIEND SNS API」を選び、**Run workflow** を押します。データベースと保存場所が自動で作られ、裏側が配備され、サイトが再公開されます（5分ほど）。
+8. `https://www.kengo-umetani.com/friends/app/` を開き、**最初のメンバー（管理者）として登録**します。このとき友人に伝える**合言葉**を決めます。
+
+### ふだんの使い方
+
+- 友人には「`https://www.kengo-umetani.com/friends/`」と「合言葉」を伝えるだけで参加できます。
+- 合言葉の変更、メンバーの利用停止、パスワードの再設定、容量の確認は、アプリの **その他 → 設定**（管理者のみ表示）から行えます。
+- `friends-api/` や `friends-app/` を変更して main に push すると、裏側とサイトが自動で更新されます。

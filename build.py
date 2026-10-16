@@ -81,7 +81,6 @@ DOMAIN = SITE.get('domain', 'www.kengo-umetani.com')
 PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'model/', 'VISION': 'vision/', 'ABOUT': 'about/', 'PRIVACY': 'privacy/', 'COOKIE': 'cookie/', "KENGO'S SYNESTHESIA": 'synesthesia-world/', 'PRESS': 'press/'}
 # pages that are published but kept out of the menu, the sitemap and search engines (invitation-only spaces)
 HIDDEN = {'FRIENDS': 'friends/'}
-FRIEND_SNS = 'https://claude.ai/artifact/GwgUJqQjiyiADDzm7YqJdL'
 # ---------- structured data: lets search engines and AI assistants identify the person, his roles and works ----------
 SITE_URL = f'https://{DOMAIN}/'
 PERSON_ID = SITE_URL + '#person'
@@ -494,6 +493,42 @@ def vision(root):
     return page('VISION', 'VISION | KENGO UMETANI OFFICIAL', 'VISION. ブランドコンセプト設計からマーケティング、クリエイティブ、プロモーションまでを一気通貫で担い、総合的なクリエイティブディレクションを行います。', '\n'.join(b), root)
 
 
+# ---------- FRIEND SNS app (/friends/app/): single page built from friends-app/src + the API's shared mutations ----------
+FRIENDS_APP_SRC = ['03_core.js', '03b_stores.js', '04_state.js', '04b_actions.js', '05_ui.js', '06_views.js', '07_flows.js', '08_auth.js']
+
+
+def friends_app():
+    src = ROOT / 'friends-app/src'
+    head = (src / '01_head.html').read_text(encoding='utf-8')
+    head = '\n'.join(l for l in head.splitlines() if 'claude:viewport-fit-sides' not in l)
+    body = (src / '02_body.html').read_text(encoding='utf-8')
+    js = re.sub(r'^export ', '', (ROOT / 'friends-api/src/mutations.js').read_text(encoding='utf-8'), flags=re.M)
+    js += ''.join((src / f).read_text(encoding='utf-8') for f in FRIENDS_APP_SRC)
+    cfg_path = ROOT / 'data/friends-api.json'
+    cfg = json.load(open(cfg_path, encoding='utf-8')) if cfg_path.exists() else {}
+    setup = f'<script>window.KFS_API={json.dumps(cfg["url"])};</script>' if cfg.get('url') else '<script>window.KFS_PENDING=true;</script>'
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f6f5f2">
+<link rel="icon" href="https://{DOMAIN}/favicon.svg" type="image/svg+xml">
+<style>:root{{color-scheme:light}}body{{margin:0}}img{{max-width:100%}}[hidden]{{display:none!important}}</style>
+{head}
+</head>
+<body>
+{body}
+{setup}
+<script>
+{js}
+</script>
+</body>
+</html>
+"""
+
+
 # ---------- FRIEND SNS (invitation only; not in the menu, the sitemap or search engines) ----------
 FRIENDS_INTRO = ([
     'KENGO FRIEND SNS は、招待した友人だけが参加できるクローズドなタイムラインです。',
@@ -501,23 +536,25 @@ FRIENDS_INTRO = ([
     'KENGO FRIEND SNS is a closed timeline open only to invited friends.',
     'Photo and video posts, stories that disappear after 24 hours, reels, likes and comments, saves, follows, hashtag search, notifications, direct messages and group chats. Everyday moments that stay off the public feed, shared only with friends.'])
 FRIENDS_JOIN = ([
-    '1. 梅谷から届く招待メールを受け取ります。',
-    '2. 「SNSを開く」から、招待されたアカウントでサインインします。',
-    '3. ユーザー名とアイコンを設定すると、タイムラインが表示されます。'], [
-    '1. Receive the invitation email from Kengo.',
-    '2. Press "OPEN KENGO FRIEND SNS" and sign in with the invited account.',
-    '3. Set your username and profile picture, and the timeline appears.'])
+    '1. 梅谷から「合言葉」を受け取ります。',
+    '2. 「SNSを開く」から「参加する」を選び、合言葉・ユーザー名・パスワードを入力します。',
+    '3. 登録が終わると、そのままタイムラインが表示されます。次回からはユーザー名とパスワードでサインインしてください。'], [
+    '1. Receive the passphrase from Kengo.',
+    '2. Press "OPEN KENGO FRIEND SNS", choose "Join" and enter the passphrase, a username and a password.',
+    '3. The timeline appears as soon as you register. Next time, sign in with your username and password.'])
 FRIENDS_NOTES = ([
-    'SNS本体は別のタブで開きます。招待されていないアカウントでは閲覧できません。',
+    '合言葉を知らない人は参加できません。合言葉は他の人に教えないでください。',
     '写真は自動で最適化されます。動画はMP4またはWebM形式で、1ファイル20MBまでです。',
-    'ストーリーズは投稿から24時間で自動的に消えます。'], [
-    'The SNS opens in a separate tab. Accounts without an invitation cannot view it.',
+    'ストーリーズは投稿から24時間で自動的に消えます。',
+    'パスワードを忘れたときは、梅谷に再設定を依頼してください。'], [
+    'Nobody can join without the passphrase. Please do not pass it on.',
     'Photos are optimised automatically. Videos must be MP4 or WebM, up to 20 MB per file.',
-    'Stories disappear automatically 24 hours after posting.'])
+    'Stories disappear automatically 24 hours after posting.',
+    'If you forget your password, ask Kengo to reset it.'])
 
 
 def friends(root):
-    cta = f'<a class="more" href="{FRIEND_SNS}" target="_blank" rel="noopener">OPEN KENGO FRIEND SNS / SNSを開く ↗</a>'
+    cta = f'<a class="more" href="{root}friends/app/index.html">OPEN KENGO FRIEND SNS / SNSを開く →</a>'
     b = [row(show(['friends-1', 'friends-2'], 'KENGO FRIEND SNS の画面 / KENGO FRIEND SNS screens', root, first_lazy=False, prio=True),
              '<h1 class="h2">KENGO FRIEND SNS<span lang="ja">友人だけのクローズドなタイムライン</span></h1>' + bi(*FRIENDS_INTRO) + cta, 'first')]
     b.append(row('<h2 class="label">参加方法<span>HOW TO JOIN</span></h2>', bi(*FRIENDS_JOIN) + cta, 'text'))
@@ -728,6 +765,8 @@ if __name__ == '__main__':
     for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie), ('friends', friends)]:
         os.makedirs(f'{OUT}/{name}', exist_ok=True)
         open(f'{OUT}/{name}/index.html', 'w', encoding='utf-8').write(fn('../'))
+    os.makedirs(f'{OUT}/friends/app', exist_ok=True)
+    open(f'{OUT}/friends/app/index.html', 'w', encoding='utf-8').write(friends_app())
     # artifact entry page: same HOME, without the document skeleton (the Artifact host adds it)
     if os.environ.get('ARTIFACT_OUT'):
         open(os.environ['ARTIFACT_OUT'], 'w', encoding='utf-8').write(home('', skeleton=False))

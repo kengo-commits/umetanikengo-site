@@ -1,0 +1,21 @@
+name = "kengo-friend-sns"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[vars]
+# Browser origins allowed to call this API (comma separated).
+ALLOWED_ORIGINS = "https://www.kengo-umetani.com,https://kengo-umetani.com,https://kengo-commits.github.io,http://localhost:8788,http://127.0.0.1:8788"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kengo-friend-sns"
+database_id = "00000000-0000-0000-0000-000000000000"   # replaced by the deploy workflow
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "kengo-friend-sns-media"
+
+[observability]
+enabled = true

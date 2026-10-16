@@ -3,3 +3,6 @@ dist/
 __pycache__/
 .DS_Store
 ig-out/
+friends-api/node_modules/
+friends-api/.wrangler/
+friends-api/deploy.log
