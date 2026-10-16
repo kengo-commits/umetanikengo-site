@@ -90,13 +90,14 @@ Instagram アプリの「設定とアクティビティ」→「アカウント�
    - **Account / D1 / Edit**
    - **Account / Workers R2 Storage / Edit**
    表示されたトークンをコピーします（この画面を閉じると二度と表示されません）。
-5. ダッシュボードの **Workers & Pages** 右側（または **Overview**）にある **Account ID** をコピーします。
-6. GitHub のリポジトリで **Settings → Secrets and variables → Actions → New repository secret** から、次の2つを登録します。
+5. GitHub のリポジトリで **Settings → Secrets and variables → Actions → New repository secret** から、次を登録します（上の欄 Name に名前、下の欄 Secret に中身）。
 
    | 名前 | 中身 |
    |---|---|
    | `CLOUDFLARE_API_TOKEN` | 手順4のトークン |
-   | `CLOUDFLARE_ACCOUNT_ID` | 手順5の Account ID |
+
+   Account ID（ダッシュボードのアドレスの先頭にある32文字）は `.github/workflows/friends-api.yml` の `CLOUDFLARE_ACCOUNT_ID` に書いてあります。アカウントを変えたときはそこを書き換えます。
+6. （この番号は欠番）
 
 7. **Actions** タブで「Deploy FRIEND SNS API」を選び、**Run workflow** を押します。データベースと保存場所が自動で作られ、裏側が配備され、サイトが再公開されます（5分ほど）。
 8. `https://www.kengo-umetani.com/friends/app/` を開き、**最初のメンバー（管理者）として登録**します。このとき友人に伝える**合言葉**を決めます。
