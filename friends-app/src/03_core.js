@@ -131,6 +131,10 @@ const ICONS = {
   arrowR: '<path d="M4 12h16M14 6l6 6-6 6"/>',
   cloud: '<path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/>',
   device: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M10 18h4"/>',
+  music: '<path d="M9 18V6l11-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+  prev: '<path d="M6 5v14M19 5 8 12l11 7z" fill="currentColor"/>',
+  next: '<path d="M18 5v14M5 5l11 7-11 7z" fill="currentColor"/>',
+  shuffle: '<path d="M3 7h3l9 10h6M3 17h3l2-2M15 7h6"/><path d="m18 4 3 3-3 3M18 14l3 3-3 3"/>',
 };
 function iconHTML(name, cls = '', fill = false) {
   const body = ICONS[name] || ICONS.info;

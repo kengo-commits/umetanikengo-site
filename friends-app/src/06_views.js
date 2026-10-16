@@ -10,6 +10,7 @@ function navDefs() {
     { name: 'search', label: '検索', icon: 'search' },
     { name: 'explore', label: '発見', icon: 'explore' },
     { name: 'reels', label: 'リール', icon: 'reels' },
+    { name: 'music', label: 'MUSIC', icon: 'music' },
     { name: 'messages', label: 'メッセージ', icon: 'send', badge: unreadThreadCount() },
     { name: 'notifications', label: 'お知らせ', icon: 'heart', badge: unreadNotifCount() },
     { name: 'create', label: '作成', icon: 'plus', action: () => openCreateMenu() },
@@ -43,7 +44,7 @@ function renderChrome() {
   top.append(acts);
   const tab = $('#tabbar'); clear(tab);
   const tabs = [
-    { name: 'home', icon: 'home' }, { name: 'search', icon: 'search' }, { name: 'create', icon: 'plus', action: () => openCreateMenu() }, { name: 'reels', icon: 'reels' }, { name: 'profile', avatar: true },
+    { name: 'home', icon: 'home' }, { name: 'search', icon: 'search' }, { name: 'create', icon: 'plus', action: () => openCreateMenu() }, { name: 'music', icon: 'music' }, { name: 'profile', avatar: true },
   ];
   for (const d of tabs) {
     const b = el('button', { class: isActive(d) ? 'active' : '', 'aria-label': d.name, onclick: () => (d.action ? d.action() : d.name === 'profile' ? (S.uid ? openProfile(S.uid) : toast('サインインが必要です')) : go(d.name)) });
@@ -69,6 +70,7 @@ function renderRail() {
 let currentView = null;
 function render() {
   renderChrome();
+  try { renderPlayer(); } catch (e) { console.error(e); }
   const main = $('#main');
   const key = S.gate ? 'gate' : routeKey(S.route);
   if (!currentView || currentView.key !== key) {
@@ -91,6 +93,7 @@ function buildView(r) {
     case 'search': return searchView();
     case 'explore': return exploreView();
     case 'reels': return reelsView();
+    case 'music': return musicView();
     case 'messages': return messagesView();
     case 'notifications': return notificationsView();
     case 'profile': return profileView(r.params.uid);
@@ -179,7 +182,7 @@ function exploreView() {
   const banner = modeBanner(); if (banner) root.append(banner);
   const grid = el('div', { class: 'explore-grid' });
   const empty = el('div');
-  root.append(el('h2', { class: 'page-title' }, '発見'), grid, empty);
+  root.append(el('h2', { class: 'page-title' }, el('span', { class: 'grow' }, '発見'), el('button', { class: 'btn sm', onclick: () => go('reels') }, icon('reels'), 'リール')), grid, empty);
   const update = () => {
     const posts = explorePosts();
     keyedList(grid, posts, p => p.id, (p) => tileEl(p, { tall: isReel(p) && posts.indexOf(p) % 7 === 2 }), (n, p) => n._update && n._update(p));

@@ -4,10 +4,10 @@ import { KFS_MUT as M } from './mutations.js';
 const JSON_LIMIT = 256 * 1024;
 const DOC_LIMIT = 256 * 1024;
 const MEDIA_LIMIT = 20 * 1024 * 1024;
-const MEDIA_TYPES = new Set(['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm']);
+const MEDIA_TYPES = new Set(['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm', 'audio/mpeg', 'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/wav', 'audio/x-wav', 'audio/ogg', 'audio/flac', 'audio/webm']);
 const TOKEN_DAYS = 180;
 const PBKDF2_ITER = 6000;
-const PUBLIC_COLS = ['users', 'posts', 'comments', 'likes', 'follows', 'stories', 'storyviews'];
+const PUBLIC_COLS = ['users', 'posts', 'comments', 'likes', 'follows', 'stories', 'storyviews', 'tracks'];
 const SELF_COLS = new Set(['users', 'likes', 'follows', 'stories', 'storyviews']);
 const USERNAME_RE = /^[a-z0-9](?:[a-z0-9._]{1,28}[a-z0-9])?$/;
 
@@ -252,6 +252,21 @@ async function putDocRoute(req, env, me, col, id) {
     };
     return json(await putDoc(env, 'posts', id, doc, doc.authorId));
   }
+  if (col === 'tracks') {
+    const cur = await getDoc(env, 'tracks', id);
+    if (cur && cur.ownerId !== me.uid && !me.isOwner) throw denied();
+    if (!cur && !/^t[a-z0-9]{6,40}$/.test(id)) throw bad('曲IDが不正です');
+    const mediaId = cur ? cur.media.id : String(body.media && body.media.id || '').slice(0, 64);
+    if (!mediaId) throw bad('音声ファイルがありません');
+    const title = clean(body.title, 120).trim(); if (!title) throw bad('曲名を入力してください');
+    const doc = {
+      ownerId: cur ? cur.ownerId : me.uid, title, artist: clean(body.artist, 120).trim(), note: clean(body.note, 300),
+      media: { id: mediaId, duration: Number((body.media && body.media.duration) || (cur && cur.media.duration) || 0) || 0, type: 'audio' },
+      cover: typeof body.cover === 'string' ? body.cover.slice(0, 64) : (body.cover === null ? null : (cur ? cur.cover : null)),
+      createdAt: cur ? cur.createdAt : ts, updatedAt: ts,
+    };
+    return json(await putDoc(env, 'tracks', id, doc, doc.ownerId));
+  }
   throw denied('このコレクションには直接書き込めません');
 }
 async function deleteDocRoute(env, me, col, id) {
@@ -262,6 +277,14 @@ async function deleteDocRoute(env, me, col, id) {
     const ts = now();
     await env.DB.batch([delStmt(env, 'posts', id, ts), delStmt(env, 'comments', id, ts)]);
     for (const m of cur.media || []) { for (const key of [m.id, m.poster]) if (key) { try { await env.MEDIA.delete(key); await env.DB.prepare('DELETE FROM media WHERE id = ?').bind(key).run(); } catch (e) { /* best effort */ } } }
+    return json({ ok: true });
+  }
+  if (col === 'tracks') {
+    const cur = await getDoc(env, 'tracks', id);
+    if (!cur) return json({ ok: true });
+    if (cur.ownerId !== me.uid && !me.isOwner) throw denied();
+    await delStmt(env, 'tracks', id, now()).run();
+    for (const key of [cur.media && cur.media.id, cur.cover]) if (key) { try { await env.MEDIA.delete(key); await env.DB.prepare('DELETE FROM media WHERE id = ?').bind(key).run(); } catch (e) { /* best effort */ } }
     return json({ ok: true });
   }
   throw denied();

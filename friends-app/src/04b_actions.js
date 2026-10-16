@@ -1,7 +1,7 @@
 /* ---------- Domain actions (store-agnostic) ---------- */
 function putLocal(col, doc) {
   if (!doc) return;
-  const map = { users: S.users, posts: S.posts, comments: S.comments, likes: S.likes, follows: S.follows, stories: S.stories, storyviews: S.storyviews, threads: S.threads }[col];
+  const map = { users: S.users, posts: S.posts, comments: S.comments, likes: S.likes, follows: S.follows, stories: S.stories, storyviews: S.storyviews, threads: S.threads, tracks: S.tracks }[col];
   if (map) map[doc.id] = doc;
   invalidate();
 }
@@ -51,6 +51,20 @@ async function editPost(id, patch) {
 async function deletePost(id) {
   await S.store.deletePost(id);
   delete S.posts[id]; delete S.extraPosts[id]; delete S.comments[id]; invalidate();
+}
+async function createTrack(p) {
+  const up = await S.store.upload(p.file, p.mime);
+  let cover = null;
+  if (p.coverBlob) { try { cover = (await S.store.upload(p.coverBlob, 'image/jpeg')).id; } catch (e) { console.warn('cover', e); } }
+  const id = 't' + uid(14);
+  const doc = { ownerId: S.uid, title: p.title.slice(0, 120), artist: (p.artist || '').slice(0, 120), note: (p.note || '').slice(0, 300), media: { id: up.id, duration: Math.round(p.duration || 0), type: 'audio' }, cover, createdAt: now(), updatedAt: now() };
+  const saved = await S.store.createTrack(id, doc);
+  putLocal('tracks', Object.assign({ id }, doc, saved || {}));
+  return id;
+}
+async function deleteTrack(id) {
+  await S.store.deleteTrack(id);
+  delete S.tracks[id]; invalidate();
 }
 async function toggleLike(pid) {
   if (!requireWrite('いいね')) return;

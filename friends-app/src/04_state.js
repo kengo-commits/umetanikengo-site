@@ -5,7 +5,7 @@ const STORY_TTL = 24 * 60 * 60 * 1000;
 const S = {
   store: null, mode: 'boot', gate: null,
   uid: null, isOwner: false, canWrite: true, canUpload: false, readOnly: false,
-  users: {}, posts: {}, extraPosts: {}, comments: {}, likes: {}, follows: {}, stories: {}, storyviews: {}, threads: {},
+  users: {}, posts: {}, extraPosts: {}, comments: {}, likes: {}, follows: {}, stories: {}, storyviews: {}, threads: {}, tracks: {},
   priv: { saves: {}, notifSeenAt: 0, threadReads: {}, recent: [], hiddenPosts: {} },
   loaded: {}, online: new Set(), typing: {}, room: null, platformProfile: null,
   route: { name: 'home', params: {} }, history: [], apiBase: '', gateError: '', authStatus: null, justSignedUp: false,
@@ -126,6 +126,7 @@ function subscribeAll() {
   unsubs.push(st.subscribe('follows', null, d => { S.follows = indexDocs(d); invalidate(); }, onErr));
   unsubs.push(st.subscribe('stories', null, d => { S.stories = indexDocs(d); invalidate(); }, onErr));
   unsubs.push(st.subscribe('storyviews', null, d => { S.storyviews = indexDocs(d); invalidate(); }, onErr));
+  unsubs.push(st.subscribe('tracks', { orderBy: ['createdAt', 'desc'], limit: 1000 }, d => { S.tracks = indexDocs(d); S.loaded.tracks = true; invalidate(); }, onErr));
   if (S.uid) unsubs.push(st.subscribe('threads', { where: [['members', 'array-contains', S.uid]], orderBy: ['updatedAt', 'desc'], limit: 100 }, d => { S.threads = indexDocs(d); S.loaded.threads = true; invalidate(); }, onErr));
   unsubs.push(st.subscribePriv(p => { S.priv = Object.assign({ saves: {}, notifSeenAt: 0, threadReads: {}, recent: [], hiddenPosts: {} }, p || {}); S.loaded.priv = true; invalidate(); }));
 }

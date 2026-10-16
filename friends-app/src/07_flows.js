@@ -385,7 +385,7 @@ function enterApi(store) {
 }
 function resetState() {
   for (const u of unsubs.splice(0)) { try { u(); } catch (e) {} }
-  Object.assign(S, { store: null, uid: null, isOwner: false, canWrite: true, canUpload: false, readOnly: false, users: {}, posts: {}, extraPosts: {}, comments: {}, likes: {}, follows: {}, stories: {}, storyviews: {}, threads: {}, loaded: {}, online: new Set(), typing: {}, priv: { saves: {}, notifSeenAt: 0, threadReads: {}, recent: [], hiddenPosts: {} }, route: { name: 'home', params: {} }, history: [] });
+  Object.assign(S, { store: null, uid: null, isOwner: false, canWrite: true, canUpload: false, readOnly: false, users: {}, posts: {}, extraPosts: {}, comments: {}, likes: {}, follows: {}, stories: {}, storyviews: {}, threads: {}, tracks: {}, loaded: {}, online: new Set(), typing: {}, priv: { saves: {}, notifSeenAt: 0, threadReads: {}, recent: [], hiddenPosts: {} }, route: { name: 'home', params: {} }, history: [] });
   S.ui.activeThread = null; S.ui.msgsOpen = false;
   closeAllModals(); if (storyState.open) closeStoryViewer();
   currentView = null;
@@ -409,11 +409,3 @@ function renderGateExtras() {
   card.append(el('a', { class: 'btn primary lg', href: location.origin + location.pathname, target: '_blank', rel: 'noopener' }, 'KENGO FRIEND SNS を開く'));
   card.append(el('button', { class: 'btn ghost', onclick: () => { S.gate = null; S.mode = 'local'; S.store = new LocalStore(); S.store.init().then(id => { S.uid = id; S.isOwner = true; S.canUpload = true; subscribeAll(); currentView = null; render(); }); } }, 'このブラウザだけで試す（ローカルモード）'));
 }
-(function startApp() {
-  const hot = window.claude && window.claude.hot;
-  try { if (hot && hot.snapshot) hot.snapshot(() => ({ route: S.route, activeThread: S.ui.activeThread })); } catch (e) {}
-  const start = data => boot(data || {}).catch(e => { console.error(e); loadingScreen('読み込みに失敗しました。ページを再読み込みしてください。'); });
-  if (hot && hot.ready) hot.ready(start); else start((hot && hot.data) || {});
-})();
-$('#layer').addEventListener('click', e => { if (e.target === e.currentTarget) closeTopModal(); });
-window.addEventListener('resize', debounce(() => scheduleRender(), 200));

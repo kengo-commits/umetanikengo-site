@@ -72,7 +72,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ---------- Routing ---------- */
-const MAIN_ROUTES = ['home', 'search', 'explore', 'reels', 'messages', 'notifications', 'profile', 'settings'];
+const MAIN_ROUTES = ['home', 'search', 'explore', 'reels', 'music', 'messages', 'notifications', 'profile', 'settings'];
 function routeKey(r) { return r.name + ':' + JSON.stringify(r.params || {}); }
 function go(name, params = {}, opts = {}) {
   const next = { name, params };

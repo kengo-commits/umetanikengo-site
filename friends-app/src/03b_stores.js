@@ -41,6 +41,8 @@ class DocStoreBase {
   async createPost(id, doc) { await this.set('posts', id, doc); return Object.assign({ id }, doc); }
   async editPost(id, doc) { await this.set('posts', id, doc); return Object.assign({ id }, doc); }
   async deletePost(id) { await this.del('posts', id); try { await this.del('comments', id); } catch (e) { /* none */ } }
+  async createTrack(id, doc) { await this.set('tracks', id, doc); return Object.assign({ id }, doc); }
+  async deleteTrack(id) { await this.del('tracks', id); }
   async setLike(pid, on) { return this.mutate('likes', this.uid, (c, t) => KFS_MUT.likesSet(c, pid, on, t)); }
   async setFollow(target, on) { return this.mutate('follows', this.uid, (c, t) => KFS_MUT.followsSet(c, target, on, t)); }
   async removeFollower(follower) { return this.mutate('follows', follower, (c, t) => KFS_MUT.followsRemove(c, this.uid, t)); }
@@ -191,7 +193,7 @@ class ApiError extends Error { constructor(status, message, code) { super(messag
 class ApiStore {
   constructor(base, token) {
     this.mode = 'api'; this.base = base.replace(/\/+$/, ''); this.token = token; this.uid = null; this.isOwner = false;
-    this.cols = { users: {}, posts: {}, comments: {}, likes: {}, follows: {}, stories: {}, storyviews: {}, threads: {} };
+    this.cols = { users: {}, posts: {}, comments: {}, likes: {}, follows: {}, stories: {}, storyviews: {}, threads: {}, tracks: {} };
     this.subs = new Set(); this.privSubs = new Set(); this.priv = null; this.online = new Set();
     this.since = 0; this.timer = null; this.polling = false; this.lastPing = 0; this.lastActivity = now(); this.onAuthLost = null; this.onOnline = null; this.started = false; this.invite = null; this.memberCount = 0;
   }
@@ -278,6 +280,8 @@ class ApiStore {
   async saveProfile(doc) { const d = await this.req('PUT', `/docs/users/${this.uid}`, doc); this._apply('users', d); return d; }
   async createPost(id, doc) { const d = await this.req('PUT', `/docs/posts/${id}`, doc); this._apply('posts', d); return d; }
   async editPost(id, doc) { const d = await this.req('PUT', `/docs/posts/${id}`, doc); this._apply('posts', d); return d; }
+  async createTrack(id, doc) { const d = await this.req('PUT', `/docs/tracks/${id}`, doc); this._apply('tracks', d); return d; }
+  async deleteTrack(id) { await this.req('DELETE', `/docs/tracks/${id}`); delete this.cols.tracks[id]; this._notify(new Set(['tracks'])); this.syncSoon(); }
   async deletePost(id) { await this.req('DELETE', `/docs/posts/${id}`); delete this.cols.posts[id]; delete this.cols.comments[id]; this._notify(new Set(['posts', 'comments'])); this.syncSoon(); }
   async setLike(pid, on) { const r = await this.req('POST', '/ops/like.set', { postId: pid, on }); this._apply('likes', r.doc); return r.doc; }
   async setFollow(target, on) { const r = await this.req('POST', '/ops/follow.set', { targetId: target, on }); this._apply('follows', r.doc); return r.doc; }

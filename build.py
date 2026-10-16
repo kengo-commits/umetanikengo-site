@@ -494,7 +494,7 @@ def vision(root):
 
 
 # ---------- FRIEND SNS app (/friends/app/): single page built from friends-app/src + the API's shared mutations ----------
-FRIENDS_APP_SRC = ['03_core.js', '03b_stores.js', '04_state.js', '04b_actions.js', '05_ui.js', '06_views.js', '07_flows.js', '08_auth.js']
+FRIENDS_APP_SRC = ['03_core.js', '03b_stores.js', '04_state.js', '04b_actions.js', '05_ui.js', '06_views.js', '07_flows.js', '08_auth.js', '09_music.js', '99_start.js']
 
 
 def friends_app():
