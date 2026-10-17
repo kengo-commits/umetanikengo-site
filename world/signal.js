@@ -167,8 +167,23 @@
     const g = document.getElementById("signals"); if (!g) return;
     g.innerHTML = "";
     days.forEach(d => { const m = meta(d.date), f = document.createElement("figure"); f.className = "sg"; f.innerHTML = `<canvas aria-label="${E(m.label)}"></canvas><figcaption><span class="no">S.${String(m.no).padStart(3, "0")}</span><span class="t">${E(fmt(d.date))} · ${E(m.id)}</span></figcaption>`; g.appendChild(f); });
-    requestAnimationFrame(() => [...g.querySelectorAll("canvas")].forEach((cv, i) => { const [cx, W, H] = fit(cv); draw(cx, W, H, days[i], 0, { small: true }); }));
+    requestAnimationFrame(() => [...g.querySelectorAll("canvas")].forEach((cv, i) => { const [cx, W, H] = fit(cv); draw(cx, W, H, days[i], 0, { small: true }); watch(cv, i, cx, W, H); }));
   }
+  /* archive pieces move only while they are on screen (and the tab is visible): the number of drawings per second
+     stays the same however many days the archive holds */
+  const live = new Map();
+  const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { const v = live.get(e.target); if (v) v.on = e.isIntersecting; }), { rootMargin: "80px" }) : null;
+  function watch(cv, i, cx, W, H) { if (!io) return; live.set(cv, { i, cx, W, H, on: false }); io.observe(cv); }
+  const galleryStill = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let gLast = 0;
+  function galleryLoop(ts) {
+    if (!galleryStill && !document.hidden && ts - gLast > 40) {   // about 25 frames a second
+      gLast = ts;
+      live.forEach((v, cv) => { if (v.on && cv.isConnected && days[v.i]) draw(v.cx, v.W, v.H, days[v.i], ts / 1000, { small: true }); else if (!cv.isConnected) { live.delete(cv); io.unobserve(cv); } });
+    }
+    requestAnimationFrame(galleryLoop);
+  }
+  requestAnimationFrame(galleryLoop);
   try { load(JSON.parse(document.getElementById("news-data").textContent)); } catch (e) {}
   try { fetch("news.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(N => { if (N) load(N); }).catch(() => {}); } catch (e) {}
   let gw = 0; addEventListener("resize", () => { const g = document.getElementById("signals"); if (g && Math.abs(g.clientWidth - gw) > 40) { gw = g.clientWidth; gallery(); } });
