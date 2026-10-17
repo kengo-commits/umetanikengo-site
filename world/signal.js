@@ -8,7 +8,26 @@
   const TAU = Math.PI * 2;
   const hash = s => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
   const rng = a => () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
-  const W8 = a => `rgba(255,255,255,${a})`;
+  /* Colour: a film-like grade instead of white on black — deep shadows, a cool and a warm tone, ivory highlights,
+     the way a good colour photograph holds together. Marks are still drawn by "brightness" (0–1); the brightness picks
+     the tone (shadow → cool → warm → highlight) and the opacity. One of six grades per day, chosen by the date. */
+  const FILMS = [
+    { name: "chrome",  bg: [22, 19, 16], shadow: [72, 62, 58],  cool: [92, 120, 124],  warm: [200, 110, 68],  hi: [246, 233, 210] },
+    { name: "forest",  bg: [14, 19, 16], shadow: [48, 68, 54],  cool: [94, 140, 112],  warm: [216, 170, 94],  hi: [236, 231, 208] },
+    { name: "harbour", bg: [15, 18, 24], shadow: [58, 70, 94],  cool: [108, 146, 182], warm: [208, 142, 108], hi: [238, 232, 222] },
+    { name: "ember",   bg: [22, 16, 14], shadow: [80, 52, 46],  cool: [130, 96, 110],  warm: [212, 96, 70],   hi: [244, 228, 214] },
+    { name: "olive",   bg: [18, 19, 13], shadow: [66, 70, 42],  cool: [128, 140, 86],  warm: [224, 184, 118], hi: [242, 236, 216] },
+    { name: "petrol",  bg: [12, 18, 20], shadow: [38, 68, 74],  cool: [70, 142, 152],  warm: [222, 160, 94],  hi: [232, 234, 224] },
+  ];
+  let FILM = FILMS[0];
+  const filmFor = date => FILMS[hash(date + "|film") % FILMS.length];
+  const mix = (u, v, f) => u.map((x, i) => Math.round(x + (v[i] - x) * f));
+  const W8 = a => {
+    const b = Math.max(0, Math.min(1, +a || 0)), F = FILM;
+    const rgb = b < .34 ? mix(F.shadow, F.cool, b / .34) : b < .67 ? mix(F.cool, F.warm, (b - .34) / .33) : mix(F.warm, F.hi, (b - .67) / .33);
+    return `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${Math.min(1, .2 + b * .85)})`;
+  };
+  const BG = () => `rgb(${FILM.bg[0]},${FILM.bg[1]},${FILM.bg[2]})`;
   function localFrac(z, when) {
     const p = new Intl.DateTimeFormat("en-GB", { timeZone: z, hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(when);
     return ((+p.find(x => x.type === "hour").value % 24) * 60 + (+p.find(x => x.type === "minute").value)) / 1440;
@@ -19,7 +38,7 @@
     const decl = 23.44 * Math.sin(TAU * (284 + n) / 365) * Math.PI / 180, l = lat * Math.PI / 180;
     return 24 / Math.PI * Math.acos(Math.max(-1, Math.min(1, -Math.tan(l) * Math.tan(decl))));
   }
-  const bg = (c, W, H) => { c.fillStyle = "#000"; c.fillRect(0, 0, W, H); };
+  const bg = (c, W, H) => { c.fillStyle = BG(); c.fillRect(0, 0, W, H); };
   const font = (c, k) => { c.font = `500 ${k.small ? 7 : Math.round(Math.max(9, Math.min(k.W, k.H) / 70))}px Helvetica, Arial, sans-serif`; };
 
   const R = [
@@ -60,7 +79,7 @@
       c.fillStyle = W8(.12); c.beginPath(); c.arc(cx, cy, mr, 0, TAU); c.fill();
       const waxing = ph < .5, rx = Math.abs(Math.cos(ph * TAU)) * mr, gib = ph > .25 && ph < .75;
       c.fillStyle = W8(.9); c.beginPath(); c.arc(cx, cy, mr, -Math.PI / 2, Math.PI / 2, !waxing); c.closePath(); c.fill();
-      c.fillStyle = gib ? W8(.9) : "#000"; c.beginPath(); c.ellipse(cx, cy, Math.max(.01, rx), mr, 0, 0, TAU); c.fill();
+      c.fillStyle = gib ? W8(.9) : BG(); c.beginPath(); c.ellipse(cx, cy, Math.max(.01, rx), mr, 0, 0, TAU); c.fill();
       if (!gib) { c.fillStyle = W8(.12); c.beginPath(); c.ellipse(cx, cy, Math.max(.01, rx), mr, 0, 0, TAU); c.fill(); }
       const grp = {}; ZONES.forEach(([n2, z]) => { const f = localFrac(z, k.when), key = Math.round(f * 1440); (grp[key] = grp[key] || [f, []])[1].push(n2); });
       Object.values(grp).forEach(([f, ns]) => { const n2 = ns.join("·"), a = f * TAU - Math.PI / 2, r1 = Rm * 1.04, r2 = Rm * 1.12; c.strokeStyle = W8(.5); c.lineWidth = 1; c.beginPath(); c.moveTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1); c.lineTo(cx + Math.cos(a) * r2, cy + Math.sin(a) * r2); c.stroke(); if (!k.small) { c.fillStyle = W8(.45); c.textBaseline = "middle"; c.textAlign = "center"; const tw = c.measureText(n2).width / 2 + 4; c.fillText(n2, Math.min(W - tw, Math.max(tw, cx + Math.cos(a) * Rm * 1.2)), cy + Math.sin(a) * Rm * 1.2); c.textAlign = "left"; } });
@@ -143,7 +162,7 @@
   function pick(date) { const n = no(date); return { no: n, recipe: R[((n - 1) % R.length + R.length) % R.length] }; }
   function draw(c, W, H, day, t, o) {
     const p = pick(day.date), k = Object.assign({ small: false, level: 0, when: new Date(day.date + "T07:30:00+09:00") }, o || {});
-    k.seed = hash(day.date + "|" + p.recipe.id); k.W = W; k.H = H;
+    k.seed = hash(day.date + "|" + p.recipe.id); k.W = W; k.H = H; FILM = filmFor(day.date);
     c.save(); p.recipe.draw(c, W, H, day, t || 0, k); c.restore();
     return p;
   }
