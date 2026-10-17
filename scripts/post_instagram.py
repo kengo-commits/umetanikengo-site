@@ -168,10 +168,45 @@ def publish(d):
     return 0
 
 
+THREADS = 'https://graph.threads.net/v1.0'
+
+
+def threads(d):
+    """The same day on Threads (THREADS_TOKEN: a Threads API user token of the posting account): the cover image
+    with a short text and the day's permalink. Skipped quietly when the token is not set."""
+    token = (os.environ.get('THREADS_TOKEN') or '').strip()
+    if not token:
+        log('THREADS_TOKEN is not set; nothing posted to Threads')
+        return 0
+    folder = IG / d
+    receipt = folder / 'threads.json'
+    if receipt.exists():
+        log(f'{d} already on Threads: {json.loads(receipt.read_text()).get("permalink", "")}')
+        return 0
+    base = SITE + d + '/'
+    cap = (folder / 'caption.txt').read_text(encoding='utf-8').strip().split('\n')
+    day_url = f"https://www.kengo-umetani.com/synesthesia-world/{d.replace('-', '/')}/"
+    text = (cap[0] + '\n\n' + next((l for l in cap[1:] if l and not l.startswith(('Plate:', '#', '—', 'Also', 'Sources', 'Cover', '元の', 'This day'))), '') + '\n\n' + day_url)[:500]
+    r = requests.post(f'{THREADS}/me/threads', data={'media_type': 'IMAGE', 'image_url': base + '1.jpg', 'text': text, 'access_token': token}, timeout=60).json()
+    cid = r.get('id')
+    if not cid:
+        log(f'Threads container failed: {r}')
+        return 0
+    time.sleep(20)
+    pub = requests.post(f'{THREADS}/me/threads_publish', data={'creation_id': cid, 'access_token': token}, timeout=60).json()
+    mid = pub.get('id')
+    info = requests.get(f'{THREADS}/{mid}', params={'fields': 'permalink,timestamp', 'access_token': token}, timeout=60).json() if mid else {}
+    receipt.write_text(json.dumps({'date': d, 'id': mid, 'permalink': info.get('permalink', ''), 'posted_at': info.get('timestamp', '')}, ensure_ascii=False, indent=1) + '\n')
+    log(f'Threads: {info.get("permalink", mid)}')
+    return 0
+
+
 if __name__ == '__main__':
     what = sys.argv[1] if len(sys.argv) > 1 else 'publish'
     d = today()
     if what == 'stage':
         stage(d)
+    elif what == 'threads':
+        sys.exit(threads(d))
     else:
         sys.exit(publish(d))

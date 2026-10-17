@@ -22,7 +22,11 @@ Instagram に接続できなかったときは、前回の投稿をそのまま�
 | `data/instagram-settings.json` | 先頭に固定する投稿・表示件数 |
 | `assets/` | 共通のデザイン（CSS）と動き（JS） |
 | `images/` | サイトの写真。`images/instagram/` は自動更新 |
-| `world/` | SYNESTHESIA WORLD のページ。`world/news.json` は毎朝のニュース |
+| `world/` | KENGO'S SYNESTHESIA のページ。`world/news.json` は毎朝のニュース、`world/plates.json` は毎日の作品、`world/weekly.json` は日曜の Weekly、`world/art/` は毎日のデジタルアートの静止画（共有用） |
+| `scripts/world_pages.py` | KENGO'S SYNESTHESIA の日付ページ（`/synesthesia-world/YYYY/MM/DD/`）、Notes / Weekly / From Japan / Objects / Rights、英語版 `/en/`、フィード（`feed.xml` `feed.json` `pins.xml`）、検索用 `search.json` を生成 |
+| `scripts/render_art.py` | 毎日のデジタルアートを OGP 用（1200×630）とストーリーズ用（1080×1920）の PNG に描き出す |
+| `scripts/weekly_report.py` | 週次レポート（`reports/`）。アクセス解析と Instagram のフォロワー数をまとめる |
+| `.github/workflows/weekly-report.yml` | 毎週月曜に週次レポートを書く設定 |
 | `scripts/fetch_instagram.py` | Instagram から投稿を取得するプログラム |
 | `.github/workflows/deploy.yml` | 自動更新と公開の設定 |
 | `friends-app/` | KENGO FRIEND SNS（友人だけのSNS）の画面。`/friends/app/` として公開されます |

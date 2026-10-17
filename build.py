@@ -83,6 +83,9 @@ PATHS = {'HOME': '', 'PROFILE': 'profile/', 'CREATIVE': 'creative/', 'MODEL': 'm
 HIDDEN = {'FRIENDS': 'friends/'}
 # ---------- structured data: lets search engines and AI assistants identify the person, his roles and works ----------
 SITE_URL = f'https://{DOMAIN}/'
+# Cloudflare Web Analytics (cookie-free). Set "cf_beacon_token" in data/site-settings.json to switch it on.
+ANALYTICS = (f'<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{{"token":"{SITE["cf_beacon_token"]}"}}\'></script>'
+             if SITE.get('cf_beacon_token') else '')
 PERSON_ID = SITE_URL + '#person'
 PERSON_LD = {
     '@type': 'Person', '@id': PERSON_ID,
@@ -253,6 +256,7 @@ addEventListener("DOMContentLoaded",()=>{{
 </head>
 <body>
 {content}
+{ANALYTICS}
 </body>
 </html>
 '''
@@ -750,6 +754,21 @@ if __name__ == '__main__':
             open(wp, 'w', encoding='utf-8').write(h)
     except Exception as e:
         print('news embed not refreshed:', e)
+    # daily pages, Notes / Weekly / From Japan / Objects / Rights, the English edition, feeds and the search index
+    world_urls = []
+    try:
+        import sys
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import world_pages
+        wp = OUT + '/synesthesia-world/index.html'
+        h = open(wp, encoding='utf-8').read()
+        world_urls, (w_head, w_weekly, w_ld) = world_pages.build_all(OUT, h, ANALYTICS)
+        h = h.replace('<!--WORLD-HEAD-->', w_head + w_ld, 1).replace('<!--WEEKLY-->', w_weekly, 1)
+        if ANALYTICS:
+            h = h.replace('</body>', ANALYTICS + '\n</body>', 1)
+        open(wp, 'w', encoding='utf-8').write(h)
+    except Exception as e:
+        print('world pages not written:', e)
     # more/ : the same page in "full list" mode (more/?v=plates|days|art), served from a subfolder
     try:
         src = open(OUT + '/synesthesia-world/index.html', encoding='utf-8').read()
@@ -774,11 +793,13 @@ if __name__ == '__main__':
     open(f'{OUT}/press/index.html', 'w', encoding='utf-8').write(press('../'))
     open(OUT + '/llms.txt', 'w', encoding='utf-8').write(llms_txt())
     open(OUT + '/llms-full.txt', 'w', encoding='utf-8').write(llms_full())
-    feed = atom_feed()
-    if feed:
-        open(OUT + '/synesthesia-world/feed.xml', 'w', encoding='utf-8').write(feed)
+    if not os.path.exists(OUT + '/synesthesia-world/feed.xml'):   # fallback if the generated pages failed
+        feed = atom_feed()
+        if feed:
+            open(OUT + '/synesthesia-world/feed.xml', 'w', encoding='utf-8').write(feed)
     open(OUT + '/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for p in PATHS.values()) + '</urlset>\n')
+        + ''.join(f'  <url><loc>https://{DOMAIN}/{p}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for p in PATHS.values())
+        + ''.join(f'  <url><loc>{u}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n' for u in world_urls) + '</urlset>\n')
     open(OUT + '/.nojekyll', 'w').write('')
     open(OUT + '/index.html', 'w', encoding='utf-8').write(home(''))
     for name, fn in [('profile', profile), ('creative', creative), ('model', model), ('vision', vision), ('about', about), ('privacy', privacy), ('cookie', cookie), ('friends', friends)]:

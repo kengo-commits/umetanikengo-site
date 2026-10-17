@@ -97,6 +97,13 @@ jobs:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
         run: python scripts/post_instagram.py publish
 
+      - name: Publish to Threads
+        if: env.SKIP != '1'
+        continue-on-error: true
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+        run: python scripts/post_instagram.py threads
+
       - name: Record the post
         if: env.SKIP != '1'
         run: |

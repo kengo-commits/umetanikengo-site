@@ -206,7 +206,7 @@
   }
   requestAnimationFrame(galleryLoop);
   try { load(JSON.parse(document.getElementById("news-data").textContent)); } catch (e) {}
-  try { fetch("news.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(N => { if (N) load(N); }).catch(() => {}); } catch (e) {}
+  if (!document.body.hasAttribute("data-static")) try { fetch("news.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(N => { if (N) load(N); }).catch(() => {}); } catch (e) {}
   let gw = 0; addEventListener("resize", () => { const g = document.getElementById("signals"); if (g && Math.abs(g.clientWidth - gw) > 40) { gw = g.clientWidth; gallery(); } });
   const cv = document.getElementById("signal"); if (!cv) return;
   let ctx, W, H; const size = () => { [ctx, W, H] = fit(cv); }; size(); addEventListener("resize", size);

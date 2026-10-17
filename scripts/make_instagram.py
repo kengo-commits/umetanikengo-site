@@ -147,7 +147,8 @@ def build(day, sig):
     if note:
         cap += [note.get('en', ''), '', note['ja'], '']
     cap += ['Also today / ほかに今日のニュース:'] + [f'— {t}' for t in others]
-    cap += ['', '元の記事へのリンクと過去のニュースは、プロフィールのリンクから。', '',
+    day_url = f"https://www.kengo-umetani.com/synesthesia-world/{day['date'].replace('-', '/')}/"
+    cap += ['', '元の記事へのリンクと過去のニュースは、プロフィールのリンクから。', f"This day's page / この日のページ: {day_url}", '',
             f'Sources: {" / ".join(sources)}', credit, '',
             '#kengossynesthesia #fashion #music #design #architecture #art #建築 #アート']
     return pages, '\n'.join(cap)
@@ -224,6 +225,11 @@ def main():
     outdir.mkdir(parents=True, exist_ok=True)
     files = asyncio.run(render(pages, outdir, f'kengos-synesthesia-{day["date"]}'))
     (outdir / 'caption.txt').write_text(caption, encoding='utf-8')
+    story = WORLD / 'art' / f"{day['date']}-story.png"
+    if story.exists():
+        import shutil
+        shutil.copy(story, outdir / 'story.png')
+        print(outdir / 'story.png', 'ok (Stories, 1080x1920)')
     try:
         print(asyncio.run(render_video(pages[0], outdir, f'kengos-synesthesia-{day["date"]}')), 'video ok')
     except Exception as e:

@@ -3,5 +3,7 @@
  "domain": "www.kengo-umetani.com",
  "_note": "公開（検索に出す）ときは noindex を false にする。domain はサイトのアドレス",
  "google_verification": "IqKK-AHK0LvGrK2WAEbt1FZlswNzZe2CdVperHjCmyI",
- "indexnow_key": "9dc82838f11c46ef8a532ce014911510"
+ "indexnow_key": "9dc82838f11c46ef8a532ce014911510",
+ "cf_beacon_token": "",
+ "_analytics": "Cloudflare Web Analytics（Cookieなし）。ダッシュボードの「サイトを追加」で出る token を cf_beacon_token に入れると、全ページに計測が入る。週次レポートには CF_API_TOKEN と CF_SITE_TAG（同じ token）を GitHub Secrets に"
 }

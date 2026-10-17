@@ -38,6 +38,13 @@ jobs:
         continue-on-error: true
         run: python scripts/add_plate.py
 
+      - name: Render the day's Digital Art to share images (OGP, Pinterest, Stories)
+        continue-on-error: true
+        run: |
+          pip install playwright >/dev/null
+          python -m playwright install --with-deps chromium >/dev/null
+          python scripts/render_art.py
+
       - name: Save refreshed token
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
@@ -52,7 +59,7 @@ jobs:
         run: |
           git config user.name "site-bot"
           git config user.email "site-bot@users.noreply.github.com"
-          git add data/instagram.json images/instagram world/plates.json world/media
+          git add data/instagram.json images/instagram world/plates.json world/media world/art
           if ! git diff --cached --quiet; then
             git commit -m "Update Instagram posts and today's artwork"
             git push
