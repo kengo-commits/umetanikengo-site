@@ -166,7 +166,9 @@
   function gallery() {
     const g = document.getElementById("signals"); if (!g) return;
     g.innerHTML = "";
-    days.forEach(d => { const m = meta(d.date), f = document.createElement("figure"); f.className = "sg"; f.innerHTML = `<canvas aria-label="${E(m.label)}"></canvas><figcaption><span class="no">S.${String(m.no).padStart(3, "0")}</span><span class="t">${E(fmt(d.date))} · ${E(m.id)}</span></figcaption>`; g.appendChild(f); });
+    const lim = Number(g.dataset.limit) || Infinity, more = document.getElementById("moreArt");
+    if (more) more.hidden = !(days.length > lim);
+    days.slice(0, lim).forEach(d => { const m = meta(d.date), f = document.createElement("figure"); f.className = "sg"; f.innerHTML = `<canvas aria-label="${E(m.label)}"></canvas><figcaption><span class="no">S.${String(m.no).padStart(3, "0")}</span><span class="t">${E(fmt(d.date))} · ${E(m.id)}</span></figcaption>`; g.appendChild(f); });
     requestAnimationFrame(() => [...g.querySelectorAll("canvas")].forEach((cv, i) => { const [cx, W, H] = fit(cv); draw(cx, W, H, days[i], 0, { small: true }); watch(cv, i, cx, W, H); }));
   }
   /* archive pieces move only while they are on screen (and the tab is visible): the number of drawings per second

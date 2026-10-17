@@ -88,6 +88,17 @@ h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
 .plh{margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;flex-wrap:wrap}
 .plh small{font-weight:400;color:var(--mute);letter-spacing:.12em}
 @media (max-width:900px){.news{grid-template-columns:minmax(0,1fr)}}
+/* VIEW MORE: the page shows the newest five of each kind; the full lists live on more/?v=... */
+.vmore{display:inline-block;margin:18px 0 0;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.vmore[hidden]{display:none}
+body.full .lede,body.full .film.signal,body.full .clocks,body.full section{display:none}
+body.full section.keep{display:block;margin-top:48px}
+body.full section.keep .vmore{display:none}
+body.full #archive .daily,body.full #archive .plh,body.full #archive > .intro{display:none}
+body.full[data-v="days"] #archive .daily,body.full[data-v="days"] #archive > .intro{display:block}
+body.full[data-v="art"] #archive .plh,body.full[data-v="art"] #archive .plh + .intro{display:block}
+body.full[data-v="art"] #archive .signals{display:grid}
+body.full #archive .signals{display:none}
 .signals{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(12px,1.6vw,20px);margin-bottom:56px}
 .sg{margin:0}
 .sg canvas{display:block;width:100%;aspect-ratio:4/5;background:#000}
@@ -180,6 +191,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <h2>Plates <small>パブリックドメイン / CC0 の作品</small></h2>
     <p class="intro">One masterpiece a day from the world's open collections, newest first. 世界の美術館が公開するパブリックドメイン／CC0の名作を、毎日1点ずつ加えています（新しいものが上）。ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の宇宙から始まりました。どれも著作権が切れた作品か、権利を放棄した画像です。触れると元の色が現れます。</p>
     <div class="plates" id="plates"></div>
+    <a class="vmore" id="morePlates" href="more/?v=plates" hidden>View more</a>
   </section>
 
   <section id="today">
@@ -642,9 +654,11 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <h2>Archive <small>毎日の記録</small></h2>
     <p class="intro">A daily record of every day's news, kept by date. 毎日のファッション・音楽・デザインのニュースを、日付ごとにすべて残しています。</p>
     <div class="daily" id="daily"></div>
+    <a class="vmore" id="moreDays" href="more/?v=days" hidden>View more</a>
     <h3 class="plh">Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small></h3>
     <p class="intro">One SYNESTHESIA DIGITAL ART for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
     <div class="signals" id="signals"></div>
+    <a class="vmore" id="moreArt" href="more/?v=art" hidden>View more</a>
   </section>
 
   <section class="sound" id="sound">
@@ -774,6 +788,18 @@ const all=Object.values(DATA).flatMap(c=>c.items);
 const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);
 const pk=all[doy%all.length]; $("#pick").textContent=pk[0]; $("#pick").href=pk[2];
 
+// Lists on this page show the newest five; more/?v=plates|days|art shows everything of one kind
+const VIEW=new URLSearchParams(location.search).get("v");
+const FULL=["plates","days","art"].includes(VIEW)?VIEW:"";
+const LIMIT=FULL?Infinity:5;
+if(FULL){document.body.classList.add("full");document.body.dataset.v=FULL;
+  const keep={plates:"plates-sec",days:"archive",art:"archive"}[FULL];document.getElementById(keep).classList.add("keep");
+  document.title=({plates:"Plates",days:"Archive",art:"Synesthesia Digital Art by Kengo"})[FULL]+" — KENGO'S SYNESTHESIA";
+  const h=document.querySelector("#"+keep+" h2");if(h&&FULL==="art"){h.innerHTML='Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small>'}
+  document.querySelectorAll(".nv a[href^='#']").forEach(a=>a.setAttribute("href","./"+a.getAttribute("href")));
+}
+{const sg=document.getElementById("signals");if(sg)sg.dataset.limit=FULL==="art"?"":"5"}
+const showMore=(id,total)=>{const a=document.getElementById(id);if(a)a.hidden=!(total>LIMIT)};
 // Daily news (data block is refreshed every morning; a news.json beside the page wins when newer)
 (function(){
   const CATS=[["fashion","Fashion"],["music","Music"],["design","Design"]];
@@ -805,7 +831,8 @@ const pk=all[doy%all.length]; $("#pick").textContent=pk[0]; $("#pick").href=pk[2
     const nt=document.getElementById("noteToday");if(nt){nt.innerHTML="";noteBlock(N.days[0],nt);const nd=document.getElementById("noteDate");if(nd)nd.textContent=fmt(N.days[0].date)}
     block(N.days[0],t,false);
     const days=N.days.slice().sort((x,y)=>x.date<y.date?1:-1);
-    days.forEach((d,i)=>{
+    showMore("moreDays",days.length);
+    days.slice(0,LIMIT).forEach((d,i)=>{
       const det=document.createElement("details"); det.className="past"; if(i===0)det.open=true;
       const s=document.createElement("summary");
       s.innerHTML=`<span>${esc(fmt(d.date))}</span><span class="lab">${d.items.length} stories</span>`;
@@ -839,6 +866,10 @@ PLATES.forEach((p,i)=>{
   c.innerHTML=`<b>P.${String(i+1).padStart(2,"0")} ${esc(p[1])}</b> — ${esc(p[2])}. ${esc(p[3])}. <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
   cr.appendChild(c);
 });
+// only the newest five plates stay on the page (the rest are on more/?v=plates); credits keep every plate
+pl.querySelectorAll("figure").forEach(f=>f.dataset.all="1");
+function trimPlates(){ const all=[...pl.querySelectorAll("figure")]; showMore("morePlates",all.length); all.forEach((f,i)=>{f.hidden=i>=LIMIT}); }
+trimPlates();
 // one new public-domain / CC0 masterpiece a day (plates.json), shown first, numbered on from the original nine
 try{fetch("plates.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(L=>{
   if(!Array.isArray(L)||!L.length)return;
@@ -853,6 +884,7 @@ try{fetch("plates.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(L=>
     c.innerHTML=`<b>P.${n} ${esc(p.title)}</b> — ${esc(meta)}. ${esc(lic)}. <a href="${esc(p.url)}" target="_blank" rel="noopener">Source</a>`;
     cr.insertBefore(c,cr.children[k]||null);
   });
+  trimPlates();
 }).catch(()=>{})}catch(e){}
 [["SYNESTHESIA DIGITAL ART by KENGO","毎日ちがうデータ（見出しの言葉、日本語要約の文字、月齢、6都市の時刻と日照時間、記事の出どころ、A〜Zの文字数、KENGO'S NOTEの文など）と、ちがう表現（波、輪、バーコード、星座、文字の格子、軌道、光の帯）を日替わりで組み合わせ、ページを開くたびにその場で描くオリジナルのアニメーション。SYNESTHESIA MUSICを再生すると音に合わせて揺れます"],["SYNESTHESIA MUSIC by KENGO — Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
 

@@ -750,6 +750,14 @@ if __name__ == '__main__':
             open(wp, 'w', encoding='utf-8').write(h)
     except Exception as e:
         print('news embed not refreshed:', e)
+    # more/ : the same page in "full list" mode (more/?v=plates|days|art), served from a subfolder
+    try:
+        src = open(OUT + '/synesthesia-world/index.html', encoding='utf-8').read()
+        os.makedirs(OUT + '/synesthesia-world/more', exist_ok=True)
+        open(OUT + '/synesthesia-world/more/index.html', 'w', encoding='utf-8').write(
+            src.replace('<head>', '<head><base href="../"><meta name="robots" content="noindex, follow">', 1))
+    except Exception as e:
+        print('more page not written:', e)
     shutil.copytree(ROOT / 'glamday', OUT + '/glamday')
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
