@@ -171,7 +171,26 @@
       host.appendChild(b);
       return b;
     }
-    var badges = selected ? [badge(diagram), badge(photo)] : [];
+    var badges = selected ? [badge(diagram)] : [];
+    var bar = sec.querySelector('.gd-floorbar');
+    function placeBar() {
+      if (!bar) return;
+      var top = 0, h = doc.querySelector('.gd-header'), nav = doc.querySelector('.gd-lp-nav');
+      if (h) top += h.getBoundingClientRect().height;
+      if (nav && window.getComputedStyle(nav).position === 'sticky') top += nav.getBoundingClientRect().height;
+      bar.style.top = Math.round(top) + 'px';
+    }
+    placeBar();
+    window.addEventListener('resize', placeBar);
+    window.addEventListener('load', placeBar);
+    var head = null;
+    var room = sec.querySelector('.gd-room');
+    if (selected && room) {
+      head = doc.createElement('div');
+      head.className = 'gd-room__head';
+      head.innerHTML = '<span class="gd-room__floor"></span><span class="gd-room__ttl">\u306e\u304a\u90e8\u5c4b</span><span class="gd-room__count"></span>';
+      room.insertBefore(head, room.firstChild);
+    }
 
     function label() {
       var floor = selected ? selected.textContent.trim().toUpperCase() : '';
@@ -215,6 +234,15 @@
       }
       var text = label();
       badges.forEach(function (b) { if (b) b.textContent = text; });
+      if (head) {
+        head.querySelector('.gd-room__floor').textContent = text;
+        var n = tabs ? tabs.querySelectorAll('.room-tab').length : 0;
+        head.querySelector('.gd-room__count').textContent = n ? n + ' ROOMS' : '';
+        if (last !== null && last !== text) {
+          head.classList.add('is-updated'); void head.offsetWidth;
+          setTimeout(function () { head.classList.remove('is-updated'); }, 80);
+        }
+      }
       if (last !== null && last !== text && !reduceMotion()) {
         [diagram, photo].forEach(function (el) { if (el) el.classList.add('is-switching'); });
         clearTimeout(fadeTimer);
@@ -232,6 +260,7 @@
       if (selected) new MutationObserver(sync).observe(selected, { childList: true, characterData: true, subtree: true });
       var dd = levels && levels.querySelector('.floor-dropdown');
       if (dd) new MutationObserver(function () { buildSeg(); sync(); }).observe(dd, { childList: true });
+      if (tabs) new MutationObserver(sync).observe(tabs, { childList: true });
       Array.prototype.forEach.call(doc.querySelectorAll('.property-tab'), function (p) {
         new MutationObserver(sync).observe(p, { attributes: true, attributeFilter: ['class'] });
       });
