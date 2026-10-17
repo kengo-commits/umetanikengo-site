@@ -739,6 +739,17 @@ if __name__ == '__main__':
     os.makedirs(OUT + '/assets')
     shutil.copytree(ROOT / 'images', OUT + '/images')
     shutil.copytree(ROOT / 'world', OUT + '/synesthesia-world')
+    # keep the page's embedded news in step with world/news.json (the morning sync may update only one of them)
+    try:
+        wp = OUT + '/synesthesia-world/index.html'
+        N = json.load(open(ROOT / 'world/news.json', encoding='utf-8'))
+        h = open(wp, encoding='utf-8').read()
+        m = re.search(r'(<script type="application/json" id="news-data">)(.*?)(</script>)', h, re.S)
+        if m and json.loads(m.group(2)).get('updated', '') < N.get('updated', ''):
+            h = h[:m.start(2)] + json.dumps(N, ensure_ascii=False).replace('</', '<\\/') + h[m.end(2):]
+            open(wp, 'w', encoding='utf-8').write(h)
+    except Exception as e:
+        print('news embed not refreshed:', e)
     shutil.copytree(ROOT / 'glamday', OUT + '/glamday')
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
