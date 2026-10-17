@@ -385,3 +385,4 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 .gd-lp-gallery .gd-gp-grid { margin-top: 48px; }
 @media (max-width: 767px) { .gd-lp-gallery .gd-gp-grid { margin-top: 32px; } }
 @media (max-width: 767px) { .gd-lp .floor-level-tab { min-width: 150px; min-height: 40px; justify-content: center; padding: 11px 20px; font-size: 13px; letter-spacing: 0.12em; } }
+.gd-lp .floor-and-room-container > .floor-plan-diagram { flex: 0 0 100%; margin: 8px 0 14px; }
