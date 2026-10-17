@@ -153,6 +153,96 @@
     }
   }
 
+  var PLAN_SPOTS = {
+    'uminonamioto/floorplan-1f.webp': { pool: [46.5, 45, 7, 19], terrace: [57.5, 49.5, 12.5, 21.5], bedroom1: [77, 26, 9, 26], bedroom2: [57.5, 35, 13, 14] },
+    'uminonamioto/floorplan-2f.webp': { living: [50, 64, 15, 16], dining: [38.5, 57, 11, 23], 'master-bedroom': [70.5, 62, 10, 17], bathroom: [66.3, 70, 4.2, 14] },
+    'asamanouta/floorplan-1f.webp': { living: [31, 57, 28, 23], fireplace: [28, 14, 11, 13], sauna: [7, 63, 16, 24] },
+    'asamanouta/floorplan-2f.webp': { living: [8, 66, 26, 20], dining: [38, 55, 18, 20], bedroom: [55, 10, 15, 38], bathroom: [70.5, 11, 9, 25] },
+    'mizunohoshi/vega_1F_floorplan.webp': { living_dining_kitchen: [20.5, 31, 38.5, 52], bed_room: [75, 34, 17, 32], woodstove: [45, 36, 13, 12] },
+    'mizunohoshi/vega_2F_floorplan.webp': { master_bed_room: [13, 17, 27, 38], bed_room_2: [71, 17, 18, 38], atrium: [42, 19, 28, 36], bath_room_3: [13, 61, 10, 18], sauna: [23, 56, 9, 10] },
+    'mizunohoshi/altair_1F_floorplan.webp': { living_dining_kitchen: [37, 4, 52, 49], bed_room: [37, 70, 32, 21], terrace_1: [1, 3, 32, 52], terrace_2: [5, 63, 30, 30], wood_stove: [37, 22, 9, 10] },
+    'mizunohoshi/altair_2F_floorplan.webp': { master_bed_room: [6, 61, 41, 36], bed_room_2: [6, 9, 42, 20], sauna: [48, 75, 12, 9] },
+    'yamanofumoto/floorplan-maple-1f.webp': { living: [19, 30, 67, 33], balcony: [19, 65, 72, 22], kitchen: [16, 12, 17, 18], stove: [19, 57, 18, 7] },
+    'yamanofumoto/floorplan-maple-2f.webp': { 'master-bed': [3, 18, 35, 45], bed: [39, 42, 54, 21], bath1: [64, 14, 29, 10], bath2: [40, 77, 27, 22], powder: [7, 77, 31, 22] },
+    'yamanofumoto/floorplan-firtree-1f.webp': { living: [30, 18, 28, 59], balcony: [62, 33, 25, 65], stove: [47, 30, 11, 14] },
+    'yamanofumoto/floorplan-firtree-2f.webp': { 'master-bed': [67, 47, 30, 37], bed: [5, 53, 39, 31], powder: [45, 62, 19, 22], soho: [83, 36, 14, 10] },
+    'yamanofumoto/floorplan-birch-1f.webp': { living: [21, 8, 34, 52], balcony: [57, 8, 23, 38], bedroom: [3, 63, 34, 25], bathroom1: [56, 70, 14, 19] },
+    'yamanofumoto/floorplan-birch-2f.webp': { 'master-bed': [5, 54, 37, 33], soho: [5, 15, 20, 11], bathroom2: [56, 46, 21, 26] },
+    'soranoniwa/floorplan.webp': { living: [23, 17, 13, 16], dining: [36, 10, 13, 18], 'master-bedroom': [80, 15, 11, 21], bathroom: [75, 8, 5, 12], terrace: [20, 33, 29, 30], fireplace: [22, 15, 5, 7] }
+  };
+
+  function initPlanSpots() {
+    var sec = doc.querySelector('.floor-plan-section');
+    if (!sec) return;
+    var img = sec.querySelector('.floor-plan-diagram > img, .floor-plan-diagram img#floorplan-diagram');
+    var tabs = sec.querySelector('.room-tabs');
+    if (!img || !tabs) return;
+    var frame = doc.createElement('span');
+    frame.className = 'gd-plan';
+    img.parentNode.insertBefore(frame, img);
+    frame.appendChild(img);
+    var layer = doc.createElement('span');
+    layer.className = 'gd-plan__spots';
+    frame.appendChild(layer);
+    var hint = doc.createElement('p');
+    hint.className = 'gd-plan__hint';
+    hint.textContent = '図面の部屋をタップすると、写真が切り替わります';
+    frame.parentNode.appendChild(hint);
+    var key = null;
+
+    function spotsFor() {
+      var src = img.getAttribute('src') || '';
+      var parts = src.split('?')[0].split('/');
+      return PLAN_SPOTS[parts.slice(-2).join('/')] || null;
+    }
+    function tabFor(id) {
+      return tabs.querySelector('.room-tab[data-room="' + id + '"]');
+    }
+    function mark() {
+      var act = tabs.querySelector('.room-tab.active');
+      var id = act ? act.getAttribute('data-room') : '';
+      Array.prototype.forEach.call(layer.children, function (b) {
+        var on = b.getAttribute('data-room') === id;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      frame.classList.toggle('has-active', !!layer.querySelector('.is-active'));
+    }
+    function render() {
+      var map = spotsFor();
+      var k = (img.getAttribute('src') || '') + '|' + tabs.textContent;
+      if (k === key) { mark(); return; }
+      key = k;
+      layer.innerHTML = '';
+      var n = 0;
+      if (map) {
+        Object.keys(map).forEach(function (id) {
+          var t = tabFor(id);
+          if (!t) return;
+          var r = map[id];
+          var b = doc.createElement('button');
+          b.type = 'button';
+          b.className = 'gd-plan__spot';
+          b.setAttribute('data-room', id);
+          b.setAttribute('data-label', t.textContent.trim());
+          b.setAttribute('aria-label', t.textContent.trim() + ' の写真を表示');
+          b.style.left = r[0] + '%'; b.style.top = r[1] + '%'; b.style.width = r[2] + '%'; b.style.height = r[3] + '%';
+          b.addEventListener('click', function () { var tt = tabFor(id); if (tt) tt.click(); });
+          layer.appendChild(b);
+          n++;
+        });
+      }
+      hint.hidden = !n;
+      mark();
+    }
+    render();
+    img.addEventListener('load', render);
+    if (window.MutationObserver) {
+      new MutationObserver(render).observe(img, { attributes: true, attributeFilter: ['src'] });
+      new MutationObserver(render).observe(tabs, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
   function initFloorPlan() {
     var sec = doc.querySelector('.floor-plan-section');
     if (!sec) return;
@@ -282,6 +372,7 @@
     initFaq();
     initAnchors();
     initFloorPlan();
+    initPlanSpots();
     initGalleryMore();
   });
 })();
