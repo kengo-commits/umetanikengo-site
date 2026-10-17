@@ -425,3 +425,6 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
   .gd-lp .gd-room__ttl { font-size: 13px; }
 }
 .gd-lp .gd-floorbar { box-shadow: 0 0 0 100vmax rgba(243,238,231,.97); clip-path: inset(0 -100vmax); border-bottom: 0; }
+.gd-lp .floor-and-room-container > .floor-plan-diagram { margin-bottom: 0; }
+.gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-main { margin-top: 6px; }
+.gd-lp .floor-plan-container:has(.gd-floorbar) .gd-room__head { margin-top: 0; }
