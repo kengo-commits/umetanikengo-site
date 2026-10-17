@@ -188,7 +188,7 @@
     if (selected && room) {
       head = doc.createElement('div');
       head.className = 'gd-room__head';
-      head.innerHTML = '<span class="gd-room__floor"></span><span class="gd-room__ttl">\u306e\u304a\u90e8\u5c4b</span><span class="gd-room__count"></span>';
+      head.innerHTML = '<span class="gd-room__floor"></span><span class="gd-room__ttl">\u306e\u304a\u90e8\u5c4b</span>';
       room.insertBefore(head, room.firstChild);
     }
 
@@ -236,8 +236,6 @@
       badges.forEach(function (b) { if (b) b.textContent = text; });
       if (head) {
         head.querySelector('.gd-room__floor').textContent = text;
-        var n = tabs ? tabs.querySelectorAll('.room-tab').length : 0;
-        head.querySelector('.gd-room__count').textContent = n ? n + ' ROOMS' : '';
         if (last !== null && last !== text) {
           head.classList.add('is-updated'); void head.offsetWidth;
           setTimeout(function () { head.classList.remove('is-updated'); }, 80);
