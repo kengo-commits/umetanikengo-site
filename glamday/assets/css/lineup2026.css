@@ -463,3 +463,17 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
   .gd-lp .floor-plan-photo .gd-room__head.is-onphoto .gd-room__floor { font-size: 15px; }
   .gd-lp .floor-plan-photo .gd-room__head.is-onphoto .gd-room__ttl { font-size: 11px; }
 }
+/* PC: plan (left) and room photo (right) side by side so both are visible together */
+@media (min-width: 1024px) {
+  .gd-lp .floor-plan-container:has(.gd-floorbar) { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 32px; align-items: start; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) > .gd-floorbar { grid-column: 1 / -1; position: static; box-shadow: none; clip-path: none; margin-bottom: 16px; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-and-room-container,
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-main,
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-top { display: contents; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-diagram { grid-column: 1; grid-row: 2; margin: 0 !important; padding: 44px 24px 20px; display: flex; flex-direction: column; justify-content: center; align-self: stretch; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-diagram .gd-fplan { align-self: center; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-diagram .gd-fplan > img { max-height: min(520px, calc(100vh - 330px)); min-height: 0; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .gd-room { grid-column: 2; grid-row: 2; margin: 0; width: auto; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .gd-room .room-tabs { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-details { grid-column: 1 / -1; grid-row: 3; margin-top: 40px; width: auto; max-width: none; }
+}
