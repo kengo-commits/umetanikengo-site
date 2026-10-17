@@ -428,3 +428,12 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 .gd-lp .floor-and-room-container > .floor-plan-diagram { margin-bottom: 0; }
 .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-main { margin-top: 6px; }
 .gd-lp .floor-plan-container:has(.gd-floorbar) .gd-room__head { margin-top: 0; }
+.gd-lp-gallery.is-collapsed .gd-gp-grid > .gd-gp-item:nth-child(n+4) { display: none; }
+.gd-lp-gallery__more { margin-top: 32px; text-align: center; }
+.gd-lp-gallery:not(.is-collapsed) .gd-lp-gallery__more { display: none; }
+.gd-lp .gd-lp-more { appearance: none; cursor: pointer; display: inline-flex; flex-direction: column; align-items: center; gap: 6px; min-width: 220px; padding: 16px 32px; border: 1px solid var(--gd-ink); background: transparent; color: var(--gd-ink); font-family: var(--gd-garamond); font-size: 15px; letter-spacing: 0.24em; text-indent: 0.24em; line-height: 1.2; transition: background .4s, color .4s; }
+.gd-lp .gd-lp-more:hover { background: var(--gd-ink); color: var(--gd-bg); }
+.gd-lp .gd-lp-more:focus-visible { outline: 1px solid var(--gd-gold); outline-offset: 3px; }
+.gd-lp .gd-lp-more__n { font-size: 11px; letter-spacing: 0.2em; text-indent: 0.2em; color: var(--gd-gold); }
+.gd-lp .gd-lp-more:hover .gd-lp-more__n { color: #e2cc98; }
+@media (max-width: 767px) { .gd-lp-gallery__more { margin-top: 24px; } .gd-lp .gd-lp-more { min-width: 200px; padding: 14px 28px; font-size: 14px; } }

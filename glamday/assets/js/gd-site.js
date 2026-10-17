@@ -267,9 +267,23 @@
     }
   }
 
+  function initGalleryMore() {
+    Array.prototype.forEach.call(doc.querySelectorAll('.gd-lp-gallery.is-collapsed'), function (sec) {
+      var btn = sec.querySelector('.gd-lp-more');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        sec.classList.remove('is-collapsed');
+        btn.setAttribute('aria-expanded', 'true');
+        var next = sec.querySelector('.gd-gp-grid > .gd-gp-item:nth-child(4)');
+        if (next) next.focus({ preventScroll: true });
+      });
+    });
+  }
+
   ready(function () {
     initFaq();
     initAnchors();
     initFloorPlan();
+    initGalleryMore();
   });
 })();
