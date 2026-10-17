@@ -453,3 +453,13 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 .gd-lp .gd-fplan__label { position: absolute; z-index: 1; padding: 4px 8px; background: #e2cc98; color: #201d1a; font-family: var(--gd-garamond); font-size: 11px; letter-spacing: 0.14em; line-height: 1.2; white-space: nowrap; pointer-events: none; transform: translateY(-100%); }
 .gd-lp .gd-fplan__label[hidden] { display: none; }
 @media (max-width: 767px) { .gd-lp .gd-fplan__label { font-size: 10px; padding: 3px 6px; } }
+/* room heading as overlay on the photo (top-left) */
+.gd-lp .floor-plan-photo .gd-room__head.is-onphoto { position: absolute; left: 0; top: 0; z-index: 2; margin: 0; padding: 10px 18px 10px 16px; gap: 10px; border: 0; border-left: 2px solid var(--gd-gold); background-color: rgba(20,17,14,.72); pointer-events: none; }
+.gd-lp .floor-plan-photo .gd-room__head.is-onphoto .gd-room__floor { color: #ecd9a8; font-size: 18px; line-height: 1; }
+.gd-lp .floor-plan-photo .gd-room__head.is-onphoto .gd-room__ttl { color: #f3eee7; font-size: 13px; line-height: 1; }
+.gd-lp .floor-plan-photo .gd-room__head.is-onphoto.is-updated { background-color: rgba(150,124,72,.92); }
+@media (max-width: 767px) {
+  .gd-lp .floor-plan-photo .gd-room__head.is-onphoto { padding: 8px 12px 8px 10px; gap: 8px; }
+  .gd-lp .floor-plan-photo .gd-room__head.is-onphoto .gd-room__floor { font-size: 15px; }
+  .gd-lp .floor-plan-photo .gd-room__head.is-onphoto .gd-room__ttl { font-size: 11px; }
+}

@@ -326,7 +326,7 @@
       head = doc.createElement('div');
       head.className = 'gd-room__head';
       head.innerHTML = '<span class="gd-room__floor"></span><span class="gd-room__ttl">\u306e\u304a\u90e8\u5c4b</span>';
-      room.insertBefore(head, room.firstChild);
+      if (photo) { head.className += ' is-onphoto'; photo.appendChild(head); } else room.insertBefore(head, room.firstChild);
     }
 
     function label() {
