@@ -184,7 +184,7 @@
 }
 </style>
   <link rel='stylesheet' href='assets/css/top2026.css?v=202610160300' media='all' />
-  <link rel='stylesheet' href='assets/css/gallery2026.css?v=202610160300' media='all' />
+  <link rel='stylesheet' href='assets/css/gallery2026.css?v=202610171945' media='all' />
 </head>
 <body class="gd-page gd-gp">
 
@@ -424,7 +424,7 @@
         <li><a href="./#styles">所有スタイル - OWNERSHIP STYLE</a></li>
         <li><a href="./#benefits">オーナー様特典 - KPG EXECUTIVE OWNER’S CLUB</a></li>
         <li><a href="./#movie">動画 - MOVIE</a></li>
-        <li><a href="./#gallery">ギャラリー - GALLERY</a></li>
+        <li><a href="./#gallery">フォトギャラリー - PHOTO GALLERY</a></li>
         <li><a href="https://glamday.jp/ownership/request.html?from=gallery-mizunohoshi">資料請求</a></li>
       </ul>
       <div class="gd-footer__contact">
@@ -573,7 +573,7 @@
   }, { rootMargin: '0px 0px -8% 0px' });
   imgs.forEach(function (img) {
     var r = img.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) return; /* 最初から見えている画像はそのまま */
+    if (r.top < window.innerHeight && r.bottom > 0) return;
     img.classList.add('gd-fade'); io.observe(img);
   });
 })();
@@ -675,7 +675,7 @@
       pushChatbotUp(false);
       return;
     }
-    var threshold = 80; /* 少しスクロールしたらすぐ表示 */
+    var threshold = 80;
     var footer = document.querySelector('footer');
     var footerInView = footer ? (footer.getBoundingClientRect().top < window.innerHeight) : false;
     if (window.scrollY > threshold && !footerInView) {
