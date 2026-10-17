@@ -26,10 +26,23 @@ WORLD = ROOT / 'world'
 OUT = ROOT / 'ig-out'
 FONTS = OUT / 'fonts'
 FONT_URL = 'https://raw.githubusercontent.com/google/fonts/main/ofl/zenkakugothicnew/{}.ttf'
+SERIF_URL = 'https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentserif/{}.ttf'
+
+# The cover headline is the name of that day's artwork, set in a different way each day
+# (the style follows the artwork number, so the sequence repeats only every 28 days):
+# bold sans / serif italic / outlined / wide serif.
+HEADLINES = (  # (css, base font size, rough width of one letter in em — long names are scaled to fit one line)
+    ('line-height:1;font-weight:700;letter-spacing:.02em;text-transform:uppercase', 84, .72),
+    ('font-family:Serif;font-style:italic;line-height:.9;font-weight:400;letter-spacing:-.01em', 112, .46),
+    ('line-height:1;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:transparent;-webkit-text-stroke:2px #000', 84, .76),
+    ('font-family:Serif;line-height:.95;font-weight:400;letter-spacing:.14em;text-transform:uppercase', 96, .78),
+)
 E = html.escape
 
 CSS = '''@font-face{font-family:Zen;src:url(../fonts/ZenKakuGothicNew-Regular.ttf)}
 @font-face{font-family:Zen;font-weight:500;src:url(../fonts/ZenKakuGothicNew-Medium.ttf)}
+@font-face{font-family:Serif;src:url(../fonts/InstrumentSerif-Regular.ttf)}
+@font-face{font-family:Serif;font-style:italic;src:url(../fonts/InstrumentSerif-Italic.ttf)}
 *{box-sizing:border-box;margin:0}
 body{width:1080px;height:1350px;background:#fff;color:#000;font-family:Inter,"Helvetica Neue",Helvetica,Arial,Zen,sans-serif;-webkit-font-smoothing:antialiased}
 .s{width:1080px;height:1350px;padding:72px 80px;display:flex;flex-direction:column;overflow:hidden}
@@ -51,6 +64,10 @@ def fonts():
         f = FONTS / f'{name}.ttf'
         if not f.exists():
             urllib.request.urlretrieve(FONT_URL.format(name), f)
+    for name in ('InstrumentSerif-Regular', 'InstrumentSerif-Italic'):
+        f = FONTS / f'{name}.ttf'
+        if not f.exists():
+            urllib.request.urlretrieve(SERIF_URL.format(name), f)
 
 
 def plates():
@@ -65,6 +82,12 @@ def frame(inner, n, total, stamp):
             f'<div class="ft"><span>kengo-umetani.com</span><span>{n:02d} / {total:02d}</span></div></div></body></html>')
 
 
+def short_title(s):
+    """Museum titles for the slide: drop parentheses, join parts with a slash."""
+    s = re.sub(r'\s*\([^)]*\)', '', s)
+    return ' / '.join(x.strip() for x in s.split(';') if x.strip())
+
+
 def plate_for(d):
     f = WORLD / 'plates.json'
     if not f.exists():
@@ -77,18 +100,24 @@ def build(day, sig):
     note = day.get('note')
     plate = plate_for(day['date'])
     stamp = date.fromisoformat(day['date']).strftime('%d %b %Y').upper()
+    weekday = date.fromisoformat(day['date']).strftime('%A').upper()
+    no = f'No. {int(sig["no"]):03d}'
+    css, base, em = HEADLINES[int(sig['no']) % len(HEADLINES)]
+    word = sig['id'] if 'uppercase' in css else sig['id'].capitalize()
+    style = f'{css};font-size:{min(base, int(900 / (len(word) * em)))}px'
     js = (WORLD / 'signal.js').as_uri()
     slides = [f'''<canvas id="sig" width="2160" height="1520" style="display:block;margin:44px -80px 0;width:1080px;height:760px;background:#000"></canvas>
 <script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);const DAY={json.dumps(day, ensure_ascii=False)};window.drawFrame=t=>SIGNAL.draw(c,1080,760,DAY,t,{{}});drawFrame(0);</script>
-<div style="margin-top:44px;display:flex;justify-content:space-between;align-items:baseline;gap:20px"><div style="font-size:76px;line-height:1.02;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Today</div><div style="font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c8c;text-align:right;max-width:520px">{E(sig["label"])}</div></div>
-<div style="margin-top:18px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art{' / Plate' if plate else ''}{' / Note' if note else ''} / Fashion / Music / Design</div>
+<div style="margin-top:40px;{style}">{E(word)}</div>
+<div style="margin-top:16px;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art by Kengo — {E(no)} · {weekday}</div>
+<div style="margin-top:22px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art{' / Plate' if plate else ''}{' / Note' if note else ''} / Fashion / Music / Design</div>
 <div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアート{'、名作' if plate else ''}{'、ノート' if note else ''}と、世界のファッション・音楽・デザイン</div>''']
     if plate:
         meta = ', '.join(x for x in (plate.get('artist'), plate.get('when')) if x) + (' — ' + plate['medium'].lower() if plate.get('medium') else '')
         img = (WORLD / 'media' / plate['file']).as_uri()
         slides.append(f'''<div class="lab">Plate</div>
-<div style="margin-top:14px;height:820px;display:flex;align-items:center;justify-content:center;background:#f4f4f4"><img src="{img}" style="max-width:100%;max-height:100%;display:block"></div>
-<div style="margin-top:30px;font-size:30px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.3">{E(plate["title"])}</div>
+<div style="margin-top:14px;height:820px;display:flex;align-items:center;justify-content:center;background:#f4f4f4"><img src="{img}" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+<div style="margin-top:30px;font-size:30px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.3">{E(short_title(plate["title"]))}</div>
 <div style="margin-top:10px;font-size:22px;letter-spacing:.04em;color:#555">{E(meta)}</div>
 <div class="src" style="margin-top:14px">{E(plate.get("license", ""))} · {E(plate.get("credit", ""))}</div>''')
     if note:
@@ -112,9 +141,9 @@ def build(day, sig):
     pages = [frame(s, k, total, stamp) for k, s in enumerate(slides, 1)]
 
     others = [i['title'] for i in day['items'] if not (note and i['url'] == note.get('url'))][:6]
-    cap = [f'TODAY — {stamp}', '']
+    cap = [f'{no} {sig["id"]} — {weekday}, {stamp}', '']
     if plate:
-        cap += [f"Plate: {plate['title']} — {', '.join(x for x in (plate.get('artist'), plate.get('when')) if x)} ({plate.get('license', '')}, {plate.get('credit', '')})", '']
+        cap += [f"Plate: {short_title(plate['title'])} — {', '.join(x for x in (plate.get('artist'), plate.get('when')) if x)} ({plate.get('license', '')}, {plate.get('credit', '')})", '']
     if note:
         cap += [note.get('en', ''), '', note['ja'], '']
     cap += ['Also today / ほかに今日のニュース:'] + [f'— {t}' for t in others]

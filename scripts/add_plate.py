@@ -44,7 +44,7 @@ def from_met():
         return {'museum': 'met', 'id': oid, 'title': o['title'], 'artist': o.get('artistDisplayName') or o.get('culture') or 'Unknown',
                 'when': o.get('objectDate') or '', 'medium': (o.get('classification') or o.get('objectName') or '').rstrip('s'),
                 'credit': 'The Metropolitan Museum of Art', 'license': 'Public domain', 'url': o.get('objectURL') or f'https://www.metmuseum.org/art/collection/search/{oid}',
-                'img': o['primaryImageSmall']}
+                'img': o.get('primaryImage') or o['primaryImageSmall']}   # full-size file, resized to 1400px below
 
 
 def from_cma():
