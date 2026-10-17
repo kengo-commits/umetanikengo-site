@@ -95,9 +95,10 @@ h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
 .plates{columns:3 260px;column-gap:clamp(8px,1.4vw,18px)}
 figure{margin:0 0 clamp(18px,2.4vw,32px);break-inside:avoid}
 figure .im{overflow:hidden;background:var(--hover)}
-figure img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.08);transition:opacity .4s ease}
-figure:hover img{filter:none}
-figure img{transition:filter .6s ease}
+/* plates come into colour as you scroll them into view, and fade back to grey when they leave */
+figure img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.08);transform:scale(1.025);transition:filter 1.4s cubic-bezier(.2,.6,.2,1),transform 1.6s cubic-bezier(.2,.6,.2,1),opacity .4s ease}
+figure.seen img{filter:none;transform:none}
+@media (prefers-reduced-motion:reduce){figure img{transition:none;transform:none}}
 figcaption{display:flex;gap:10px;padding-top:8px;text-transform:uppercase;font-size:10px;letter-spacing:.1em}
 figcaption .no{color:var(--mute)}
 figcaption .t{display:block;color:var(--ink)}
@@ -825,6 +826,10 @@ tick();setInterval(tick,15000);
 
 // Archive plates + credits
 const pl=$("#plates"), cr=$("#creditList");
+// colour appears as a plate scrolls into view (about a third of it on screen), and leaves with it
+const seeIO="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("seen",e.isIntersecting)),{threshold:.35,rootMargin:"0px 0px -6% 0px"}):null;
+const seePlates=()=>{ if(seeIO) pl.querySelectorAll("figure:not([data-seen])").forEach(f=>{f.dataset.seen="1";seeIO.observe(f)}); else pl.querySelectorAll("figure").forEach(f=>f.classList.add("seen")); };
+new MutationObserver(seePlates).observe(pl,{childList:true});
 PLATES.forEach((p,i)=>{
   const f=document.createElement("figure");
   f.innerHTML=`<div class="im"><img src="media/${p[0]}.webp" width="${p[5]}" height="${p[6]}" loading="lazy" alt="${esc(p[1]+" — "+p[2])}"></div>
