@@ -439,15 +439,17 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 @media (max-width: 767px) { .gd-lp-gallery__more { margin-top: 24px; } .gd-lp .gd-lp-more { min-width: 200px; padding: 14px 28px; font-size: 14px; } }
 .gd-lp .floor-plan-diagram .gd-plan { position: relative; display: inline-block; max-width: 100%; line-height: 0; overflow: hidden; vertical-align: top; }
 .gd-lp .floor-plan-diagram .gd-plan > img { display: block; max-width: 100%; max-height: 760px; width: auto; height: auto; }
-.gd-lp .gd-plan__spots { position: absolute; inset: 0; }
-.gd-lp .gd-plan__spot { position: absolute; appearance: none; padding: 0; margin: 0; cursor: pointer; background: rgba(226,204,152,.06); border: 1px dashed rgba(226,204,152,.55); border-radius: 2px; transition: background-color .3s, border-color .3s, box-shadow .3s; -webkit-tap-highlight-color: transparent; }
-.gd-lp .gd-plan__spot:hover { background: rgba(226,204,152,.18); border-color: rgba(226,204,152,.9); }
-.gd-lp .gd-plan__spot:focus-visible { outline: 2px solid #e2cc98; outline-offset: 2px; }
-.gd-lp .gd-plan__spot.is-active { z-index: 1; background: rgba(226,204,152,.2); border: 2px solid #e2cc98; box-shadow: 0 0 0 200vmax rgba(20,17,14,.32); }
-.gd-lp .gd-plan__spot.is-active::after { content: attr(data-label); position: absolute; left: -1px; top: -1px; padding: 4px 8px; background: #e2cc98; color: #201d1a; font-family: var(--gd-garamond); font-size: 11px; letter-spacing: 0.14em; line-height: 1.2; white-space: nowrap; pointer-events: none; }
 .gd-lp .gd-plan__hint { margin: 12px 0 0; font-family: var(--gd-mincho); font-size: 12px; letter-spacing: 0.1em; color: rgba(243,238,231,.75); text-align: center; line-height: 1.6; }
 @media (max-width: 767px) {
   .gd-lp .floor-plan-diagram .gd-plan > img { max-height: 520px; }
-  .gd-lp .gd-plan__spot.is-active::after { font-size: 10px; padding: 3px 6px; }
-  .gd-lp .gd-plan__hint { font-size: 11px; margin-top: 8px; }
+    .gd-lp .gd-plan__hint { font-size: 11px; margin-top: 8px; }
 }
+.gd-lp .gd-plan__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.gd-lp .gd-plan__dim { fill: rgba(20,17,14,.34); pointer-events: none; }
+.gd-lp .gd-plan__spot { fill: rgba(226,204,152,.06); stroke: rgba(226,204,152,.6); stroke-width: 1px; stroke-dasharray: 4 3; cursor: pointer; outline: none; transition: fill .3s, stroke .3s; -webkit-tap-highlight-color: transparent; }
+.gd-lp .gd-plan__spot:hover { fill: rgba(226,204,152,.18); stroke: rgba(226,204,152,.95); }
+.gd-lp .gd-plan__spot:focus-visible { stroke: #fff; stroke-width: 2px; stroke-dasharray: none; }
+.gd-lp .gd-plan__spot.is-active { fill: rgba(226,204,152,.16); stroke: #e2cc98; stroke-width: 2px; stroke-dasharray: none; }
+.gd-lp .gd-plan__label { position: absolute; z-index: 1; padding: 4px 8px; background: #e2cc98; color: #201d1a; font-family: var(--gd-garamond); font-size: 11px; letter-spacing: 0.14em; line-height: 1.2; white-space: nowrap; pointer-events: none; transform: translateY(-100%); }
+.gd-lp .gd-plan__label[hidden] { display: none; }
+@media (max-width: 767px) { .gd-lp .gd-plan__label { font-size: 10px; padding: 3px 6px; } }
