@@ -386,3 +386,24 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 @media (max-width: 767px) { .gd-lp-gallery .gd-gp-grid { margin-top: 32px; } }
 @media (max-width: 767px) { .gd-lp .floor-level-tab { min-width: 150px; min-height: 40px; justify-content: center; padding: 11px 20px; font-size: 13px; letter-spacing: 0.12em; } }
 .gd-lp .floor-and-room-container > .floor-plan-diagram { flex: 0 0 100%; margin: 8px 0 14px; }
+.gd-lp .floor-level-tabs.is-seg > #floor-selector, .gd-lp .floor-level-tabs.is-seg > .floor-dropdown { display: none !important; }
+.gd-lp .gd-floor-seg { display: inline-flex; border: 1px solid var(--gd-ink); }
+.gd-lp .gd-floor-seg__btn { appearance: none; cursor: pointer; min-width: 92px; padding: 12px 22px; border: 0; background: transparent; color: var(--gd-ink); font-family: var(--gd-garamond); font-size: 15px; letter-spacing: 0.18em; text-indent: 0.18em; line-height: 1.2; transition: background .3s, color .3s; }
+.gd-lp .gd-floor-seg__btn + .gd-floor-seg__btn { border-left: 1px solid var(--gd-ink); }
+.gd-lp .gd-floor-seg__btn:hover { background: rgba(49,49,49,.08); }
+.gd-lp .gd-floor-seg__btn.is-active { background: var(--gd-ink); color: var(--gd-bg); cursor: default; }
+.gd-lp .gd-floor-seg__btn:focus-visible { outline: 1px solid var(--gd-gold); outline-offset: 3px; }
+.gd-lp .gd-floor-badge { position: absolute; left: 0; top: 0; z-index: 2; padding: 8px 16px; background: rgba(20,17,14,.78); color: #ecd9a8; font-family: var(--gd-garamond); font-size: 14px; letter-spacing: 0.2em; line-height: 1.2; pointer-events: none; }
+.gd-lp .floor-plan-diagram .gd-floor-badge { left: 0; top: 0; }
+.gd-lp .floor-plan-diagram.is-switching img, .gd-lp .floor-plan-photo.is-switching img { opacity: .15; transition: none; }
+.gd-lp .floor-plan-diagram img, .gd-lp .floor-plan-photo img { transition: opacity .45s ease; }
+.gd-lp .gd-room { min-width: 0; }
+.gd-lp .floor-plan-main:not(:has(.floor-plan-top)) > .gd-room { order: 1; }
+.gd-lp .gd-room .room-tabs { display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 6px; margin: 10px 0 0; }
+.gd-lp .gd-room .room-tab { min-width: 0; width: 100%; padding: 13px 10px; font-size: 13px; letter-spacing: 0.12em; white-space: normal; line-height: 1.3; }
+@media (max-width: 767px) {
+  .gd-lp .gd-floor-seg__btn { min-width: 84px; padding: 11px 18px; font-size: 14px; }
+  .gd-lp .gd-floor-badge { padding: 6px 12px; font-size: 12px; letter-spacing: 0.16em; }
+  .gd-lp .gd-room .room-tabs { grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 5px; margin-top: 8px; }
+  .gd-lp .gd-room .room-tab { padding: 11px 6px; font-size: 11.5px; letter-spacing: 0.08em; }
+}

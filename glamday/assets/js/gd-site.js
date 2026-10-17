@@ -153,8 +153,94 @@
     }
   }
 
+  function initFloorPlan() {
+    var sec = doc.querySelector('.floor-plan-section');
+    if (!sec) return;
+    var levels = sec.querySelector('.floor-level-tabs');
+    var selected = doc.getElementById('selected-floor');
+    var diagram = sec.querySelector('.floor-plan-diagram');
+    var photo = sec.querySelector('.floor-plan-photo');
+    var tabs = sec.querySelector('.gd-room .room-tabs');
+    var seg = null;
+
+    function badge(host) {
+      if (!host) return null;
+      var b = doc.createElement('span');
+      b.className = 'gd-floor-badge';
+      b.setAttribute('aria-hidden', 'true');
+      host.appendChild(b);
+      return b;
+    }
+    var badges = selected ? [badge(diagram), badge(photo)] : [];
+
+    function label() {
+      var floor = selected ? selected.textContent.trim().toUpperCase() : '';
+      var prop = doc.querySelector('.property-tab.active');
+      return (prop ? prop.textContent.trim() + ' / ' : '') + floor;
+    }
+
+    function buildSeg() {
+      if (!levels) return;
+      var opts = Array.prototype.slice.call(levels.querySelectorAll('.floor-option'));
+      if (opts.length < 2) { levels.classList.remove('is-seg'); if (seg) seg.innerHTML = ''; return; }
+      if (!seg) {
+        seg = doc.createElement('div');
+        seg.className = 'gd-floor-seg';
+        seg.setAttribute('role', 'group');
+        seg.setAttribute('aria-label', 'フロア切り替え');
+        levels.appendChild(seg);
+      }
+      seg.innerHTML = '';
+      opts.forEach(function (o) {
+        var b = doc.createElement('button');
+        b.type = 'button';
+        b.className = 'gd-floor-seg__btn';
+        b.textContent = o.textContent.trim();
+        b.setAttribute('data-floor', o.getAttribute('data-floor') || '');
+        b.addEventListener('click', function (e) { e.stopPropagation(); o.click(); });
+        seg.appendChild(b);
+      });
+      levels.classList.add('is-seg');
+    }
+
+    var last = null, fadeTimer = null;
+    function sync() {
+      var floor = selected ? selected.textContent.trim().toUpperCase() : '';
+      if (seg) {
+        Array.prototype.forEach.call(seg.children, function (b) {
+          var on = b.textContent.trim().toUpperCase() === floor;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+      }
+      var text = label();
+      badges.forEach(function (b) { if (b) b.textContent = text; });
+      if (last !== null && last !== text && !reduceMotion()) {
+        [diagram, photo].forEach(function (el) { if (el) el.classList.add('is-switching'); });
+        clearTimeout(fadeTimer);
+        fadeTimer = setTimeout(function () {
+          [diagram, photo].forEach(function (el) { if (el) el.classList.remove('is-switching'); });
+        }, 60);
+      }
+      last = text;
+      if (tabs) tabs.setAttribute('aria-label', (text ? text + ' ' : '') + '部屋の写真');
+    }
+
+    buildSeg();
+    sync();
+    if (window.MutationObserver) {
+      if (selected) new MutationObserver(sync).observe(selected, { childList: true, characterData: true, subtree: true });
+      var dd = levels && levels.querySelector('.floor-dropdown');
+      if (dd) new MutationObserver(function () { buildSeg(); sync(); }).observe(dd, { childList: true });
+      Array.prototype.forEach.call(doc.querySelectorAll('.property-tab'), function (p) {
+        new MutationObserver(sync).observe(p, { attributes: true, attributeFilter: ['class'] });
+      });
+    }
+  }
+
   ready(function () {
     initFaq();
     initAnchors();
+    initFloorPlan();
   });
 })();
