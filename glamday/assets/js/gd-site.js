@@ -184,20 +184,20 @@
     if (!img || !tabs) return;
     var NS = 'http://www.w3.org/2000/svg';
     var frame = doc.createElement('span');
-    frame.className = 'gd-plan';
+    frame.className = 'gd-fplan';
     img.parentNode.insertBefore(frame, img);
     frame.appendChild(img);
     var svg = doc.createElementNS(NS, 'svg');
-    svg.setAttribute('class', 'gd-plan__svg');
+    svg.setAttribute('class', 'gd-fplan__svg');
     svg.setAttribute('viewBox', '0 0 100 100');
     svg.setAttribute('preserveAspectRatio', 'none');
     frame.appendChild(svg);
     var label = doc.createElement('span');
-    label.className = 'gd-plan__label';
+    label.className = 'gd-fplan__label';
     label.setAttribute('aria-hidden', 'true');
     frame.appendChild(label);
     var hint = doc.createElement('p');
-    hint.className = 'gd-plan__hint';
+    hint.className = 'gd-fplan__hint';
     hint.textContent = '図面の部屋をタップすると、写真が切り替わります';
     frame.parentNode.appendChild(hint);
     var key = null, maskId = 'gd-plan-mask';
@@ -213,14 +213,14 @@
       var act = tabs.querySelector('.room-tab.active');
       var id = act ? act.getAttribute('data-room') : '';
       var on = null;
-      Array.prototype.forEach.call(svg.querySelectorAll('.gd-plan__spot'), function (p) {
+      Array.prototype.forEach.call(svg.querySelectorAll('.gd-fplan__spot'), function (p) {
         var hit = p.getAttribute('data-room') === id;
         p.classList.toggle('is-active', hit);
         p.setAttribute('aria-pressed', hit ? 'true' : 'false');
         if (hit) on = p;
       });
-      var hole = svg.querySelector('.gd-plan__hole');
-      var dim = svg.querySelector('.gd-plan__dim');
+      var hole = svg.querySelector('.gd-fplan__hole');
+      var dim = svg.querySelector('.gd-fplan__dim');
       if (on && hole) {
         hole.setAttribute('points', on.getAttribute('points'));
         dim.style.display = '';
@@ -251,10 +251,10 @@
         var full = doc.createElementNS(NS, 'rect');
         full.setAttribute('width', '100'); full.setAttribute('height', '100'); full.setAttribute('fill', '#fff');
         var hole = doc.createElementNS(NS, 'polygon');
-        hole.setAttribute('class', 'gd-plan__hole'); hole.setAttribute('fill', '#000');
+        hole.setAttribute('class', 'gd-fplan__hole'); hole.setAttribute('fill', '#000');
         mask.appendChild(full); mask.appendChild(hole); defs.appendChild(mask); svg.appendChild(defs);
         var dim = doc.createElementNS(NS, 'rect');
-        dim.setAttribute('class', 'gd-plan__dim');
+        dim.setAttribute('class', 'gd-fplan__dim');
         dim.setAttribute('width', '100'); dim.setAttribute('height', '100');
         dim.setAttribute('mask', 'url(#' + maskId + ')');
         svg.appendChild(dim);
@@ -263,7 +263,7 @@
           if (!t) return;
           var a = planPoints(map[id]);
           var p = doc.createElementNS(NS, 'polygon');
-          p.setAttribute('class', 'gd-plan__spot');
+          p.setAttribute('class', 'gd-fplan__spot');
           p.setAttribute('points', pts(a));
           p.setAttribute('data-pts', a.join(','));
           p.setAttribute('data-room', id);
