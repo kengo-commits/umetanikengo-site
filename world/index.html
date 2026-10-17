@@ -94,11 +94,6 @@ h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
 body.full .lede,body.full .film.signal,body.full .clocks,body.full section{display:none}
 body.full section.keep{display:block;margin-top:48px}
 body.full section.keep .vmore{display:none}
-body.full #archive .daily,body.full #archive .plh,body.full #archive > .intro{display:none}
-body.full[data-v="days"] #archive .daily,body.full[data-v="days"] #archive > .intro{display:block}
-body.full[data-v="art"] #archive .plh,body.full[data-v="art"] #archive .plh + .intro{display:block}
-body.full[data-v="art"] #archive .signals{display:grid}
-body.full #archive .signals{display:none}
 .signals{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(12px,1.6vw,20px);margin-bottom:56px}
 .sg{margin:0}
 .sg canvas{display:block;width:100%;aspect-ratio:4/5;background:#000}
@@ -169,7 +164,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
 <div class="wrap">
   <div class="top lab"><span>Issue 01 — Fashion / Music / Design / World</span><span id="date"></span></div>
-  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#note">Note</a><a href="#plates-sec">Plates</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
+  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#note">Note</a><a href="#art">Digital Art</a><a href="#plates-sec">Plates</a><a href="#today">Today</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
   <div class="lede">
     <p><span>Kengo Umetani's tastes and thoughts on fashion, music and design, sent out to the world — selected every day from the public domain around the globe, with SYNESTHESIA DIGITAL ART by KENGO and original music made for this site.</span>KENGO'S SYNESTHESIA は、梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するサイトです。それらは毎日世界中のパブリックドメインから厳選しています。SYNESTHESIA DIGITAL ART by KENGO と共に、このサイトのためのオリジナル音楽も発信しています。</p>
     <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
@@ -185,6 +180,13 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
   <section id="note">
     <h2>Kengo's Note <small id="noteDate"></small></h2>
     <div id="noteToday"></div>
+  </section>
+
+  <section id="art">
+    <h2>Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small></h2>
+    <p class="intro">One SYNESTHESIA DIGITAL ART for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
+    <div class="signals" id="signals"></div>
+    <a class="vmore" id="moreArt" href="more/?v=art" hidden>View more</a>
   </section>
 
   <section id="plates-sec">
@@ -655,10 +657,6 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
     <p class="intro">A daily record of every day's news, kept by date. 毎日のファッション・音楽・デザインのニュースを、日付ごとにすべて残しています。</p>
     <div class="daily" id="daily"></div>
     <a class="vmore" id="moreDays" href="more/?v=days" hidden>View more</a>
-    <h3 class="plh">Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small></h3>
-    <p class="intro">One SYNESTHESIA DIGITAL ART for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
-    <div class="signals" id="signals"></div>
-    <a class="vmore" id="moreArt" href="more/?v=art" hidden>View more</a>
   </section>
 
   <section class="sound" id="sound">
@@ -793,9 +791,8 @@ const VIEW=new URLSearchParams(location.search).get("v");
 const FULL=["plates","days","art"].includes(VIEW)?VIEW:"";
 const LIMIT=FULL?Infinity:5;
 if(FULL){document.body.classList.add("full");document.body.dataset.v=FULL;
-  const keep={plates:"plates-sec",days:"archive",art:"archive"}[FULL];document.getElementById(keep).classList.add("keep");
+  const keep={plates:"plates-sec",days:"archive",art:"art"}[FULL];document.getElementById(keep).classList.add("keep");
   document.title=({plates:"Plates",days:"Archive",art:"Synesthesia Digital Art by Kengo"})[FULL]+" — KENGO'S SYNESTHESIA";
-  const h=document.querySelector("#"+keep+" h2");if(h&&FULL==="art"){h.innerHTML='Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small>'}
   document.querySelectorAll(".nv a[href^='#']").forEach(a=>a.setAttribute("href","./"+a.getAttribute("href")));
 }
 {const sg=document.getElementById("signals");if(sg)sg.dataset.limit=FULL==="art"?"":"5"}
