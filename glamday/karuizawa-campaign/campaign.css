@@ -116,3 +116,8 @@
 .gc-head__brand { aspect-ratio: 2721 / 401; background-image: linear-gradient(100deg, #8c7443 0%, #9a8150 14%, #b09461 30%, #cdb27a 42%, #dcc38e 50%, #cdb27a 58%, #b09461 70%, #9a8150 86%, #8c7443 100%); background-size: 720px 100%; background-repeat: repeat-x; -webkit-mask-image: url("assets/images/top2026/title_logo.webp"); mask-image: url("assets/images/top2026/title_logo.webp"); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; animation: gd-gold-flow 18s linear infinite; }
 .gc-head__brand img { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .gc-head__brand { animation: none; } }
+
+/* ヒーロー見出し：導入文（小）＋ メインコピー（大） */
+.gc-hero__lead .gc-hero__pre { margin: 0 0 clamp(18px, 2vw, 30px); font-size: clamp(13px, 1.45vw, 21px); line-height: 1.9; letter-spacing: .1em; color: #6f675a; }
+.gc-hero__lead .gc-hero__pre span { display: block; }
+@media (max-width: 767px) { .gc-hero__lead .gc-hero__pre { font-size: 12.5px; letter-spacing: .03em; margin-bottom: 16px; } .gc-hero__lead { font-size: 26px; } }
