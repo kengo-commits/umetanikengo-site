@@ -265,3 +265,5 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
 @media (max-width: 767px) { .gc-campaign { padding-top: 20px; } }
 @media (min-width: 768px) { .gc-campaign { padding-top: 15px; } }
 @media (max-width: 767px) { .gc-campaign { padding-top: 15px; } }
+@media (min-width: 768px) { .gc-campaign { padding-top: 20px; } }
+@media (max-width: 767px) { .gc-campaign { padding-top: 20px; } }
