@@ -134,3 +134,16 @@
   .gc-hero__lead .gc-hero__sub { font-size: 19px; letter-spacing: .18em; }
   .gc-hero__lead .gc-hero__brandname { font-size: 9.2vw; letter-spacing: .08em; }
 }
+
+/* SPECIAL CAMPAIGN label: gold, large */
+.gd-page .gc-campaign .gd-heading__label {
+  display: block; font-family: var(--gd-garamond); font-weight: 500;
+  font-size: clamp(38px, 5.4vw, 72px); line-height: 1.1; letter-spacing: .12em; text-indent: .12em;
+  margin-bottom: 18px; color: #b39a62;
+  background: linear-gradient(100deg, #8c7443 0%, #dcc38e 35%, #a98f58 60%, #dcc38e 85%, #8c7443 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: gd-gold-flow 18s linear infinite;
+}
+@media (max-width: 767px) { .gd-page .gc-campaign .gd-heading__label { font-size: 8.2vw; letter-spacing: .08em; text-indent: .08em; } }
