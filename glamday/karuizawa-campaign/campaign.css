@@ -63,3 +63,43 @@
 @media (max-width: 767px) { .gc-head { height: 60px; padding: 0 12px 0 16px; } .gc-head__brand { width: 140px; } .gc-head__actions { display: none; } .gc-head__menu { margin-left: 0; } }
 .gd-page [id] { scroll-margin-top: 84px; }
 @media (max-width: 767px) { .gd-page [id] { scroll-margin-top: 60px; } }
+
+/* ヒーロー：軽井沢LPのデザイン（全幅の写真＋左下に物件ロゴ／下に見出し・物件タブ・ボタン） */
+.gc-hero { margin-top: 84px; background: var(--gd-bg); color: var(--gd-ink); font-family: var(--gd-mincho); }
+.gc-hero__media { position: relative; width: 100%; aspect-ratio: 2000 / 610; min-height: 340px; overflow: hidden; background: #2a2a28; }
+.gc-hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s ease; }
+.gc-hero__slide.is-active { opacity: 1; z-index: 1; }
+.gc-hero__slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.04); transition: transform 8s ease-out; }
+.gc-hero__slide.is-active img { transform: scale(1); }
+.gc-hero__slide:nth-of-type(1) img { object-position: 50% 87%; }
+.gc-hero__slide:nth-of-type(2) img { object-position: 50% 68%; }
+.gc-hero__slide:nth-of-type(3) img { object-position: 50% 46%; }
+.gc-hero__slide:nth-of-type(4) img { object-position: 50% 50%; }
+.gc-hero__media::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(to top, rgba(12,10,7,.34), transparent 38%); }
+.gc-hero__brand { position: absolute; z-index: 3; left: 5.4vw; bottom: 7%; width: clamp(150px, 15vw, 240px); aspect-ratio: 3 / 1.6; pointer-events: none; }
+.gc-hero__logo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: left bottom; opacity: 0; transition: opacity 1s ease; }
+.gc-hero__logo.is-active { opacity: 1; }
+.gc-hero__copy { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; padding: clamp(40px, 5vw, 72px) 5.4vw clamp(48px, 5vw, 80px); background: var(--gd-bg); }
+.gc-hero__lead { margin: 0; font-size: clamp(26px, 3.4vw, 48px); line-height: 1.6; letter-spacing: .08em; font-weight: 400; }
+.gc-hero__lead span { display: block; }
+.gc-hero__tabs { display: flex; flex-wrap: wrap; gap: 8px 32px; margin: clamp(24px, 2.6vw, 40px) 0 0; }
+.gc-hero__tabs button { position: relative; padding: 6px 0 10px; background: none; border: 0; cursor: pointer; font: inherit; font-size: 15px; letter-spacing: .14em; color: #a8a090; transition: color .4s; }
+.gc-hero__tabs button::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--gd-ink); transition: width .5s ease; }
+.gc-hero__tabs button.is-active { color: var(--gd-ink); }
+.gc-hero__tabs button.is-active::after { width: 20px; }
+.gc-hero__action { display: inline-flex; align-items: center; justify-content: space-between; gap: 48px; min-width: 360px; box-sizing: border-box; height: 68px; margin-top: clamp(20px, 2vw, 32px); padding: 0 40px; background: var(--gd-ink); color: var(--gd-bg) !important; text-decoration: none; font-size: 15px; letter-spacing: .2em; transition: background .3s; }
+.gc-hero__action span { color: inherit; }
+.gc-hero__action:hover { background: #2b2722; }
+.gc-hero__note { margin: 0; flex: 0 0 auto; font-size: 14px; line-height: 2.1; letter-spacing: .12em; color: #6f675a; }
+.gc-hero__note span { display: block; }
+@media (max-width: 1023px) { .gc-hero__copy { flex-direction: column; align-items: flex-start; gap: 32px; } .gc-hero__note { font-size: 13px; } }
+@media (max-width: 767px) {
+  .gc-hero { margin-top: 60px; }
+  .gc-hero__media { aspect-ratio: 4 / 5; min-height: 0; }
+  .gc-hero__brand { left: 20px; bottom: 20px; width: 150px; }
+  .gc-hero__copy { padding: 36px 20px 44px; }
+  .gc-hero__lead { font-size: 19px; letter-spacing: .03em; }
+  .gc-hero__brand { bottom: 24px; }
+  .gc-hero__tabs { gap: 6px 22px; }
+  .gc-hero__action { min-width: 0; width: 100%; padding: 0 24px; }
+}

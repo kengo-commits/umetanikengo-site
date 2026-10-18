@@ -278,32 +278,46 @@
     <div class="container">
     <main>
 
-  <section class="gd-hero" aria-label="メインビジュアル">
-    <div class="gd-hero__frame js-gd-hero">
-      <div class="gd-hero__slide is-active">
-        <img src="assets/images/top2026/kv_asamanouta.webp" width="1400" height="1000" alt="森に囲まれたGLAMDAY STYLE TEITAKU 浅間ノ詩の外観とテラス" fetchpriority="high" decoding="async">
-        <a class="gd-hero__cap" href="https://www.kengo-umetani.com/glamday/asamanouta-share.html"><span class="gd-hero__cap-series">GLAMDAY STYLE TEITAKU</span><span class="gd-hero__cap-name">浅間ノ詩<small>軽井沢</small></span><span class="gd-hero__cap-arrow" aria-hidden="true"></span></a>
+  <section class="gc-hero" aria-label="軽井沢のシェア別荘">
+    <div class="gc-hero__media" data-gc-hero>
+      <picture class="gc-hero__slide is-active" data-gc-slide>
+        <source media="(max-width: 768px)" srcset="assets/img/hero/karuizawa-hero-sora-sp.webp">
+        <img src="assets/img/hero/karuizawa-hero-sora-pc.webp" alt="" width="2400" height="1100" fetchpriority="high" decoding="async">
+      </picture>
+      <picture class="gc-hero__slide" data-gc-slide>
+        <source media="(max-width: 768px)" srcset="assets/img/hero/karuizawa-hero-mizu-sp.webp">
+        <img src="assets/img/hero/karuizawa-hero-mizu-pc.webp" alt="" width="2400" height="1100" loading="lazy" decoding="async">
+      </picture>
+      <picture class="gc-hero__slide" data-gc-slide>
+        <source media="(max-width: 768px)" srcset="assets/img/hero/karuizawa-hero-asama-sp.webp">
+        <img src="assets/img/hero/karuizawa-hero-asama-pc.webp" alt="" width="2400" height="1100" loading="lazy" decoding="async">
+      </picture>
+      <picture class="gc-hero__slide" data-gc-slide>
+        <source media="(max-width: 768px)" srcset="assets/img/hero/karuizawa-hero-yama-sp.webp">
+        <img src="assets/img/hero/karuizawa-hero-yama-pc.webp" alt="" width="2400" height="1100" loading="lazy" decoding="async">
+      </picture>
+      <div class="gc-hero__brand" aria-hidden="true"><img class="gc-hero__logo is-active" data-gc-logo src="assets/img/property-logos/soranoniwa.webp" alt="" width="240" height="80"><img class="gc-hero__logo" data-gc-logo src="assets/img/property-logos/mizunohoshi.webp" alt="" width="240" height="80"><img class="gc-hero__logo" data-gc-logo src="assets/img/property-logos/asamanouta.webp" alt="" width="240" height="80"><img class="gc-hero__logo" data-gc-logo src="assets/img/property-logos/yamanofumoto.webp" alt="" width="240" height="80"></div>
+    </div>
+    <div class="gc-hero__copy">
+      <div class="gc-hero__main">
+        <p class="gc-hero__lead"><span>軽井沢の一棟を、共同で所有する。</span><span>GLAMDAY STYLEのシェア別荘。</span></p>
+        <div class="gc-hero__tabs" role="tablist" aria-label="物件を選ぶ"><button type="button" class="is-active" data-gc-tab="0">空ノ庭</button><button type="button" class="" data-gc-tab="1">水ノ星</button><button type="button" class="" data-gc-tab="2">浅間ノ詩</button><button type="button" class="" data-gc-tab="3">山ノ麓</button></div>
+        <a class="gc-hero__action" href="#sales">物件一覧を見る<span aria-hidden="true">→</span></a>
       </div>
-      <div class="gd-hero__slide">
-        <img src="assets/images/top2026/kv_mizunohoshi.webp" width="2200" height="1466" alt="石積みの壁と吹き抜けのある水ノ星のリビング" decoding="async" loading="lazy">
-        <a class="gd-hero__cap" href="https://www.kengo-umetani.com/glamday/mizunohoshi-share.html"><span class="gd-hero__cap-series">GLAMDAY STYLE TEITAKU</span><span class="gd-hero__cap-name">水ノ星<small>軽井沢</small></span><span class="gd-hero__cap-arrow" aria-hidden="true"></span></a>
-      </div>
-      <div class="gd-hero__slide">
-        <img src="assets/images/top2026/kv_soranoniwa.webp" width="2200" height="1466" alt="軽井沢の森を見渡す空ノ庭のテラス" decoding="async" loading="lazy">
-        <a class="gd-hero__cap" href="https://www.kengo-umetani.com/glamday/soranoniwa-share.html"><span class="gd-hero__cap-series">GLAMDAY STYLE TEITAKU</span><span class="gd-hero__cap-name">空ノ庭<small>軽井沢</small></span><span class="gd-hero__cap-arrow" aria-hidden="true"></span></a>
-      </div>
-      <div class="gd-hero__slide">
-        <img src="assets/images/top2026/kv_yamanofumoto.webp" width="2200" height="1466" alt="薪ストーブと石積みの壁がある山ノ麓のリビングダイニング" decoding="async" loading="lazy">
-        <a class="gd-hero__cap" href="https://www.kengo-umetani.com/glamday/yamanofumoto-share.html"><span class="gd-hero__cap-series">GLAMDAY STYLE HOTEL SUITE</span><span class="gd-hero__cap-name">山ノ麓<small>軽井沢</small></span><span class="gd-hero__cap-arrow" aria-hidden="true"></span></a>
-      </div>
-      <div class="gd-hero__dots" role="group" aria-label="表示する写真を選ぶ">
-        <button type="button" class="is-active" aria-label="浅間ノ詩"></button>
-        <button type="button" aria-label="水ノ星"></button>
-        <button type="button" aria-label="空ノ庭"></button>
-        <button type="button" aria-label="山ノ麓"></button>
-      </div>
+      <p class="gc-hero__note"><span>雄大な自然に包まれた、歴史ある避暑地・軽井沢。</span><span>別荘の心地よさと、ホテルの快適さをあわせ持つ、</span><span>カトープレジャーグループのシェア別荘です。</span></p>
     </div>
   </section>
+  <script>
+  (function(){
+    var root=document.querySelector('[data-gc-hero]'); if(!root) return;
+    var slides=[].slice.call(root.querySelectorAll('[data-gc-slide]')), logos=[].slice.call(root.querySelectorAll('[data-gc-logo]')), tabs=[].slice.call(document.querySelectorAll('[data-gc-tab]'));
+    var cur=0, timer=null, reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function show(i){ cur=(i+slides.length)%slides.length; slides.forEach(function(e,k){e.classList.toggle('is-active',k===cur);}); logos.forEach(function(e,k){e.classList.toggle('is-active',k===cur);}); tabs.forEach(function(e,k){e.classList.toggle('is-active',k===cur);}); }
+    function start(){ if(reduce) return; clearInterval(timer); timer=setInterval(function(){show(cur+1);},6000); }
+    tabs.forEach(function(t,k){ t.addEventListener('click',function(){show(k);start();}); });
+    start();
+  })();
+  </script>
 
   <section class="gd-concept" id="about">
     <p class="gd-concept__eyebrow">別荘所有の新しいかたち</p>
