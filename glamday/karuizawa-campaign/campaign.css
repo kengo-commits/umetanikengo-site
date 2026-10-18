@@ -231,3 +231,8 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
   border-image: linear-gradient(100deg, #8c7443, #c5a86a 30%, #e3cf9f 50%, #c5a86a 70%, #8c7443) 1;
 }
 @media (max-width: 767px) { .gc-campaign { margin: 12px 10px; padding: 56px 0 48px; } .gc-campaign::before { border-width: 1.5px; } }
+
+/* narrower frame */
+.gc-campaign { max-width: 1160px; margin-left: auto; margin-right: auto; }
+@media (max-width: 1240px) { .gc-campaign { margin-left: clamp(12px, 2.6vw, 40px); margin-right: clamp(12px, 2.6vw, 40px); max-width: none; } }
+@media (max-width: 767px) { .gc-campaign { margin-left: 10px; margin-right: 10px; } }
