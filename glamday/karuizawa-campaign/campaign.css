@@ -304,3 +304,39 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
   .gc-hero__main { justify-content: center; }
   .gc-hero__note { text-align: center; }
 }
+
+/* floating bar (mobile): campaign CTA on the right, same gold design/text as the main CTA */
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-btn { flex: 1 1 0 !important; min-width: 0; white-space: nowrap; }
+  .mobile-floating-cta .mobile-floating-meeting { flex: 1.35 1 0 !important; }
+  .mobile-floating-cta .mobile-floating-campaign {
+    flex: 2.5 1 0 !important; position: relative; overflow: hidden; isolation: isolate; gap: 4px;
+    white-space: normal !important; text-align: center; line-height: 1.35 !important; font-size: 12px !important; font-weight: 500 !important;
+    color: #fff !important; border: 0 !important; border-radius: 3px !important;
+    background: linear-gradient(100deg, #7a6232 0%, #a98f58 25%, #c3a869 50%, #a98f58 75%, #7a6232 100%) !important;
+    background-size: 200% 100% !important; text-shadow: 0 1px 2px rgba(80,60,20,.35);
+    animation: gc-cta-flow 6s linear infinite;
+  }
+  .mobile-floating-cta .mobile-floating-campaign::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: 38%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: gc-cta-shine 3.6s ease-in-out infinite;
+  }
+  .mobile-floating-cta .mobile-floating-campaign span { flex: 0 0 auto; }
+}
+@media (prefers-reduced-motion: reduce) { .mobile-floating-cta .mobile-floating-campaign, .mobile-floating-cta .mobile-floating-campaign::before { animation: none; } }
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-btn { font-size: clamp(10px, 2.9vw, 12px) !important; padding: 8px 6px !important; letter-spacing: 0 !important; }
+  .mobile-floating-cta .mobile-floating-request, .mobile-floating-cta .mobile-floating-meeting { flex: 0 0 auto !important; padding: 8px clamp(6px,2vw,10px) !important; }
+  .mobile-floating-cta .mobile-floating-campaign { flex: 1 1 0 !important; padding: 8px 4px !important; font-size: clamp(10px, 2.9vw, 12px) !important; }
+}
+@media (max-width: 768px) {
+  .gd-page .mobile-floating-cta { margin: 0 !important; width: auto !important; padding: 8px !important; gap: 6px !important; }
+}
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-campaign { display: block !important; white-space: nowrap !important; padding: 8px 2px !important; font-size: clamp(10px, 2.8vw, 11.5px) !important; line-height: 1.45 !important; }
+  .mobile-floating-cta .mobile-floating-campaign span { display: inline-block; margin-left: .5em; }
+}
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-campaign { font-size: clamp(9.5px, 2.55vw, 11px) !important; padding: 8px 0 !important; }
+  .mobile-floating-cta .mobile-floating-request, .mobile-floating-cta .mobile-floating-meeting { padding: 8px 6px !important; font-size: clamp(10px, 2.7vw, 11.5px) !important; }
+}
