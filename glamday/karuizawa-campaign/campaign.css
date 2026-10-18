@@ -178,3 +178,16 @@
 /* SPECIAL CAMPAIGN label: a bit smaller */
 .gd-page .gc-campaign .gd-heading__label { font-size: clamp(28px, 3.7vw, 52px); margin-bottom: 14px; }
 @media (max-width: 767px) { .gd-page .gc-campaign .gd-heading__label { font-size: 6.4vw; } }
+
+/* intro note: one line, top-aligned with tabs */
+.gc-hero__tabs { flex-shrink: 0; flex-wrap: nowrap; white-space: nowrap; }
+.gc-hero__note span { display: inline; }
+@media (min-width: 768px) { .gc-hero__note { white-space: nowrap; font-size: 13px; letter-spacing: .06em; line-height: 1.6; } }
+@media (min-width: 1360px) {
+  .gc-hero__copy { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+  .gc-hero__note { padding-top: 0; margin-top: 7px; }
+}
+@media (min-width: 768px) and (max-width: 1359px) { .gc-hero__copy { flex-direction: column; align-items: flex-start; gap: 18px; } .gc-hero__note { padding-top: 0; } }
+@media (max-width: 767px) { .gc-hero__tabs { flex-wrap: wrap; } }
+.gc-hero__main { flex-shrink: 0; }
+@media (min-width: 1360px) { .gc-hero__note { letter-spacing: .02em; } }
