@@ -297,3 +297,10 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
   font-size: 13px; letter-spacing: .14em; margin: 0;
 }
 @media (max-width: 767px) { .gc-hero__copy .gc-hero__action { width: auto; height: 38px; padding: 0 18px; font-size: 13px; margin-top: 0; order: 0; } }
+
+/* tabs row + note: centered on the screen (PC) */
+@media (min-width: 768px) {
+  .gc-hero__copy { align-items: center; text-align: center; }
+  .gc-hero__main { justify-content: center; }
+  .gc-hero__note { text-align: center; }
+}
