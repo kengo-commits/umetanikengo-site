@@ -167,3 +167,10 @@
 .gc-hero__media .gc-hero__action span { color: #a98f58; transition: transform .35s, color .35s; }
 .gc-hero__media .gc-hero__action:hover { background: #fff; border-color: #a98f58; transform: translateY(-2px); }
 .gc-hero__media .gc-hero__action:hover span { transform: translateX(4px); color: #8c7443; }
+
+/* tabs directly under the slideshow */
+.gc-hero__copy { align-items: flex-start; padding-top: clamp(14px, 1.6vw, 24px); padding-bottom: clamp(36px, 4vw, 64px); }
+.gc-hero__tabs { margin-top: 0; }
+.gc-hero__note { padding-top: 10px; }
+@media (max-width: 1023px) { .gc-hero__copy { gap: 20px; } .gc-hero__note { padding-top: 0; } }
+@media (max-width: 767px) { .gc-hero__copy { padding-top: 12px; padding-bottom: 36px; } }
