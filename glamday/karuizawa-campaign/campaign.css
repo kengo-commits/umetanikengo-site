@@ -121,3 +121,16 @@
 .gc-hero__lead .gc-hero__pre { margin: 0 0 clamp(18px, 2vw, 30px); font-size: clamp(13px, 1.45vw, 21px); line-height: 1.9; letter-spacing: .1em; color: #6f675a; }
 .gc-hero__lead .gc-hero__pre span { display: block; }
 @media (max-width: 767px) { .gc-hero__lead .gc-hero__pre { font-size: 12.5px; letter-spacing: .03em; margin-bottom: 16px; } .gc-hero__lead { font-size: 26px; } }
+
+/* ヒーロー見出しの整理：GLAMDAY STYLE を主役に、導入文→サブコピー→ブランド名の3段で整える */
+.gc-hero__lead { line-height: 1.5; letter-spacing: normal; }
+.gc-hero__lead .gc-hero__pre { margin: 0 0 clamp(22px, 2.4vw, 36px); font-size: clamp(13px, 1.25vw, 18px); line-height: 2; letter-spacing: .14em; color: #7a7266; }
+.gc-hero__lead .gc-hero__sub { font-size: clamp(20px, 2.1vw, 30px); letter-spacing: .26em; color: var(--gd-ink); padding-left: .1em; }
+.gc-hero__lead .gc-hero__brandname { margin-top: clamp(8px, .9vw, 14px); font-family: var(--gd-garamond, "EB Garamond", serif); font-size: clamp(40px, 6.2vw, 92px); line-height: 1.1; letter-spacing: .14em; font-weight: 400; white-space: nowrap;
+  background-image: linear-gradient(100deg, #8c7443 0%, #9a8150 14%, #b09461 30%, #cdb27a 42%, #dcc38e 50%, #cdb27a 58%, #b09461 70%, #9a8150 86%, #8c7443 100%); background-size: 720px 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: gd-gold-flow 18s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .gc-hero__lead .gc-hero__brandname { animation: none; } }
+@media (max-width: 767px) {
+  .gc-hero__lead .gc-hero__pre { font-size: 12px; letter-spacing: .04em; margin-bottom: 20px; }
+  .gc-hero__lead .gc-hero__sub { font-size: 19px; letter-spacing: .18em; }
+  .gc-hero__lead .gc-hero__brandname { font-size: 9.2vw; letter-spacing: .08em; }
+}
