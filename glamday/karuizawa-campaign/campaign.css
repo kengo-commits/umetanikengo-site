@@ -240,3 +240,16 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
 /* even narrower frame */
 .gc-campaign { max-width: 1040px; }
 @media (min-width: 1025px) { .gd-page .gc-campaign .gd-heading__title { font-size: 28px; letter-spacing: .1em; } .gc-campaign .gd-heading__lead { font-size: 14px; } }
+
+/* narrower still: frame 880px, cards scaled with it */
+.gc-campaign { max-width: 880px; }
+.gc-campaign .gc-benefits { max-width: 760px; gap: 24px; }
+@media (min-width: 1025px) {
+  .gd-page .gc-campaign .gd-heading__title { font-size: 26px; text-wrap: balance; }
+  .gc-campaign .gd-heading__lead { font-size: 13.5px; }
+  .gc-campaign .gc-benefit__body { padding-left: 20px; padding-right: 20px; }
+  .gc-campaign .gc-benefit__title { font-size: 20px; }
+  .gc-campaign .gc-benefit__main { font-size: 14.5px; }
+  .gc-campaign .gc-benefit__text { font-size: 12.5px; }
+}
+.gc-nb { display: inline-block; }
