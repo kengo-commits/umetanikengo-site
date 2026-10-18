@@ -79,7 +79,7 @@ def plates():
 def frame(inner, n, total, stamp):
     return (f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body><div class="s">'
             f'<div class="hd"><b>Kengo\'s Synesthesia</b><span>{stamp}</span></div>{inner}'
-            f'<div class="ft"><span>kengo-umetani.com</span><span>{n:02d} / {total:02d}</span></div></div></body></html>')
+            f'<div class="ft"><span>kengo-umetani.com</span></div></div></body></html>')
 
 
 def short_title(s):
