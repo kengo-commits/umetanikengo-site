@@ -174,3 +174,7 @@
 .gc-hero__note { padding-top: 10px; }
 @media (max-width: 1023px) { .gc-hero__copy { gap: 20px; } .gc-hero__note { padding-top: 0; } }
 @media (max-width: 767px) { .gc-hero__copy { padding-top: 12px; padding-bottom: 36px; } }
+
+/* SPECIAL CAMPAIGN label: a bit smaller */
+.gd-page .gc-campaign .gd-heading__label { font-size: clamp(28px, 3.7vw, 52px); margin-bottom: 14px; }
+@media (max-width: 767px) { .gd-page .gc-campaign .gd-heading__label { font-size: 6.4vw; } }
