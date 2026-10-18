@@ -152,3 +152,7 @@
 .gc-hero__head { padding: clamp(36px, 4.4vw, 68px) 5.4vw clamp(28px, 3.2vw, 48px); background: var(--gd-bg); }
 .gc-hero__copy { padding-top: clamp(32px, 3.6vw, 52px); }
 @media (max-width: 767px) { .gc-hero__head { padding: 32px 20px 24px; } .gc-hero__copy { padding-top: 28px; } }
+
+/* property-list button: bottom-right of the slideshow */
+.gc-hero__media .gc-hero__action { position: absolute; z-index: 4; right: 5.4vw; bottom: 7%; margin: 0; min-width: 0; height: 56px; padding: 0 28px; gap: 28px; }
+@media (max-width: 767px) { .gc-hero__media .gc-hero__action { right: 16px; bottom: 24px; width: auto; height: 46px; padding: 0 16px; gap: 14px; font-size: 13px; letter-spacing: .12em; } }
