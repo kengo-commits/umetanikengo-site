@@ -236,3 +236,7 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
 .gc-campaign { max-width: 1160px; margin-left: auto; margin-right: auto; }
 @media (max-width: 1240px) { .gc-campaign { margin-left: clamp(12px, 2.6vw, 40px); margin-right: clamp(12px, 2.6vw, 40px); max-width: none; } }
 @media (max-width: 767px) { .gc-campaign { margin-left: 10px; margin-right: 10px; } }
+
+/* even narrower frame */
+.gc-campaign { max-width: 1040px; }
+@media (min-width: 1025px) { .gd-page .gc-campaign .gd-heading__title { font-size: 28px; letter-spacing: .1em; } .gc-campaign .gd-heading__lead { font-size: 14px; } }
