@@ -257,3 +257,9 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
 /* heading block moved up inside the frame */
 @media (min-width: 768px) { .gc-campaign { padding-top: clamp(40px, 4vw, 60px); } }
 @media (max-width: 767px) { .gc-campaign { padding-top: 36px; } }
+
+/* top spacing inside the frame: much tighter */
+@media (min-width: 768px) { .gc-campaign { padding-top: 14px; } .gc-campaign .gd-heading { margin-top: 0; padding-top: 0; } }
+@media (max-width: 767px) { .gc-campaign { padding-top: 12px; } }
+@media (min-width: 768px) { .gc-campaign { padding-top: 24px; } }
+@media (max-width: 767px) { .gc-campaign { padding-top: 20px; } }
