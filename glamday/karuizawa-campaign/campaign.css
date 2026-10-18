@@ -268,3 +268,6 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
 @media (min-width: 768px) { .gc-campaign { padding-top: 20px; } }
 @media (max-width: 767px) { .gc-campaign { padding-top: 20px; } }
 .gc-campaign { padding-bottom: 20px; }
+
+/* frame: always centered */
+.gd-page .gc-campaign { box-sizing: border-box; width: calc(100% - 2 * clamp(10px, 2.6vw, 40px)); max-width: 880px; margin-left: auto; margin-right: auto; }
