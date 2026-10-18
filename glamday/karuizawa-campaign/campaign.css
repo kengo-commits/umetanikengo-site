@@ -340,3 +340,17 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
   .mobile-floating-cta .mobile-floating-campaign { font-size: clamp(9.5px, 2.55vw, 11px) !important; padding: 8px 0 !important; }
   .mobile-floating-cta .mobile-floating-request, .mobile-floating-cta .mobile-floating-meeting { padding: 8px 6px !important; font-size: clamp(10px, 2.7vw, 11.5px) !important; }
 }
+
+/* SPECIAL CAMPAIGN: centered over the hero slideshow */
+.gc-hero__center { position: absolute; z-index: 3; inset: 0; margin: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.gc-hero__center::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 46% 34% at 50% 50%, rgba(14,11,7,.34), transparent 72%); }
+.gc-hero__center span {
+  position: relative; font-family: var(--gd-garamond, "EB Garamond", serif); font-weight: 500; line-height: 1; white-space: nowrap;
+  font-size: clamp(34px, 5.4vw, 84px); letter-spacing: .14em; text-indent: .14em;
+  background: linear-gradient(100deg, #e9d6a6 0%, #c9ad6f 40%, #f1e1b8 70%, #cfb078 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(20,14,6,.45));
+}
+@media (max-width: 767px) { .gc-hero__center span { font-size: 8.4vw; letter-spacing: .08em; text-indent: .08em; } }
+.gc-hero__center::before { background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(14,11,7,.5), transparent 75%); }
+.gc-hero__center span { filter: drop-shadow(0 1px 2px rgba(20,14,6,.55)) drop-shadow(0 4px 16px rgba(20,14,6,.55)); }
