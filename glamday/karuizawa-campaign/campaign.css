@@ -47,8 +47,8 @@
 /* ヘッダー：軽井沢LPのデザイン（明るい背景・GSロゴ・文字ナビ・資料請求は濃色ベタ） */
 .gd-page { --gd-header-h: 0px; }
 .gc-head { position: fixed; z-index: 9000; top: 0; left: 0; right: 0; height: 84px; box-sizing: border-box; display: grid; grid-template-columns: 1fr auto auto; align-items: center; padding: 0 3vw; background: rgba(255,255,255,.96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid #e8e4dc; color: var(--gd-ink); font-family: var(--gd-mincho); }
-.gc-head__brand { display: flex; align-items: center; width: 190px; }
-.gc-head__brand img { display: block; width: 100%; height: auto; opacity: .86; }
+.gc-head__brand { display: flex; align-items: center; width: 330px; }
+.gc-head__brand img { display: block; width: 100%; height: auto; }
 .gc-head__nav { display: flex; align-items: center; gap: 56px; padding-right: 48px; }
 .gc-head__nav a, .gc-head__actions a { font-size: 13px; letter-spacing: .16em; text-decoration: none; color: inherit; white-space: nowrap; }
 .gc-head__nav a:hover { opacity: .6; }
@@ -60,7 +60,7 @@
 .gc-head__menu { display: none; }
 @media (max-width: 1180px) { .gc-head__nav { gap: 28px; padding-right: 24px; } .gc-head__nav a { letter-spacing: .1em; } }
 @media (max-width: 1023px) { .gc-head__nav { display: none; } .gc-head { grid-template-columns: 1fr auto auto; } .gc-head__menu { display: inline-flex; flex-direction: column; justify-content: center; gap: 7px; width: 44px; height: 44px; margin-left: 12px; padding: 0 10px; background: none; border: 0; cursor: pointer; color: var(--gd-ink); box-sizing: border-box; } .gc-head__menu span { display: block; height: 1px; background: currentColor; } }
-@media (max-width: 767px) { .gc-head { height: 60px; padding: 0 12px 0 16px; } .gc-head__brand { width: 140px; } .gc-head__actions { display: none; } .gc-head__menu { margin-left: 0; } }
+@media (max-width: 767px) { .gc-head { height: 60px; padding: 0 12px 0 16px; } .gc-head__brand { width: 220px; } .gc-head__actions { display: none; } .gc-head__menu { margin-left: 0; } }
 .gd-page [id] { scroll-margin-top: 84px; }
 @media (max-width: 767px) { .gd-page [id] { scroll-margin-top: 60px; } }
 
@@ -103,3 +103,6 @@
   .gc-hero__tabs { gap: 6px 22px; }
   .gc-hero__action { min-width: 0; width: 100%; padding: 0 24px; }
 }
+
+@media (max-width: 1180px) { .gc-head__brand { width: 270px; } }
+@media (max-width: 767px) { .gc-head__brand { width: 210px; } }
