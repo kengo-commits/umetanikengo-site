@@ -106,3 +106,13 @@
 
 @media (max-width: 1180px) { .gc-head__brand { width: 270px; } }
 @media (max-width: 767px) { .gc-head__brand { width: 210px; } }
+
+/* ヘッダーのロゴをゴールドに（元サイトと同じ金色のグラデーションを文字形に適用） */
+.gc-head__brand { aspect-ratio: 2721 / 401; background-image: linear-gradient(100deg, #8c7443 0%, #9a8150 14%, #b09461 30%, #cdb27a 42%, #dcc38e 50%, #cdb27a 58%, #b09461 70%, #9a8150 86%, #8c7443 100%); background-size: 720px 100%; background-repeat: repeat-x; -webkit-mask-image: url("assets/images/top2026/title_logo.webp"); mask-image: url("assets/images/top2026/title_logo.webp"); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; animation: gd-gold-flow 18s linear infinite; }
+.gc-head__brand img { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .gc-head__brand { animation: none; } }
+
+/* ヘッダーのロゴをゴールドに（ロゴ画像を型抜きにして金のグラデーションを流す） */
+.gc-head__brand { aspect-ratio: 2721 / 401; background-image: linear-gradient(100deg, #8c7443 0%, #9a8150 14%, #b09461 30%, #cdb27a 42%, #dcc38e 50%, #cdb27a 58%, #b09461 70%, #9a8150 86%, #8c7443 100%); background-size: 720px 100%; background-repeat: repeat-x; -webkit-mask-image: url("assets/images/top2026/title_logo.webp"); mask-image: url("assets/images/top2026/title_logo.webp"); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; animation: gd-gold-flow 18s linear infinite; }
+.gc-head__brand img { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .gc-head__brand { animation: none; } }
