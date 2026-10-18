@@ -185,7 +185,7 @@ async def render(pages, outdir, stem):
     return files
 
 
-async def render_video(page_html, outdir, stem, seconds=10, fps=30):
+async def render_video(page_html, outdir, stem, seconds=10, fps=30, speed=2.0):
     """Slide 1 as a 10-second MP4: the same page, with the artwork stepped frame by frame."""
     import subprocess, shutil
     from playwright.async_api import async_playwright
@@ -199,7 +199,7 @@ async def render_video(page_html, outdir, stem, seconds=10, fps=30):
         await pg.goto(h.as_uri())
         await pg.wait_for_timeout(400)
         for k in range(seconds * fps):
-            await pg.evaluate(f'drawFrame({k / fps:.4f})')
+            await pg.evaluate(f'drawFrame({k / fps * speed:.4f})')
             await pg.screenshot(path=str(frames / f'f{k:04d}.jpg'), type='jpeg', quality=92)
         await b.close()
     h.unlink()
