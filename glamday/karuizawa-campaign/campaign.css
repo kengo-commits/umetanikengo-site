@@ -35,3 +35,11 @@
   .gc-entry { flex-direction: column; align-items: center; }
   .gd-btn-member { max-width: 100%; }
 }
+
+/* ロゴ（KARUIZAWA SPECIAL CAMPAIGN）を見やすく拡大 */
+.gd-page .gd-header__logo img { width: 400px; height: auto; }
+.gd-page .gd-footer__logo { width: 340px; }
+.gd-page .gd-menu__logo, .gd-page .gd-menu__logo img { width: 230px; height: auto; }
+@media (max-width: 1180px) { .gd-page .gd-header__logo img { width: 330px; } }
+@media (max-width: 1023px) { .gd-page .gd-header__logo img { width: 280px; } }
+@media (max-width: 767px) { .gd-page .gd-header__logo img { width: min(250px, 66vw); } .gd-page .gd-footer__logo { width: 280px; } }
