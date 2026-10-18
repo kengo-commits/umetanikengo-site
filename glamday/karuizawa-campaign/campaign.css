@@ -46,7 +46,7 @@
 
 /* ヘッダー：軽井沢LPのデザイン（明るい背景・GSロゴ・文字ナビ・資料請求は濃色ベタ） */
 .gd-page { --gd-header-h: 0px; }
-.gc-head { position: fixed; z-index: 9000; top: 0; left: 0; right: 0; height: 84px; box-sizing: border-box; display: grid; grid-template-columns: 1fr auto auto; align-items: center; padding: 0 3vw; background: rgba(243,238,231,.95); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--gd-rule); color: var(--gd-ink); font-family: var(--gd-mincho); }
+.gc-head { position: fixed; z-index: 9000; top: 0; left: 0; right: 0; height: 84px; box-sizing: border-box; display: grid; grid-template-columns: 1fr auto auto; align-items: center; padding: 0 3vw; background: rgba(255,255,255,.96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid #e8e4dc; color: var(--gd-ink); font-family: var(--gd-mincho); }
 .gc-head__brand { display: flex; align-items: center; width: 190px; }
 .gc-head__brand img { display: block; width: 100%; height: auto; opacity: .86; }
 .gc-head__nav { display: flex; align-items: center; gap: 56px; padding-right: 48px; }
