@@ -447,3 +447,5 @@ body.gd-page { padding-bottom: 92px; }
 @media (max-width: 767px) { .gc-head__brand { width: 170px !important; } }
 .gc-head__brand { width: 180px !important; }
 @media (max-width: 767px) { .gc-head__brand { width: 140px !important; } }
+.gc-head__brand { width: 150px !important; }
+@media (max-width: 767px) { .gc-head__brand { width: 120px !important; } }
