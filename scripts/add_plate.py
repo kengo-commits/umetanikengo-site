@@ -23,6 +23,10 @@ if any(p['date'] == today for p in plates):
     print('already added for', today); sys.exit(0)
 seen = {(p['museum'], str(p['id'])) for p in plates}
 rng = random.Random(today)
+# "Japan -> World": two days out of three the Plate is a Japanese work (ukiyo-e, screens, scrolls, sculpture, ceramics-as-drawing excluded by ok_type),
+# still only public-domain (Met) / CC0 (Cleveland) images. The third day stays open to the rest of the world.
+JAPAN_DAY = datetime.now(JST).toordinal() % 3 != 0
+JP_QUERIES = ['ukiyo-e', 'Japan', 'Edo period', 'woodblock print', 'Hokusai', 'Hiroshige', 'Utamaro', 'Japanese painting', 'screen', 'handscroll', 'Momoyama period', 'Kamakura period']
 
 
 def ok_type(s):
@@ -30,9 +34,13 @@ def ok_type(s):
     return any(t in s for t in TYPES) and not any(k in s for k in SKIP)
 
 
-def from_met():
-    r = requests.get('https://collectionapi.metmuseum.org/public/collection/v1.1/search',
-                     params={'isHighlight': 'true', 'isPublicDomain': 'true', 'hasImages': 'true', 'q': rng.choice(['painting', 'sculpture', 'landscape', 'portrait', 'drawing', 'print']), 'limit': 200}, headers=UA, timeout=30).json()
+def from_met(japan=False):
+    params = {'isPublicDomain': 'true', 'hasImages': 'true', 'limit': 200}
+    if japan:
+        params.update({'departmentId': 6, 'q': rng.choice(JP_QUERIES)})   # 6 = Asian Art
+    else:
+        params.update({'isHighlight': 'true', 'q': rng.choice(['painting', 'sculpture', 'landscape', 'portrait', 'drawing', 'print'])})
+    r = requests.get('https://collectionapi.metmuseum.org/public/collection/v1.1/search', params=params, headers=UA, timeout=30).json()
     ids = r.get('objectIDs') or []
     rng.shuffle(ids)
     for oid in ids[:40]:
@@ -41,15 +49,21 @@ def from_met():
         o = requests.get(f'https://collectionapi.metmuseum.org/public/collection/v1/objects/{oid}', headers=UA, timeout=30).json()
         if not (o.get('isPublicDomain') and o.get('primaryImageSmall') and ok_type(o.get('classification') or o.get('objectName')) and o.get('artistDisplayName')):
             continue
+        if japan and 'japan' not in (o.get('culture') or '').lower():
+            continue
         return {'museum': 'met', 'id': oid, 'title': o['title'], 'artist': o.get('artistDisplayName') or o.get('culture') or 'Unknown',
                 'when': o.get('objectDate') or '', 'medium': (o.get('classification') or o.get('objectName') or '').rstrip('s'),
                 'credit': 'The Metropolitan Museum of Art', 'license': 'Public domain', 'url': o.get('objectURL') or f'https://www.metmuseum.org/art/collection/search/{oid}',
                 'img': o.get('primaryImage') or o['primaryImageSmall']}   # full-size file, resized to 1400px below
 
 
-def from_cma():
-    r = requests.get('https://openaccess-api.clevelandart.org/api/artworks/',
-                     params={'cc0': 1, 'has_image': 1, 'highlight': 1, 'limit': 300, 'fields': 'id,title,creators,creation_date,technique,type,url,images'}, headers=UA, timeout=30).json()
+def from_cma(japan=False):
+    params = {'cc0': 1, 'has_image': 1, 'limit': 300, 'fields': 'id,title,creators,creation_date,technique,type,url,images'}
+    if japan:
+        params.update({'department': 'Japanese Art', 'skip': rng.randrange(0, 2900)})
+    else:
+        params['highlight'] = 1
+    r = requests.get('https://openaccess-api.clevelandart.org/api/artworks/', params=params, headers=UA, timeout=30).json()
     data = r.get('data') or []
     rng.shuffle(data)
     for a in data:
@@ -69,7 +83,9 @@ order = [from_met, from_cma] if datetime.now(JST).toordinal() % 2 == 0 else [fro
 pick = None
 for fn in order:
     try:
-        pick = fn()
+        pick = fn(japan=JAPAN_DAY)
+        if not pick and JAPAN_DAY:
+            pick = fn(japan=False)   # never leave a day empty
     except Exception as e:
         print('source failed:', fn.__name__, e)
     if pick:
