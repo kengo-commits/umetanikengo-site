@@ -417,3 +417,7 @@ body.gd-page { padding-bottom: 92px; }
 .gd-page .mobile-floating-cta .mobile-floating-meeting {
   background: #fff !important; color: var(--gd-ink) !important; border: 1px solid #fff !important; text-shadow: none;
 }
+
+/* Campaign-local facility pages: keep hero label clear of the fixed campaign header */
+.gd-lp .gd-lp-hero__label { top: 100px !important; }
+@media (max-width: 767px) { .gd-lp .gd-lp-hero__label { top: 76px !important; } }
