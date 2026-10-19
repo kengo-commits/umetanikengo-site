@@ -106,6 +106,8 @@ h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
 .col-list .hl{display:block;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;line-height:1.5}
 .col-list .sm{display:block;font-family:var(--jp);font-size:11px;letter-spacing:.03em;line-height:1.8;color:var(--mute);margin-top:4px;max-width:64ch}
 .col-list .src{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.col-list .glab{display:block;padding-block:12px 4px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink)}
+.col-list .glab small{font-weight:400;color:var(--mute);letter-spacing:.1em;margin-left:10px;font-family:var(--jp);text-transform:none}
 .col-list .when{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
 .sbox{display:flex;gap:16px;align-items:center;border-bottom:1px solid var(--ink);max-width:560px}
 .sbox input{flex:1;font:400 12px var(--sans);letter-spacing:.06em;background:none;color:var(--ink);border:none;padding:10px 0;border-radius:0;outline:none}
@@ -328,6 +330,15 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
      "en": "Brussels gallery Objects with Narratives is showing What Remains? at PAD London. Six designers take part, including Ben Storms with a piece milled from red Mexican onyx and Paul Cocksedge with a Corten steel shelf.",
      "source": "Dezeen",
      "url": "https://www.dezeen.com/2026/10/16/objects-with-narratives-collectible-design-pad/"
+    },
+    {
+     "cat": "art",
+     "title": "Otomo Yoshihide improvises across YCAM",
+     "ja": "音楽家の大友良英と山口情報芸術センター［YCAM］の新作展「即興！」が10月17日に始まり、2027年3月1日まで続きます。磯崎新設計の館内のスタジオからホワイエ、中庭、隣の中央公園まで会場が広がり、1970年代の携帯プレーヤー約80台がレコードなしで音を出す《without records》や、各地で集めた布を縫い合わせた《大風呂敷》など、同じ音の組み合わせが二度と起こらない作品が並びます。",
+     "en": "Improvisation!, a new exhibition by musician Otomo Yoshihide with the Yamaguchi Center for Arts and Media [YCAM], opened on 17 October and runs until 1 March 2027. It spreads from the studios of Arata Isozaki's building to the foyer, courtyard and the park next door, with works such as without records, some 80 portable record players from the 1970s playing without records, and The Great Furoshiki, a patchwork of cloths gathered across Japan, so the same combination of sounds never recurs.",
+     "source": "Bijutsu Techo",
+     "url": "https://bijutsutecho.com/magazine/news/exhibition/33187",
+     "japan": true
     }
    ]
   },
@@ -894,7 +905,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
   <section id="japan">
     <h2>From Japan <small>日本から世界へ</small></h2>
-    <p class="intro">Japanese design, architecture, fashion and music, sent out to the world. 毎日のニュースのうち、日本のつくり手やブランドについてのものだけを集めています。</p>
+    <p class="intro">Japanese art, design, architecture, fashion and music, sent out to the world. 毎日のニュースのうち、日本のつくり手やブランドについてのものだけを集めています。Japan Art の枠では、日本の展覧会・作家・ギャラリーを毎日ひとつ。</p>
     <div class="col-list" id="japanList"></div>
     <a class="vmore" id="moreJapan" href="japan/" hidden>View more</a>
   </section>
@@ -1092,7 +1103,7 @@ const showMore=(id,total)=>{const a=document.getElementById(id);if(a)a.hidden=!(
     showMore("moreDays",days.length);
     // From Japan and Objects, newest first, five each (the rest on japan/ and objects/)
     const jl=document.getElementById("japanList"), ol=document.getElementById("objectList");
-    if(jl){const J=days.flatMap(d=>d.items.filter(i=>i.japan).map(i=>({...i,date:d.date})));jl.innerHTML=J.slice(0,LIMIT).map(i=>`<article><span class="when">${esc(fmt(i.date))}</span><a href="${esc(i.url)}" target="_blank" rel="noopener"><span class="hl">${esc(i.title)}</span><span class="sm">${esc(i.ja)}</span><span class="src">${esc(i.source)}</span></a></article>`).join("")||'<p class="intro">日本についての記事が入ると、ここに並びます。</p>';showMore("moreJapan",J.length)}
+    if(jl){const J=days.flatMap(d=>d.items.filter(i=>i.japan).map(i=>({...i,date:d.date})));const row=i=>`<article><span class="when">${esc(fmt(i.date))}</span><a href="${esc(i.url)}" target="_blank" rel="noopener"><span class="hl">${esc(i.title)}${i.cat==="art"?'<span class="jp">Art</span>':""}</span><span class="sm">${esc(i.ja)}</span><span class="src">${esc(i.source)}</span></a></article>`;const A=J.filter(i=>i.cat==="art"),R=J.filter(i=>i.cat!=="art");jl.innerHTML=(A.length?'<span class="glab">Japan Art <small>展覧会・作家・ギャラリー</small></span>'+A.slice(0,LIMIT).map(row).join("")+(R.length?'<span class="glab">デザイン・建築・ファッション・音楽</span>':""):"")+R.slice(0,LIMIT).map(row).join("")||'<p class="intro">日本についての記事が入ると、ここに並びます。</p>';showMore("moreJapan",J.length)}
     if(ol){const O=days.flatMap(d=>(d.objects||(d.object?[d.object]:[])).map(o=>({...o,date:d.date})));ol.innerHTML=O.slice(0,LIMIT).map(o=>{const buy=o.buy||o.url||"#",ship={worldwide:"Ships worldwide",japan:"Japan only"}[o.ships]||"";return `<article>${o.buy?'<span class="pr">PR</span>':""}<span class="when">${esc(fmt(o.date))}</span><span class="hl">${o.brand?esc(o.brand)+" — ":""}${esc(o.name||"")}${o.japan?'<span class="jp">From Japan</span>':""}</span><span class="sm">${esc(o.ja||"")}</span><a class="buy" href="${esc(buy)}" target="_blank" rel="${o.buy?"sponsored noopener":"noopener"}">見る${o.price?" · "+esc(o.price):""}</a>${ship?`<span class="ship">${ship}</span>`:""}</article>`}).join("")||'<p class="intro">まだありません。</p>';showMore("moreObjects",O.length)}
     days.slice(0,LIMIT).forEach((d,i)=>{
       const det=document.createElement("details"); det.className="past"; if(i===0)det.open=true;

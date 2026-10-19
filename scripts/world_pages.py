@@ -94,6 +94,8 @@ EXTRA_CSS = '''<style>
 .col-list .en{display:block;font-size:11px;letter-spacing:.03em;line-height:1.75;margin-top:6px;max-width:70ch}
 .col-list .src{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:6px}
 .col-list .when{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+.col-list .glab{display:block;padding-block:14px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink)}
+.col-list .glab small{font-weight:400;color:var(--mute);letter-spacing:.1em;margin-left:10px;font-family:var(--jp);text-transform:none}
 .picks{margin:14px 0 0;padding:0;list-style:none}
 .picks li{padding-block:6px;border-top:1px solid var(--rule)}
 .picks .hl{text-transform:uppercase;font-size:10.5px;letter-spacing:.1em}
@@ -182,9 +184,27 @@ def note_block(day, lang):
 
 def story(i, lang, when=''):
     jp = '<span class="jp">From Japan</span>' if i.get('japan') else ''
+    if i.get('cat') == 'art':
+        jp += '<span class="jp">Art</span>'
     text = i.get('ja', '') if lang == 'ja' else (i.get('en') or '')
     sm = f'<span class="sm">{esc(text)}</span>' if text else ''
     return (f'<article>{f"<span class=\"when\">{esc(when)}</span>" if when else ""}<a href="{esc(i.get("url", "#"))}" target="_blank" rel="noopener"><span class="hl">{esc(i.get("title", ""))}{jp}</span>{sm}<span class="src">{esc(i.get("source", ""))}</span></a></article>')
+
+
+def japan_list(items, lang, when=None):
+    """From Japan: the Japan Art stories (exhibitions, artists, galleries) first under their own label, then the rest."""
+    art = [x for x in items if x.get('cat') == 'art']
+    rest = [x for x in items if x.get('cat') != 'art']
+    T = (lambda ja, en: ja if lang == 'ja' else en)
+    out = ''
+    if art:
+        out += f'<span class="glab">Japan Art <small>{T("展覧会・作家・ギャラリー", "Exhibitions, artists and galleries")}</small></span>'
+        out += ''.join(story(x, lang, when=when(x) if when else '') for x in art)
+    if rest:
+        if art:
+            out += f'<span class="glab">{T("デザイン・建築・ファッション・音楽", "Design, architecture, fashion and music")}</span>'
+        out += ''.join(story(x, lang, when=when(x) if when else '') for x in rest)
+    return out
 
 
 def news_grid(day, lang):
@@ -266,7 +286,7 @@ def day_page(day, days, plates, art_dir, lang):
         body += f'  <section id="plates-sec"><h2>Daily Masterwork <small>{T("この日の作品", "The daily masterwork")}</small></h2><div class="plate1">{plate_figure(plate, lang, root)}</div></section>\n'
     body += f'  <section id="today"><h2>Today <small>{esc(fmt(d))}</small></h2>{news_grid(day, lang)}</section>\n'
     if japan:
-        body += f'  <section id="japan"><h2>From Japan <small>{T("日本から世界へ", "Japan to the world")}</small></h2><div class="col-list">{"".join(story(x, lang) for x in japan)}</div></section>\n'
+        body += f'  <section id="japan"><h2>From Japan <small>{T("日本から世界へ", "Japan to the world")}</small></h2><div class="col-list">{japan_list(japan, lang)}</div></section>\n'
     if objects:
         body += f'  <section id="objects"><h2>Objects <small>{T("今日の良いもの", "One good thing")}</small></h2><div class="objects">{"".join(object_card(o, lang) for o in objects)}</div></section>\n'
     pv = f'<a href="{root}{"en/" if lang == "en" else ""}{day_path(prev_d)}">← {esc(fmt(prev_d))}</a>' if prev_d else '<span></span>'
@@ -334,12 +354,13 @@ def weekly_pages(weekly, lang='ja'):
 
 def japan_page(days, lang='ja'):
     root = '../'
-    rows = ''.join(story(i, lang, when=fmt(d['date'])) for d in days for i in d.get('items', []) if i.get('japan'))
-    body = f'''  <div class="dayhead"><span class="lab">KENGO'S SYNESTHESIA</span><h1>From Japan<small>日本から世界へ — Japanese design, architecture, fashion and music, sent out to the world</small></h1>
-    <p>毎日のニュースのうち、日本のつくり手・ブランド・建築・音楽についてのものだけを集めています。海外の読者に向けて、日本からの視点で。</p></div>
+    allj = [dict(i, _when=fmt(d['date'])) for d in days for i in d.get('items', []) if i.get('japan')]
+    rows = japan_list(allj, lang, when=lambda x: x['_when'])
+    body = f'''  <div class="dayhead"><span class="lab">KENGO'S SYNESTHESIA</span><h1>From Japan<small>日本から世界へ — Japanese art, design, architecture, fashion and music, sent out to the world</small></h1>
+    <p>毎日のニュースのうち、日本のつくり手・ブランド・建築・音楽についてのものだけを集めています。Japan Art の枠では、日本の展覧会・作家・ギャラリーを毎日ひとつ。海外の読者に向けて、日本からの視点で。</p></div>
   <section><div class="col-list">{rows or '<p class="intro">まだありません。日本についての記事が入ると、ここに並びます。</p>'}</div></section>
 '''
-    return shell('From Japan', '日本のデザイン・建築・ファッション・音楽についてのニュースを、世界に向けて。', body, root, lang, BASE + 'japan/')
+    return shell('From Japan', '日本のアート・デザイン・建築・ファッション・音楽についてのニュースを、世界に向けて。', body, root, lang, BASE + 'japan/')
 
 
 def objects_page(days, lang='ja'):
