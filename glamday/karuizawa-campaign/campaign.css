@@ -449,3 +449,8 @@ body.gd-page { padding-bottom: 92px; }
 @media (max-width: 767px) { .gc-head__brand { width: 140px !important; } }
 .gc-head__brand { width: 150px !important; }
 @media (max-width: 767px) { .gc-head__brand { width: 120px !important; } }
+
+/* Anchor jumps: keep section headings clear of the fixed header */
+html { scroll-padding-top: 84px; }
+#sales, #flow, #campaign, #top, [id^="gd-"], main section[id] { scroll-margin-top: 84px; }
+@media (max-width: 767px) { html { scroll-padding-top: 60px; } #sales, #flow, #campaign, main section[id] { scroll-margin-top: 60px; } }

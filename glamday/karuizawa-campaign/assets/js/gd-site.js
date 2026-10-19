@@ -61,7 +61,7 @@
 
   function offsetTop() {
     var off = 0;
-    var header = doc.querySelector('.gd-header');
+    var header = doc.querySelector('.gd-header, .gc-head');
     if (header) off += header.getBoundingClientRect().height;
     var nav = doc.querySelector('.gd-lp-nav');
     if (nav && window.getComputedStyle(nav).position === 'sticky') off += nav.getBoundingClientRect().height;
@@ -312,7 +312,7 @@
     var bar = sec.querySelector('.gd-floorbar');
     function placeBar() {
       if (!bar) return;
-      var top = 0, h = doc.querySelector('.gd-header'), nav = doc.querySelector('.gd-lp-nav');
+      var top = 0, h = doc.querySelector('.gd-header, .gc-head'), nav = doc.querySelector('.gd-lp-nav');
       if (h) top += h.getBoundingClientRect().height;
       if (nav && window.getComputedStyle(nav).position === 'sticky') top += nav.getBoundingClientRect().height;
       bar.style.top = Math.round(top) + 'px';
