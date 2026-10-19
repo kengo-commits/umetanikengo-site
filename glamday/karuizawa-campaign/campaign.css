@@ -461,3 +461,4 @@ html { scroll-padding-top: 84px; }
 .gc-benefit__text { text-align: left; word-break: auto-phrase; line-break: strict; }
 .gc-benefit__text, .gc-benefit p, .gc-lead, .gc-note { text-wrap: pretty; }
 .gd-page p, .gd-page li, .gd-page dd { word-break: auto-phrase; line-break: strict; }
+.gd-heading__label.is-ink { line-height: 1.25; }
