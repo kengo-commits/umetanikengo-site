@@ -369,3 +369,46 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
   }
 }
 @media (max-width: 767px) { .gc-head__actions { display: none; } }
+
+/* floating bar: always visible on every device */
+.gd-page .mobile-floating-cta {
+  display: flex !important; position: fixed !important; z-index: 9999 !important;
+  transform: none !important; opacity: 1 !important; pointer-events: auto !important; visibility: visible !important;
+}
+body.gd-page { padding-bottom: 92px; }
+@media (min-width: 769px) {
+  .gd-page .mobile-floating-cta {
+    left: 50% !important; right: auto !important; bottom: 18px !important; transform: translateX(-50%) !important;
+    width: min(760px, calc(100% - 32px)) !important; max-width: none !important; margin: 0 !important; box-sizing: border-box;
+    padding: 10px !important; gap: 8px !important; border-radius: 14px !important; border: 0 !important;
+    background-color: rgba(38,34,30,.94) !important;
+    background-image: linear-gradient(rgba(32,29,26,.78), rgba(32,29,26,.78)), url("assets/images/top2026/texture_marble_01.webp") !important;
+    background-size: auto, 700px auto !important;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    box-shadow: 0 18px 40px rgba(20,17,14,.45), 0 4px 12px rgba(20,17,14,.3), inset 0 0 0 1px rgba(226,204,152,.35) !important;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-btn {
+    position: relative; overflow: hidden; display: flex !important; align-items: center; justify-content: center; text-align: center;
+    min-height: 56px; border-radius: 8px !important; font-family: var(--gd-mincho, serif) !important; font-size: 15px !important; font-weight: 500 !important;
+    letter-spacing: .14em !important; text-decoration: none !important; white-space: nowrap; box-sizing: border-box;
+    transition: transform .2s ease, opacity .3s ease !important;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-request, .gd-page .mobile-floating-cta .mobile-floating-meeting { flex: 0 0 150px !important; width: 150px !important; padding: 0 6px !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-request { background: var(--gd-ivory, #f0ece4) !important; color: var(--gd-ink) !important; border: 1px solid var(--gd-ivory, #f0ece4) !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-meeting { background: #111 !important; color: #fff !important; border: 1px solid rgba(226,204,152,.75) !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign { flex: 1 1 0 !important; display: flex !important; gap: .8em; padding: 0 12px !important; font-size: 15px !important; letter-spacing: .1em !important; line-height: 1.3 !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign br { display: none; }
+  .gd-page .mobile-floating-cta .mobile-floating-btn:hover { transform: translateY(-1px); }
+}
+@media (min-width: 769px) {
+  .gd-page .mobile-floating-cta .mobile-floating-campaign {
+    position: relative; overflow: hidden; isolation: isolate; border: 0 !important; color: #fff !important;
+    background: linear-gradient(100deg, #7a6232 0%, #a98f58 25%, #c3a869 50%, #a98f58 75%, #7a6232 100%) !important; background-size: 200% 100% !important;
+    text-shadow: 0 1px 2px rgba(80,60,20,.35); animation: gc-cta-flow 6s linear infinite;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: 38%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: gc-cta-shine 3.6s ease-in-out infinite;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign span { display: inline-block; }
+}
