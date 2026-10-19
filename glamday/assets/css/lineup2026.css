@@ -426,8 +426,8 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 }
 .gd-lp .gd-floorbar { box-shadow: 0 0 0 100vmax rgba(243,238,231,.97); clip-path: inset(0 -100vmax); border-bottom: 0; }
 .gd-lp .floor-and-room-container > .floor-plan-diagram { margin-bottom: 0; }
-.gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-plan-main { margin-top: 6px; }
-.gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .gd-room__head { margin-top: 0; }
+.gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-main { margin-top: 6px; }
+.gd-lp .floor-plan-container:has(.gd-floorbar) .gd-room__head { margin-top: 0; }
 .gd-lp-gallery.is-collapsed .gd-gp-grid > .gd-gp-item:nth-child(n+4) { display: none; }
 .gd-lp-gallery__more { margin-top: 32px; text-align: center; }
 .gd-lp-gallery:not(.is-collapsed) .gd-lp-gallery__more { display: none; }
@@ -465,15 +465,15 @@ body.gd-page.gd-lp { overflow-x: clip; overflow-y: visible; }
 }
 /* PC: plan (left) and room photo (right) side by side so both are visible together */
 @media (min-width: 1024px) {
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 32px; align-items: start; }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) > .gd-floorbar { grid-column: 1 / -1; position: static; box-shadow: none; clip-path: none; margin-bottom: 16px; }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-and-room-container,
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-plan-main,
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-plan-top { display: contents; }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-plan-diagram { grid-column: 1; grid-row: 2; margin: 0 !important; padding: 44px 24px 20px; display: flex; flex-direction: column; justify-content: center; align-self: stretch; }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-plan-diagram .gd-fplan { align-self: center; }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-plan-diagram .gd-fplan > img { max-height: min(520px, calc(100vh - 330px)); min-height: 0; }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .gd-room { grid-column: 2; grid-row: 2; margin: 0; width: auto; }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .gd-room .room-tabs { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
-  .gd-lp .floor-plan-container:is(:has(.gd-floorbar), .is-single) .floor-plan-details { grid-column: 1 / -1; grid-row: 3; margin-top: 40px; width: auto; max-width: none; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 32px; align-items: start; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) > .gd-floorbar { grid-column: 1 / -1; position: static; box-shadow: none; clip-path: none; margin-bottom: 16px; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-and-room-container,
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-main,
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-top { display: contents; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-diagram { grid-column: 1; grid-row: 2; margin: 0 !important; padding: 44px 24px 20px; display: flex; flex-direction: column; justify-content: center; align-self: stretch; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-diagram .gd-fplan { align-self: center; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-diagram .gd-fplan > img { max-height: min(520px, calc(100vh - 330px)); min-height: 0; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .gd-room { grid-column: 2; grid-row: 2; margin: 0; width: auto; }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .gd-room .room-tabs { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .gd-lp .floor-plan-container:has(.gd-floorbar) .floor-plan-details { grid-column: 1 / -1; grid-row: 3; margin-top: 40px; width: auto; max-width: none; }
 }
