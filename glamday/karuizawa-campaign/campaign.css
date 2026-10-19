@@ -441,3 +441,7 @@ body.gd-page { padding-bottom: 92px; }
 }
 .gd-page .gd-footer__logo::after { background: linear-gradient(100deg, #8e9195, #b3b6b9 50%, #8e9195); }
 @media (min-width:768px){ .gd-page .gd-footer__logo { width: 300px; } }
+
+/* Header logo: smaller */
+.gc-head__brand { width: 230px !important; }
+@media (max-width: 767px) { .gc-head__brand { width: 170px !important; } }
