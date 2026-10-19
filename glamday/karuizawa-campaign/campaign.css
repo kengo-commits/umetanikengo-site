@@ -358,3 +358,13 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
 .gc-hero__center span { font-size: clamp(17px, 2.7vw, 42px); }
 @media (max-width: 767px) { .gc-hero__center span { font-size: 4.2vw; } }
 .gc-hero__center span { line-height: 1.35; text-align: center; }
+
+/* 資料請求 / オンライン商談: same size */
+.gc-head__actions { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.gc-head__request, .gc-head__meeting { display: flex; align-items: center; justify-content: center; text-align: center; box-sizing: border-box; white-space: nowrap; }
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-request, .mobile-floating-cta .mobile-floating-meeting {
+    flex: 0 0 auto !important; width: clamp(84px, 25.5vw, 104px) !important; box-sizing: border-box !important; padding: 8px 2px !important;
+    display: flex !important; align-items: center; justify-content: center; white-space: nowrap;
+  }
+}
