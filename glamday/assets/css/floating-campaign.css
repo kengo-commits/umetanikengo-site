@@ -1,0 +1,95 @@
+/* Floating CTA bar shared by the property pages (same as the karuizawa campaign page) */
+@keyframes gc-cta-flow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+@keyframes gc-cta-shine { 0%, 55% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(260%) skewX(-20deg); } }
+/* floating bar (mobile): campaign CTA on the right, same gold design/text as the main CTA */
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-btn { flex: 1 1 0 !important; min-width: 0; white-space: nowrap; }
+  .mobile-floating-cta .mobile-floating-meeting { flex: 1.35 1 0 !important; }
+  .mobile-floating-cta .mobile-floating-campaign {
+    flex: 2.5 1 0 !important; position: relative; overflow: hidden; isolation: isolate; gap: 4px;
+    white-space: normal !important; text-align: center; line-height: 1.35 !important; font-size: 12px !important; font-weight: 500 !important;
+    color: #fff !important; border: 0 !important; border-radius: 3px !important;
+    background: linear-gradient(100deg, #7a6232 0%, #a98f58 25%, #c3a869 50%, #a98f58 75%, #7a6232 100%) !important;
+    background-size: 200% 100% !important; text-shadow: 0 1px 2px rgba(80,60,20,.35);
+    animation: gc-cta-flow 6s linear infinite;
+  }
+  .mobile-floating-cta .mobile-floating-campaign::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: 38%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: gc-cta-shine 3.6s ease-in-out infinite;
+  }
+  .mobile-floating-cta .mobile-floating-campaign span { flex: 0 0 auto; }
+}
+@media (prefers-reduced-motion: reduce) { .mobile-floating-cta .mobile-floating-campaign, .mobile-floating-cta .mobile-floating-campaign::before { animation: none; } }
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-btn { font-size: clamp(10px, 2.9vw, 12px) !important; padding: 8px 6px !important; letter-spacing: 0 !important; }
+  .mobile-floating-cta .mobile-floating-request, .mobile-floating-cta .mobile-floating-meeting { flex: 0 0 auto !important; padding: 8px clamp(6px,2vw,10px) !important; }
+  .mobile-floating-cta .mobile-floating-campaign { flex: 1 1 0 !important; padding: 8px 4px !important; font-size: clamp(10px, 2.9vw, 12px) !important; }
+}
+@media (max-width: 768px) {
+  .gd-page .mobile-floating-cta { margin: 0 !important; width: auto !important; padding: 8px !important; gap: 6px !important; }
+}
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-campaign { display: block !important; white-space: nowrap !important; padding: 8px 2px !important; font-size: clamp(10px, 2.8vw, 11.5px) !important; line-height: 1.45 !important; }
+  .mobile-floating-cta .mobile-floating-campaign span { display: inline-block; margin-left: .5em; }
+}
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-campaign { font-size: clamp(9.5px, 2.55vw, 11px) !important; padding: 8px 0 !important; }
+  .mobile-floating-cta .mobile-floating-request, .mobile-floating-cta .mobile-floating-meeting { padding: 8px 6px !important; font-size: clamp(10px, 2.7vw, 11.5px) !important; }
+}
+
+
+@media (max-width: 768px) {
+  .mobile-floating-cta .mobile-floating-request, .mobile-floating-cta .mobile-floating-meeting {
+    flex: 0 0 auto !important; width: clamp(84px, 25.5vw, 104px) !important; box-sizing: border-box !important; padding: 8px 2px !important;
+    display: flex !important; align-items: center; justify-content: center; white-space: nowrap;
+  }
+}
+
+/* floating bar: always visible on every device */
+.gd-page .mobile-floating-cta {
+  display: flex !important; position: fixed !important; z-index: 9999 !important;
+  transform: none !important; opacity: 1 !important; pointer-events: auto !important; visibility: visible !important;
+}
+body.gd-page { padding-bottom: 92px; }
+@media (min-width: 769px) {
+  .gd-page .mobile-floating-cta {
+    left: 50% !important; right: auto !important; bottom: 18px !important; transform: translateX(-50%) !important;
+    width: min(760px, calc(100% - 32px)) !important; max-width: none !important; margin: 0 !important; box-sizing: border-box;
+    padding: 10px !important; gap: 8px !important; border-radius: 14px !important; border: 0 !important;
+    background-color: rgba(38,34,30,.94) !important;
+    background-image: linear-gradient(rgba(32,29,26,.78), rgba(32,29,26,.78)), url("../images/top2026/texture_marble_01.webp") !important;
+    background-size: auto, 700px auto !important;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    box-shadow: 0 18px 40px rgba(20,17,14,.45), 0 4px 12px rgba(20,17,14,.3), inset 0 0 0 1px rgba(226,204,152,.35) !important;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-btn {
+    position: relative; overflow: hidden; display: flex !important; align-items: center; justify-content: center; text-align: center;
+    min-height: 56px; border-radius: 8px !important; font-family: var(--gd-mincho, serif) !important; font-size: 15px !important; font-weight: 500 !important;
+    letter-spacing: .14em !important; text-decoration: none !important; white-space: nowrap; box-sizing: border-box;
+    transition: transform .2s ease, opacity .3s ease !important;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-request, .gd-page .mobile-floating-cta .mobile-floating-meeting { flex: 0 0 150px !important; width: 150px !important; padding: 0 6px !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-request { background: var(--gd-ivory, #f0ece4) !important; color: var(--gd-ink) !important; border: 1px solid var(--gd-ivory, #f0ece4) !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-meeting { background: #111 !important; color: #fff !important; border: 1px solid rgba(226,204,152,.75) !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign { flex: 1 1 0 !important; display: flex !important; gap: .8em; padding: 0 12px !important; font-size: 15px !important; letter-spacing: .1em !important; line-height: 1.3 !important; }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign br { display: none; }
+  .gd-page .mobile-floating-cta .mobile-floating-btn:hover { transform: translateY(-1px); }
+}
+@media (min-width: 769px) {
+  .gd-page .mobile-floating-cta .mobile-floating-campaign {
+    position: relative; overflow: hidden; isolation: isolate; border: 0 !important; color: #fff !important;
+    background: linear-gradient(100deg, #7a6232 0%, #a98f58 25%, #c3a869 50%, #a98f58 75%, #7a6232 100%) !important; background-size: 200% 100% !important;
+    text-shadow: 0 1px 2px rgba(80,60,20,.35); animation: gc-cta-flow 6s linear infinite;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: 38%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: gc-cta-shine 3.6s ease-in-out infinite;
+  }
+  .gd-page .mobile-floating-cta .mobile-floating-campaign span { display: inline-block; }
+}
+
+/* floating bar: オンライン商談 on white */
+.gd-page .mobile-floating-cta .mobile-floating-meeting {
+  background: #fff !important; color: var(--gd-ink) !important; border: 1px solid #fff !important; text-shadow: none;
+}
+
