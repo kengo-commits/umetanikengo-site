@@ -412,3 +412,8 @@ body.gd-page { padding-bottom: 92px; }
   }
   .gd-page .mobile-floating-cta .mobile-floating-campaign span { display: inline-block; }
 }
+
+/* floating bar: オンライン商談 on white */
+.gd-page .mobile-floating-cta .mobile-floating-meeting {
+  background: #fff !important; color: var(--gd-ink) !important; border: 1px solid #fff !important; text-shadow: none;
+}
