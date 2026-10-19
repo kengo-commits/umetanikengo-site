@@ -368,3 +368,4 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
     display: flex !important; align-items: center; justify-content: center; white-space: nowrap;
   }
 }
+@media (max-width: 767px) { .gc-head__actions { display: none; } }
