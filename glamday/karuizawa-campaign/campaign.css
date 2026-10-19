@@ -426,7 +426,7 @@ body.gd-page { padding-bottom: 92px; }
 /* Logo: "GLAMDAY STYLE" (top line) in dark silver, "KARUIZAWA SPECIAL CAMPAIGN" stays gold */
 .gc-head__brand {
   background-image:
-    linear-gradient(100deg, #26282b 0%, #313336 30%, #3d3f43 50%, #313336 70%, #26282b 100%),
+    linear-gradient(100deg, #0f1011 0%, #161718 30%, #1d1e20 50%, #161718 70%, #0f1011 100%),
     linear-gradient(100deg, #8c7443 0%, #9a8150 14%, #b09461 30%, #cdb27a 42%, #dcc38e 50%, #cdb27a 58%, #b09461 70%, #9a8150 86%, #8c7443 100%) !important;
   background-size: 100% 46%, 720px 100% !important;
   background-position: 0 0, 0 0 !important;
@@ -435,7 +435,7 @@ body.gd-page { padding-bottom: 92px; }
 .gd-page .gd-menu__logo, .gd-page .gd-footer__logo { position: relative; display: block; }
 .gd-page .gd-menu__logo::after, .gd-page .gd-footer__logo::after {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 46%; pointer-events: none;
-  background: linear-gradient(100deg, #26282b, #3d3f43 50%, #26282b);
+  background: linear-gradient(100deg, #0f1011, #1d1e20 50%, #0f1011);
   -webkit-mask-image: url("assets/images/top2026/title_logo.webp"); mask-image: url("assets/images/top2026/title_logo.webp");
   -webkit-mask-size: 100% 217%; mask-size: 100% 217%; -webkit-mask-position: top; mask-position: top; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
 }
