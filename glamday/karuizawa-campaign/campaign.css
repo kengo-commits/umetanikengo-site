@@ -357,3 +357,4 @@ a.gd-btn-member.is-gold:hover { opacity: 1; }
 /* hero SPECIAL CAMPAIGN: half size */
 .gc-hero__center span { font-size: clamp(17px, 2.7vw, 42px); }
 @media (max-width: 767px) { .gc-hero__center span { font-size: 4.2vw; } }
+.gc-hero__center span { line-height: 1.35; text-align: center; }
