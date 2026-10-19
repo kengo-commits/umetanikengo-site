@@ -421,3 +421,4 @@ body.gd-page { padding-bottom: 92px; }
 /* Campaign-local facility pages: keep hero label clear of the fixed campaign header */
 .gd-lp .gd-lp-hero__label { top: 100px !important; }
 @media (max-width: 767px) { .gd-lp .gd-lp-hero__label { top: 76px !important; } }
+.gc-head__nav a { font-family: var(--gd-garamond); font-size: 14px; letter-spacing: .22em; }
