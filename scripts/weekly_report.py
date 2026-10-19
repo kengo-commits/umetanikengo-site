@@ -96,7 +96,7 @@ def main():
     else:
         L += ['- Analytics: not connected yet (set CF_API_TOKEN and CF_SITE_TAG in the repository secrets, and cf_beacon_token in data/site-settings.json).']
     L += ['', '## Published this week', '',
-          f'- {site["days"]} daily issues · {site["stories"]} stories · {site["notes"]} notes · {site["plates"]} plates · {site["objects"]} objects · {site["japan"]} From Japan stories',
+          f'- {site["days"]} daily issues · {site["stories"]} stories · {site["notes"]} notes · {site["plates"]} daily masterworks · {site["objects"]} objects · {site["japan"]} From Japan stories',
           f'- Instagram sets posted automatically: {", ".join(site["posted"]) or "none (IG_POST_TOKEN not set)"}']
     L += [f'  - {d} — {t}' for d, t in site['titles']]
     L += ['', '## Instagram', '']

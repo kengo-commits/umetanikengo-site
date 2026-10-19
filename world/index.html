@@ -193,7 +193,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
 <div class="wrap">
   <div class="top lab"><span>Issue 01 — Fashion / Music / Design / World</span><span id="date"></span></div>
-  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#note">Note</a><a href="#art">Digital Art</a><a href="#plates-sec">Plates</a><a href="#today">Today</a><a href="#weekly">Weekly</a><a href="#japan">From Japan</a><a href="#objects">Objects</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
+  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#note">Note</a><a href="#art">Digital Art</a><a href="#plates-sec">Daily Masterworks</a><a href="#today">Today</a><a href="#weekly">Weekly</a><a href="#japan">From Japan</a><a href="#objects">Objects</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
   <div class="lede">
     <p><span>Kengo Umetani's tastes and thoughts on fashion, music and design, sent out to the world — selected every day from the public domain around the globe, with SYNESTHESIA DIGITAL ART by KENGO and original music made for this site.</span>KENGO'S SYNESTHESIA は、梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するサイトです。それらは毎日世界中のパブリックドメインから厳選しています。SYNESTHESIA DIGITAL ART by KENGO と共に、このサイトのためのオリジナル音楽も発信しています。</p>
     <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
@@ -220,7 +220,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
   </section>
 
   <section id="plates-sec">
-    <h2>Plates <small>パブリックドメイン / CC0 の作品</small></h2>
+    <h2>Daily Masterworks <small>パブリックドメイン / CC0 の作品</small></h2>
     <p class="intro">One masterpiece a day from the world's open collections, newest first. 世界の美術館が公開するパブリックドメイン／CC0の名作を、毎日1点ずつ加えています（新しいものが上）。ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の宇宙から始まりました。どれも著作権が切れた作品か、権利を放棄した画像です。触れると元の色が現れます。</p>
     <div class="plates" id="plates"></div>
     <a class="vmore" id="morePlates" href="more/?v=plates" hidden>View more</a>
@@ -908,7 +908,7 @@ footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display
 
   <section id="search">
     <h2>Search <small>サイト内検索</small></h2>
-    <form class="sbox" id="sform" role="search"><input id="sq" type="search" placeholder="Notes, stories, plates — 例：Slimane、建築、Klint" aria-label="サイト内検索" autocomplete="off"><span class="lab" id="scount"></span></form>
+    <form class="sbox" id="sform" role="search"><input id="sq" type="search" placeholder="Notes, stories, masterworks — 例：Slimane、建築、Klint" aria-label="サイト内検索" autocomplete="off"><span class="lab" id="scount"></span></form>
     <ul class="sres" id="sres"></ul>
   </section>
 
@@ -1053,7 +1053,7 @@ const FULL=["plates","days","art"].includes(VIEW)?VIEW:"";
 const LIMIT=FULL?Infinity:5;
 if(FULL){document.body.classList.add("full");document.body.dataset.v=FULL;
   const keep={plates:"plates-sec",days:"archive",art:"art"}[FULL];document.getElementById(keep).classList.add("keep");
-  document.title=({plates:"Plates",days:"Archive",art:"Synesthesia Digital Art by Kengo"})[FULL]+" — KENGO'S SYNESTHESIA";
+  document.title=({plates:"Daily Masterworks",days:"Archive",art:"Synesthesia Digital Art by Kengo"})[FULL]+" — KENGO'S SYNESTHESIA";
   document.querySelectorAll(".nv a[href^='#']").forEach(a=>a.setAttribute("href","./"+a.getAttribute("href")));
 }
 {const sg=document.getElementById("signals");if(sg)sg.dataset.limit=FULL==="art"?"":"5"}
@@ -1111,7 +1111,7 @@ const showMore=(id,total)=>{const a=document.getElementById(id);if(a)a.hidden=!(
 (function(){
   const f=document.getElementById("sform"),q=document.getElementById("sq"),res=document.getElementById("sres"),cnt=document.getElementById("scount");
   if(!f)return; let IDX=null,t;
-  const LAB={note:"Note",fashion:"Fashion",music:"Music",design:"Design",plate:"Plate",object:"Object",weekly:"Weekly"};
+  const LAB={note:"Note",fashion:"Fashion",music:"Music",design:"Design",plate:"Daily Masterwork",object:"Object",weekly:"Weekly"};
   const run=()=>{const s=q.value.trim().toLowerCase();res.innerHTML="";cnt.textContent="";if(!s)return;if(!IDX){fetch("search.json").then(r=>r.json()).then(j=>{IDX=j;run()}).catch(()=>{cnt.textContent="検索できませんでした"});return}
     const terms=s.split(/\s+/).filter(Boolean),hits=IDX.filter(r=>terms.every(w=>r.q.includes(w))).slice(0,40);
     cnt.textContent=hits.length?hits.length+(hits.length===40?"+":""):"0";

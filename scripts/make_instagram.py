@@ -4,7 +4,7 @@ Reads the newest day in world/news.json and writes six 1080x1350 images plus
 a caption to ig-out/<date>/ :
 
   1 cover: that day's SYNESTHESIA DIGITAL ART by KENGO (world/signal.js), a different data artwork every day
-  2 Plate: that day's public-domain / CC0 masterpiece (world/plates.json)
+  2 Daily Masterwork: that day's public-domain / CC0 masterpiece (world/plates.json)
   3 Kengo's Note
   4 Fashion  5 Music  6 Design
   7 link to the site, sources and what the cover was drawn from
@@ -110,12 +110,12 @@ def build(day, sig):
 <script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);const DAY={json.dumps(day, ensure_ascii=False)};window.drawFrame=t=>SIGNAL.draw(c,1080,760,DAY,t,{{}});drawFrame(0);</script>
 <div style="margin-top:40px;{style}">{E(word)}</div>
 <div style="margin-top:16px;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art by Kengo — {E(no)} · {weekday}</div>
-<div style="margin-top:22px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art{' / Plate' if plate else ''}{' / Note' if note else ''} / Fashion / Music / Design</div>
+<div style="margin-top:22px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art{' / Daily Masterwork' if plate else ''}{' / Note' if note else ''} / Fashion / Music / Design</div>
 <div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアート{'、名作' if plate else ''}{'、ノート' if note else ''}と、世界のファッション・音楽・デザイン</div>''']
     if plate:
         meta = ', '.join(x for x in (plate.get('artist'), plate.get('when')) if x) + (' — ' + plate['medium'].lower() if plate.get('medium') else '')
         img = (WORLD / 'media' / plate['file']).as_uri()
-        slides.append(f'''<div class="lab">Plate</div>
+        slides.append(f'''<div class="lab">Daily Masterwork</div>
 <div style="margin-top:14px;height:820px;display:flex;align-items:center;justify-content:center;background:#f4f4f4"><img src="{img}" style="width:100%;height:100%;object-fit:contain;display:block"></div>
 <div style="margin-top:30px;font-size:30px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.3">{E(short_title(plate["title"]))}</div>
 <div style="margin-top:10px;font-size:22px;letter-spacing:.04em;color:#555">{E(meta)}</div>
@@ -143,7 +143,7 @@ def build(day, sig):
     others = [i['title'] for i in day['items'] if not (note and i['url'] == note.get('url'))][:6]
     cap = [f'{no} {sig["id"]} — {weekday}, {stamp}', '']
     if plate:
-        cap += [f"Plate: {short_title(plate['title'])} — {', '.join(x for x in (plate.get('artist'), plate.get('when')) if x)} ({plate.get('license', '')}, {plate.get('credit', '')})", '']
+        cap += [f"Daily Masterwork: {short_title(plate['title'])} — {', '.join(x for x in (plate.get('artist'), plate.get('when')) if x)} ({plate.get('license', '')}, {plate.get('credit', '')})", '']
     if note:
         cap += [note.get('en', ''), '', note['ja'], '']
     cap += ['Also today / ほかに今日のニュース:'] + [f'— {t}' for t in others]

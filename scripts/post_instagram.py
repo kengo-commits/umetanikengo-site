@@ -186,7 +186,7 @@ def threads(d):
     base = SITE + d + '/'
     cap = (folder / 'caption.txt').read_text(encoding='utf-8').strip().split('\n')
     day_url = f"https://www.kengo-umetani.com/synesthesia-world/{d.replace('-', '/')}/"
-    text = (cap[0] + '\n\n' + next((l for l in cap[1:] if l and not l.startswith(('Plate:', '#', '—', 'Also', 'Sources', 'Cover', '元の', 'This day'))), '') + '\n\n' + day_url)[:500]
+    text = (cap[0] + '\n\n' + next((l for l in cap[1:] if l and not l.startswith(('Daily Masterwork:', '#', '—', 'Also', 'Sources', 'Cover', '元の', 'This day'))), '') + '\n\n' + day_url)[:500]
     r = requests.post(f'{THREADS}/me/threads', data={'media_type': 'IMAGE', 'image_url': base + '1.jpg', 'text': text, 'access_token': token}, timeout=60).json()
     cid = r.get('id')
     if not cid:

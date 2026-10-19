@@ -1,4 +1,4 @@
-"""Adds one public-domain / CC0 artwork a day to KENGO'S SYNESTHESIA (the "Plates" section).
+"""Adds one public-domain / CC0 artwork a day to KENGO'S SYNESTHESIA (the "Daily Masterworks" section).
 
 Sources: The Met Open Access (public domain highlights) and The Cleveland Museum of Art Open Access (CC0 highlights).
 Writes world/media/p-YYYY-MM-DD.webp and appends an entry to world/plates.json. Runs once per day (Asia/Tokyo); safe to re-run.
@@ -23,7 +23,7 @@ if any(p['date'] == today for p in plates):
     print('already added for', today); sys.exit(0)
 seen = {(p['museum'], str(p['id'])) for p in plates}
 rng = random.Random(today)
-# "Japan -> World": two days out of three the Plate is a Japanese work (ukiyo-e, screens, scrolls, sculpture, ceramics-as-drawing excluded by ok_type),
+# "Japan -> World": two days out of three the Daily Masterwork is a Japanese work (ukiyo-e, screens, scrolls, sculpture, ceramics-as-drawing excluded by ok_type),
 # still only public-domain (Met) / CC0 (Cleveland) images. The third day stays open to the rest of the world.
 JAPAN_DAY = datetime.now(JST).toordinal() % 3 != 0
 JP_QUERIES = ['ukiyo-e', 'Japan', 'Edo period', 'woodblock print', 'Hokusai', 'Hiroshige', 'Utamaro', 'Japanese painting', 'screen', 'handscroll', 'Momoyama period', 'Kamakura period']
