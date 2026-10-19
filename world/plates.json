@@ -88,5 +88,20 @@
   "file": "p-2026-10-19.webp",
   "w": 939,
   "h": 1400
+ },
+ {
+  "museum": "cma",
+  "id": 153796,
+  "title": "Wild Geese",
+  "artist": "Kano Sanraku",
+  "when": "late 1500s-early 1600s",
+  "medium": "Painting",
+  "credit": "The Cleveland Museum of Art",
+  "license": "CC0",
+  "url": "https://clevelandart.org/art/1987.9",
+  "date": "2026-10-20",
+  "file": "p-2026-10-20.webp",
+  "w": 900,
+  "h": 832
  }
 ]
