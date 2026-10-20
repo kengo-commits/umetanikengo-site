@@ -1589,3 +1589,33 @@ a.gd-benefit .gd-benefit__text { margin-bottom: 0; }
   background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.04));
   pointer-events: none;
 }
+/* waiting-list CTA (WAITING facilities) */
+.gd-page .gd-btn-head.is-gold { background: rgba(226,204,152,.06); color: #e2cc98 !important; border-color: rgba(196,174,128,.9); animation: gd-border-glow-soft 6s ease-in-out 4.5s infinite; }
+.gd-page .gd-btn-head.is-gold:hover { background: #c4ae80; color: #1a1714 !important; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .gd-page .gd-btn-head.is-gold { animation: none; } }
+@media (max-width: 1180px) { .gd-page .gd-header__nav:has(.is-gold) { gap: 8px; } }
+@media (max-width: 1023px) { .gd-page .gd-header__nav:has(.is-gold) .gd-btn-head { padding: 0 8px; letter-spacing: 0.02em; } }
+@media (max-width: 768px) {
+  .gd-page .mobile-floating-cta.has-waitlist { flex-wrap: wrap !important; width: min(calc(100% - 48px), 340px) !important; }
+  .gd-page .mobile-floating-cta.has-waitlist .mobile-floating-btn { flex: 1 1 calc(50% - 3px) !important; }
+  .gd-page .mobile-floating-cta.has-waitlist .mobile-floating-waitlist {
+    flex: 1 1 100% !important; min-height: 38px;
+    background: rgba(226,204,152,.1) !important; color: #e2cc98 !important; border: 1px solid rgba(196,174,128,.85) !important;
+  }
+  body.gd-page.cta-visible:has(.mobile-floating-cta.has-waitlist) #chatbot-widget-button { bottom: 126px !important; }
+}
+.gd-page .gd-btn-head__short { display: none; }
+@media (max-width: 1320px) {
+  .gd-page .gd-header__nav:has(.is-gold) .gd-btn-head__full { display: none; }
+  .gd-page .gd-header__nav:has(.is-gold) .gd-btn-head__short { display: inline; }
+}
+@media (max-width: 1100px) {
+  .gd-page .gd-header__nav:has(.is-gold) { gap: 6px; }
+  .gd-page .gd-header__nav:has(.is-gold) .gd-btn-head { padding: 0 6px; }
+  .gd-page .gd-header__inner:has(.is-gold) .gd-header__logo img { width: 156px; }
+  .gd-page .gd-header__nav:has(.is-gold) .gd-btn-head { font-size: 11.5px; }
+}
+@media (max-width: 860px) {
+  .gd-page .gd-header__inner:has(.is-gold) .gd-header__logo img { width: 140px; }
+  .gd-page .gd-header__nav:has(.is-gold) .gd-btn-head { padding: 0 5px; font-size: 11px; letter-spacing: 0; }
+}
