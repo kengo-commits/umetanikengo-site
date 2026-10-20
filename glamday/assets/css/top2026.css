@@ -1143,11 +1143,12 @@ html.gd-menu-open { overflow: hidden; }
 .gd-page .gd-card { container-type: inline-size; }
 .gd-page .gd-card > .gd-soldout {
   position: absolute; z-index: 2; left: 50%; right: auto; top: calc(100cqw * 334 / 467); bottom: auto;
-  transform: translate(-50%, -50%); width: 124px; height: 30px; font-size: 13px;
+  transform: translate(-50%, -50%); width: 168px; height: 42px; font-size: 16px;
 }
 .gd-page .gd-card:has(> .gd-soldout) .gd-card__body { padding-top: 26px; }
 
 .gd-page .gd-card .gd-card__body, .gd-page .gd-card:has(> .gd-soldout) .gd-card__body { padding-top: 26px; }
+.gd-page .gd-card:has(> .gd-soldout) .gd-card__body { padding-top: 34px; }
 
 .gd-page .gd-footer {
   background-color: var(--gd-umber);
