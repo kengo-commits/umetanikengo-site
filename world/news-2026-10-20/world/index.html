@@ -1,0 +1,1433 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KENGO'S SYNESTHESIA | KENGO UMETANI OFFICIAL</title>
+<meta name="description" content="KENGO'S SYNESTHESIA — 梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するページ。">
+<link rel="canonical" href="https://www.kengo-umetani.com/synesthesia-world/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KENGO'S SYNESTHESIA | KENGO UMETANI OFFICIAL">
+<meta property="og:description" content="KENGO'S SYNESTHESIA — 梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するページ。">
+<meta property="og:url" content="https://www.kengo-umetani.com/synesthesia-world/">
+<meta property="og:image" content="https://www.kengo-umetani.com/synesthesia-world/media/film-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>
+/* Layout: white page, one thin header line, everything set small in uppercase grotesk; photographs carry the page */
+:root{
+  --paper:#ffffff; --ink:#000000; --mute:#8c8c8c; --rule:#e8e8e8; --hover:#f4f4f4; --night:#ffffff; --onnight:#000000;
+  --sans:"Helvetica Neue",Helvetica,Arial,"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  --jp:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:11px;line-height:1.6;letter-spacing:.06em;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.45}
+.wrap{max-width:none;margin:0;padding-inline:clamp(16px,3vw,40px);padding-block:0 64px}
+.lab{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.top{display:none}
+header.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:18px 14px}
+.mast{margin:0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;line-height:1.5}
+.mast i{font-style:normal;font-weight:400;text-transform:none;letter-spacing:.06em;color:var(--mute);margin-left:.4em}
+nav.nv{display:flex;gap:clamp(12px,2vw,28px);flex-wrap:wrap;text-transform:uppercase;font-size:10px;letter-spacing:.14em}
+.lede{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-block:48px 28px}
+.lede p{margin:0;max-width:60ch;font-family:var(--jp);font-size:10px;letter-spacing:.03em;line-height:1.6;color:var(--mute)}
+.lede p span{display:block;font-family:var(--sans);color:var(--ink);text-transform:uppercase;font-size:10.5px;letter-spacing:.12em;margin-bottom:10px}
+.pick{text-align:right}
+.pick a{display:block;color:var(--ink);font-size:11px;letter-spacing:.14em;margin-top:6px}
+
+.film{position:relative;margin-inline:calc(-1*clamp(16px,3vw,40px));background:#000}
+.film video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;max-height:86vh}
+.film .ttl{display:none}
+.film.signal canvas{display:block;width:100%;aspect-ratio:16/9;max-height:86vh;background:#000}
+.film.signal .cap b{font-weight:400;color:var(--ink)}
+.film.signal .cap #signalData{text-transform:none;letter-spacing:.06em}
+@media (max-width:640px){.film.signal canvas{aspect-ratio:4/5}}
+
+.film .cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px clamp(16px,3vw,40px);background:var(--paper);color:var(--mute);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+
+.clocks{display:flex;flex-wrap:wrap;gap:6px 28px;padding-block:10px 0;border-top:1px solid var(--rule);margin-top:4px}
+.clocks div{display:flex;gap:8px;align-items:baseline}
+.clocks b{font-weight:400;font-size:10px;letter-spacing:.12em;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+section{margin-top:96px}
+h2{margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+h2 small{font-weight:400;font-size:10px;letter-spacing:.12em;color:var(--mute)}
+.intro{font-family:var(--jp);font-size:11px;letter-spacing:.04em;line-height:1.9;color:var(--mute);max-width:56ch;margin:6px 0 24px}
+
+#note{margin-top:56px}
+#note .knote .lab{display:none}
+#note .knote .kt{margin-top:0}
+#plates-sec h2{margin-bottom:4px}
+.news{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(16px,3vw,40px);border-top:1px solid var(--ink)}
+.news .col{min-width:0}
+.news .col>.lab{display:block;padding-block:10px 4px;color:var(--ink)}
+.news article{padding-block:12px;border-bottom:1px solid var(--rule)}
+.news article a{display:block}
+.news .hl{display:block;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;line-height:1.5}
+.news .sm{display:block;font-family:var(--jp);font-size:11px;letter-spacing:.03em;line-height:1.8;color:var(--mute);margin-top:4px}
+.news .src{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.knote{border-top:1px solid var(--ink);padding-block:14px 18px;display:grid;grid-template-columns:minmax(0,12em) minmax(0,1fr);gap:8px clamp(16px,3vw,40px)}
+.knote .lab{color:var(--ink)}
+.knote .kt{display:block;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;margin-top:6px}
+.knote .ken{margin:0;font-size:11.5px;line-height:1.75;letter-spacing:.03em;max-width:68ch}
+.knote .kja{margin:8px 0 0;font-family:var(--jp);font-size:11.5px;line-height:1.9;letter-spacing:.03em;color:var(--mute);max-width:60ch}
+.knote .src{display:inline-block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:8px}
+@media (max-width:640px){.knote{grid-template-columns:minmax(0,1fr)}}
+.past{margin-top:20px}
+.past summary{cursor:pointer;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:flex;gap:12px;padding-block:6px}
+.past h4{margin:22px 0 0;font-size:10px;font-weight:400;letter-spacing:.14em;color:var(--mute)}
+.daily{border-top:1px solid var(--ink);margin-bottom:56px}
+.daily .past{margin-top:0;border-bottom:1px solid var(--rule)}
+.daily .past summary{padding-block:12px;justify-content:space-between;color:var(--ink)}
+.daily .past .news{border-top:none;margin-bottom:16px}
+.plh{margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;flex-wrap:wrap}
+.plh small{font-weight:400;color:var(--mute);letter-spacing:.12em}
+@media (max-width:900px){.news{grid-template-columns:minmax(0,1fr)}}
+/* VIEW MORE: the page shows the newest five of each kind; the full lists live on more/?v=... */
+.vmore{display:inline-block;margin:18px 0 0;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.vmore[hidden]{display:none}
+.plink{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-left:auto}
+.daily .past summary .plink{margin-left:0}
+.objects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0 clamp(16px,3vw,40px);border-top:1px solid var(--ink)}
+.objects article{padding-block:14px;border-bottom:1px solid var(--rule)}
+.objects .pr{display:inline-block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);border:1px solid var(--rule);padding:1px 5px;margin-bottom:6px}
+.objects .hl{display:block;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;line-height:1.5}
+.objects .sm{display:block;font-family:var(--jp);font-size:11px;letter-spacing:.03em;line-height:1.8;color:var(--mute);margin-top:4px}
+.objects .buy{display:inline-block;margin-top:8px;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:1px}
+.objects .ship{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-left:10px}
+.jp{display:inline-block;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border:1px solid var(--ink);padding:0 4px;margin-left:8px;vertical-align:middle}
+.col-list{border-top:1px solid var(--ink)}
+.col-list article{padding-block:14px 16px;border-bottom:1px solid var(--rule)}
+.col-list .hl{display:block;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;line-height:1.5}
+.col-list .sm{display:block;font-family:var(--jp);font-size:11px;letter-spacing:.03em;line-height:1.8;color:var(--mute);margin-top:4px;max-width:64ch}
+.col-list .src{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.col-list .glab{display:block;padding-block:12px 4px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink)}
+.col-list .glab small{font-weight:400;color:var(--mute);letter-spacing:.1em;margin-left:10px;font-family:var(--jp);text-transform:none}
+.col-list .when{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+.sbox{display:flex;gap:16px;align-items:center;border-bottom:1px solid var(--ink);max-width:560px}
+.sbox input{flex:1;font:400 12px var(--sans);letter-spacing:.06em;background:none;color:var(--ink);border:none;padding:10px 0;border-radius:0;outline:none}
+.sres{margin:0;padding:0;list-style:none;max-width:720px}
+.sres li{border-bottom:1px solid var(--rule);padding-block:10px}
+.sres .k{display:inline-block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);min-width:5.5em}
+.sres .hl{text-transform:uppercase;font-size:10.5px;letter-spacing:.1em}
+.sres .sm{display:block;font-family:var(--jp);font-size:11px;color:var(--mute);line-height:1.8;margin-top:2px}
+.sres .d{font-size:9.5px;letter-spacing:.12em;color:var(--mute);margin-left:10px}
+.picks{margin:14px 0 0;padding:0;list-style:none}
+.picks li{padding-block:6px;border-top:1px solid var(--rule)}
+.picks .hl{text-transform:uppercase;font-size:10.5px;letter-spacing:.1em}
+.picks .sm{display:block;font-family:var(--jp);font-size:11px;color:var(--mute);line-height:1.8;margin-top:2px}
+body.full .lede,body.full .film.signal,body.full .clocks,body.full section{display:none}
+body.full section.keep{display:block;margin-top:48px}
+body.full section.keep .vmore{display:none}
+.signals{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:clamp(12px,1.6vw,20px);margin-bottom:56px}
+.sg{margin:0}
+.sg canvas{display:block;width:100%;aspect-ratio:4/5;background:#000}
+.sg figcaption{padding-top:8px}
+.plates{columns:3 260px;column-gap:clamp(8px,1.4vw,18px)}
+figure{margin:0 0 clamp(18px,2.4vw,32px);break-inside:avoid}
+figure .im{overflow:hidden;background:var(--hover)}
+/* plates come into colour as you scroll them into view, and fade back to grey when they leave */
+figure img{display:block;width:100%;height:auto;filter:grayscale(1) contrast(1.08);transform:scale(1.025);transition:filter 1.4s cubic-bezier(.2,.6,.2,1),transform 1.6s cubic-bezier(.2,.6,.2,1),opacity .4s ease}
+figure.seen img{filter:none;transform:none}
+@media (prefers-reduced-motion:reduce){figure img{transition:none;transform:none}}
+figcaption{display:flex;gap:10px;padding-top:8px;text-transform:uppercase;font-size:10px;letter-spacing:.1em}
+figcaption .no{color:var(--mute)}
+figcaption .t{display:block;color:var(--ink)}
+figcaption .m{display:block;color:var(--mute);text-transform:none;letter-spacing:.04em;margin-top:1px}
+figcaption .m a{color:var(--mute);text-decoration:underline;text-underline-offset:2px}
+
+.sound{background:var(--paper);color:var(--ink);padding:0;margin-inline:0}
+.player{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;margin-top:8px;border-top:1px solid var(--ink);padding-top:16px}
+.play{background:none;border:none;color:var(--ink);padding:0;font:700 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;min-width:5em;text-align:left}
+.play:hover{opacity:.45}
+#scope{width:100%;height:56px;display:block}
+.trk{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:6px}
+.trk .t{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+
+.bar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 43px);background:var(--paper);z-index:5;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:10px;border-bottom:1px solid var(--rule)}
+.tabs{display:flex;gap:18px;flex-wrap:wrap}
+.tabs button{font:400 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;background:none;border:none;color:var(--mute);padding:6px 0;cursor:pointer}
+.tabs button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.search{flex:0 1 220px;font:400 11px var(--sans);letter-spacing:.06em;background:none;color:var(--ink);border:none;border-bottom:1px solid var(--rule);padding:6px 0;border-radius:0}
+.search:focus,button:focus-visible,a:focus-visible,input:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+.cat{margin-top:40px}
+.cat h3{margin:0;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;flex-wrap:wrap}
+.cat h3 small{font-weight:400;color:var(--mute);letter-spacing:.12em}
+.list{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(16px,3vw,40px)}
+.list li{min-width:0}
+.list a{display:grid;grid-template-columns:3.4em minmax(0,1fr);gap:8px;padding:7px 0;align-items:baseline}
+.no{font-size:10px;color:var(--mute);font-variant-numeric:tabular-nums}
+.nm{text-transform:uppercase;font-size:10.5px;letter-spacing:.12em}
+.ds{display:block;font-family:var(--jp);font-size:10.5px;color:var(--mute);letter-spacing:.03em;margin-top:1px}
+.tg{display:none}
+.empty{color:var(--mute);font-size:10.5px;padding:8px 0}
+form.add{display:grid;grid-template-columns:1fr 1.4fr auto;gap:16px;margin-top:12px;max-width:760px}
+form.add input{font:400 11px var(--sans);background:none;color:var(--ink);border:none;border-bottom:1px solid var(--rule);padding:6px 0;min-width:0;border-radius:0}
+form.add button{font:700 10px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;background:none;color:var(--ink);border:none;padding:6px 0;cursor:pointer}
+.mine li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+.rm{font:400 10px/1 var(--sans);letter-spacing:.12em;background:none;color:var(--mute);border:none;padding:6px 8px;cursor:pointer}
+.note{font-size:10px;color:var(--mute);margin-top:10px}
+
+.credits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(16px,3vw,40px);font-family:var(--jp);font-size:10.5px;letter-spacing:.03em;color:var(--mute);line-height:1.7;max-width:1100px}
+.credits p{margin:0;padding:5px 0;min-width:0}
+.credits b{color:var(--ink);font-weight:400;font-family:var(--sans);text-transform:uppercase;letter-spacing:.1em}
+.credits a{text-decoration:underline;text-underline-offset:2px}
+footer{margin-top:96px;padding-top:12px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media (max-width:900px){.list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  .list,.credits,.lede,.player{grid-template-columns:minmax(0,1fr)}
+  .pick{text-align:left}
+  form.add{grid-template-columns:minmax(0,1fr)}
+  .bar{position:static}
+  .film .cap span:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+<!--WORLD-HEAD-->
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top lab"><span>Issue 01 — Fashion / Music / Design / World</span><span id="date"></span></div>
+  <header class="hd"><h1 class="mast"><a href="#">KENGO'S SYNESTHESIA</a></h1><nav class="nv" aria-label="サイト内"><a href="../">← Kengo Umetani Official</a><a href="#note">Note</a><a href="#art">Digital Art</a><a href="#plates-sec">Daily Masterworks</a><a href="#today">Today</a><a href="#weekly">Weekly</a><a href="#japan">From Japan</a><a href="#objects">Objects</a><a href="#archive">Archive</a><a href="#sound">Synesthesia Music</a><a href="#index">Index</a><a href="#credits">Credits</a></nav></header>
+  <div class="lede">
+    <p><span>Kengo Umetani's tastes and thoughts on fashion, music and design, sent out to the world — selected every day from the public domain around the globe, with SYNESTHESIA DIGITAL ART by KENGO and original music made for this site.</span>KENGO'S SYNESTHESIA は、梅谷憲吾が好きなファッション、音楽、デザインと、そこから生まれる考えを世界に向けて発信するサイトです。それらは毎日世界中のパブリックドメインから厳選しています。SYNESTHESIA DIGITAL ART by KENGO と共に、このサイトのためのオリジナル音楽も発信しています。</p>
+    <div class="pick lab">Today's pick<a id="pick" href="#" target="_blank" rel="noopener">—</a></div>
+  </div>
+
+  <div class="film signal">
+    <canvas id="signal" aria-label="今日の9本のニュースの見出しと、6都市の時刻から描いたアニメーション"></canvas>
+    <div class="cap"><span><b id="signalName">SYNESTHESIA DIGITAL ART by KENGO</b> — <span id="signalData">Drawn from today's data.</span></span><span id="signalJa">毎日ちがうデータと表現で描いています。</span></div>
+  </div>
+
+  <div class="clocks" id="clocks" aria-label="世界のファッション都市の現在時刻"></div>
+
+  <section id="note">
+    <h2>Kengo's Note <small id="noteDate"></small></h2>
+    <div id="noteToday"></div>
+    <a class="vmore" href="notes/">View more</a>
+  </section>
+
+  <section id="art">
+    <h2>Synesthesia Digital Art by Kengo <small>毎日のニュースから生まれたアート</small></h2>
+    <p class="intro">One SYNESTHESIA DIGITAL ART for every day. Each day takes a different source of data and a different way of drawing it, so no two are alike. 毎日ちがうデータと表現で描いた一枚を、日付ごとに残しています。同じ作品は二度とできません。</p>
+    <div class="signals" id="signals"></div>
+    <a class="vmore" id="moreArt" href="more/?v=art" hidden>View more</a>
+  </section>
+
+  <section id="plates-sec">
+    <h2>Daily Masterworks <small>パブリックドメイン / CC0 の作品</small></h2>
+    <p class="intro">One masterpiece a day from the world's open collections, newest first. 世界の美術館が公開するパブリックドメイン／CC0の名作を、毎日1点ずつ加えています（新しいものが上）。ヒルマ・アフ・クリント、マレーヴィチ、モンドリアン、カンディンスキーの絵画、ロダンとサモトラケのニケの彫刻、ルイス・カーンの建築、ジェイムズ・ウェッブ宇宙望遠鏡の宇宙から始まりました。どれも著作権が切れた作品か、権利を放棄した画像です。触れると元の色が現れます。</p>
+    <div class="plates" id="plates"></div>
+    <a class="vmore" id="morePlates" href="more/?v=plates" hidden>View more</a>
+  </section>
+
+  <section id="today">
+    <h2>Today <small id="todayDate"></small></h2>
+    <p class="intro">Fashion, music and design news from around the world, refreshed every morning. 世界のファッション・音楽・デザインのニュースを毎朝更新しています。見出しから元の記事へ移動できます。</p>
+    <div class="news" id="newsToday"></div>
+  </section>
+<script type="application/json" id="news-data">{
+ "updated": "2026-10-20",
+ "days": [
+  {
+   "date": "2026-10-20",
+   "note": {
+    "title": "On Kiefer's single room",
+    "en": "In the sculpture garden of Museum Würth 2 in Künzelsau, David Chipperfield Architects has built a concrete pavilion for one painting, Anselm Kiefer's Schwarze Flocken, more than eleven metres tall and made with oil, shellac, earth and twigs. Daylight falls between exposed timber beams, so the surface of the painting changes with the hour and the season. Kiefer himself helped decide the proportions, the openings and the colour of the walls. I like the patience of a room built for a single work, with no machines to hold the air still, only brick, clay plaster and light.",
+    "ja": "ドイツ・キュンツェルザウのヴュルト美術館2の彫刻庭園に、デイヴィッド・チッパーフィールド・アーキテクツが、たった一枚の絵のためのコンクリートのパビリオンをつくりました。収められているのは、高さ11メートルを超えるアンゼルム・キーファーの《黒い雪片》で、油彩やシェラックに土や小枝が重ねられているそうです。むき出しの木の梁のあいだから光が落ち、時間や季節によって絵の表情が変わっていきます。部屋の寸法や開口、壁の色はキーファー自身も一緒に決めたと聞きました。空調に頼らず、レンガと土の左官と自然の光だけで一つの作品に寄り添う、その静かな覚悟に惹かれます。",
+    "source": "designboom",
+    "url": "https://www.designboom.com/architecture/anselm-kiefer-monumental-painting-pavilion-david-chipperfield-schwarze-flocken/"
+   },
+   "objects": [
+    {
+     "name": "Nib holder – Walnut",
+     "brand": "Kakimori",
+     "ja": "東京・蔵前の文具店カキモリの、小泉誠がデザインしたウォルナットのペン軸です。広島・熊野の筆メーカーが削る軸は一般的な鉛筆と同じ7インチの長さで、薄いウレタン仕上げのまま木の手ざわりが残り、ペン先を替えながら長く使えます。",
+     "en": "A walnut dip-pen holder from Kakimori, the Tokyo stationery shop, designed by Makoto Koizumi. The shaft is turned by a brush maker in Kumano, Hiroshima, to the same seven-inch length as a standard pencil, with a thin urethane finish that keeps the feel of the wood, and the nib can be changed for years of use.",
+     "url": "https://kakimori.com/products/kp09702",
+     "japan": true,
+     "price": "¥4,950"
+    }
+   ],
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Mikiosakabe stages a mall swimsuit show",
+     "ja": "ミキオサカベが10月18日、ラフォーレ原宿で2027年春夏コレクション「Cheers!」を発表しました。夏のショッピングモールの水着ショーに着想し、ねじれたウエストのデニムミニとビキニや、シャドーチェックの制服風のルック、新しいクリアソール「Marfa」のメリージェーンなどが登場し、坂部三樹郎は2027年のブランド20周年への前哨戦だと話しています。",
+     "en": "Mikiosakabe showed its spring 2027 collection, Cheers!, at Laforet Harajuku on 18 October. Inspired by summer swimsuit shows in Japanese shopping malls, it paired bikinis with twisted-waist denim minis and added shadow-check uniform looks and Mary Janes on a new clear sole called Marfa; Mikio Sakabe called it a warm-up for the brand's 20th anniversary in 2027.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2529957",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Graphpaper and Descente cut eight pieces in black",
+     "ja": "グラフペーパーとデサントのカプセルコレクション全8型が10月24日に発売されます。グラフペーパーの定番をデサントの機能素材と技術で仕立て、ワイドコートは8万2500円、シェフトラックパンツは3万8500円で、Tシャツ以外はすべて黒です。",
+     "en": "Graphpaper and Descente release an eight-piece capsule on 24 October. Graphpaper staples are remade in Descente's performance fabrics, from a wide coat at ¥82,500 to chef track pants at ¥38,500, and everything except the two T-shirts comes in black only.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2529711",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Sacai prints Mapplethorpe's Debbie Harry",
+     "ja": "サカイが、ロバート・メイプルソープが1978年に撮ったデボラ・ハリーのモノクロ写真をプリントしたユニセックスのTシャツを10月23日に発売します。ロバート・メイプルソープ財団の許諾を得たもので、白と黒の2色、価格は2万5300円で、ドーバー ストリート マーケット ギンザと公式オンラインで扱います。",
+     "en": "Sacai releases a unisex T-shirt printed with Robert Mapplethorpe's 1978 black-and-white portrait of Deborah Harry on 23 October. Licensed through the Robert Mapplethorpe Foundation, it comes in black or white for ¥25,300 at Dover Street Market Ginza and Sacai's online store.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2529477",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Hot Chip head A Long Way From Kansas",
+     "ja": "ホット・チップが約5年ぶり、9作目となるアルバム『A Long Way From Kansas』を2027年1月8日に出します。ジョー・ゴダードとアル・ドイルの東ロンドンのスタジオで録音され、先行曲「Random Violence」の映像には女性のモリスダンス集団ボス・モリスが登場し、3月12日のロンドン公演を含む英国・欧州ツアーも決まりました。",
+     "en": "Hot Chip release A Long Way From Kansas, their ninth album and first in almost five years, on 8 January 2027. It was recorded at Joe Goddard and Al Doyle's east London studio, the video for lead single Random Violence features the women's morris troupe Boss Morris, and a UK and European tour includes London on 12 March.",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514995/hot-chip-announce-new-album-a-long-way-from-kansas-hear-random-violence/music"
+    },
+    {
+     "cat": "music",
+     "title": "Ryuichi Sakamoto's scores return to Korean stages",
+     "ja": "坂本龍一の音楽を室内楽で演奏する「Ryuichi Sakamoto Tribute」が、10月31日の高陽アラム音楽堂を皮切りに、12月14日にソウルのロッテコンサートホール、23日に城南アートセンターで開かれます。指揮とピアノのハン・ジュホンにチェロとバイオリンが加わり、「戦場のメリークリスマス」や「ラストエンペラー」「Aqua」など17曲を演奏します。",
+     "en": "Ryuichi Sakamoto Tribute brings his music to Korean concert halls, starting at Goyang's Aram Music Hall on 31 October, then Lotte Concert Hall in Seoul on 14 December and Seongnam Arts Center on 23 December. Conductor and pianist Han Joo-heon leads a cellist and violinist through 17 pieces including Merry Christmas Mr. Lawrence, The Last Emperor and Aqua.",
+     "source": "Seoul Economic Daily",
+     "url": "https://en.sedaily.com/culture/2026/10/19/ryuichi-sakamotos-lyrical-scores-return-to-korean-stages",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Sleaford Mods open up The Demise Of Planet X",
+     "ja": "スリーフォード・モッズが『The Demise Of Planet X』の拡張版を出し、アルバム制作時の未発表デモ9曲を加えました。ライフ・ウィズアウト・ビルディングスのスー・トンプキンスが映像を監督した「Cato」も収められ、10月25日のローザンヌから欧州ツアーが始まります。",
+     "en": "Sleaford Mods have released an expanded edition of The Demise Of Planet X with nine unreleased demos from the album sessions. It includes Cato, with a video directed by Sue Tompkins of Life Without Buildings, and a European tour begins in Lausanne on 25 October.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/sleaford-mods-share-the-demise-of-planet-x-expanded-edition-with-nine-unreleased-songs-3973542"
+    },
+    {
+     "cat": "design",
+     "title": "Chipperfield builds a room for one Kiefer",
+     "ja": "デイヴィッド・チッパーフィールド・アーキテクツが、ドイツ・キュンツェルザウのヴュルト美術館2の彫刻庭園に、アンゼルム・キーファーの2007年の大作《黒い雪片》だけを展示する140平方メートルのパビリオンを建て、10月13日に公開しました。ビシャン仕上げのコンクリートの外壁に、木の梁と天窓の天井を組み合わせ、空調を使わずに作品を守っています。",
+     "en": "David Chipperfield Architects has built a 140 sq m pavilion in the sculpture garden of Museum Würth 2 in Künzelsau, Germany, to show a single work, Anselm Kiefer's 2007 painting Schwarze Flocken, which went on view on 13 October. Bush-hammered concrete outside, timber beams and skylights inside, and no active climate control.",
+     "source": "designboom",
+     "url": "https://www.designboom.com/architecture/anselm-kiefer-monumental-painting-pavilion-david-chipperfield-schwarze-flocken/"
+    },
+    {
+     "cat": "design",
+     "title": "Jenny Holzer writes in light and stone at the Musée d'Orsay",
+     "ja": "ジェニー・ホルツァーの展覧会「J'ai Vu」がパリのオルセー美術館で10月20日に始まります。22日までの夜はセーヌ川に面した外壁にゴッホやセザンヌ、ゾラら34人の言葉を投影し、館内には動くLEDの文字と、主に1848〜1914年の文章を刻んだ19点の新作の石の彫刻が並びます。",
+     "en": "Jenny Holzer's exhibition J'ai Vu opens at the Musée d'Orsay in Paris on 20 October. Until 22 October the Seine-side façade carries evening projections of texts by 34 authors including Van Gogh, Cézanne and Zola, while inside are moving LED texts and 19 new carved stone works, mostly bearing writing from 1848 to 1914.",
+     "source": "designboom",
+     "url": "https://www.designboom.com/art/jenny-holzer-musee-dorsay-paris-monumental-light-projections-engraved-stone-exhibition-jai-vu/"
+    },
+    {
+     "cat": "design",
+     "title": "Fran Silvestre folds a white plane over Ibiza",
+     "ja": "バレンシアのフラン・シルベストレ・アルキテクトスが、イビサ島東岸ロカ・リサに住宅「Bellavista 11」を完成させました。厚さ15センチの白いコンクリートの面が斜面に沿って折れ曲がり、屋上テラスと日陰をつくり、淡い石の床と木の建具、細いフレームの全面ガラスで、光そのものを素材として扱っています。",
+     "en": "Valencia studio Fran Silvestre Arquitectos has completed Bellavista 11, a villa at Roca Lisa on Ibiza's east coast. A 15 cm white concrete plane folds down the hillside to form roof terraces and shade, with pale stone floors, timber joinery and slim-framed full-height glazing that treat light as a material.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/18/bellavista-11-villa-fran-silvestre-arquitectos/"
+    },
+    {
+     "cat": "art",
+     "title": "Tatsuo Kawaguchi by the lake in Ichihara",
+     "ja": "1940年生まれの美術家・河口龍夫の個展「関係─無関係 湖畔にて」が、千葉県の市原湖畔美術館で10月17日から12月20日まで開かれています。高滝湖に面した館の光や眺めを取り込んだ新作のインスタレーションに加え、房総のアトリエで制作された未発表作や、自らの脈拍をもとにした絵画のシリーズが並びます。",
+     "en": "Relation–Unrelation, By the Lake, a solo show by conceptual artist Tatsuo Kawaguchi (born 1940), runs at the Ichihara Lakeside Museum in Ichihara, Chiba, from 17 October to 20 December. New site-specific installations draw in the light and views of Lake Takitaki, alongside unseen works from his Boso studio and a series of paintings based on his own pulse.",
+     "source": "Bijutsu Techo",
+     "url": "https://bijutsutecho.com/magazine/news/exhibition/32990",
+     "japan": true
+    }
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "note": {
+    "title": "On Shanghai's opera house",
+    "en": "On the Huangpu waterfront, Snøhetta has completed the Shanghai Grand Opera House, ten years after winning the competition. Its radial plan gathers around a giant spiral stair that cantilevers at the top and carries anyone up to a public roof. Outside it is white stone, glass and timber; inside, the main hall turns to deep red while the smaller halls stay in lighter wood. I am drawn to the idea that the most important room here may be the one without walls, a roof where the city can climb, look at the river and simply stay.",
+    "ja": "上海・黄浦江のほとりに、スノヘッタが設計した上海大歌劇院が完成しました。2016年のコンペから10年をかけた建物で、放射状の平面の中心には巨大な螺旋階段があり、頂部で張り出しながら誰でも上がれる屋上へと続いているそうです。外観は白い石とガラスと木、内部の大ホールは深い赤で包まれ、ほかのホールには明るい木が使われています。劇場のいちばん大切な場所が、壁のない屋上なのかもしれないと考えています。川と公園に向かって開いたロビーから風が抜けるつくりも、街の人をやわらかく迎え入れる姿勢のように感じます。",
+    "source": "Dezeen",
+    "url": "https://www.dezeen.com/2026/10/17/snohetta-shanghai-grand-opera-house/"
+   },
+   "objects": [
+    {
+     "name": "Butterfly Stool S-0521MP-NT",
+     "brand": "Tendo Mokko",
+     "ja": "柳宗理がデザインし、山形の天童木工がつくるバタフライスツールのメープル仕上げです。同じ形の二枚の成形合板を背中合わせにつないだだけの構造で、グッドデザイン・ロングライフデザイン賞を受けています。",
+     "en": "Sori Yanagi's Butterfly Stool in natural maple, made by Tendo Mokko in Yamagata. Two identical moulded plywood shells joined back to back make the whole structure, and it holds a Good Design Long Life Design Award.",
+     "url": "https://www.tendo-mokko.co.jp/products/s-0521mp-nt",
+     "japan": true,
+     "price": "¥82,500"
+    }
+   ],
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "S'YTE and Taion make a fourth down collection",
+     "ja": "ヨウジヤマモトの「サイト」とタイオンのコラボ第4弾が10月22日に直営店と公式オンラインで発売されます。800フィルパワーのダウンを使い、すべてリバーシブルか2ウエイで、ロングMA-1やひざ下で外せるキルティングパンツなど5型がそろい、表参道と岡山でポップアップも開かれます。",
+     "en": "Yohji Yamamoto's S'YTE releases its fourth collaboration with Taion on 22 October at its own stores and online. All five pieces use 800-fill-power down and are reversible or 2-way, from a long MA-1 to quilted trousers that zip off into shorts, with pop-ups in Omotesando and Okayama.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2528118",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Attachment and Tarvas walk the Ivalo river",
+     "ja": "アタッチメントとヘルシンキのフットウエアブランド、ターバスが、フィンランド北部の川の名をつけたハイキングブーツ「IVALO」を10月23日に発売します。毛足の長いベロアレザーを使い、価格は6万500円で、デザイナーの榎本光希がオーク材とステンレスで売り場の什器も自らつくりました。",
+     "en": "Attachment and Helsinki footwear brand Tarvas release Ivalo, a hiking boot named after a river in northern Finland, on 23 October for ¥60,500. The upper is in long-nap velour leather, and Attachment designer Mitsuki Enomoto built the oak and stainless steel display fixtures himself.",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-18/attachment-tarvas-ivalo/",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Namacheko measures in Minami-Aoyama",
+     "ja": "ナマチェコが初めてのメイド・トゥ・メジャーサロンを、10月24日と25日に南青山のMANHOLEで完全予約制で開きます。デザイナーのディラン・ルールが自ら採寸し、過去のコレクションのヴィンテージ生地からも選べ、イタリアの工場で約9週間かけて仕立てられます。",
+     "en": "Namacheko holds its first made-to-measure salon on 24 and 25 October at Manhole in Minami-Aoyama, by appointment only. Designer Dilan Lurr takes the measurements himself, fabrics include vintage cloth from past collections, and pieces are made in Italy in about nine weeks.",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-17/namacheko-made-to-measure/"
+    },
+    {
+     "cat": "music",
+     "title": "Michael Stipe sings E-Bow The Letter with The National",
+     "ja": "マイケル・スタイプが10月17日、フランス・ビアリッツのアタバルで、ザ・ナショナルのマット・バーニンガーとR.E.M.の「E-Bow The Letter」を歌いました。アーロンとブライスのデスナー兄弟の50歳を祝う2日間のフェス「AB100」の一幕です。",
+     "en": "Michael Stipe joined Matt Berninger to sing R.E.M.'s E-Bow The Letter at Atabal in Biarritz on 17 October. It was part of AB100, a two-day festival in Biarritz and San Sebastián marking Aaron and Bryce Dessner's 50th birthdays.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/watch-michael-stipe-join-members-the-national-rem-ebow-the-letter-3973454"
+    },
+    {
+     "cat": "music",
+     "title": "Bob Dylan opens Lights Of Autumn in Oslo",
+     "ja": "ボブ・ディランが10月17日、オスロ・スペクトラムで「Lights Of Autumn」ツアーを始めました。19曲のセットで、ランディ・ニューマンの「Louisiana 1927」やガイ・クラークの「Dublin Blues」を初めてライブで演奏しました。",
+     "en": "Bob Dylan opened his Lights Of Autumn tour at Oslo Spektrum on 17 October. The 19-song set included first live performances of Randy Newman's Louisiana 1927 and Guy Clark's Dublin Blues.",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514895/bob-dylan-kicks-off-tour-with-live-debuts-rarities-and-yet-another-new-guitarist/news"
+    },
+    {
+     "cat": "music",
+     "title": "Brandon Flowers previews a second Nashville album",
+     "ja": "ザ・キラーズのブランドン・フラワーズが10月17日、ブリストル・ビーコンでの公演で新曲「A Good Man Is Hard To Find」を初披露しました。ナッシュビルで2枚のアルバムを録音しており、8月の『Thrasher』に続く2枚目は2027年に出す予定だと話しています。",
+     "en": "The Killers' Brandon Flowers debuted a new song, A Good Man Is Hard To Find, at Bristol Beacon on 17 October. He said he recorded two albums in Nashville, with the follow-up to August's Thrasher due in 2027.",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514922/brandon-flowers-debuts-song-from-another-new-solo-album-and-a-coral-cover-in-bristol/news"
+    },
+    {
+     "cat": "design",
+     "title": "Snøhetta completes the Shanghai Grand Opera House",
+     "ja": "スノヘッタが上海・黄浦江沿いに上海大歌劇院を完成させました。延床約14万7千平方メートルの放射状の建物で、巨大な螺旋階段が誰でも上がれる屋上へ続き、3つのホールに合計4200席を備えています。",
+     "en": "Snøhetta has completed the Shanghai Grand Opera House on the Huangpu River. The 146,786 sq m radial building has a giant spiral stair leading to a public roof and three auditoriums with 4,200 seats in all.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/17/snohetta-shanghai-grand-opera-house/"
+    },
+    {
+     "cat": "design",
+     "title": "A Bangladesh rug factory wins the RIBA International Prize",
+     "ja": "ダッカのNakshabid Architectsが設計したバングラデシュ・ランプルの7階建てのじゅうたん工場「Green Field Factory」が、RIBAインターナショナル賞を受けました。ベンガルの伝統的な住まいをもとに自然換気を取り入れ、約5000人の従業員が同じ入口と2つの大階段を使い、屋上には保育室もあります。",
+     "en": "Green Field Factory, a seven-storey rug factory in Rangpur, Bangladesh, by Dhaka studio Nakshabid Architects, has won the RIBA International Prize. Based on the traditional Bengali home and naturally ventilated, it gives its 5,000 workers one entrance and two grand stairs, with a rooftop daycare.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/16/green-field-factory-nakshabid-architects-riba-international-prize/"
+    },
+    {
+     "cat": "design",
+     "title": "Objects with Narratives asks What Remains? at PAD London",
+     "ja": "ブリュッセルのギャラリー、オブジェクツ・ウィズ・ナラティヴズが、PAD Londonで展示「What Remains?」を開きました。メキシコ産の赤いオニキスを削ったベン・ストームスの作品や、ポール・コックセッジのコールテン鋼の棚など、6人の作家によるコレクタブルデザインが並びます。",
+     "en": "Brussels gallery Objects with Narratives is showing What Remains? at PAD London. Six designers take part, including Ben Storms with a piece milled from red Mexican onyx and Paul Cocksedge with a Corten steel shelf.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/16/objects-with-narratives-collectible-design-pad/"
+    },
+    {
+     "cat": "art",
+     "title": "Otomo Yoshihide improvises across YCAM",
+     "ja": "音楽家の大友良英と山口情報芸術センター［YCAM］の新作展「即興！」が10月17日に始まり、2027年3月1日まで続きます。磯崎新設計の館内のスタジオからホワイエ、中庭、隣の中央公園まで会場が広がり、1970年代の携帯プレーヤー約80台がレコードなしで音を出す《without records》や、各地で集めた布を縫い合わせた《大風呂敷》など、同じ音の組み合わせが二度と起こらない作品が並びます。",
+     "en": "Improvisation!, a new exhibition by musician Otomo Yoshihide with the Yamaguchi Center for Arts and Media [YCAM], opened on 17 October and runs until 1 March 2027. It spreads from the studios of Arata Isozaki's building to the foyer, courtyard and the park next door, with works such as without records, some 80 portable record players from the 1970s playing without records, and The Great Furoshiki, a patchwork of cloths gathered across Japan, so the same combination of sounds never recurs.",
+     "source": "Bijutsu Techo",
+     "url": "https://bijutsutecho.com/magazine/news/exhibition/33187",
+     "japan": true
+    }
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "note": {
+    "title": "On Large, Île Seguin",
+    "en": "On the Île Seguin, where Renault built cars for most of the last century, a new art centre called Large has opened. RCR Arquitectes and CALQ shaped it as a six-storey wedge of Corten steel, copper-toned aluminium and glass, with 2,500 square metres for exhibitions. The first show sets works from Renault's own collection, Le Parc and Tinguely among them, beside seventeen new commissions. I like that an island once given to machines now holds art that thinks about motion, in materials that will keep changing colour with the weather.",
+    "ja": "かつてルノーの工場があったパリ西部のセガン島に、新しい現代アートセンター「Large」が開きました。設計はRCRアルキテクテスとCALQで、コールテン鋼と銅色のアルミ、ガラスでできた6階建ての楔形の建物に、2,500平方メートルの展示空間があります。最初の展覧会では、ジュリオ・ル・パルクやジャン・ティンゲリーなどルノーのコレクションの作品と、17点の新作が並ぶそうです。機械をつくっていた島が、動きを考える作品を迎える場所になったことに、静かなつながりを感じます。錆びて色を深めていく鋼の外壁も、時間とともにこの場所の記憶を重ねていくのだと思います。",
+    "source": "The Art Newspaper",
+    "url": "https://www.theartnewspaper.com/2026/10/16/sprawling-contemporary-art-centre-large-opens-on-island-near-paris"
+   },
+   "objects": [
+    {
+     "name": "Copper tea caddy, 100g",
+     "brand": "Kaikado",
+     "ja": "京都で1875年から続く開化堂の、銅の茶筒です。内側にブリキを重ねた二重のつくりで、継ぎ目を合わせると蓋が自分の重みでゆっくり閉まり、銅の色は使ううちに数か月で深く変わっていきます。",
+     "en": "A copper tea caddy from Kaikado, a Kyoto workshop founded in 1875. Lined with tinplate, its lid sinks shut under its own weight once the seams are aligned, and the copper darkens with use within a few months.",
+     "url": "https://www.kaikado.jp/2020/07/23/copper-100g-2/",
+     "japan": true
+    }
+   ],
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Yohji Yamamoto's unseen drawings become a book",
+     "ja": "ヨウジヤマモトのパリ・カンボン店で、山本耀司の未発表デッサンを集めた作品集『Yohji Yamamoto Drawings』の発売に合わせ、1981年のパリデビューから1999年までの原画が公開されました。東京の倉庫で見つかった数百枚から本人が選び、ブックデザインはピーター・サヴィルで、日本では11月6日に2万2000円で発売されます。",
+     "en": "Yohji Yamamoto's Cambon store in Paris showed original drawings from 1981 to 1999 to launch Yohji Yamamoto Drawings, a book of his unpublished sketches. Yamamoto chose them from several hundred sheets found in a Tokyo warehouse; Peter Saville designed the book, out in Japan on 6 November for ¥22,000.",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-17/yohji-yamamoto-exhibition/",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Anrealage brings 100 looks home to Kunitachi",
+     "ja": "アンリアレイジが、国立駅の開業100周年を記念して11月22日夜に国立駅南口のロータリーと大学通りでショーを開きます。国立出身の森永邦彦が、過去のパリコレクションと9月29日にパリで発表した最新作「SKIN」から全100ルックを見せます。",
+     "en": "Anrealage will stage a show on 22 November at Kunitachi Station's south rotary and Daigaku-dori to mark the station's centenary. Kunitachi-born designer Kunihiko Morinaga will present 100 looks drawn from past Paris collections and his latest, SKIN, shown in Paris on 29 September.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2528274",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Kim Jones dresses Aman Essentials",
+     "ja": "ホテルグループ、アマンのライフスタイルブランド「アマン エッセンシャルズ」がキム・ジョーンズとのコラボを発表し、ドーバー ストリート マーケット ギンザで販売しています。シルクのパジャマやポロ、パーカー、水着などユニセックスの服で、10月16日には本人が来店しました。",
+     "en": "Aman Essentials, the lifestyle label of the Aman hotel group, has released a collaboration with Kim Jones at Dover Street Market Ginza. The unisex line includes silk pyjamas, polos, hoodies and swimwear, and Jones attended a reception there on 16 October.",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-16/aman-kimjones/"
+    },
+    {
+     "cat": "music",
+     "title": "Fontaines D.C. open Dopamine Chamber at the Roundhouse",
+     "ja": "フォンテインズD.C.が新作アルバム『Dopamine Chamber』の発売に合わせ、10月15日にロンドンのラウンドハウスで約3300人規模の公演を行いました。収益はメンタルヘルス団体CALMに寄付され、新曲を初めて演奏したほか、11月には「Later... With Jools Holland」の特集が放送されます。",
+     "en": "Fontaines D.C. marked the release of their album Dopamine Chamber with a show at London's Roundhouse on 15 October, with proceeds going to the mental health charity CALM. They played new songs live for the first time, and a Later... With Jools Holland special follows in November.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/fontaines-d-c-roundhouse-dopamine-chambger-photos-footage-setlist-3973312"
+    },
+    {
+     "cat": "music",
+     "title": "Altar opens in Leytonstone with Simian Mobile Disco",
+     "ja": "ドリームハウス・レコーズやトランスグレッシヴのメンバーが手がける音楽とアートの場「Altar」が、10月23日にロンドン東部レイトンストーンに開きます。バーとレコード店を備え、初日はシミアン・モバイル・ディスコがDJを務め、11月にはホット・チップのアレクシス・テイラーらが出演します。",
+     "en": "Altar, a venue, bar and record shop curated by people from Dreamhouse Records and Transgressive, opens in Leytonstone, east London, on 23 October. Simian Mobile Disco DJ the free opening night, with Hot Chip's Alexis Taylor among the November bookings.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/altar-venue-opening-in-london-with-simian-mobile-disco-louis-theroux-girl-in-the-year-above-3973374"
+    },
+    {
+     "cat": "music",
+     "title": "Matador reissues two Butthole Surfers records",
+     "ja": "バットホール・サーファーズの1991年の5作目『Piouhgd』と、80年代半ばの音源を集めた『Humpty Dumpty LSD』が、リマスターされて12月11日にMatadorからアナログで再発されます。後に形を変えて使われた「Sherman (Backass Alt.)」も初めて配信されます。",
+     "en": "Matador will reissue Butthole Surfers' 1991 album Piouhgd and the archival collection Humpty Dumpty LSD, both remastered, on vinyl on 11 December. The early version Sherman (Backass Alt.) becomes available digitally for the first time.",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/butthole-surfers-piouhgd-and-humpty-dumpty-lsd-to-be-reissued/"
+    },
+    {
+     "cat": "design",
+     "title": "Large opens on the former Renault island",
+     "ja": "パリ西部セガン島に、エメリージュ・グループの非営利団体による現代アートセンター「Large」が10月17日に開きました。RCRアルキテクテスとCALQの設計で、コールテン鋼と銅色のアルミの6階建ての建物に2,500平方メートルの展示空間があり、セシリア・アレマーニが開館展を企画しています。",
+     "en": "Large, a contemporary art centre run by a non-profit founded by the Emerige group, opened on 17 October on the Île Seguin in western Paris. Designed by RCR Arquitectes with CALQ in Corten steel and copper-toned aluminium, it has 2,500 sq m of galleries and an opening show curated by Cecilia Alemani.",
+     "source": "The Art Newspaper",
+     "url": "https://www.theartnewspaper.com/2026/10/16/sprawling-contemporary-art-centre-large-opens-on-island-near-paris"
+    },
+    {
+     "cat": "design",
+     "title": "Pinault gives Palazzo Grassi a permanent collection",
+     "ja": "フランソワ・ピノーが、ヴェネツィアのパラッツォ・グラッシで自身のコレクションの常設展示を始めると明かしました。54人の作家の106点を並べ、ミニマリズムやアルテ・ポーヴェラが中心となり、企画展はプンタ・デラ・ドガーナで続けられます。",
+     "en": "François Pinault plans a permanent display of his collection at Palazzo Grassi in Venice, with 106 works by 54 artists. Minimalism and Arte Povera sit at its core, while temporary shows continue at Punta della Dogana.",
+     "source": "The Art Newspaper",
+     "url": "https://www.theartnewspaper.com/2026/10/16/francois-pinault-to-launch-permanent-display-of-his-collection-venice-palazzo-grassi"
+    },
+    {
+     "cat": "design",
+     "title": "A brick barrel vault rises over a Chennai community centre",
+     "ja": "インド・チェンナイのSpaces by Manahが、地域の学びの場となるコミュニティセンター「The Soil & Sea」を完成させました。平屋の中央の集会スペースにはレンガのヴォールト屋根が木々の上にのぞき、むき出しのレンガ壁や花崗岩の柱、再利用した建具が使われています。",
+     "en": "Chennai studio Spaces by Manah has completed The Soil & Sea, a single-storey community and learning centre. A brick barrel vault over the central hall rises above the trees, with exposed load-bearing brick, granite pillars and reclaimed doors and windows.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/16/spaces-by-manah-soil-sea-community-centre-india/"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "note": {
+    "title": "On the Resonance pavilion",
+    "en": "Outside the Estonian Museum of Architecture in Tallinn, Aru Ma- has built a square courtyard from rebar, rope, plywood and limestone. The stone sits at the centre as ballast, keeping a tensile structure in careful balance. On a busy traffic island the walls turn inward, and the space is left to light, wind, sound and gravity. In a biennale asking how much architecture costs, I find a quiet answer in how little it takes to make a place feel held.",
+    "ja": "タリンのエストニア建築博物館の前に、Aru Ma-が鉄筋とロープ、合板、石灰岩で正方形の中庭をつくりました。中心に置かれた石灰岩が重りとなり、張力で成り立つ構造の均衡を支えているそうです。車の行き交う交通島の上で壁は内側を向き、空間は光や風、音、重力にゆだねられています。お金と建築を問う今年のテーマ「How Much?」に対して、ありふれた材料でも人を包む場所はつくれるという、静かな答えのように感じます。会期が終われば解体されることを前提にしている点も、この軽やかさに合っていると思います。",
+    "source": "Dezeen",
+    "url": "https://www.dezeen.com/2026/10/15/resonance-pavilion-tallinn-architecture-biennale/"
+   },
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Eye Junya Watanabe Man tailors Brooks Brothers",
+     "ja": "アイ ジュンヤ ワタナベ マンとブルックス ブラザーズのコラボが10月16日に数量限定で発売されました。カシミヤ混フランネルの3つボタンジャケットは背中を異なるツイードのパッチワークで切り替え、モールスキンのワイドトラウザーズやボタンダウンシャツもそろいます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2526918",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Haider Ackermann puts Canada Goose's Chilliwack in leather",
+     "ja": "カナダグースのクリエイティブ・ディレクター、ハイダー・アッカーマンによる「スノーグース」の2026-27年秋冬が、10月17日から銀座店と公式オンラインで順次発売されます。定番のチリワック ボンバーを初めてレザーで仕立て、アースカラーにオレンジやピンクの差し色を加えています。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2526293"
+    },
+    {
+     "cat": "fashion",
+     "title": "A.P.C. and Barbour revive thornproof wax cotton",
+     "ja": "A.P.C.とバブアーのコラボが10月16日に発売されました。アーカイブから復刻したソーンプルーフのワックスコットンで「ビューフォート」や「スペイ」を仕立て、デニムやタータンシャツ、長靴もそろいます。価格は1万6500円から13万2000円です。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-15/apc-barbour-2026-aw-collaboration/"
+    },
+    {
+     "cat": "music",
+     "title": "Orbital return with Other",
+     "ja": "オービタルが11作目のアルバム『Other』を2027年3月19日にLondon Recordsから出します。先行曲「Mother, Maiden & Crone」には俳優のマキシン・ピークが声で参加し、4月から5月にかけて英国とヨーロッパを回るツアーも決まりました。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/orbital-detail-new-album-other/"
+    },
+    {
+     "cat": "music",
+     "title": "Smalltown Supersound maps Norway's noise minimalism",
+     "ja": "スモールタウン・スーパーサウンドが、1991〜2001年のノルウェーのミニマルなノイズを集めたコンピレーション『Towards A Cosmic Music』を11月27日に出します。デスプロッドやラッセ・マーハウグ、スーパーサイレントらの全10曲を、デジタルと2枚組LPで届けます。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/smalltown-supersound-to-explore-norways-90s-minimal-noise-scene-on-new-compilation/"
+    },
+    {
+     "cat": "music",
+     "title": "Saya Gray and quickly, quickly sing for Wildwood",
+     "ja": "ライカのストップモーション映画『Wildwood』に寄せた未発表曲集『The Wildwood Sessions』が公開されました。セイヤ・グレイ、quickly, quickly、アミネ、ザ・ディセンバリスツらが参加し、映画はコリン・メロイの小説をもとにしています。",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514829/saya-gray-quickly-quickly-amine-more-share-new-songs-for-the-movie-version-of-colin-meloys-wildwood/news"
+    },
+    {
+     "cat": "design",
+     "title": "Star-shaped housing in Coulsdon wins the Stirling Prize",
+     "ja": "メアリー・ダガン・アーキテクツとラフ・アーキテクツによるロンドン南部クールスドンの集合住宅「Lion Green Road」が、2026年のRIBAスターリング賞に選ばれました。旧駐車場の急な斜面に星形の5棟、157戸を配し、3種類のレンガで仕上げています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/15/lion-green-road-riba-stirling-prize-2026/"
+    },
+    {
+     "cat": "design",
+     "title": "A balanced courtyard at the Tallinn Architecture Biennale",
+     "ja": "タリン建築ビエンナーレの中央パビリオン「Resonance」を、Aru Ma-が鉄筋、ロープ、石灰岩、合板で建てました。エストニア建築博物館の前に置かれた内向きの正方形の中庭で、会期末の11月30日まで公開され、その後は解体されます。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/15/resonance-pavilion-tallinn-architecture-biennale/"
+    },
+    {
+     "cat": "design",
+     "title": "Frank Lloyd Wright's planetarium restored in Florida",
+     "ja": "フロリダ・サザン大学にあるフランク・ロイド・ライト設計の唯一のプラネタリウムが修復を終え、一般にも公開されました。手づくりの「テキスタイル」タイル280枚以上を取り替え、合板とビニール張りの円形の座席や、チェロキーレッドの床もよみがえっています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/15/florida-southern-college-frank-lloyd-wright-planetarium-restoration/"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "note": {
+    "title": "On Casa Ortega",
+    "en": "In Mexico City, the gardens of Luis Barragán's Casa Ortega are holding work by more than thirty designers, born from three years of residencies that paired French designers with Mexican artisans. The plinths are a deep red, made from panels of recycled laminated cardboard waste, and I find myself picturing that colour among the plants of a garden Barragán shaped in the 1940s. The same family has kept the house since 1947, and its caretakers call it his best-kept secret. A private place that opens for only a few weeks reminds me how much of a space lives in what is usually kept quiet.",
+    "ja": "メキシコシティにあるルイス・バラガンのカサ・オルテガの庭で、30人を超えるデザイナーの作品が展示されています。フランスのデザイナーとメキシコの職人が3年かけて取り組んだレジデンスから生まれたものだそうです。作品を載せる台は、積層段ボールの廃材を再生したパネルでつくられた深い赤色です。バラガンが1940年代に手がけた庭のなかに、その赤がどう置かれているのかを想像しています。1947年から同じ家族が守り、「バラガンのいちばんの秘密」と呼ばれる家が、10月25日までの短いあいだだけ開かれることにも、静かな意味を感じます。",
+    "source": "Dezeen",
+    "url": "https://www.dezeen.com/2026/10/14/design-week-mexico-2026-creative-immersions-casa-ortega/"
+   },
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Michiko Tsuda's windows at Maison Hermès Ginza",
+     "ja": "銀座メゾンエルメスのウィンドウを、アーティストの津田道子が11月24日まで手がけています。与那国島の馬や海の映像や、のぞき込む人を少し遅れて映すカメラを使い、年間テーマ「冒険の呼び声」を18のウィンドウで表現しています。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-14/hermes-lanterne-evening/",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Acne Studios revisits Hussein Chalayan",
+     "ja": "アクネ ストゥディオズが、フセイン・チャラヤンの2001〜2003年のコレクションをもとにした12型のコラボを発売しました。パッチワークのデニムやジャージーのドレス、だまし絵のようなレザーバッグのほか、1000部限定の作品集もあり、アクネ ストゥディオズ青山と公式オンラインで扱っています。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-14/acne-studios-hussein-chalayan/"
+    },
+    {
+     "cat": "fashion",
+     "title": "Junya Watanabe puts CW-X tights on the Paris runway",
+     "ja": "ジュンヤ ワタナベが10月3日にパリで発表した2027年春夏ウィメンズで、ワコールのコンディショニングウエア「CW-X」とのコラボを見せました。テーピングの原理を応用したタイツを漆黒に仕立て直したもので、長崎と福井の工場で生産されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2526166",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Justice scores GTA VI",
+     "ja": "ロックスター・ゲームスが『GTA VI』の発売トレーラーを公開し、ジャスティスがゲームの音楽を手がけることを明かしました。トレーラーではテーム・インパラ、SZA、キング・ギザード&ザ・リザード・ウィザードと組んだ新曲「Flower In A Hurricane」が流れ、34曲入りのアルバムとともに11月19日に発売されます。",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514667/justice-score-gta-vi-share-tame-impala-sza-king-gizzard-collab-flower-in-a-hurricane/music"
+    },
+    {
+     "cat": "music",
+     "title": "Marika Hackman plans False Dogs",
+     "ja": "マリカ・ハックマンが5作目のアルバム『False Dogs』を2027年2月19日にChrysalis Recordsから出します。ほぼすべての楽器を本人が演奏し、ラムズゲートのBig Jelly Studiosで仕上げた全12曲で、2月26日のロイヤル・フェスティバル・ホールからツアーが始まります。",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/marika-hackman-announces-new-album-false-dogs-single-33-tour-3973125"
+    },
+    {
+     "cat": "music",
+     "title": "Michael Stipe sets a date for his solo debut",
+     "ja": "R.E.M.のマイケル・スタイプが、初のソロアルバムを来年5月に出す予定だと明かしました。最初の曲と映像は大みそかに公開され、ピーチズがゲストで参加し、一部の曲はディスコ寄りだと話しています。",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514468/michael-stipe-shares-debut-solo-album-release-plan-talks-new-music-with-monica-lewinsky/news"
+    },
+    {
+     "cat": "design",
+     "title": "French-Mexican design in Barragán's Casa Ortega",
+     "ja": "デザインウィーク・メキシコ2026にあわせ、ルイス・バラガン設計のカサ・オルテガの庭で、フランスとメキシコの30人以上のデザイナーによる作品展が10月25日まで開かれています。展示台は段ボール積層材の廃材を再生した赤いパネルでつくられています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/14/design-week-mexico-2026-creative-immersions-casa-ortega/"
+    },
+    {
+     "cat": "design",
+     "title": "Behnaz Farahi projects an ocean onto Kendall Plaza",
+     "ja": "MITメディアラボのベナズ・ファラヒが、MIT初のフューチャー・フェストのため、MITミュージアムの上から広場に潮の流れの映像を投影しました。約264平方メートルの波の下には、400人以上が寄せたさまざまな言語の願いの言葉が浮かびます。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/14/behnaz-farahi-ocean-of-dreams-mit/"
+    },
+    {
+     "cat": "design",
+     "title": "A furniture maker's house and workshop on Prince Edward Island",
+     "ja": "カナダのオマー・ガンディー・アーキテクツが、プリンスエドワード島に家具職人ブロディ・チャペルの住まいと工房を完成させました。中庭を挟んだ2棟は淡いグレーの波板で覆われ、チャペル自身が家具をつくり、施工も率いました。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/14/omar-gandhi-brodye-chappell-prince-edwards-island/"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "note": {
+    "title": "On Frieze Sculpture",
+    "en": "Frieze Sculpture has returned to Regent's Park, with eleven artists placed among the lawns and trees. I keep thinking about Angel Otero's plywood door, half buried and left ajar, opening onto a stair that goes down into the ground. Nearby, Conrad Shawcross's perforated ellipse lets the light through and throws moving patterns of shadow onto the grass. Outdoors, sculpture is never finished; the weather, the hour and the people walking past keep changing it.",
+    "ja": "ロンドンのリージェンツ・パークで、今年もフリーズ・スカルプチャーが始まりました。11人の作家の作品が、芝生と木々のあいだに置かれています。いちばん心に残ったのは、アンヘル・オテロの合板の扉です。半分地面に埋まり、少しだけ開いた先に、地下へ降りる階段が続いているそうです。コンラッド・ショークロスの穴の空いた楕円の彫刻は光を通し、芝の上に揺れる影の模様を落とします。屋外の彫刻は、天気や時間、そばを歩く人によって、いつまでも完成しないのだと思います。",
+    "source": "Wallpaper*",
+    "url": "https://www.wallpaper.com/art/frieze-sculpture-2026"
+   },
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Auralee meets Salon C. Lundman",
+     "ja": "オーラリーが、ストックホルムのサロン シー ルンドマンと初めてコラボします。シングルジャケットやウールカシミヤのコート、ベビーカシミヤのニットなどがそろい、10月24日にドーバー ストリート マーケット ギンザで発売されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2525273",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Toga returns to Wrangler denim",
+     "ja": "トーガが8年ぶりにラングラーとコラボし、デニムジャケットやセミフレアパンツ、デニムドレスなど5型を出します。10月21日に伊勢丹新宿店で先行発売し、23日から直営店などで販売されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2525038",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Hender Scheme puts shoes on Artek's Stool 60",
+     "ja": "エンダースキーマとフィンランドのアルテックが共同シリーズを発表しました。脚に革靴を履かせた「スツール 60」や、真鍮の代わりに革のシェードを使ったペンダントなどがあり、ヘルシンキや東京のアルテックなどで数量限定で販売されています。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2525740",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "A trailer for Paul Thomas Anderson's Cameron Winter film",
+     "ja": "ポール・トーマス・アンダーソンが監督した、ギースのキャメロン・ウィンターによるカーネギー・ホールでのソロ公演の映画の予告編が公開されました。35mmフィルムでの上映が11月20日からニューヨークで始まり、来年にはMubiで配信される予定です。",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514549/watch-the-trailer-for-paul-thomas-andersons-cameron-winter-at-carnegie-hall/news"
+    },
+    {
+     "cat": "music",
+     "title": "Thom Yorke's Hamlet comes to the Barbican",
+     "ja": "レディオヘッドの『Hail To The Thief』を使ってロイヤル・シェイクスピア・カンパニーが『ハムレット』を描き直した舞台が、10月31日から2027年1月23日までロンドンのバービカンで上演されます。トム・ヨーク自身がアルバムを20人以上の演者のために編曲し直しています。",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/thom-yorke-radiohead-hamlet-to-the-thief-rsc-london-barbican-exclusive-photos-3973076"
+    },
+    {
+     "cat": "music",
+     "title": "JD Twitch's records go on sale in London",
+     "ja": "オプティモのJD・トゥイッチとして知られたキース・マキーヴァーの約2万枚のレコードを、ロンドンのレコード店World of Echoが販売します。第1弾の7千〜8千枚は11月14日から店頭のみで売り出され、2027年にも販売が続く予定です。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/jd-twitchs-record-collection-to-be-sold/"
+    },
+    {
+     "cat": "design",
+     "title": "Eleven sculptors settle into Regent's Park",
+     "ja": "14回目となるフリーズ・スカルプチャーがロンドンのリージェンツ・パークで11月1日まで無料で開かれています。キュレーターはファトシュ・ウステクで、コンラッド・ショークロスやアンヘル・オテロら11人の作品が並びます。",
+     "source": "Wallpaper*",
+     "url": "https://www.wallpaper.com/art/frieze-sculpture-2026"
+    },
+    {
+     "cat": "design",
+     "title": "Formafantasma builds a travelling ocean exhibition for Prada",
+     "ja": "フォルマファンタズマが、プラダとユネスコ政府間海洋学委員会のために、海と気候の関係を伝える巡回型の科学展を設計しました。アルミと木の組み立て式の構造で、サルデーニャ島カリアリのルナ・ロッサの拠点で10月15日まで公開されています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/13/prada-ioc-formafantasma-ocean-climate-village-exhibition/"
+    },
+    {
+     "cat": "design",
+     "title": "Furniture clad in reused shingles",
+     "ja": "ルーカス・ヴェークヴェルトとコリーナ・デーンが、ドイツ・フォーゲルスベルク地方の建物から集めた木のこけら板で覆った家具シリーズ「Armadillo」の新作6点を発表しました。ロンドンのギャラリー・フミで11月21日まで展示されています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/14/armadillo-furniture-reused-shingles-friendly-monsters/"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "note": {
+    "title": "On OMA's FLAMA",
+    "en": "OMA is turning a 1930s coffee plant in Houston into a music school for young children, and the instruments are drawn into the building itself. The main stair curves like a French horn, the cafetorium opens through a round void taken from the body of a banjo, and an F-shaped cut joins two libraries, recalling both the forte mark and the f-hole of a violin. I like that the old warehouse is not erased but tuned, as Jason Long puts it. Children will climb floor by floor as they grow, so the building becomes a slow score they move through over years.",
+    "ja": "ヒューストンの1930年代のコーヒー工場が、OMAの設計で子どものための音楽学校に生まれ変わります。メインの階段はフレンチホルンのように曲がり、食堂兼ホールにはバンジョーの胴をかたどった丸い吹き抜けが開き、二つの図書室はFの字の開口でつながるそうです。Fはフォルテの記号であり、バイオリンのf字孔でもあります。古い倉庫を消すのではなく、楽器を調律するように整え直すという考え方に惹かれます。学年が上がるごとに上の階へ移っていく構成なので、子どもたちは何年もかけて、この建物を一つの楽譜のように進んでいくのだと思います。",
+    "source": "Dezeen",
+    "url": "https://www.dezeen.com/2026/10/13/oma-convert-houston-coffee-plant-flama/"
+   },
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Margiela brings its shipyard show to Tokyo",
+     "ja": "メゾン マルジェラが2026-27年秋冬コレクションの発売に合わせ、ドーバー ストリート マーケット ギンザとエストネーション六本木ヒルズでポップアップを開いています。上海の造船所のコンテナに着想したショーの雰囲気を、タペストリー柄の壁紙やパッチワークの家具で再現しています。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-13/margiela-popup-26aw/",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Loewe and On head for the Alps",
+     "ja": "ロエベとオンのコラボで、ハイキングブーツを再解釈した「Cloud Solo Hiker」など靴2型と、キルティングジャケットやポンチョなどのアウトドア服がそろいます。一部にはスイスアルプスのプリントが使われ、10月14日から事前登録者向けにオンラインで先行販売されます。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-13/loewe-on/"
+    },
+    {
+     "cat": "fashion",
+     "title": "JW Anderson turns UGG into loafers",
+     "ja": "UGGとJWアンダーソンが、クラシックブーツとタスマンをペニーローファーの形に組み替えた2型を10月15日に発売します。色はジョナサン・アンダーソンが選んだチェスナット、カーキ、オレンジの3色です。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-13/ugg-jw-anderson/"
+    },
+    {
+     "cat": "music",
+     "title": "Throbbing Gristle marks fifty years at the ICA",
+     "ja": "スロッビング・グリッスルの結成50周年を記念する無料イベントが、10月18日にロンドンのICAで開かれます。クリス・カーターとコージー・ファニ・トゥッティのトークや1981年のライブ映像の上映があり、1976年のICA公演を収めた50枚限定の盤も販売されます。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/further-details-of-tg50-event-at-londons-ica-emerge/"
+    },
+    {
+     "cat": "music",
+     "title": "Bloc returns for one night with Jeff Mills",
+     "ja": "英国の電子音楽フェス「Bloc」が20周年を記念し、2027年3月6日にロンドンのThe Causeで16時間のパーティーを開きます。ジェフ・ミルズがヘッドライナーを務め、ブリティッシュ・マーダー・ボーイズやレフトフィールドらが出演します。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/bloc-reveals-first-acts-and-venue-for-20th-anniversary-event/"
+    },
+    {
+     "cat": "music",
+     "title": "The Comet Is Coming collects its first era",
+     "ja": "ザ・コメット・イズ・カミングが、デビュー作『Channel The Spirits』の10周年を記念した作品集を11月20日にLeafから出します。アルバムに加えて2枚のEPと、未発表の録音4曲が収められます。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/the-comet-is-coming-detail-channel-the-spirits-reissue/"
+    },
+    {
+     "cat": "design",
+     "title": "OMA tunes a Houston coffee plant into a music school",
+     "ja": "OMAがヒューストンの1930年代のコーヒー工場を、幼児から中学2年生までが通う無償の音楽学校に改修します。フレンチホルンのような階段やバンジョーの胴を思わせる丸い吹き抜けを設け、2027年の開校を予定しています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/13/oma-convert-houston-coffee-plant-flama/"
+    },
+    {
+     "cat": "design",
+     "title": "A reused-timber shade pavilion in Camden",
+     "ja": "ロンドンのPearce+が、過去の仕事で使った木材を再利用した六角形の日よけパビリオンをカムデンに建てました。来場者が寄付された布を壁に織り込み、解体して別の場所へ運べるため、来年は学校などを巡回する予定です。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/13/shading-pavilion-camden-pearce-plus/"
+    },
+    {
+     "cat": "design",
+     "title": "Wheeler Kearns stages a bronze and limestone house on Lake Michigan",
+     "ja": "シカゴのWheeler Kearns Architectsが、ミシガン湖畔に3つの棟からなる住宅を完成させました。切妻の2棟は濃いブロンズ色の金属で覆われ、平屋の棟には地元産の石灰岩を使い、ガラスの廊下が道路から湖への眺めをつないでいます。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/13/timber-lane-retreat-wheeler-kearns-architects/"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Loewe's second year under McCollough and Hernandez",
+     "ja": "ジャック・マッコローとラザロ・ヘルナンデスによるロエベの2027年春夏は、着やすさと個性を前面に出したコレクションです。シルク100%のカーゴパンツや後ろ前に着るポロ、1960年に初めて使われた「オロ」色のスエードのブレザーなどが登場しました。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2524496"
+    },
+    {
+     "cat": "fashion",
+     "title": "Noritaka Tatehana revisits his heel-less shoes",
+     "ja": "舘鼻則孝の個展「Heel-less Shoes」が10月30日から12月12日まで東京・京橋のKOSAKU KANECHIKAで開かれます。花魁の高下駄に着想したヒールレスシューズ22点と、制作時のドローイングをもとにした新作の絵画など30点以上が並びます。入場は無料です。",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-10/heel-less-shoes-exhibition/",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Yoshio Kubo opens the Tokyo spring 2027 season",
+     "ja": "ヨシオクボが楽天 ファッション ウィーク 東京のトップバッターとして2027年春夏コレクションを発表しました。WWDJAPANがバックステージの写真30点を公開しています。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2521376",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Lorenzo Senni returns to Warp with All Ages",
+     "ja": "イタリアのロレンツォ・センニが6年ぶりのアルバム『All Ages』を11月20日にWarpから出します。全11曲で、本人が初めて歌い、シュー・シューのジェイミー・スチュワートやスケートボーダーのチャド・マスカとジェイミー・トーマスも声で参加しています。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/lorenzo-senni-returns-to-warp-records-for-first-album-in-six-years/"
+    },
+    {
+     "cat": "music",
+     "title": "Liz Harris gathers two film scores about water",
+     "ja": "グルーパーとして知られるリズ・ハリスが、本名名義で映画音楽集『Music For Two Films About Water』を11月27日にKrankyから出します。ローヌ川を描いた『We Exhale』と、牧野貴の『Constellation』のための長尺の2曲を収めています。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/liz-harris-plots-new-release-of-soundtrack-work/"
+    },
+    {
+     "cat": "music",
+     "title": "Jeff Mills' Tomorrow Comes The Harvest plans The Forbidden Planet",
+     "ja": "ジェフ・ミルズ率いるトゥモロー・カムズ・ザ・ハーヴェストが、新作『The Forbidden Planet』を11月20日にAxis Recordsから発表します。マイアミとパリで2年かけて録音した全9曲で、電子音とアコースティックな演奏を組み合わせています。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/jeff-mills-unveils-new-album-from-tomorrow-comes-the-harvest-project/"
+    },
+    {
+     "cat": "design",
+     "title": "Zaha Hadid's old studio becomes a public design hub",
+     "ja": "ザハ・ハディド財団が、ハディドが30年以上使ったロンドン・クラーケンウェルの旧小学校の事務所を、建築とデザインの拠点として来月公開します。舞台美術をテーマにした展示や講堂が設けられ、ロゴはExperimental Jetsetが刷新しました。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/08/zaha-hadid-foundation-cultural-hub-london/"
+    },
+    {
+     "cat": "design",
+     "title": "Melbourne's State Theatre reopens with its brass ceiling restored",
+     "ja": "NH ArchitectureとSnøhettaが、1984年完成のメルボルンのイアン・ポッター州立劇場を改修しました。約7万5千個の真鍮の球でできた天井を外して磨き直し、元の姿に近い新しい座席や地下のリハーサル室を加えています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/09/ian-potter-state-theatre-melbourne/"
+    },
+    {
+     "cat": "design",
+     "title": "A former Czech brewery turned community centre",
+     "ja": "チェコ・ブルノ近郊の町ヴェルカー・ビーテシュで、Acronym Collective Studioが旧醸造所を図書館やホールを備えた文化センターに改修しました。穴あきのレンガ外壁や螺旋階段を加え、地下のヴォールト空間は展示と工房になっています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/10/brewery-cultural-centre-brno-acronym-collective-studio/"
+    }
+   ],
+   "note": {
+    "title": "On Zaha Hadid's studio",
+    "en": "Zaha Hadid's studio on Bowling Green Lane is opening to the public. What stays with me is that some of the most fluid architecture of our time was drawn inside a plain Victorian schoolhouse of brick. The renovation is quiet: the old fireplace and doorways are opened up again, and her Z-shaped door pulls are still there. Ten years after her death, the place where the ideas were born becomes the exhibition itself.",
+    "ja": "ザハ・ハディドが30年以上使ったロンドンのスタジオが、一般に開かれます。あの流れるような建築が、ヴィクトリア朝の素朴なレンガの校舎から生まれていたことに、改めて心を動かされます。改修は控えめで、元の暖炉や扉を開き直し、Zの形のドアハンドルもそのまま残しているそうです。亡くなって10年、アイデアが生まれた場所そのものが展示になる。建築を学んだ者として、この手の入れ方に強く惹かれます。",
+    "source": "Dezeen",
+    "url": "https://www.dezeen.com/2026/10/08/zaha-hadid-foundation-cultural-hub-london/"
+   }
+  },
+  {
+   "date": "2026-10-12",
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Kim Jones brings back his own label",
+     "ja": "ルイ・ヴィトン、ディオール、フェンディを率いてきたキム・ジョーンズが、自身のブランド「キム ジョーンズ」を再始動します。2027-28年秋冬が最初のコレクションで、香港のセントラル・ヤードに店を開き、服の多くは日本で生産されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2524673"
+    },
+    {
+     "cat": "fashion",
+     "title": "Masaco Teranishi shows spring 2027 in Tokyo",
+     "ja": "マサコ テラニシが楽天 ファッション ウィーク 東京で2027年春夏コレクションを発表しました。全17ルックが公開されています。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2522106",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Limi Feu teams up with graphic artist HIROTTON",
+     "ja": "ヨウジヤマモトのリミ フゥが、グラフィックアーティストのHIROTTONとのコラボアイテムを発売しました。Tシャツやスーベニアジャケット、スケートボードなどがそろい、10月16日から全国の取扱店でも販売されます。",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2524571",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Ryuichi Sakamoto's 1996 reissued for its 30th anniversary",
+     "ja": "坂本龍一がピアノ、チェロ、バイオリンの三重奏で自作を演奏したアルバム『1996』が、新たなリマスターで12月11日にMilan Recordsから2枚組LPとカセットで再発されます。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/ryuichi-sakamotos-1996-set-for-30th-anniversary-reissue/",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Björk releases her 2021 concert with the Hamrahlíð Choir",
+     "ja": "ビョークが2021年にレイキャビクのハルパで50人のハムラリーズ合唱団と行った公演が、ライブアルバムとして11月27日にOne Little Independentから出ます。『Medúlla』の曲が中心です。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/bjork-details-live-orchestral-album-bjork-orkestral-with-the-hamrahlid-choir/"
+    },
+    {
+     "cat": "music",
+     "title": "Loraine James and Warp's Providenza Ensemble head to the Barbican",
+     "ja": "ロレイン・ジェームスやピュース・メアリーら6人の作曲家による新しい管弦楽作品が、2027年1月24日にロンドンのバービカンでシンフォニエッタ・クラコヴィアの演奏により初演されます。Unsoundの主催です。",
+     "source": "The Quietus",
+     "url": "https://thequietus.com/news/loraine-james-puce-mary-and-more-to-debut-orchestral-works-at-londons-barbican/"
+    },
+    {
+     "cat": "design",
+     "title": "A red metal extension for a former pigsty home in Czechia",
+     "ja": "プラハのFacha Architektiが、豚小屋を改装したチェコの住宅に赤い波板の増築部を加えました。内装はパイン合板で、収納を家具に組み込み、玄関と浴室を広げています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/11/facha-architekti-red-extension-czech-pigsty-home/"
+    },
+    {
+     "cat": "design",
+     "title": "Grimshaw's rammed-earth visitor centre at the Twelve Apostles",
+     "ja": "オーストラリア・ビクトリア州の名所トゥエルブ・アポストルズに、グリムショウとAspect Studiosが版築の壁を使ったビジターセンターを完成させました。屋上は海を望む展望台になっています。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/12/grimshaw-visitor-centre-twelve-apostles-australia/"
+    },
+    {
+     "cat": "design",
+     "title": "A concrete house in India inspired by rock-cut monasteries",
+     "ja": "インドのRoomoorが、バレシュワルのジャイナ教寺院の敷地に打ち放しコンクリートの住宅を建てました。デカン高原の石窟僧院を参考に、天窓の光を中心に据えた設計です。",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/11/monastic-field-roomoor-india/"
+    }
+   ]
+  }
+ ]
+}</script>
+
+  <section id="weekly">
+    <h2>Weekly Synesthesia <small>日曜日の編集後記</small></h2>
+    <p class="intro">Once a week, a human look back at the week's news: what stayed, five things worth keeping, and a thought that grew out of them. 毎日の自動更新の上に、週に一度だけ人の視点を置きます。</p>
+    <div id="weeklyLatest"><!--WEEKLY--></div>
+    <a class="vmore" href="weekly/">View more</a>
+  </section>
+
+  <section id="japan">
+    <h2>From Japan <small>日本から世界へ</small></h2>
+    <p class="intro">Japanese art, design, architecture, fashion and music, sent out to the world. 毎日のニュースのうち、日本のつくり手やブランドについてのものだけを集めています。Japan Art の枠では、日本の展覧会・作家・ギャラリーを毎日ひとつ。</p>
+    <div class="col-list" id="japanList"></div>
+    <a class="vmore" id="moreJapan" href="japan/" hidden>View more</a>
+  </section>
+
+  <section id="objects">
+    <h2>Objects <small>1日1点の良いもの</small></h2>
+    <p class="intro">One good thing a day, in the same form as the news. デザインが良く、長く使えるものを1日1点。海外へ送れるものには Ships worldwide を、PR と記したリンクはアフィリエイトです。</p>
+    <div class="objects" id="objectList"></div>
+    <a class="vmore" id="moreObjects" href="objects/" hidden>View more</a>
+  </section>
+
+  <section id="search">
+    <h2>Search <small>サイト内検索</small></h2>
+    <form class="sbox" id="sform" role="search"><input id="sq" type="search" placeholder="Notes, stories, masterworks — 例：Slimane、建築、Klint" aria-label="サイト内検索" autocomplete="off"><span class="lab" id="scount"></span></form>
+    <ul class="sres" id="sres"></ul>
+  </section>
+
+  <section id="archive">
+    <h2>Archive <small>毎日の記録</small></h2>
+    <p class="intro">A daily record of every day's news, kept by date. 毎日のファッション・音楽・デザインのニュースを、日付ごとにすべて残しています。</p>
+    <div class="daily" id="daily"></div>
+    <a class="vmore" id="moreDays" href="more/?v=days" hidden>View more</a>
+  </section>
+
+  <section class="sound" id="sound">
+    <h2>Synesthesia Music by Kengo <small>このサイトのためのオリジナル曲</small></h2>
+    <p class="intro">An original piece composed in code for this page. 低いサブベース、ゆっくり動くコード、声のように揺れるシンセ。ブラウザがその場で演奏するので、既存の楽曲や音源は一切使っていません。</p>
+    <div class="player">
+      <button class="play" id="playBtn" type="button" aria-pressed="false">Play</button>
+      <div>
+        <canvas id="scope" aria-hidden="true"></canvas>
+        <div class="trk"><span class="t">Night Signal</span><span class="lab" id="trkInfo">F minor — 70 BPM — Original</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="index">
+    <h2>Index <small>情報源へのリンク</small></h2>
+    <div class="bar">
+      <div class="tabs" role="group" aria-label="カテゴリ">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="fashion" aria-pressed="false">Fashion</button>
+        <button type="button" data-f="music" aria-pressed="false">Music</button>
+        <button type="button" data-f="design" aria-pressed="false">Design</button>
+        <button type="button" data-f="world" aria-pressed="false">Archives</button>
+        <button type="button" data-f="mine" aria-pressed="false">My Links</button>
+      </div>
+      <input id="q" class="search" type="search" placeholder="検索 — 例：Hedi、Warp、建築" aria-label="検索">
+    </div>
+    <div id="cats"></div>
+    <div class="cat" data-cat="mine">
+      <h3>My Links <small>自分で追加</small></h3>
+      <form class="add" id="addForm">
+        <input id="addName" placeholder="名前（例：好きなショップ）" required aria-label="名前">
+        <input id="addUrl" type="url" placeholder="https://" required aria-label="URL">
+        <button type="submit">Add</button>
+      </form>
+      <ul class="list mine" id="mineList"></ul>
+      <p class="note">追加したリンクはこのブラウザに保存されます。</p>
+    </div>
+  </section>
+
+  <section id="credits">
+    <h2>Credits <small>素材と権利</small></h2>
+    <p class="intro">掲載している写真・映像はすべて Wikimedia Commons でパブリックドメインまたは CC0 と表示されている作品です。トップのアニメーションと音楽は、このページのオリジナルです。各リンク先は外部サイトで、ブランドやメディアの画像はこのページには載せていません。</p>
+    <div class="credits" id="creditList"></div>
+    <a class="vmore" href="rights/">Rights ledger</a>
+  </section>
+
+  <footer class="lab"><span>KENGO'S SYNESTHESIA — Kengo Umetani</span><span>Issue 01 — 2026</span></footer>
+</div>
+
+<script>
+const C="https://commons.wikimedia.org/wiki/File:";
+const PLATES=[
+ ["klint","The Ten Largest, No. 7, Adulthood","Hilma af Klint, 1907 — painting","Public domain","Hilma_af_Klint_—_The_Ten_Largest_—_Number_7_Adulthood.jpg","1334","1800"],
+ ["salk","Salk Institute, La Jolla","Louis Kahn, 1965 — architecture / photo: Carol M. Highsmith","Public domain","Salk_Institute_Highsmith.jpg","1400","1103"],
+ ["malevich","Suprematist Composition","Kazimir Malevich, 1916 — painting","Public domain","Kazimir_malevich_suprematist_composition.jpg","1400","1689"],
+ ["thinker","The Thinker","Auguste Rodin, modeled 1880 — sculpture / The Met","CC0","The_Thinker_MET_DP-13618-011.jpg","1400","1707"],
+ ["kandinsky","Composition VIII","Wassily Kandinsky, 1923 — painting","Public domain","Wassily_Kandinsky_Composition_VIII.jpg","1400","980"],
+ ["nike","Winged Victory of Samothrace","c. 190 BC — sculpture, Louvre / photo: KHo235","CC0","Winged_Victory_of_Samothrace_-_March_2015_by_kHo.jpg","1159","1800"],
+ ["mondrian","Tableau I","Piet Mondrian, 1921 — painting","Public domain","Tableau_I,_by_Piet_Mondriaan.jpg","1400","1486"],
+ ["pillars","Pillars of Creation","NASA, ESA, CSA, STScI — James Webb Space Telescope, 2022","Public domain","Pillars_of_Creation_(NIRCam_Image).jpg","1039","1800"],
+ ["brutal","Brutalist Architecture, Ashford","John K Thorne, Kent — architecture","CC0","Brutalist_architecture,_Ashford,_Kent.jpg","1400","934"]
+];
+const DATA={
+fashion:{t:"Fashion",jp:"ブランド・コレクション・雑誌",items:[
+["Hedi Slimane","写真と作品のアーカイブ","https://www.hedislimane.com","Photo"],
+["CELINE","公式サイト・コレクション","https://www.celine.com","Maison"],
+["Saint Laurent","公式サイト・コレクション","https://www.ysl.com","Maison"],
+["HERMÈS","公式サイト","https://www.hermes.com","Maison"],
+["GUCCI","公式サイト","https://www.gucci.com","Maison"],
+["KENZO","公式サイト","https://www.kenzo.com","Maison"],
+["Maison Margiela","公式サイト","https://www.maisonmargiela.com","Maison"],
+["Rick Owens","公式サイト","https://www.rickowens.eu","Designer"],
+["The Row","公式サイト","https://www.therow.com","Designer"],
+["Vogue Runway","世界のコレクション速報","https://www.vogue.com/fashion-shows","Runway"],
+["SSENSE","セレクト・エディトリアル","https://www.ssense.com","Shop"],
+["System Magazine","業界人の長編インタビュー誌","https://www.system-magazine.com","Magazine"],
+["Dazed","ファッション・カルチャー誌","https://www.dazeddigital.com","Magazine"],
+["i-D","ファッション・ユース・カルチャー","https://i-d.co","Magazine"],
+["032c","ベルリンのカルチャー誌","https://032c.com","Magazine"],
+["The Business of Fashion","業界ニュース・分析","https://www.businessoffashion.com","News"],
+["FASHIONSNAP","国内ファッションニュース","https://www.fashionsnap.com","News"],
+["WWDJAPAN","国内業界ニュース","https://www.wwdjapan.com","News"]
+]},
+music:{t:"Music",jp:"アーティスト・レーベル・ラジオ・メディア",items:[
+["James Blake","公式サイト","https://www.jamesblakemusic.com","Artist"],
+["James Blake on Spotify","すぐ聴く","https://open.spotify.com/search/James%20Blake","Listen"],
+["Bon Iver","公式サイト","https://www.boniver.org","Artist"],
+["Sampha","公式サイト","https://www.sampha.com","Artist"],
+["Ryuichi Sakamoto","公式サイト","https://www.sitesakamoto.com","Artist"],
+["Warp Records","Aphex Twin などのレーベル","https://warp.net","Label"],
+["XL Recordings","レーベル","https://www.xlrecordings.com","Label"],
+["4AD","レーベル","https://4ad.com","Label"],
+["Hyperdub","Burial などのレーベル","https://hyperdub.net","Label"],
+["NTS Radio","ロンドン発のオンラインラジオ","https://www.nts.live","Radio"],
+["Boiler Room","DJ・ライブ映像","https://boilerroom.tv","Live"],
+["Resident Advisor","電子音楽のニュース・イベント","https://ra.co","Media"],
+["Pitchfork","レビュー・ニュース","https://pitchfork.com","Media"],
+["Bandcamp Daily","インディーの深掘り記事","https://daily.bandcamp.com","Media"],
+["The Quietus","UKの音楽批評誌","https://thequietus.com","Media"]
+]},
+design:{t:"Design",jp:"建築・インテリア・デザイン",items:[
+["Dezeen","建築・デザインニュース","https://www.dezeen.com","News"],
+["designboom","建築・アート・デザイン","https://www.designboom.com","News"],
+["ArchDaily","建築作品データベース","https://www.archdaily.com","Archive"],
+["Wallpaper*","デザイン・ライフスタイル誌","https://www.wallpaper.com","Magazine"],
+["Casa BRUTUS","建築・デザイン誌","https://casabrutus.com","Magazine"],
+["Kinfolk","ライフスタイル誌","https://www.kinfolk.com","Magazine"]
+]},
+world:{t:"Open Archives",jp:"自由に使える世界の写真・映像・音楽",items:[
+["Wikimedia Commons","パブリックドメイン・CC作品の宝庫","https://commons.wikimedia.org","Archive"],
+["The Met Open Access","メトロポリタン美術館の公開画像","https://www.metmuseum.org/art/collection","Museum"],
+["Rijksmuseum Studio","アムステルダム国立美術館の高画質画像","https://www.rijksmuseum.nl/en/rijksstudio","Museum"],
+["Cleveland Museum of Art","CC0の所蔵作品","https://www.clevelandart.org/art/collection/search","Museum"],
+["NASA Image Library","宇宙・地球の写真と映像","https://images.nasa.gov","Space"],
+["Internet Archive","映画・音源のアーカイブ","https://archive.org","Archive"],
+["Musopen","著作権フリーのクラシック録音","https://musopen.org","Music"],
+["Free Music Archive","ライセンス明記の音楽","https://freemusicarchive.org","Music"]
+]}};
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const d=new Date();
+$("#date").textContent=d.toLocaleDateString("en-GB",{weekday:"short",day:"2-digit",month:"short",year:"numeric"});
+
+// Today's pick
+const all=Object.values(DATA).flatMap(c=>c.items);
+const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);
+const pk=all[doy%all.length]; $("#pick").textContent=pk[0]; $("#pick").href=pk[2];
+
+// Lists on this page show the newest five; more/?v=plates|days|art shows everything of one kind
+const VIEW=new URLSearchParams(location.search).get("v");
+const FULL=["plates","days","art"].includes(VIEW)?VIEW:"";
+const LIMIT=FULL?Infinity:5;
+if(FULL){document.body.classList.add("full");document.body.dataset.v=FULL;
+  const keep={plates:"plates-sec",days:"archive",art:"art"}[FULL];document.getElementById(keep).classList.add("keep");
+  document.title=({plates:"Daily Masterworks",days:"Archive",art:"Synesthesia Digital Art by Kengo"})[FULL]+" — KENGO'S SYNESTHESIA";
+  document.querySelectorAll(".nv a[href^='#']").forEach(a=>a.setAttribute("href","./"+a.getAttribute("href")));
+}
+{const sg=document.getElementById("signals");if(sg)sg.dataset.limit=FULL==="art"?"":"5"}
+const showMore=(id,total)=>{const a=document.getElementById(id);if(a)a.hidden=!(total>LIMIT)};
+// Daily news (data block is refreshed every morning; a news.json beside the page wins when newer)
+(function(){
+  const CATS=[["fashion","Fashion"],["music","Music"],["design","Design"]];
+  const fmt=s=>new Date(s+"T00:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}).toUpperCase();
+  function noteBlock(day,target){
+    const n=day.note; if(!n||!n.ja)return;
+    const w=document.createElement("div"); w.className="knote";
+    w.innerHTML=`<div><span class="lab">Kengo's Note</span><span class="kt">${esc(n.title||"")}</span></div><div>${n.en?`<p class="ken">${esc(n.en)}</p>`:""}<p class="kja">${esc(n.ja)}</p>${n.url?`<a class="src" href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.source||"Source")} ↗</a>`:""}</div>`;
+    target.appendChild(w);
+  }
+  function block(day,target,withNote=true){
+    if(withNote)noteBlock(day,target);
+    const g=document.createElement("div"); g.className="news";
+    CATS.forEach(([k,label])=>{
+      const items=day.items.filter(i=>i.cat===k); if(!items.length)return;
+      const col=document.createElement("div"); col.className="col";
+      col.innerHTML=`<span class="lab">${label}</span>`+items.map(i=>`<article><a href="${esc(i.url)}" target="_blank" rel="noopener"><span class="hl">${esc(i.title)}</span><span class="sm">${esc(i.ja)}</span><span class="src">${esc(i.source)}</span></a></article>`).join("");
+      g.appendChild(col);
+    });
+    target.appendChild(g);
+  }
+  let shown="";
+  function render(N){
+    if(!N||!N.days||!N.days.length||(N.updated||"")<=shown)return;
+    shown=N.updated||"0";
+    const t=document.getElementById("newsToday"), a=document.getElementById("daily");
+    t.innerHTML=""; t.className=""; a.innerHTML="";
+    document.getElementById("todayDate").textContent=fmt(N.days[0].date);
+    const nt=document.getElementById("noteToday");if(nt){nt.innerHTML="";noteBlock(N.days[0],nt);const nd=document.getElementById("noteDate");if(nd)nd.textContent=fmt(N.days[0].date)}
+    block(N.days[0],t,false);
+    const days=N.days.slice().sort((x,y)=>x.date<y.date?1:-1);
+    showMore("moreDays",days.length);
+    // From Japan and Objects, newest first, five each (the rest on japan/ and objects/)
+    const jl=document.getElementById("japanList"), ol=document.getElementById("objectList");
+    if(jl){const J=days.flatMap(d=>d.items.filter(i=>i.japan).map(i=>({...i,date:d.date})));const row=i=>`<article><span class="when">${esc(fmt(i.date))}</span><a href="${esc(i.url)}" target="_blank" rel="noopener"><span class="hl">${esc(i.title)}${i.cat==="art"?'<span class="jp">Art</span>':""}</span><span class="sm">${esc(i.ja)}</span><span class="src">${esc(i.source)}</span></a></article>`;const A=J.filter(i=>i.cat==="art"),R=J.filter(i=>i.cat!=="art");jl.innerHTML=(A.length?'<span class="glab">Japan Art <small>展覧会・作家・ギャラリー</small></span>'+A.slice(0,LIMIT).map(row).join("")+(R.length?'<span class="glab">デザイン・建築・ファッション・音楽</span>':""):"")+R.slice(0,LIMIT).map(row).join("")||'<p class="intro">日本についての記事が入ると、ここに並びます。</p>';showMore("moreJapan",J.length)}
+    if(ol){const O=days.flatMap(d=>(d.objects||(d.object?[d.object]:[])).map(o=>({...o,date:d.date})));ol.innerHTML=O.slice(0,LIMIT).map(o=>{const buy=o.buy||o.url||"#",ship={worldwide:"Ships worldwide",japan:"Japan only"}[o.ships]||"";return `<article>${o.buy?'<span class="pr">PR</span>':""}<span class="when">${esc(fmt(o.date))}</span><span class="hl">${o.brand?esc(o.brand)+" — ":""}${esc(o.name||"")}${o.japan?'<span class="jp">From Japan</span>':""}</span><span class="sm">${esc(o.ja||"")}</span><a class="buy" href="${esc(buy)}" target="_blank" rel="${o.buy?"sponsored noopener":"noopener"}">見る${o.price?" · "+esc(o.price):""}</a>${ship?`<span class="ship">${ship}</span>`:""}</article>`}).join("")||'<p class="intro">まだありません。</p>';showMore("moreObjects",O.length)}
+    days.slice(0,LIMIT).forEach((d,i)=>{
+      const det=document.createElement("details"); det.className="past"; if(i===0)det.open=true;
+      const s=document.createElement("summary");
+      s.innerHTML=`<span>${esc(fmt(d.date))}</span><span class="lab">${d.items.length} stories</span><a class="plink" href="${d.date.replace(/-/g,"/")}/" title="この日のページ">Permalink ↗</a>`;
+      s.querySelector(".plink").addEventListener("click",e=>e.stopPropagation());
+      det.appendChild(s); block(d,det); a.appendChild(det);
+    });
+  }
+  let N=null; try{N=JSON.parse(document.getElementById("news-data").textContent)}catch(e){}
+  if(N&&N.days&&N.days.length)render(N); else document.getElementById("newsToday").innerHTML='<p class="intro">本日のニュースは準備中です。</p>';
+  try{fetch("news.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(render).catch(()=>{})}catch(e){}
+})();
+
+// Site search: notes, stories, plates, objects and weekly columns (search.json, built every publish)
+(function(){
+  const f=document.getElementById("sform"),q=document.getElementById("sq"),res=document.getElementById("sres"),cnt=document.getElementById("scount");
+  if(!f)return; let IDX=null,t;
+  const LAB={note:"Note",fashion:"Fashion",music:"Music",design:"Design",plate:"Daily Masterwork",object:"Object",weekly:"Weekly"};
+  const run=()=>{const s=q.value.trim().toLowerCase();res.innerHTML="";cnt.textContent="";if(!s)return;if(!IDX){fetch("search.json").then(r=>r.json()).then(j=>{IDX=j;run()}).catch(()=>{cnt.textContent="検索できませんでした"});return}
+    const terms=s.split(/\s+/).filter(Boolean),hits=IDX.filter(r=>terms.every(w=>r.q.includes(w))).slice(0,40);
+    cnt.textContent=hits.length?hits.length+(hits.length===40?"+":""):"0";
+    res.innerHTML=hits.map(r=>`<li><span class="k">${LAB[r.k]||r.k}</span><a href="${esc(r.u)}"><span class="hl">${esc(r.t)}</span></a><span class="d">${esc(r.d)}</span>${r.s?`<span class="sm">${esc(r.s)}</span>`:""}</li>`).join("")||'<li class="sm">一致するものはありません。</li>';
+  };
+  q.addEventListener("input",()=>{clearTimeout(t);t=setTimeout(run,160)}); f.addEventListener("submit",e=>{e.preventDefault();run()});
+  const u=new URLSearchParams(location.search).get("q"); if(u){q.value=u;run();document.getElementById("search").scrollIntoView()}
+})();
+// World clocks
+const CITIES=[["Paris","Europe/Paris"],["Milan","Europe/Rome"],["London","Europe/London"],["New York","America/New_York"],["Seoul","Asia/Seoul"],["Tokyo","Asia/Tokyo"]];
+const ck=$("#clocks");
+CITIES.forEach(([n])=>{const e=document.createElement("div");e.innerHTML=`<span class="lab">${n}</span><b>--:--</b>`;ck.appendChild(e)});
+function tick(){const now=new Date();CITIES.forEach(([n,z],i)=>{ck.children[i].querySelector("b").textContent=now.toLocaleTimeString("en-GB",{timeZone:z,hour:"2-digit",minute:"2-digit"})})}
+tick();setInterval(tick,15000);
+
+// Archive plates + credits
+const pl=$("#plates"), cr=$("#creditList");
+// colour appears as a plate scrolls into view (about a third of it on screen), and leaves with it
+const seeIO="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("seen",e.isIntersecting)),{threshold:.35,rootMargin:"0px 0px -6% 0px"}):null;
+const seePlates=()=>{ if(seeIO) pl.querySelectorAll("figure:not([data-seen])").forEach(f=>{f.dataset.seen="1";seeIO.observe(f)}); else pl.querySelectorAll("figure").forEach(f=>f.classList.add("seen")); };
+new MutationObserver(seePlates).observe(pl,{childList:true});
+PLATES.forEach((p,i)=>{
+  const f=document.createElement("figure");
+  f.innerHTML=`<div class="im"><img src="media/${p[0]}.webp" width="${p[5]}" height="${p[6]}" loading="lazy" alt="${esc(p[1]+" — "+p[2])}"></div>
+  <figcaption><span class="no">P.${String(i+1).padStart(2,"0")}</span><span><span class="t">${esc(p[1])}</span><span class="m">${esc(p[2])} · ${esc(p[3])} · <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Source</a></span></span></figcaption>`;
+  pl.appendChild(f);
+  const c=document.createElement("p");
+  c.innerHTML=`<b>P.${String(i+1).padStart(2,"0")} ${esc(p[1])}</b> — ${esc(p[2])}. ${esc(p[3])}. <a href="${C+encodeURI(p[4])}" target="_blank" rel="noopener">Wikimedia Commons</a>`;
+  cr.appendChild(c);
+});
+// only the newest five plates stay on the page (the rest are on more/?v=plates); credits keep every plate
+pl.querySelectorAll("figure").forEach(f=>f.dataset.all="1");
+function trimPlates(){ const all=[...pl.querySelectorAll("figure")]; showMore("morePlates",all.length); all.forEach((f,i)=>{f.hidden=i>=LIMIT}); }
+trimPlates();
+// one new public-domain / CC0 masterpiece a day (plates.json), shown first, numbered on from the original nine
+try{fetch("plates.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(L=>{
+  if(!Array.isArray(L)||!L.length)return;
+  const cr0=cr.firstChild;
+  L.slice().sort((a,b)=>a.date<b.date?1:-1).forEach((p,k)=>{
+    const n=String(PLATES.length+L.length-k).padStart(2,"0"), meta=[p.artist,p.when].filter(Boolean).join(", ")+(p.medium?" — "+p.medium.toLowerCase():""), lic=`${p.license} · ${p.credit}`;
+    const f=document.createElement("figure");
+    f.innerHTML=`<div class="im"><img src="media/${esc(p.file)}" width="${p.w}" height="${p.h}" loading="lazy" alt="${esc(p.title+" — "+meta)}"></div>
+    <figcaption><span class="no">P.${n}</span><span><span class="t">${esc(p.title)}</span><span class="m">${esc(meta)} · ${esc(lic)} · <a href="${esc(p.url)}" target="_blank" rel="noopener">Source</a></span></span></figcaption>`;
+    pl.insertBefore(f,pl.children[k]||null);
+    const c=document.createElement("p");
+    c.innerHTML=`<b>P.${n} ${esc(p.title)}</b> — ${esc(meta)}. ${esc(lic)}. <a href="${esc(p.url)}" target="_blank" rel="noopener">Source</a>`;
+    cr.insertBefore(c,cr.children[k]||null);
+  });
+  trimPlates();
+}).catch(()=>{})}catch(e){}
+[["SYNESTHESIA DIGITAL ART by KENGO","毎日ちがうデータ（見出しの言葉、日本語要約の文字、月齢、6都市の時刻と日照時間、記事の出どころ、A〜Zの文字数、KENGO'S NOTEの文など）と、ちがう表現（波、輪、バーコード、星座、文字の格子、軌道、光の帯）を日替わりで組み合わせ、ページを開くたびにその場で描くオリジナルのアニメーション。SYNESTHESIA MUSICを再生すると音に合わせて揺れます"],["SYNESTHESIA MUSIC by KENGO — Night Signal","このページのためにコードで作曲・演奏したオリジナル曲"],["Typography","Zen Kaku Gothic New（SIL Open Font License）と端末のHelvetica系書体"]].forEach(([a,b])=>{const c=document.createElement("p");c.innerHTML=`<b>${a}</b> — ${b}`;cr.appendChild(c)});
+
+// Index lists
+const cats=$("#cats");
+for(const [k,c] of Object.entries(DATA)){
+  const s=document.createElement("div"); s.className="cat"; s.dataset.cat=k;
+  s.innerHTML=`<h3>${c.t} <small>${c.jp}</small></h3><ul class="list"></ul><p class="empty" hidden>一致する項目はありません。</p>`;
+  const ul=s.querySelector("ul");
+  c.items.forEach((it,i)=>{
+    const li=document.createElement("li"); li.dataset.s=it.join(" ").toLowerCase();
+    li.innerHTML=`<a href="${it[2]}" target="_blank" rel="noopener"><span class="no">${c.t[0]}.${String(i+1).padStart(2,"0")}</span><span><span class="nm">${esc(it[0])}</span><span class="ds">${esc(it[1])}</span></span><span class="tg">${it[3]}</span></a>`;
+    ul.appendChild(li);
+  });
+  cats.appendChild(s);
+}
+
+// My links
+let mine=[];
+try{mine=JSON.parse(localStorage.getItem("kengoIndexMine")||"[]")}catch(e){mine=[]}
+const save=()=>{try{localStorage.setItem("kengoIndexMine",JSON.stringify(mine))}catch(e){}};
+function renderMine(){
+  const ul=$("#mineList"); ul.innerHTML="";
+  if(!mine.length){ul.innerHTML='<li class="empty" style="display:block">まだありません。上のフォームから追加できます。</li>';return}
+  mine.forEach((m,i)=>{
+    const li=document.createElement("li"); li.dataset.s=(m.n+" "+m.u).toLowerCase();
+    li.innerHTML=`<a target="_blank" rel="noopener"><span class="no">M.${String(i+1).padStart(2,"0")}</span><span><span class="nm"></span><span class="ds"></span></span></a><button class="rm" type="button">削除</button>`;
+    li.querySelector("a").href=m.u; li.querySelector(".nm").textContent=m.n;
+    try{li.querySelector(".ds").textContent=new URL(m.u).hostname}catch(e){}
+    li.querySelector(".rm").onclick=()=>{mine.splice(i,1);save();renderMine();filter()};
+    ul.appendChild(li);
+  });
+}
+$("#addForm").addEventListener("submit",e=>{
+  e.preventDefault(); const u=$("#addUrl").value.trim(); if(!/^https?:\/\//.test(u))return;
+  mine.push({n:$("#addName").value.trim(),u}); save(); e.target.reset(); renderMine(); filter();
+});
+renderMine();
+
+let cat="all";
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{
+  cat=b.dataset.f; document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-pressed",x===b)); filter();
+});
+$("#q").addEventListener("input",filter);
+function filter(){
+  const q=$("#q").value.trim().toLowerCase();
+  document.querySelectorAll(".cat[data-cat]").forEach(s=>{
+    s.hidden=!(cat==="all"||cat===s.dataset.cat);
+    let n=0; s.querySelectorAll("li[data-s]").forEach(li=>{const ok=!q||li.dataset.s.includes(q);li.hidden=!ok;if(ok)n++});
+    const em=s.querySelector("p.empty"); if(em)em.hidden=!(q&&n===0);
+  });
+}
+
+
+/* ---------- Night Signal: original composition, synthesized live ---------- */
+const BPM=70, BEAT=60/BPM, BAR=BEAT*4;
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+// chords (MIDI): Fm9, Dbmaj7, Abmaj7/C, Eb sus
+const CH=[[53,56,60,63,67],[49,53,56,60,65],[48,56,60,63,67],[51,56,58,63,70]];
+const ROOT=[29,25,24,27];
+// voice melody per 2-bar chord: [beatOffset, midi, lengthBeats]
+const MEL=[
+ [[1,72,1.5],[3,70,.5],[3.5,68,2],[6,67,1.5]],
+ [[1,68,1],[2,70,1],[3,72,2.5],[6,65,1.5]],
+ [[1,67,1.5],[3,68,.5],[3.5,70,2],[6,72,1.5]],
+ [[1,75,2],[3.5,72,1],[4.5,70,2.5]]
+];
+let ac,master,rev,dly,an,timer,next=0,step=0,playing=false;
+function impulse(sec,decay){const r=ac.sampleRate,l=r*sec,b=ac.createBuffer(2,l,r);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<l;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/l,decay)}return b}
+function setup(){
+  ac=new (window.AudioContext||window.webkitAudioContext)();
+  master=ac.createGain(); master.gain.value=.0001;
+  const comp=ac.createDynamicsCompressor(); comp.threshold.value=-16; comp.ratio.value=3;
+  an=ac.createAnalyser(); an.fftSize=2048;
+  master.connect(comp).connect(an).connect(ac.destination);
+  rev=ac.createConvolver(); rev.buffer=impulse(4.5,3); const rg=ac.createGain(); rg.gain.value=.5; rev.connect(rg).connect(master);
+  dly=ac.createDelay(2); dly.delayTime.value=BEAT*.75; const fb=ac.createGain(); fb.gain.value=.35; const df=ac.createBiquadFilter(); df.type="lowpass"; df.frequency.value=2400;
+  dly.connect(df).connect(fb).connect(dly); df.connect(master); df.connect(rev);
+}
+function pad(t,notes,dur){
+  const f=ac.createBiquadFilter(); f.type="lowpass"; f.frequency.setValueAtTime(500,t); f.frequency.linearRampToValueAtTime(1300,t+dur*.5); f.frequency.linearRampToValueAtTime(600,t+dur); f.Q.value=.7;
+  const g=ac.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.05,t+1.6); g.gain.setValueAtTime(.05,t+dur-1); g.gain.linearRampToValueAtTime(0,t+dur+.8);
+  f.connect(g); g.connect(master); g.connect(rev);
+  notes.forEach(n=>[-7,7].forEach(dt=>{const o=ac.createOscillator();o.type="sawtooth";o.frequency.value=mtof(n);o.detune.value=dt;o.connect(f);o.start(t);o.stop(t+dur+1)}));
+}
+function sub(t,n,dur){
+  const o=ac.createOscillator(); o.type="sine"; o.frequency.value=mtof(n+12);
+  const g=ac.createGain(); g.gain.setValueAtTime(0,t);
+  for(let b=0;b<dur/BEAT;b++){const bt=t+b*BEAT; g.gain.setValueAtTime(.02,bt); g.gain.linearRampToValueAtTime(.32,bt+.18)}
+  g.gain.linearRampToValueAtTime(0,t+dur);
+  o.connect(g).connect(master); o.start(t); o.stop(t+dur+.1);
+}
+function kick(t){const o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(38,t+.25);g.gain.setValueAtTime(.7,t);g.gain.exponentialRampToValueAtTime(.001,t+.5);o.connect(g).connect(master);o.start(t);o.stop(t+.55)}
+function noise(t,dur,freq,q,vol,wet){
+  const b=ac.createBuffer(1,ac.sampleRate*dur,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  const s=ac.createBufferSource();s.buffer=b;const f=ac.createBiquadFilter();f.type="bandpass";f.frequency.value=freq;f.Q.value=q;
+  const g=ac.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);
+  s.connect(f).connect(g);g.connect(master);if(wet){const w=ac.createGain();w.gain.value=wet;g.connect(w).connect(rev)}s.start(t);
+}
+function voice(t,n,len){
+  const dur=len*BEAT;
+  const o=ac.createOscillator(); o.type="sawtooth"; o.frequency.setValueAtTime(mtof(n-1),t); o.frequency.exponentialRampToValueAtTime(mtof(n),t+.12);
+  const lfo=ac.createOscillator(),lg=ac.createGain(); lfo.frequency.value=5.2; lg.gain.setValueAtTime(0,t); lg.gain.linearRampToValueAtTime(14,t+dur*.6); lfo.connect(lg).connect(o.detune);
+  const g=ac.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.09,t+.15); g.gain.setValueAtTime(.09,t+dur*.7); g.gain.linearRampToValueAtTime(0,t+dur+.25);
+  // vowel formants ("ah" → "oh")
+  [[800,620,9,1],[1150,900,11,.6],[2800,2600,14,.18]].forEach(([a,b,q,v])=>{const f=ac.createBiquadFilter();f.type="bandpass";f.Q.value=q;f.frequency.setValueAtTime(a,t);f.frequency.linearRampToValueAtTime(b,t+dur);const fg=ac.createGain();fg.gain.value=v*3;o.connect(f).connect(fg).connect(g)});
+  g.connect(master); const w=ac.createGain(); w.gain.value=.8; g.connect(w).connect(rev); const s=ac.createGain(); s.gain.value=.4; g.connect(s).connect(dly);
+  o.start(t); lfo.start(t); o.stop(t+dur+.4); lfo.stop(t+dur+.4);
+}
+// one 2-bar section per scheduler step
+function section(t,i){
+  const c=i%4, cycle=Math.floor(i/4), dur=BAR*2;
+  pad(t,CH[c],dur);
+  if(cycle>=1){sub(t,ROOT[c],dur)}
+  if(cycle>=1){for(let bar=0;bar<2;bar++){const bt=t+bar*BAR;kick(bt);kick(bt+BEAT*2.5);noise(bt+BEAT*2,.35,1800,.9,.35,.6)}}
+  if(cycle>=2){for(let h=0;h<16;h++){if(h%2===1)noise(t+h*BEAT/2,.05,8000,1.5,h%4===3?.08:.04,0)}}
+  if(cycle>=1){MEL[c].forEach(([b,n,l])=>voice(t+b*BEAT,n,l))}
+}
+function sched(){while(next<ac.currentTime+1.5){section(next,step);next+=BAR*2;step++}}
+const cv=$("#scope"),cx=cv.getContext("2d");
+function sizeCv(){const r=cv.getBoundingClientRect(),p=Math.min(2,devicePixelRatio||1);cv.width=r.width*p;cv.height=r.height*p}
+sizeCv(); addEventListener("resize",sizeCv);
+function drawIdle(){cx.clearRect(0,0,cv.width,cv.height);cx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--onnight").trim()||"#ecece8";cx.globalAlpha=.4;cx.lineWidth=1;cx.beginPath();cx.moveTo(0,cv.height/2);cx.lineTo(cv.width,cv.height/2);cx.stroke();cx.globalAlpha=1}
+drawIdle();
+const buf=new Uint8Array(2048);
+function draw(){
+  if(!playing){drawIdle();return}
+  an.getByteTimeDomainData(buf); cx.clearRect(0,0,cv.width,cv.height);
+  cx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--onnight").trim()||"#ecece8"; cx.lineWidth=1.4*(devicePixelRatio||1); cx.beginPath();
+  for(let i=0;i<buf.length;i++){const x=i/buf.length*cv.width,y=(buf[i]/255)*cv.height;i?cx.lineTo(x,y):cx.moveTo(x,y)}
+  cx.stroke(); requestAnimationFrame(draw);
+}
+$("#playBtn").addEventListener("click",async()=>{
+  const btn=$("#playBtn");
+  try{
+    if(!ac)setup();
+    if(!playing){
+      await ac.resume(); next=ac.currentTime+.1; step=0; sched(); timer=setInterval(sched,250);
+      master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(.0001,ac.currentTime); master.gain.exponentialRampToValueAtTime(.9,ac.currentTime+1.5);
+      playing=true; btn.textContent="Stop"; btn.setAttribute("aria-pressed","true"); draw();
+    }else{
+      clearInterval(timer); master.gain.cancelScheduledValues(ac.currentTime); master.gain.setValueAtTime(master.gain.value,ac.currentTime); master.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+1.2);
+      playing=false; btn.textContent="Play"; btn.setAttribute("aria-pressed","false");
+      const old=ac; ac=null; setTimeout(()=>{try{old.close()}catch(e){}},1400);
+    }
+  }catch(e){$("#trkInfo").textContent="このブラウザでは再生できませんでした。別のブラウザでお試しください。"}
+});
+</script>
+<script src="signal.js"></script>
+</body>
+</html>
