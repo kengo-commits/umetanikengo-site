@@ -1,9 +1,6 @@
 {
   "cleanUrls": false,
   "trailingSlash": true,
-  "redirects": [
-    { "source": "/", "destination": "/karuizawa-campaign/", "permanent": false }
-  ],
   "headers": [
     {
       "source": "/(.*)",
