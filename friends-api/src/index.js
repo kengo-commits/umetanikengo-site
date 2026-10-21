@@ -244,6 +244,7 @@ async function putDocRoute(req, env, me, col, id) {
     if (!cur && !/^p[a-z0-9]{6,40}$/.test(id)) throw bad('投稿IDが不正です');
     const media = Array.isArray(body.media) ? body.media.slice(0, 10).map(m => ({ id: String(m.id || '').slice(0, 64), type: m.type === 'video' ? 'video' : 'image', w: Number(m.w) || 0, h: Number(m.h) || 0, duration: m.duration ? Number(m.duration) : undefined, poster: m.poster ? String(m.poster).slice(0, 64) : undefined, filter: m.filter ? String(m.filter).slice(0, 20) : undefined, adj: isPlainObject(m.adj) ? m.adj : undefined, alt: m.alt ? clean(m.alt, 200) : undefined })) : (cur ? cur.media : []);
     if (!media.length) throw bad('写真または動画がありません');
+    await assertOwnMedia(env, media.flatMap(m => [m.id, m.poster]), cur ? cur.authorId : me.uid, cur ? (cur.media || []).flatMap(m => [m.id, m.poster]) : []);
     const caption = clean(body.caption, 2200);
     const doc = {
       authorId: cur ? cur.authorId : me.uid, caption, media, aspect: ['original', '1:1', '4:5', '16:9'].includes(body.aspect) ? body.aspect : (cur ? cur.aspect : 'original'),
@@ -258,6 +259,8 @@ async function putDocRoute(req, env, me, col, id) {
     if (!cur && !/^t[a-z0-9]{6,40}$/.test(id)) throw bad('曲IDが不正です');
     const mediaId = cur ? cur.media.id : String(body.media && body.media.id || '').slice(0, 64);
     if (!mediaId) throw bad('音声ファイルがありません');
+    const newCover = typeof body.cover === 'string' ? body.cover.slice(0, 64) : null;
+    await assertOwnMedia(env, [mediaId, newCover], cur ? cur.ownerId : me.uid, cur ? [cur.media && cur.media.id, cur.cover] : []);
     const title = clean(body.title, 120).trim(); if (!title) throw bad('曲名を入力してください');
     const doc = {
       ownerId: cur ? cur.ownerId : me.uid, title, artist: clean(body.artist, 120).trim(), note: clean(body.note, 300),
@@ -276,7 +279,7 @@ async function deleteDocRoute(env, me, col, id) {
     if (cur.authorId !== me.uid && !me.isOwner) throw denied();
     const ts = now();
     await env.DB.batch([delStmt(env, 'posts', id, ts), delStmt(env, 'comments', id, ts)]);
-    for (const m of cur.media || []) { for (const key of [m.id, m.poster]) if (key) { try { await env.MEDIA.delete(key); await env.DB.prepare('DELETE FROM media WHERE id = ?').bind(key).run(); } catch (e) { /* best effort */ } } }
+    await removeOwnedMedia(env, (cur.media || []).flatMap(m => [m.id, m.poster]), cur.authorId);
     return json({ ok: true });
   }
   if (col === 'tracks') {
@@ -284,7 +287,7 @@ async function deleteDocRoute(env, me, col, id) {
     if (!cur) return json({ ok: true });
     if (cur.ownerId !== me.uid && !me.isOwner) throw denied();
     await delStmt(env, 'tracks', id, now()).run();
-    for (const key of [cur.media && cur.media.id, cur.cover]) if (key) { try { await env.MEDIA.delete(key); await env.DB.prepare('DELETE FROM media WHERE id = ?').bind(key).run(); } catch (e) { /* best effort */ } }
+    await removeOwnedMedia(env, [cur.media && cur.media.id, cur.cover], cur.ownerId);
     return json({ ok: true });
   }
   throw denied();
@@ -292,6 +295,26 @@ async function deleteDocRoute(env, me, col, id) {
 
 /* ---------- atomic operations ---------- */
 async function requireMember(env, threadId, uidv) { const r = await env.DB.prepare('SELECT 1 AS ok FROM thread_members WHERE thread_id = ? AND user_id = ?').bind(threadId, uidv).first(); if (!r) throw denied('このスレッドのメンバーではありません'); }
+/* Media in R2 belongs to whoever uploaded it (media.owner_id). A post or track may only reference its author's own
+   uploads, and deleting one removes only files that author owns, so nobody can delete another member's files. */
+async function assertOwnMedia(env, keys, authorId, alreadyAttached) {
+  const keep = new Set((alreadyAttached || []).filter(Boolean));
+  for (const key of new Set(keys.filter(Boolean))) {
+    if (keep.has(key)) continue;
+    const row = await env.DB.prepare('SELECT owner_id FROM media WHERE id = ?').bind(key).first();
+    if (!row || row.owner_id !== authorId) throw bad('使えないファイルが含まれています');
+  }
+}
+async function removeOwnedMedia(env, keys, ownerId) {
+  for (const key of new Set(keys.filter(Boolean))) {
+    try {
+      const row = await env.DB.prepare('SELECT owner_id FROM media WHERE id = ?').bind(key).first();
+      if (!row || row.owner_id !== ownerId) continue;
+      await env.MEDIA.delete(key);
+      await env.DB.prepare('DELETE FROM media WHERE id = ? AND owner_id = ?').bind(key, ownerId).run();
+    } catch (e) { /* best effort */ }
+  }
+}
 function cleanMedia(m) { if (!isPlainObject(m) || !m.id) return undefined; return { id: String(m.id).slice(0, 64), type: m.type === 'video' ? 'video' : 'image', w: Number(m.w) || 0, h: Number(m.h) || 0, duration: m.duration ? Number(m.duration) : undefined, poster: m.poster ? String(m.poster).slice(0, 64) : undefined, filter: m.filter ? String(m.filter).slice(0, 20) : undefined, adj: isPlainObject(m.adj) ? m.adj : undefined, alt: m.alt ? clean(m.alt, 200) : undefined }; }
 async function op(req, env, me, name) {
   const b = await readJson(req);
