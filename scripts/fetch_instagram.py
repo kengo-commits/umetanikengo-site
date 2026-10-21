@@ -82,24 +82,47 @@ def save_image(url, code):
     return {'ws': ws, 'fw': fw, 'fh': fb.size[1]}
 
 
-def refresh_token(token):
-    """Long-lived tokens last 60 days; refreshing extends them. Instagram only allows it once a token is 24h old."""
+# Every long-lived token lasts 60 days and is extended by refreshing it (allowed once it is 24h old).
+# A new token, when issued, is written to a file that the workflow saves back into the repository Secrets.
+TOKENS = [
+    # (secret name, refresh URL, grant type, file the new token is written to)
+    ('IG_TOKEN', f'{API}/refresh_access_token', 'ig_refresh_token', '.ig_token_new'),            # @kengo_umetani (site feed)
+    ('IG_POST_TOKEN', f'{API}/refresh_access_token', 'ig_refresh_token', '.ig_post_token_new'),  # @kengo_diary (daily posts)
+    ('THREADS_TOKEN', 'https://graph.threads.net/refresh_access_token', 'th_refresh_token', '.threads_token_new'),
+]
+
+
+def refresh_token(name, url, grant, out):
+    token = os.environ.get(name, '').strip()
+    if not token:
+        log(f'{name} is not set; refresh skipped')
+        return
     try:
-        r = requests.get(f'{API}/refresh_access_token', params={'grant_type': 'ig_refresh_token', 'access_token': token}, timeout=30)
+        r = requests.get(url, params={'grant_type': grant, 'access_token': token}, timeout=30)
         if r.ok:
             new = r.json().get('access_token')
             if new and new != token:
-                (ROOT / '.ig_token_new').write_text(new)
-                log('token refreshed (new token issued)')
+                (ROOT / out).write_text(new)
+                log(f'{name} refreshed (new token issued)')
             else:
-                log('token refreshed')
+                log(f'{name} refreshed')
         else:
-            log(f'token refresh skipped: {r.status_code}')
+            log(f'{name} refresh skipped: {r.status_code}')
     except requests.RequestException as e:
-        log(f'token refresh skipped: {e}')
+        log(f'{name} refresh skipped: {e}')
 
 
-def main():
+def refresh_tokens():
+    seen = set()
+    for name, url, grant, out in TOKENS:
+        token = os.environ.get(name, '').strip()
+        if token and token in seen:  # IG_POST_TOKEN may fall back to the same token as IG_TOKEN
+            continue
+        seen.add(token)
+        refresh_token(name, url, grant, out)
+
+
+def fetch_posts():
     token = os.environ.get('IG_TOKEN', '').strip()
     if not token:
         log('IG_TOKEN is not set; keeping current posts')
@@ -143,8 +166,14 @@ def main():
         log(f'updated {len(posts)} posts')
     else:
         log('no changes')
-    refresh_token(token)
     return 0
+
+
+def main():
+    try:
+        return fetch_posts()
+    finally:
+        refresh_tokens()  # always, even when Instagram could not be reached or nothing changed
 
 
 if __name__ == '__main__':
