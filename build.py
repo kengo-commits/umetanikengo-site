@@ -742,7 +742,7 @@ if __name__ == '__main__':
         shutil.rmtree(OUT)
     os.makedirs(OUT + '/assets')
     shutil.copytree(ROOT / 'images', OUT + '/images')
-    shutil.copytree(ROOT / 'world', OUT + '/synesthesia-world')
+    shutil.copytree(ROOT / 'world', OUT + '/synesthesia-world', ignore=shutil.ignore_patterns('news-*', '*.patch'))  # skip work-in-progress folders
     # keep the page's embedded news in step with world/news.json (the morning sync may update only one of them)
     try:
         wp = OUT + '/synesthesia-world/index.html'

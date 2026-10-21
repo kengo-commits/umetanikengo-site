@@ -1,5 +1,7 @@
 dist/
 .ig_token_new
+.ig_post_token_new
+.threads_token_new
 __pycache__/
 .DS_Store
 ig-out/
