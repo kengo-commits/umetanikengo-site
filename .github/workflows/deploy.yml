@@ -32,6 +32,8 @@ jobs:
       - name: Fetch latest Instagram posts
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_POST_TOKEN: ${{ secrets.IG_POST_TOKEN }}
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
         run: python scripts/fetch_instagram.py
 
       - name: Add today's artwork to KENGO'S SYNESTHESIA
@@ -45,15 +47,19 @@ jobs:
           python -m playwright install --with-deps chromium >/dev/null
           python scripts/render_art.py
 
-      - name: Save refreshed token
+      - name: Save refreshed tokens
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          if [ -f .ig_token_new ] && [ -n "$GH_TOKEN" ]; then
-            gh secret set IG_TOKEN --repo "$GITHUB_REPOSITORY" < .ig_token_new
-            echo "IG_TOKEN updated"
-          fi
-          rm -f .ig_token_new
+          save() {
+            if [ -f "$2" ] && [ -n "$GH_TOKEN" ]; then
+              gh secret set "$1" --repo "$GITHUB_REPOSITORY" < "$2" && echo "$1 updated"
+            fi
+            rm -f "$2"
+          }
+          save IG_TOKEN .ig_token_new
+          save IG_POST_TOKEN .ig_post_token_new
+          save THREADS_TOKEN .threads_token_new
 
       - name: Commit updated posts
         run: |
