@@ -1,6 +1,219 @@
 {
- "updated": "2026-10-19",
+ "updated": "2026-10-21",
  "days": [
+  {
+   "date": "2026-10-21",
+   "note": {
+    "title": "On Rondinone's stone figures",
+    "en": "In the Moon Garden of Jojuin, a subtemple of Kiyomizu-dera in Kyoto, Ugo Rondinone is placing seventeen human figures made of stacked stones of different sizes, set on stainless steel and concrete. In the tokonoma hangs a round painting of a sun, red and black in concentric bands of colour, and there are monk figures that answer the temple's long history. The stones are heavy, yet in a balanced stack they read almost like a pause in breathing. I think about how a garden designed for looking at the moon will hold these figures, and how their shadows will move across the gravel from morning to evening.",
+    "ja": "京都・清水寺の塔頭、成就院の「月の庭」に、ウーゴ・ロンディノーネが17体の石の人物像を置きます。大きさの違う石を積み上げ、ステンレスとコンクリートの台に据えた像だそうです。床の間には、赤と黒の色の輪が重なる太陽の円い絵が掛けられ、寺の歴史に応える僧の像も並ぶと聞きました。重い石が、積まれることでかえって静かな呼吸のように見えるところに惹かれます。月を眺めるためにつくられた庭のなかで、朝から夕方へと像の影がどう動いていくのかを考えています。",
+    "source": "Bijutsu Techo",
+    "url": "https://bijutsutecho.com/magazine/news/exhibition/33205"
+   },
+   "objects": [
+    {
+     "name": "Couleur Milk Pan 12 cm",
+     "brand": "Noda Horo",
+     "ja": "東京の野田琺瑯がつくる「クルール」シリーズの、容量0.7リットルの小さなミルクパンです。白、グレー、ベージュの3色に桜の木の持ち手を合わせた簡素なかたちで、約310グラムと軽く、同社の製品はすべて日本でつくられています。",
+     "en": "A small 0.7-litre milk pan from Noda Horo's Couleur series, made in Japan like all of the maker's products. It comes in white, grey or beige with a natural cherry-wood handle, weighs about 310 g and keeps to a plain, quiet shape.",
+     "url": "https://www.nodahoro.com/itemseries/couleur",
+     "japan": true,
+     "price": "¥3,080"
+    }
+   ],
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Maison Margiela opens its Tokyo folders",
+     "ja": "メゾン マルジェラのプロジェクト「MaisonMargiela/folders」が、恵比寿にあるブランド初の路面店メゾン マルジェラ トウキョウに焦点を当てました。足袋シューズの愛用者や近隣の人々へのインタビューをDropboxのフォルダで公開し、11月5日には限定ZINEを配布するほか、店内では11月15日まで鈴木美緒とフランスのタペストリー工房によるインスタレーションを展示しています。",
+     "en": "Maison Margiela's MaisonMargiela/folders project turns to Maison Margiela Tokyo in Ebisu, the brand's first store, 20 years after it moved there. Interviews with Tabi collectors and neighbours are shared in a Dropbox folder, a limited zine is handed out on 5 November, and an installation by artist Mio Suzuki with the French tapestry workshops of the Mobilier National is in the store until 15 November.",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-20/maison-margiela-folders-tokyo/"
+    },
+    {
+     "cat": "fashion",
+     "title": "Uniqlo and Francesco Risso knit for winter",
+     "ja": "ユニクロとフランチェスコ・リッソの「UNIQLO F.RISSO」のニットコレクションが10月30日に105店舗と公式オンラインで発売されます。夏に続く第2弾で、ヴィンテージのニットを手がかりにした5型のセーターを3Dニットで立体的に仕立て、価格は3990〜4990円、ビーニーやヒートテックの靴下もそろいます。",
+     "en": "UNIQLO F.RISSO, Uniqlo's line with Francesco Risso, releases a knitwear capsule on 30 October at 105 stores and online. Following the summer debut, it draws on vintage knitwear for five genderless sweaters shaped with 3D knitting, priced ¥3,990 to ¥4,990, plus a beanie and Heattech socks.",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-20/uniqlo-f-risso-26-knit/",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Lutz Huelle balances ruffles and restraint",
+     "ja": "パリを拠点とするドイツ出身のデザイナー、ルッツ・ヒュエルが2027年春夏コレクションを発表しました。カッティングを生かしたドレスやテーラリングにボリュームのあるフリルを重ね、オーガンジーのコートや着物袖の3つボタンジャケット、マルタン・マルジェラのサークルシャツにつながる円形柄のデニムやシャツが並びます。",
+     "en": "Paris-based German designer Lutz Huelle has shown his spring 2027 collection, setting cut-led dresses and tailoring against voluminous ruffles. It includes organza coats, a sheer three-button jacket with kimono sleeves, and a circle-pattern series on denim and shirts that recalls Martin Margiela's circle shirt.",
+     "source": "FASHIONSNAP",
+     "url": "https://www.fashionsnap.com/article/2026-10-20/lutzhuelle-2027ss-exhibition/"
+    },
+    {
+     "cat": "music",
+     "title": "The National close AB100 in San Sebastián",
+     "ja": "ザ・ナショナルが10月18日、サン・セバスティアンのクルサール・オーディトリアムで開かれたフェス「AB100」の最終夜に、約2年ぶりのフルバンド公演を行いました。アーケイド・ファイアのリチャード・リード・パリーやラグナル・キャルタンソンが加わり、「90-Mile Water Wall」を2014年以来はじめて演奏しました。",
+     "en": "The National played their first full-band show in two years on 18 October, closing AB100 at the Kursaal Auditorium in San Sebastián. Arcade Fire's Richard Reed Parry and artist Ragnar Kjartansson joined them, and they played 90-Mile Water Wall for the first time since 2014.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/the-national-richard-reed-parry-play-90-mile-water-wall-first-time-2014-setlist-footage-3973522"
+    },
+    {
+     "cat": "music",
+     "title": "Doves' Jez Williams goes solo",
+     "ja": "ダヴズのジェズ・ウィリアムズが初のソロアルバム『Life Of Me And You』を2027年2月26日にEarth To Echo Recordsから出します。先行曲は「Hollow Man」で全10曲を収め、11月20〜22日にはマンチェスターのザ・リッツでエルボーの公演のサポートを務めます。",
+     "en": "Doves' Jez Williams releases his debut solo album, Life Of Me And You, on Earth To Echo Records on 26 February 2027. The ten-track record is led by Hollow Man, and he supports Elbow at The Ritz in Manchester on 20 to 22 November.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/doves-jez-williams-interview-solo-album-life-of-me-and-you-hollow-man-tour-elbow-3973562"
+    },
+    {
+     "cat": "music",
+     "title": "The Rolling Stones loosen Foreign Tongues",
+     "ja": "ザ・ローリング・ストーンズが10月20日、新曲「Who You Callin' Crazy」を予告なしで公開しました。25作目のアルバム『Foreign Tongues』の拡張版『Loose Lips』に収められる未発表5曲のひとつで、ジャズ・サックス奏者のコートニー・パインが参加し、拡張版は11月27日にPolydorから出ます。",
+     "en": "The Rolling Stones surprise-released a new song, Who You Callin' Crazy, on 20 October. It is one of five unreleased songs on Loose Lips, the expanded edition of their 25th album Foreign Tongues, features jazz saxophonist Courtney Pine, and the edition is out on Polydor on 27 November.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/the-rolling-stones-surprise-release-breezy-new-single-who-you-callin-crazy-3973619"
+    },
+    {
+     "cat": "design",
+     "title": "William Morris and the women makers in Cambridge",
+     "ja": "ケンブリッジのフィッツウィリアム美術館で、展覧会「A Call to Art: William Morris and the Pre-Raphaelites」が10月23日から2027年5月3日まで開かれます。モリスの友人で館長を務めたシドニー・コッカレルが集めた所蔵品が中心で、多くが初公開となり、ジェーンとメイ・モリスやケイト・フォークナーら女性の作り手にも光を当て、フォークナーの金箔を施した石膏の祭壇画も並びます。",
+     "en": "A Call to Art: William Morris and the Pre-Raphaelites runs at the Fitzwilliam Museum in Cambridge from 23 October to 3 May 2027. Built on the collection of Sydney Cockerell, Morris's friend and later the museum's director, it shows much never seen before and highlights women makers including Jane and May Morris and Kate Faulkner, whose gilded gesso altarpiece is on loan.",
+     "source": "The Art Newspaper",
+     "url": "https://www.theartnewspaper.com/2026/10/19/exhibition-highlights-overlooked-william-morris-collection-and-his-collaborations-with-women-makers"
+    },
+    {
+     "cat": "design",
+     "title": "OMA facets a law court in Lille",
+     "ja": "OMAが、フランス北部リールに六角形の裁判所「パレ・ド・ジュスティス・ド・リール」を完成させました。色ガラスで覆われた多面体のファサードは近くにあるヴォーバンの1667年の星形要塞を思わせ、大法廷の基壇、小法廷の三角形の塔、光を内へ導くオフィスの環の3つで構成され、広場と屋上庭園も備えています。",
+     "en": "OMA has completed a six-sided law court in Lille, northern France, for the Ministry of Justice. Its faceted facade of coloured glass echoes Vauban's star-shaped citadel of 1667 nearby, and it stacks a plinth of major courtrooms, a triangular tower of smaller ones and a faceted ring of offices that draws light inward, with a public plaza and roof garden.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/19/oma-palais-de-justice-de-lille/"
+    },
+    {
+     "cat": "design",
+     "title": "A copper-lined pavilion over a New York pond",
+     "ja": "デサイ・チア・アーキテクチャーが、ニューヨーク州北部チャタムの私有地に、湿地として再生された池の野生生物を眺めるためのパビリオンを完成させました。約35平方メートルの8の字形の平面に高さの違う2つのデッキがあり、再生アルミ98％のパネルで覆った円筒の屋根は外側がサテンのような灰色、内側が銅色に仕上げられています。",
+     "en": "Desai Chia Architecture has completed a wildlife-viewing pavilion beside a former livestock pond, now a restored wetland, on a private estate in Chatham, upstate New York. The 35 sq m figure-of-eight plan holds two platforms at different heights, under intersecting cylinders clad in 98 per cent recycled aluminium, satin grey outside and copper within.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/20/wildlife-pavilion-desai-chia-architecture-new-york/"
+    },
+    {
+     "cat": "art",
+     "title": "Ugo Rondinone sets stone figures at Kiyomizu-dera",
+     "ja": "ウーゴ・ロンディノーネの個展「静寂のかたち」が、京都市東山区の清水寺 成就院で10月27日から11月12日まで開かれます。「月の庭」に大小の石を積んだ17体の人物像を置き、床の間には同心円状の色面で描いた太陽の絵画を掛けるほか、清水寺の歴史に応える僧の彫刻も展示されます。",
+     "en": "Ugo Rondinone's exhibition Forms of Silence runs at Jojuin, a subtemple of Kiyomizu-dera in Higashiyama, Kyoto, from 27 October to 12 November. Seventeen figures of stacked stones stand in the Moon Garden, a sun painted in concentric fields of colour hangs in the tokonoma, and monk sculptures respond to the temple's history.",
+     "source": "Bijutsu Techo",
+     "url": "https://bijutsutecho.com/magazine/news/exhibition/33205",
+     "japan": true
+    }
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "note": {
+    "title": "On Kiefer's single room",
+    "en": "In the sculpture garden of Museum Würth 2 in Künzelsau, David Chipperfield Architects has built a concrete pavilion for one painting, Anselm Kiefer's Schwarze Flocken, more than eleven metres tall and made with oil, shellac, earth and twigs. Daylight falls between exposed timber beams, so the surface of the painting changes with the hour and the season. Kiefer himself helped decide the proportions, the openings and the colour of the walls. I like the patience of a room built for a single work, with no machines to hold the air still, only brick, clay plaster and light.",
+    "ja": "ドイツ・キュンツェルザウのヴュルト美術館2の彫刻庭園に、デイヴィッド・チッパーフィールド・アーキテクツが、たった一枚の絵のためのコンクリートのパビリオンをつくりました。収められているのは、高さ11メートルを超えるアンゼルム・キーファーの《黒い雪片》で、油彩やシェラックに土や小枝が重ねられているそうです。むき出しの木の梁のあいだから光が落ち、時間や季節によって絵の表情が変わっていきます。部屋の寸法や開口、壁の色はキーファー自身も一緒に決めたと聞きました。空調に頼らず、レンガと土の左官と自然の光だけで一つの作品に寄り添う、その静かな覚悟に惹かれます。",
+    "source": "designboom",
+    "url": "https://www.designboom.com/architecture/anselm-kiefer-monumental-painting-pavilion-david-chipperfield-schwarze-flocken/"
+   },
+   "objects": [
+    {
+     "name": "Nib holder – Walnut",
+     "brand": "Kakimori",
+     "ja": "東京・蔵前の文具店カキモリの、小泉誠がデザインしたウォルナットのペン軸です。広島・熊野の筆メーカーが削る軸は一般的な鉛筆と同じ7インチの長さで、薄いウレタン仕上げのまま木の手ざわりが残り、ペン先を替えながら長く使えます。",
+     "en": "A walnut dip-pen holder from Kakimori, the Tokyo stationery shop, designed by Makoto Koizumi. The shaft is turned by a brush maker in Kumano, Hiroshima, to the same seven-inch length as a standard pencil, with a thin urethane finish that keeps the feel of the wood, and the nib can be changed for years of use.",
+     "url": "https://kakimori.com/products/kp09702",
+     "japan": true,
+     "price": "¥4,950"
+    }
+   ],
+   "items": [
+    {
+     "cat": "fashion",
+     "title": "Mikiosakabe stages a mall swimsuit show",
+     "ja": "ミキオサカベが10月18日、ラフォーレ原宿で2027年春夏コレクション「Cheers!」を発表しました。夏のショッピングモールの水着ショーに着想し、ねじれたウエストのデニムミニとビキニや、シャドーチェックの制服風のルック、新しいクリアソール「Marfa」のメリージェーンなどが登場し、坂部三樹郎は2027年のブランド20周年への前哨戦だと話しています。",
+     "en": "Mikiosakabe showed its spring 2027 collection, Cheers!, at Laforet Harajuku on 18 October. Inspired by summer swimsuit shows in Japanese shopping malls, it paired bikinis with twisted-waist denim minis and added shadow-check uniform looks and Mary Janes on a new clear sole called Marfa; Mikio Sakabe called it a warm-up for the brand's 20th anniversary in 2027.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2529957",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Graphpaper and Descente cut eight pieces in black",
+     "ja": "グラフペーパーとデサントのカプセルコレクション全8型が10月24日に発売されます。グラフペーパーの定番をデサントの機能素材と技術で仕立て、ワイドコートは8万2500円、シェフトラックパンツは3万8500円で、Tシャツ以外はすべて黒です。",
+     "en": "Graphpaper and Descente release an eight-piece capsule on 24 October. Graphpaper staples are remade in Descente's performance fabrics, from a wide coat at ¥82,500 to chef track pants at ¥38,500, and everything except the two T-shirts comes in black only.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2529711",
+     "japan": true
+    },
+    {
+     "cat": "fashion",
+     "title": "Sacai prints Mapplethorpe's Debbie Harry",
+     "ja": "サカイが、ロバート・メイプルソープが1978年に撮ったデボラ・ハリーのモノクロ写真をプリントしたユニセックスのTシャツを10月23日に発売します。ロバート・メイプルソープ財団の許諾を得たもので、白と黒の2色、価格は2万5300円で、ドーバー ストリート マーケット ギンザと公式オンラインで扱います。",
+     "en": "Sacai releases a unisex T-shirt printed with Robert Mapplethorpe's 1978 black-and-white portrait of Deborah Harry on 23 October. Licensed through the Robert Mapplethorpe Foundation, it comes in black or white for ¥25,300 at Dover Street Market Ginza and Sacai's online store.",
+     "source": "WWDJAPAN",
+     "url": "https://www.wwdjapan.com/articles/2529477",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Hot Chip head A Long Way From Kansas",
+     "ja": "ホット・チップが約5年ぶり、9作目となるアルバム『A Long Way From Kansas』を2027年1月8日に出します。ジョー・ゴダードとアル・ドイルの東ロンドンのスタジオで録音され、先行曲「Random Violence」の映像には女性のモリスダンス集団ボス・モリスが登場し、3月12日のロンドン公演を含む英国・欧州ツアーも決まりました。",
+     "en": "Hot Chip release A Long Way From Kansas, their ninth album and first in almost five years, on 8 January 2027. It was recorded at Joe Goddard and Al Doyle's east London studio, the video for lead single Random Violence features the women's morris troupe Boss Morris, and a UK and European tour includes London on 12 March.",
+     "source": "Stereogum",
+     "url": "https://stereogum.com/2514995/hot-chip-announce-new-album-a-long-way-from-kansas-hear-random-violence/music"
+    },
+    {
+     "cat": "music",
+     "title": "Ryuichi Sakamoto's scores return to Korean stages",
+     "ja": "坂本龍一の音楽を室内楽で演奏する「Ryuichi Sakamoto Tribute」が、10月31日の高陽アラム音楽堂を皮切りに、12月14日にソウルのロッテコンサートホール、23日に城南アートセンターで開かれます。指揮とピアノのハン・ジュホンにチェロとバイオリンが加わり、「戦場のメリークリスマス」や「ラストエンペラー」「Aqua」など17曲を演奏します。",
+     "en": "Ryuichi Sakamoto Tribute brings his music to Korean concert halls, starting at Goyang's Aram Music Hall on 31 October, then Lotte Concert Hall in Seoul on 14 December and Seongnam Arts Center on 23 December. Conductor and pianist Han Joo-heon leads a cellist and violinist through 17 pieces including Merry Christmas Mr. Lawrence, The Last Emperor and Aqua.",
+     "source": "Seoul Economic Daily",
+     "url": "https://en.sedaily.com/culture/2026/10/19/ryuichi-sakamotos-lyrical-scores-return-to-korean-stages",
+     "japan": true
+    },
+    {
+     "cat": "music",
+     "title": "Sleaford Mods open up The Demise Of Planet X",
+     "ja": "スリーフォード・モッズが『The Demise Of Planet X』の拡張版を出し、アルバム制作時の未発表デモ9曲を加えました。ライフ・ウィズアウト・ビルディングスのスー・トンプキンスが映像を監督した「Cato」も収められ、10月25日のローザンヌから欧州ツアーが始まります。",
+     "en": "Sleaford Mods have released an expanded edition of The Demise Of Planet X with nine unreleased demos from the album sessions. It includes Cato, with a video directed by Sue Tompkins of Life Without Buildings, and a European tour begins in Lausanne on 25 October.",
+     "source": "NME",
+     "url": "https://www.nme.com/news/music/sleaford-mods-share-the-demise-of-planet-x-expanded-edition-with-nine-unreleased-songs-3973542"
+    },
+    {
+     "cat": "design",
+     "title": "Chipperfield builds a room for one Kiefer",
+     "ja": "デイヴィッド・チッパーフィールド・アーキテクツが、ドイツ・キュンツェルザウのヴュルト美術館2の彫刻庭園に、アンゼルム・キーファーの2007年の大作《黒い雪片》だけを展示する140平方メートルのパビリオンを建て、10月13日に公開しました。ビシャン仕上げのコンクリートの外壁に、木の梁と天窓の天井を組み合わせ、空調を使わずに作品を守っています。",
+     "en": "David Chipperfield Architects has built a 140 sq m pavilion in the sculpture garden of Museum Würth 2 in Künzelsau, Germany, to show a single work, Anselm Kiefer's 2007 painting Schwarze Flocken, which went on view on 13 October. Bush-hammered concrete outside, timber beams and skylights inside, and no active climate control.",
+     "source": "designboom",
+     "url": "https://www.designboom.com/architecture/anselm-kiefer-monumental-painting-pavilion-david-chipperfield-schwarze-flocken/"
+    },
+    {
+     "cat": "design",
+     "title": "Jenny Holzer writes in light and stone at the Musée d'Orsay",
+     "ja": "ジェニー・ホルツァーの展覧会「J'ai Vu」がパリのオルセー美術館で10月20日に始まります。22日までの夜はセーヌ川に面した外壁にゴッホやセザンヌ、ゾラら34人の言葉を投影し、館内には動くLEDの文字と、主に1848〜1914年の文章を刻んだ19点の新作の石の彫刻が並びます。",
+     "en": "Jenny Holzer's exhibition J'ai Vu opens at the Musée d'Orsay in Paris on 20 October. Until 22 October the Seine-side façade carries evening projections of texts by 34 authors including Van Gogh, Cézanne and Zola, while inside are moving LED texts and 19 new carved stone works, mostly bearing writing from 1848 to 1914.",
+     "source": "designboom",
+     "url": "https://www.designboom.com/art/jenny-holzer-musee-dorsay-paris-monumental-light-projections-engraved-stone-exhibition-jai-vu/"
+    },
+    {
+     "cat": "design",
+     "title": "Fran Silvestre folds a white plane over Ibiza",
+     "ja": "バレンシアのフラン・シルベストレ・アルキテクトスが、イビサ島東岸ロカ・リサに住宅「Bellavista 11」を完成させました。厚さ15センチの白いコンクリートの面が斜面に沿って折れ曲がり、屋上テラスと日陰をつくり、淡い石の床と木の建具、細いフレームの全面ガラスで、光そのものを素材として扱っています。",
+     "en": "Valencia studio Fran Silvestre Arquitectos has completed Bellavista 11, a villa at Roca Lisa on Ibiza's east coast. A 15 cm white concrete plane folds down the hillside to form roof terraces and shade, with pale stone floors, timber joinery and slim-framed full-height glazing that treat light as a material.",
+     "source": "Dezeen",
+     "url": "https://www.dezeen.com/2026/10/18/bellavista-11-villa-fran-silvestre-arquitectos/"
+    },
+    {
+     "cat": "art",
+     "title": "Tatsuo Kawaguchi by the lake in Ichihara",
+     "ja": "1940年生まれの美術家・河口龍夫の個展「関係─無関係 湖畔にて」が、千葉県の市原湖畔美術館で10月17日から12月20日まで開かれています。高滝湖に面した館の光や眺めを取り込んだ新作のインスタレーションに加え、房総のアトリエで制作された未発表作や、自らの脈拍をもとにした絵画のシリーズが並びます。",
+     "en": "Relation–Unrelation, By the Lake, a solo show by conceptual artist Tatsuo Kawaguchi (born 1940), runs at the Ichihara Lakeside Museum in Ichihara, Chiba, from 17 October to 20 December. New site-specific installations draw in the light and views of Lake Takitaki, alongside unseen works from his Boso studio and a series of paintings based on his own pulse.",
+     "source": "Bijutsu Techo",
+     "url": "https://bijutsutecho.com/magazine/news/exhibition/32990",
+     "japan": true
+    }
+   ]
+  },
   {
    "date": "2026-10-19",
    "note": {
