@@ -526,6 +526,50 @@ img,video,canvas{max-width:100%}
 .mosaic{grid-auto-flow:dense}
 .mosaic a,.mosaic .ltile{aspect-ratio:auto;height:100%}
 .mosaic .ltile.wide{aspect-ratio:auto}
+
+/* ===== type tuning ===== */
+body{font-size:15px;line-height:1.75;letter-spacing:0;font-weight:400;-webkit-font-smoothing:antialiased}
+:lang(ja) body,body{font-feature-settings:"palt"}
+h1,h2,h3,h4{letter-spacing:0}
+.state h1{font-size:clamp(30px,5.5vw,76px);line-height:1.05;letter-spacing:-.01em}
+.state p,.sec-head p,.tbanner span,dt,label,.fgrid h4,.foot,.foot ul,.fgrid ul,.m-kana,.modal-x,.btn,.card h3,.mosaic a .nm,.nav.open ul li:nth-child(n+6) a{letter-spacing:.12em;text-transform:uppercase}
+.state p{font-size:12px;line-height:1.9}
+.sec{padding-block:96px}
+.sec-head{margin-bottom:40px}
+.sec-head h2{font-size:clamp(34px,5.5vw,72px);line-height:1}
+.sec-head p{font-size:12px}
+.aud h2,.co h2,.contact h2{font-size:clamp(32px,4.8vw,60px);margin-bottom:24px}
+.aud p,.co p,.contact p{font-size:15px;line-height:1.9;color:var(--fg);max-width:34em}
+.tbanner{padding-bottom:12px;margin-bottom:22px}
+.tbanner h3{font-size:clamp(22px,3vw,34px)}
+.tbanner span{font-size:11px}
+.card h3{font-size:12px;letter-spacing:.08em;margin-top:10px}
+.card h3 small{font-weight:300;color:var(--muted);font-size:11px}
+.card .role{font-size:11px;letter-spacing:.02em;margin-top:3px}
+.mosaic a .nm{font-size:11px;letter-spacing:.1em}
+dl{grid-template-columns:120px 1fr}
+dt{font-size:11px;letter-spacing:.1em;padding-top:15px}
+dd{font-size:15px;line-height:1.8}
+.biz div{font-size:14px;line-height:1.8}
+.biz strong{font-size:12px;letter-spacing:.1em}
+.group span{font-size:12px;letter-spacing:.08em}
+label{font-size:11px;letter-spacing:.08em}
+input,select,textarea{font-size:16px;padding:12px 0}
+.btn,.btn.primary,.btn:not(.primary){font-size:12px;letter-spacing:.14em;padding:14px 36px}
+.note{font-size:12px;line-height:1.7}
+.addr{font-size:14px;line-height:2}
+.modal-body h3{font-size:clamp(28px,3.5vw,48px)}
+.m-kana{font-size:12px;letter-spacing:.14em}
+.m-tbl{font-size:13px;letter-spacing:.02em;line-height:2.1}
+.m-tbl td:first-child{font-size:11px;letter-spacing:.1em}
+.modal-x::after{font-size:11px;letter-spacing:.14em}
+.fgrid h4{font-size:11px}
+.fgrid ul{font-size:12px;letter-spacing:.06em;line-height:1.9}
+.foot{font-size:11px;letter-spacing:.06em}
+footer div{line-height:1.9}
+.nav.open ul li a{font-size:clamp(36px,8vw,96px)}
+.nav.open ul li:nth-child(n+6) a{font-size:12px;letter-spacing:.14em}
+@media (max-width:560px){.sec-head{grid-template-columns:1fr;gap:8px}.sec{padding-block:72px}.sec-head h2{font-size:34px}.aud h2,.co h2,.contact h2{font-size:30px}.state h1{font-size:32px}.state{padding-block:44px 20px}dl{grid-template-columns:1fr}dt{padding-top:12px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -562,7 +606,6 @@ img,video,canvas{max-width:100%}
 <section class="sec" id="talent">
   <div class="wrap">
     <div class="sec-head"><h2>Talent</h2><p>Models / Actors / Creators / Artists</p></div>
-    </div>
     <div class="talent" id="talent-grid"></div>
     
   </div>
