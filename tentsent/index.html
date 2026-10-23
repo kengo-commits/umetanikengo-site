@@ -515,7 +515,10 @@ footer{padding-block:64px 32px}
 .nav.open ul li:nth-child(n+6) a::after{display:none}
 
 /* ===== viewport fit ===== */
-html,body{overflow-x:clip}
+html,body{overflow-x:clip;max-width:100%}
+*{box-sizing:border-box}
+img,video,canvas{max-width:100%}
+@media (max-width:560px){.aud,.co,.contact,.fgrid{grid-template-columns:1fr}}
 .talent,#talent-grid{display:block;margin-inline:0;padding-inline:0;overflow:visible}
 .mosaic{width:100%}
 @media (max-width:560px){.talent{display:block;overflow:visible;margin-inline:0;padding-inline:0}}
@@ -551,7 +554,6 @@ html,body{overflow-x:clip}
 
 <main id="top">
 <section class="mosaic wrap" id="mosaic" aria-label="所属タレント"></section>
-<div class="marq" aria-hidden="true"><span><i>Tentsent Entertainment</i><i>Tokyo</i><i>Models</i><i>Actors</i><i>Artists</i><i>Creators</i><i>Tentsent Entertainment</i><i>Tokyo</i><i>Models</i><i>Actors</i><i>Artists</i><i>Creators</i></span></div>
 <section class="wrap state"><h1>Faces that<br><em>speak</em> before<br>words do.</h1><p>Model &amp; Talent Agency<br>Shibuya, Tokyo<br>Est. 2023</p></section>
 
 
