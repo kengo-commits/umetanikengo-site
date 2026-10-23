@@ -570,6 +570,13 @@ footer div{line-height:1.9}
 .nav.open ul li a{font-size:clamp(36px,8vw,96px)}
 .nav.open ul li:nth-child(n+6) a{font-size:12px;letter-spacing:.14em}
 @media (max-width:560px){.sec-head{grid-template-columns:1fr;gap:8px}.sec{padding-block:72px}.sec-head h2{font-size:34px}.aud h2,.co h2,.contact h2{font-size:30px}.state h1{font-size:32px}.state{padding-block:44px 20px}dl{grid-template-columns:1fr}dt{padding-top:12px}}
+
+/* ===== behaviour fixes ===== */
+.sec,.tsec{scroll-margin-top:72px}
+*{-webkit-tap-highlight-color:transparent}
+.mosaic a{touch-action:manipulation}
+.modal-box{max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px)}
+.nav.open ul{height:100vh;height:100dvh}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -782,9 +789,9 @@ footer div{line-height:1.9}
       grid.appendChild(wrap);
     });
   }
-  (function(){var m=document.getElementById('mosaic');var pos=Math.min(7,T.length);function fit(){var W=m.clientWidth,avail=Math.max(320,innerHeight-m.getBoundingClientRect().top-8),n=T.length+1,best=3,bd=1e9;for(var c=2;c<=7;c++){var rows=Math.ceil(n/c),tw=W/c,rh=avail/rows,d=Math.abs(tw-rh)+(rh>tw*1.25||rh<tw*0.75?1e4:0);if(d<bd){bd=d;best=c}}var rows=Math.ceil(n/best),rh=(avail-(rows-1)*3-3)/rows;m.style.gridTemplateColumns='repeat('+best+',1fr)';m.style.gridAutoRows=Math.floor(rh)+'px';var r=n%best,l=m.querySelector('.ltile');if(l){l.style.gridColumn=r?('span '+(best-r+1)):'auto'}}addEventListener('resize',fit);setTimeout(fit,0);T.forEach(function(t,i){
+  (function(){var m=document.getElementById('mosaic');var pos=Math.min(7,T.length);var lastW=0;function fit(force){var W=m.clientWidth;if(!force&&W===lastW)return;lastW=W;var hh=document.querySelector('header').offsetHeight||64,avail=Math.max(320,innerHeight-hh-8),n=T.length+1,best=3,bd=1e9;for(var c=2;c<=7;c++){var rows=Math.ceil(n/c),tw=W/c,rh=avail/rows,d=Math.abs(tw-rh)+(rh>tw*1.25||rh<tw*0.75?1e4:0);if(d<bd){bd=d;best=c}}var rows=Math.ceil(n/best),rh=(avail-(rows-1)*3-3)/rows;m.style.gridTemplateColumns='repeat('+best+',1fr)';m.style.gridAutoRows=Math.floor(rh)+'px';var r=n%best,l=m.querySelector('.ltile');if(l){l.style.gridColumn=r?('span '+(best-r+1)):'auto'}}var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){fit(false)},120)});addEventListener('orientationchange',function(){setTimeout(function(){fit(true)},250)});fit(true);addEventListener('load',function(){fit(true)});T.forEach(function(t,i){
       if(i===pos){var l=document.createElement('div');l.className='ltile';l.innerHTML='<img alt="TENTSENT ENTERTAINMENT">';l.querySelector('img').src=document.querySelector('.logo .lg').src;m.appendChild(l)}
-      var a=document.createElement('a');a.href='#talent-'+t[2];a.innerHTML='<img alt=""><span class="nm"></span>';a.querySelector('img').src=t[6];a.querySelector('img').alt=t[0];a.querySelector('.nm').textContent=t[0];a.addEventListener('click',function(e){e.preventDefault();openP(t)});m.appendChild(a)});})();
+      var a=document.createElement('a');a.href='#talent-'+t[2];a.innerHTML='<img alt="" decoding="async"><span class="nm"></span>';a.querySelector('img').src=t[6];a.querySelector('img').alt=t[0];a.querySelector('.nm').textContent=t[0];a.addEventListener('click',function(e){e.preventDefault();openP(t)});m.appendChild(a)});})();
   renderTalent();
   document.querySelectorAll('.nav a[data-tab]').forEach(function(a){a.href='#talent-'+a.dataset.tab});
 
