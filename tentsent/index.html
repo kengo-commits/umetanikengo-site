@@ -596,7 +596,7 @@ footer div{line-height:1.9}
 .mosaic a img{transform-origin:50% 40%}
 
 /* ===== hero: full screen + random B/W ===== */
-.mosaic a img{filter:grayscale(0);transition:filter 1.6s ease}
+.mosaic a img{filter:grayscale(0);transition:filter .45s ease}
 .mosaic a.bw img{filter:grayscale(1)}
 .mosaic a:hover img{filter:grayscale(0)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -809,9 +809,11 @@ footer div{line-height:1.9}
 
   (function(){var tiles=[].slice.call(document.querySelectorAll('#mosaic a'));if(!tiles.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     tiles.forEach(function(t){if(Math.random()<0.4)t.classList.add('bw')});
-    setInterval(function(){var t=tiles[Math.floor(Math.random()*tiles.length)];t.classList.toggle('bw');var on=tiles.filter(function(x){return x.classList.contains('bw')}).length;if(on<Math.floor(tiles.length*0.25)){tiles[Math.floor(Math.random()*tiles.length)].classList.add('bw')}if(on>Math.ceil(tiles.length*0.6)){t.classList.remove('bw')}},1400);
+    setInterval(function(){var n=2+Math.floor(Math.random()*3);for(var i=0;i<n;i++){tiles[Math.floor(Math.random()*tiles.length)].classList.toggle('bw')}
+      var on=tiles.filter(function(x){return x.classList.contains('bw')});
+      if(on.length<Math.floor(tiles.length*0.25)){tiles.filter(function(x){return !x.classList.contains('bw')})[0].classList.add('bw')}
+      if(on.length>Math.ceil(tiles.length*0.6)){on[Math.floor(Math.random()*on.length)].classList.remove('bw')}},550);
   })();
-
   /* ---- mobile menu ---- */
   var nav=document.getElementById('nav'),mb=document.getElementById('menu-btn');
   mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});
