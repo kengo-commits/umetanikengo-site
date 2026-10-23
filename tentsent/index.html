@@ -596,8 +596,12 @@ footer div{line-height:1.9}
 .mosaic a img{transform-origin:50% 40%}
 
 /* ===== hero: full screen + random B/W ===== */
-.mosaic a img{filter:grayscale(0);transition:filter .45s ease}
-.mosaic a.bw img{filter:grayscale(1)}
+.mosaic a img{filter:grayscale(0) contrast(1);transition:filter .6s ease}
+.mosaic a.bw img{filter:grayscale(1) contrast(1.2) brightness(.92)}
+.mosaic a::after{content:"";position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.mosaic a.flip::after{animation:flash .6s ease-out}
+@keyframes flash{0%{opacity:.85}100%{opacity:0}}
+.mosaic a.flip{z-index:1}
 .mosaic a:hover img{filter:grayscale(0)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -808,11 +812,12 @@ footer div{line-height:1.9}
 
 
   (function(){var tiles=[].slice.call(document.querySelectorAll('#mosaic a'));if(!tiles.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    tiles.forEach(function(t){if(Math.random()<0.4)t.classList.add('bw')});
-    setInterval(function(){var n=2+Math.floor(Math.random()*3);for(var i=0;i<n;i++){tiles[Math.floor(Math.random()*tiles.length)].classList.toggle('bw')}
+    tiles.forEach(function(t){if(Math.random()<0.45)t.classList.add('bw')});
+    function flip(t){t.classList.toggle('bw');t.classList.remove('flip');void t.offsetWidth;t.classList.add('flip');setTimeout(function(){t.classList.remove('flip')},650)}
+    setInterval(function(){var n=3+Math.floor(Math.random()*3),pool=tiles.slice();for(var i=0;i<n&&pool.length;i++){flip(pool.splice(Math.floor(Math.random()*pool.length),1)[0])}
       var on=tiles.filter(function(x){return x.classList.contains('bw')});
-      if(on.length<Math.floor(tiles.length*0.25)){tiles.filter(function(x){return !x.classList.contains('bw')})[0].classList.add('bw')}
-      if(on.length>Math.ceil(tiles.length*0.6)){on[Math.floor(Math.random()*on.length)].classList.remove('bw')}},550);
+      if(on.length<Math.floor(tiles.length*0.3)){var c=tiles.filter(function(x){return !x.classList.contains('bw')});if(c.length)flip(c[Math.floor(Math.random()*c.length)])}
+      if(on.length>Math.ceil(tiles.length*0.65)){flip(on[Math.floor(Math.random()*on.length)])}},700);
   })();
   /* ---- mobile menu ---- */
   var nav=document.getElementById('nav'),mb=document.getElementById('menu-btn');
