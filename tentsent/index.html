@@ -614,6 +614,18 @@ a.igl{display:inline-flex;align-items:center;justify-content:center;width:36px;h
 a.igl:hover{background:var(--fg);color:var(--bg)}
 .nav.open ul li .igl{margin-top:16px}
 .sns a{border:0;width:auto;height:auto}
+
+.aform{display:grid;gap:18px;max-width:760px;margin-top:24px}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
+@media (max-width:600px){.agrid{grid-template-columns:1fr}}
+.afiles{display:grid;gap:10px;margin-top:8px}
+.afiles label{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:12px;font-size:12px;letter-spacing:.04em;text-transform:none;color:var(--fg)}
+@media (max-width:480px){.afiles label{grid-template-columns:1fr}}
+.afiles input[type=file]{border:0;padding:6px 0;font-size:12px}
+#audition h2{font-family:var(--display);font-size:clamp(32px,4.8vw,60px);letter-spacing:-.02em;line-height:.95;font-weight:400;margin:0 0 20px}
+#audition p{margin:0 0 8px;color:var(--fg)}
+#audition .note{color:var(--muted);font-size:12px}
+#audition .btn{justify-self:start}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -655,21 +667,19 @@ a.igl:hover{background:var(--fg);color:var(--bg)}
 </section>
 
 <section class="sec dark" id="audition">
-  <div class="wrap aud">
-    <div>
-      <h2>Audition</h2>
-      <p>応募フォーム</p>
-      <p>※こちらから連絡が無い状態での再度のご応募はお控え下さい</p>
-      <p>※書類通過した方のみ連絡致します。</p>
-      <a class="btn primary" href="#contact">応募する</a>
-    </div>
-    <div class="req">
-      <dl>
-        <dt>バストアップ写真</dt><dd>必須</dd>
-        <dt>全身写真</dt><dd>必須</dd>
-        <dt>追加写真</dt><dd>任意（3枚まで）</dd>
-      </dl>
-    </div>
+  <div class="wrap">
+    <h2>Audition</h2>
+    <p>応募フォーム</p>
+    <p class="note">※こちらから連絡が無い状態での再度のご応募はお控え下さい</p>
+    <p class="note"><a href="https://tentsententertainment.com/home/privacy-policy/" target="_blank" rel="noopener">Privacy policy</a></p>
+    <form id="audition-form" class="aform" novalidate>
+      <div class="agrid"><input id="a-0" type="text" placeholder="お名前" required aria-label="お名前"><input id="a-1" type="email" placeholder="Eメール" required aria-label="Eメール"><input id="a-2" type="tel" placeholder="電話番号" required aria-label="電話番号"><input id="a-3" type="text" placeholder="ご出身" aria-label="ご出身"><input id="a-4" type="text" placeholder="性別" aria-label="性別"><input id="a-5" type="text" placeholder="生年月日 (yyyy-mm-dd)" required aria-label="生年月日 (yyyy-mm-dd)"><input id="a-6" type="text" placeholder="髪の色" aria-label="髪の色"><input id="a-7" type="text" placeholder="目の色" aria-label="目の色"><input id="a-8" type="text" placeholder="身長" required aria-label="身長"><input id="a-9" type="text" placeholder="体重" required aria-label="体重"><input id="a-10" type="text" placeholder="バスト/チェスト" required aria-label="バスト/チェスト"><input id="a-11" type="text" placeholder="ウエスト" required aria-label="ウエスト"><input id="a-12" type="text" placeholder="ヒップ" required aria-label="ヒップ"><input id="a-13" type="text" placeholder="ドレス/スーツサイズ" aria-label="ドレス/スーツサイズ"><input id="a-14" type="text" placeholder="靴のサイズ" required aria-label="靴のサイズ"><input id="a-15" type="text" placeholder="インスタグラム名" required aria-label="インスタグラム名"></div>
+      <div class="afiles"><label>バストアップ写真：<input id="a-f0" type="file" accept="image/*" required></label><label>全身写真：<input id="a-f1" type="file" accept="image/*" required></label><label>追加写真：<input id="a-f2" type="file" accept="image/*"></label><label>追加写真：<input id="a-f3" type="file" accept="image/*"></label><label>追加写真：<input id="a-f4" type="file" accept="image/*"></label></div>
+      <p class="note">※書類通過した方のみ連絡致します。</p>
+      <textarea id="a-msg" placeholder="自己PR / ご質問等" required aria-label="自己PR / ご質問等" rows="8"></textarea>
+      <button class="btn primary" type="submit" id="a-submit">送信</button>
+      <div class="done" id="a-done" role="status">送信しました。書類通過した方のみご連絡いたします。</div>
+    </form>
   </div>
 </section>
 
@@ -712,7 +722,7 @@ a.igl:hover{background:var(--fg);color:var(--bg)}
       <div class="row">
         <label>メールアドレス<input id="f-email" name="email" type="email" required placeholder=""></label>
         <label>ご用件<select id="f-type" name="type">
-          <option>お問い合わせ</option><option>オーディション応募</option>
+          <option>お問い合わせ</option>
         </select></label>
       </div>
       <label>内容<textarea id="f-body" name="body" required placeholder=""></textarea></label>
@@ -831,6 +841,8 @@ a.igl:hover{background:var(--fg);color:var(--bg)}
       if(on.length>Math.ceil(tiles.length*0.65)){flip(on[Math.floor(Math.random()*on.length)])}},2800);
   })();
   (function(){var t=document.getElementById('totop');if(!t)return;function u(){t.classList.toggle('show',scrollY>400)}addEventListener('scroll',u,{passive:true});u();t.addEventListener('click',function(e){e.preventDefault();scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})})})();
+
+  var af=document.getElementById('audition-form');if(af){af.addEventListener('submit',function(e){e.preventDefault();var ok=true;af.querySelectorAll('[required]').forEach(function(el){var v=el.type==='file'?el.files.length:el.value.trim();el.style.borderColor=v?'':'var(--accent)';if(!v)ok=false});if(!ok)return;document.getElementById('a-done').classList.add('show');af.reset()})}
   /* ---- mobile menu ---- */
   var nav=document.getElementById('nav'),mb=document.getElementById('menu-btn');
   mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});
