@@ -422,7 +422,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);font-size:11px;lett
 .fgrid h4{font-size:10px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;color:var(--muted)}
 .sns a{border-radius:0;font-size:9px;letter-spacing:.1em}
 .foot ul{font-size:10px;letter-spacing:.2em;text-transform:uppercase}
-.totop{display:none}
+
 /* header + overlay menu */
 header{background:var(--bg);backdrop-filter:none;border-bottom:1px solid var(--line)}
 .nav{height:64px}
@@ -603,6 +603,12 @@ footer div{line-height:1.9}
 @keyframes flash{0%{opacity:.85}100%{opacity:0}}
 .mosaic a.flip{z-index:1}
 .mosaic a:hover img{filter:grayscale(0)}
+
+/* to top */
+.totop{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:44px;height:44px;border:1px solid var(--fg);border-radius:50%;background:var(--bg);color:var(--fg);display:grid;place-items:center;z-index:8;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s,color .2s;font-size:0}
+.totop::before{content:"";width:9px;height:9px;border-left:1px solid currentColor;border-top:1px solid currentColor;transform:translateY(2px) rotate(45deg)}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--fg);color:var(--bg)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -744,7 +750,7 @@ footer div{line-height:1.9}
     </div>
   </div>
 </footer>
-<a class="totop" href="#top" aria-label="ページ上部へ">TOP</a>
+<a class="totop" id="totop" href="#top" aria-label="ページ上部へ">TOP</a>
 
 <script>
 (function(){
@@ -819,6 +825,7 @@ footer div{line-height:1.9}
       if(on.length<Math.floor(tiles.length*0.3)){var c=tiles.filter(function(x){return !x.classList.contains('bw')});if(c.length)flip(c[Math.floor(Math.random()*c.length)])}
       if(on.length>Math.ceil(tiles.length*0.65)){flip(on[Math.floor(Math.random()*on.length)])}},2800);
   })();
+  (function(){var t=document.getElementById('totop');if(!t)return;function u(){t.classList.toggle('show',scrollY>400)}addEventListener('scroll',u,{passive:true});u();t.addEventListener('click',function(e){e.preventDefault();scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})})})();
   /* ---- mobile menu ---- */
   var nav=document.getElementById('nav'),mb=document.getElementById('menu-btn');
   mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});

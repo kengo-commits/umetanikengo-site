@@ -61,6 +61,12 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:11px;letter-spa
 .gal-ctr .dots i.on{background:var(--fg)}
 }
 @media (min-width:701px){.slider{display:none}}
+
+/* to top */
+.totop{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:44px;height:44px;border:1px solid var(--fg);border-radius:50%;background:var(--bg);color:var(--fg);display:grid;place-items:center;z-index:8;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s,color .2s;font-size:0}
+.totop::before{content:"";width:9px;height:9px;border-left:1px solid currentColor;border-top:1px solid currentColor;transform:translateY(2px) rotate(45deg)}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--fg);color:var(--bg)}
 </style>
 </head>
 <body>
@@ -84,6 +90,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;font-size:11px;letter-spa
 <nav class="pn"><a href="../akane-naito/">← 内藤 紅</a><a href="../maxime/">MAXIME →</a></nav>
 </main>
 <div class="lb" id="lb" hidden><button class="x" id="lb-x">Close</button><button class="p" id="lb-p">Prev</button><img id="lb-img" alt=""><button class="n" id="lb-n">Next</button></div>
+<a class="totop" id="totop" href="#" aria-label="ページ上部へ">TOP</a>
 <footer>© 2026 TENTSENT Inc.</footer>
 <script>
 (function(){var as=[].slice.call(document.querySelectorAll('#gal a')),lb=document.getElementById('lb'),im=document.getElementById('lb-img'),cur=0;
@@ -102,5 +109,6 @@ as.forEach(function(a,i){var c=document.createElement('a');c.href=a.href;c.inner
 function upd(){var w=sl.clientWidth,i=Math.round(sl.scrollLeft/(w+8));i=Math.max(0,Math.min(as.length-1,i));num.textContent=(i+1)+' / '+as.length;var d=dots.children;for(var k=0;k<d.length;k++)d[k].className=k===i?'on':''}
 sl.addEventListener('scroll',function(){requestAnimationFrame(upd)},{passive:true});upd();})();
 </script>
+<script>(function(){var t=document.getElementById('totop');if(!t)return;function u(){t.classList.toggle('show',scrollY>400)}addEventListener('scroll',u,{passive:true});u();t.addEventListener('click',function(e){e.preventDefault();scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})})})();</script>
 </body>
 </html>
