@@ -87,6 +87,9 @@ a.igl{display:inline-flex;align-items:center;justify-content:center;width:36px;h
 a.igl:hover{background:var(--fg);color:var(--bg)}
 .links{align-items:center}
 .main img{object-position:50% 12%}
+.gal{columns:auto;column-gap:0;display:flex;gap:12px;align-items:flex-start}
+.gal .col{flex:1 1 0;min-width:0;display:grid;gap:12px}
+.gal .col a{margin:0}
 </style>
 </head>
 <body>
@@ -111,6 +114,12 @@ a.igl:hover{background:var(--fg);color:var(--bg)}
 <div class="lb" id="lb" hidden><button class="x" id="lb-x">Close</button><button class="p" id="lb-p">Prev</button><img id="lb-img" alt=""><button class="n" id="lb-n">Next</button></div>
 <a class="totop" id="totop" href="#" aria-label="ページ上部へ">TOP</a>
 <footer>© 2026 TENTSENT Inc.</footer>
+<script>
+(function(){var g=document.getElementById('gal');if(!g)return;var items=[].slice.call(g.querySelectorAll('a'));var last=0;
+function layout(){var n=innerWidth<=700?2:innerWidth<=900?2:3;if(n===last)return;last=n;g.innerHTML='';var cols=[],h=[];for(var i=0;i<n;i++){var c=document.createElement('div');c.className='col';g.appendChild(c);cols.push(c);h.push(0)}
+items.forEach(function(a){var im=a.querySelector('img'),r=(+im.getAttribute('height')||1)/(+im.getAttribute('width')||1);var k=0;for(var i=1;i<n;i++)if(h[i]<h[k])k=i;cols[k].appendChild(a);h[k]+=r})}
+layout();var t;addEventListener('resize',function(){clearTimeout(t);t=setTimeout(layout,120)});})();
+</script>
 <script>
 (function(){var as=[].slice.call(document.querySelectorAll('#gal a')),lb=document.getElementById('lb'),im=document.getElementById('lb-img'),cur=0;
 function show(i){cur=(i+as.length)%as.length;im.src=as[cur].href;lb.hidden=false;document.body.style.overflow='hidden'}
