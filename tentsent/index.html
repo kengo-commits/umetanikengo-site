@@ -799,7 +799,7 @@ footer div{line-height:1.9}
         var a=document.createElement('a');a.className='card';a.href='#talent';
         a.innerHTML='<div class="ph"><img alt="" loading="lazy"></div><h3><span></span><small>'+String(i+1).padStart(2,'0')+'</small></h3><div class="kana">'+t[1]+'</div><div class="role"></div>';
         a.querySelector('img').src=t[6];a.querySelector('img').alt=t[0];
-        a.querySelector('h3 span').textContent=t[0];a.querySelector('.role').textContent=t[5];a.addEventListener('click',function(e){e.preventDefault();openP(t)});g.appendChild(a);
+        a.querySelector('h3 span').textContent=t[0];a.querySelector('.role').textContent=t[5];a.href='./'+SL[t[0]]+'/';g.appendChild(a);
       });
       grid.appendChild(wrap);
     });
