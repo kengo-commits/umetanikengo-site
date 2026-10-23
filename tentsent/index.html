@@ -792,7 +792,7 @@ footer div{line-height:1.9}
     SECS.forEach(function(sc){
       var wrap=document.createElement('div');wrap.className='tsec';wrap.id='talent-'+sc[0];
       var items=T.filter(function(t){return t[2]===sc[0]});
-      wrap.innerHTML='<div class="tbanner"><h3>'+sc[1]+'</h3><span>'+sc[2]+' · '+(UNDER[sc[0]]?'under construction':items.length+'名')+'</span></div><div class="tgrid"></div>';
+      wrap.innerHTML='<div class="tbanner"><h3>'+sc[1]+'</h3><span>'+(UNDER[sc[0]]?'under construction':'')+'</span></div><div class="tgrid"></div>';
       var g=wrap.querySelector('.tgrid');
       if(!items.length){var e=document.createElement('div');e.className='empty';e.textContent='under construction';g.appendChild(e)}
       items.forEach(function(t,i){
