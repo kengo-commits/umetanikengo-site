@@ -779,13 +779,14 @@ if __name__ == '__main__':
         print('more page not written:', e)
     shutil.copytree(ROOT / 'glamday', OUT + '/glamday')
     shutil.copytree(ROOT / 'tentsent', OUT + '/tentsent')  # private preview, noindex
+    shutil.copytree(ROOT / 'trem', OUT + '/trem')  # private preview, noindex
     shutil.copy(ROOT / 'assets/site.css', OUT + '/assets/site.css')
     shutil.copy(ROOT / 'assets/site.js', OUT + '/assets/site.js')
     shutil.copy(ROOT / 'assets/paper.png', OUT + '/assets/paper.png')
     shutil.copy(ROOT / 'assets/favicon.svg', OUT + '/favicon.svg')
     if SITE.get('indexnow_key'):
         open(f"{OUT}/{SITE['indexnow_key']}.txt", 'w').write(SITE['indexnow_key'])
-    open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\nDisallow: /tentsent/\n\n# AI search and assistant crawlers are welcome\n' + ''.join(f'User-agent: {b}\nAllow: /\n\n' for b in ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot']) + f'Sitemap: https://{DOMAIN}/sitemap.xml\n')
+    open(OUT + '/robots.txt', 'w').write('User-agent: *\nDisallow: /\n' if SITE.get('noindex') else f'User-agent: *\nAllow: /\nDisallow: /tentsent/\nDisallow: /trem/\n\n# AI search and assistant crawlers are welcome\n' + ''.join(f'User-agent: {b}\nAllow: /\n\n' for b in ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot']) + f'Sitemap: https://{DOMAIN}/sitemap.xml\n')
     open(OUT + '/CNAME', 'w').write(DOMAIN + '\n')
     for k in ORDER:
         os.makedirs(f'{OUT}/creative/{k}', exist_ok=True)
