@@ -163,5 +163,20 @@
   "file": "p-2026-10-24.webp",
   "w": 423,
   "h": 900
+ },
+ {
+  "museum": "met",
+  "id": 459192,
+  "title": "Seated Woman",
+  "artist": "Antoine Watteau",
+  "when": "1716–17",
+  "medium": "Drawing",
+  "credit": "The Metropolitan Museum of Art",
+  "license": "Public domain",
+  "url": "https://www.metmuseum.org/art/collection/search/459192",
+  "date": "2026-10-25",
+  "file": "p-2026-10-25.webp",
+  "w": 924,
+  "h": 1400
  }
 ]
