@@ -90,6 +90,10 @@ a.igl:hover{background:var(--fg);color:var(--bg)}
 .gal{columns:auto;column-gap:0;display:flex;gap:12px;align-items:flex-start}
 .gal .col{flex:1 1 0;min-width:0;display:grid;gap:12px}
 .gal .col a{margin:0}
+
+/* dark-mode logo */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mosaic .ltile img,:root:not([data-theme="light"]) .logo .lg,:root:not([data-theme="light"]) .nav .lg{filter:invert(1)}}
+:root[data-theme="dark"] .mosaic .ltile img,:root[data-theme="dark"] .logo .lg,:root[data-theme="dark"] .nav .lg{filter:invert(1)}
 </style>
 </head>
 <body>

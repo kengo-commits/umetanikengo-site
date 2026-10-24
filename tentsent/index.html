@@ -647,6 +647,10 @@ a.igl:hover{background:var(--fg);color:var(--bg)}
 .mosaic a img,.ph img{object-position:50% 12%}
 .mosaic a img{transform-origin:50% 20%}
 @keyframes drift{from{transform:scale(1)}to{transform:scale(1.05)}}
+
+/* dark-mode logo */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mosaic .ltile img,:root:not([data-theme="light"]) .logo .lg,:root:not([data-theme="light"]) .nav .lg{filter:invert(1)}}
+:root[data-theme="dark"] .mosaic .ltile img,:root[data-theme="dark"] .logo .lg,:root[data-theme="dark"] .nav .lg{filter:invert(1)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
