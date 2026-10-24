@@ -1,24 +1,29 @@
 """Make the daily Instagram carousel for KENGO'S SYNESTHESIA.
 
-Reads the newest day in world/news.json and writes six 1080x1350 images plus
-a caption to ig-out/<date>/ :
+A photo-led set of nine 1080x1350 images plus a caption, written to ig-out/<date>/ :
 
-  1 cover: that day's SYNESTHESIA DIGITAL ART by KENGO (world/signal.js), a different data artwork every day
-  2 Daily Masterwork: that day's public-domain / CC0 masterpiece (world/plates.json)
-  3 Kengo's Note
-  4 Fashion  5 Music  6 Design
-  7 link to the site, sources and what the cover was drawn from
+  1 cover: that day's SYNESTHESIA DIGITAL ART by KENGO (world/signal.js), a different data artwork every day (also a 10 s MP4)
+  2 the same artwork, full-bleed second cut
+  3 Daily Masterwork: that day's public-domain / CC0 masterpiece (world/plates.json)
+  4-6 three more public-domain / CC0 works for the day (The Met Open Access, The Cleveland Museum of Art Open Access),
+      fetched once and cached in ig-out/<date>/plates/
+  7 Kengo's Note (Japanese, short)
+  8 today's Fashion / Music / Design headlines on one page
+  9 link to the site, sources and credits
 
+The post is dated today (Asia/Tokyo); the text comes from the newest day in world/news.json on or before that date.
 Usage:  python scripts/make_instagram.py [YYYY-MM-DD]
 Needs Playwright with Chromium. Fonts are downloaded once into ig-out/fonts.
 """
 import asyncio
 import html
+import io
 import json
+import random
 import re
 import sys
 import urllib.request
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -96,61 +101,183 @@ def plate_for(d):
     return max(L, key=lambda p: p['date']) if L else None
 
 
-def build(day, sig):
+# --- three more public-domain / CC0 works a day (same sources and filters as scripts/add_plate.py) ---
+UA = {'User-Agent': 'KengosSynesthesia/1.0 (https://www.kengo-umetani.com/synesthesia-world/)'}
+SKIP = ('photograph', 'photo', 'costume', 'arms', 'armor', 'musical')
+TYPES = ('painting', 'sculpture', 'drawing', 'print', 'watercolor', 'woodblock', 'pastel')
+JP_QUERIES = ['ukiyo-e', 'Japan', 'Edo period', 'woodblock print', 'Hokusai', 'Hiroshige', 'Utamaro', 'Japanese painting', 'screen', 'handscroll', 'Momoyama period', 'Kamakura period']
+
+
+def ok_type(s):
+    s = (s or '').lower()
+    return any(t in s for t in TYPES) and not any(k in s for k in SKIP)
+
+
+def met_pick(rng, seen, japan):
+    import requests
+    params = {'isPublicDomain': 'true', 'hasImages': 'true', 'limit': 200}
+    if japan:
+        params.update({'departmentId': 6, 'q': rng.choice(JP_QUERIES)})
+    else:
+        params.update({'isHighlight': 'true', 'q': rng.choice(['painting', 'sculpture', 'landscape', 'portrait', 'drawing', 'print'])})
+    ids = requests.get('https://collectionapi.metmuseum.org/public/collection/v1.1/search', params=params, headers=UA, timeout=30).json().get('objectIDs') or []
+    rng.shuffle(ids)
+    for oid in ids[:40]:
+        if ('met', str(oid)) in seen:
+            continue
+        o = requests.get(f'https://collectionapi.metmuseum.org/public/collection/v1/objects/{oid}', headers=UA, timeout=30).json()
+        if not (o.get('isPublicDomain') and o.get('primaryImageSmall') and ok_type(o.get('classification') or o.get('objectName')) and o.get('artistDisplayName')):
+            continue
+        if japan and 'japan' not in (o.get('culture') or '').lower():
+            continue
+        return {'museum': 'met', 'id': oid, 'title': o['title'], 'artist': o['artistDisplayName'], 'when': o.get('objectDate') or '',
+                'medium': (o.get('classification') or o.get('objectName') or '').rstrip('s'), 'credit': 'The Metropolitan Museum of Art',
+                'license': 'Public domain', 'url': o.get('objectURL') or f'https://www.metmuseum.org/art/collection/search/{oid}', 'img': o.get('primaryImage') or o['primaryImageSmall']}
+
+
+def cma_pick(rng, seen, japan):
+    import requests
+    params = {'cc0': 1, 'has_image': 1, 'limit': 300, 'fields': 'id,title,creators,creation_date,technique,type,url,images'}
+    if japan:
+        params.update({'department': 'Japanese Art', 'skip': rng.randrange(0, 2900)})
+    else:
+        params['highlight'] = 1
+    data = requests.get('https://openaccess-api.clevelandart.org/api/artworks/', params=params, headers=UA, timeout=30).json().get('data') or []
+    rng.shuffle(data)
+    for a in data:
+        img = (a.get('images') or {}).get('web', {}).get('url')
+        artist = ', '.join(c['description'].split(' (')[0] for c in a.get('creators') or [])
+        if ('cma', str(a['id'])) in seen or not ok_type(a.get('type')) or not img or not artist:
+            continue
+        return {'museum': 'cma', 'id': a['id'], 'title': a['title'], 'artist': artist, 'when': a.get('creation_date') or '',
+                'medium': a.get('type') or '', 'credit': 'The Cleveland Museum of Art', 'license': 'CC0', 'url': a.get('url'), 'img': img}
+
+
+def extra_plates(d, outdir, n=3):
+    """n more works for the day, deterministic per date, cached in <outdir>/plates/ so a rerun does not refetch."""
+    import requests
+    from PIL import Image
+    cache = outdir / 'plates' / 'plates.json'
+    if cache.exists():
+        return json.loads(cache.read_text(encoding='utf-8'))
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    f = WORLD / 'plates.json'
+    seen = {(p['museum'], str(p['id'])) for p in (json.loads(f.read_text(encoding='utf-8')) if f.exists() else [])}
+    rng = random.Random(d + '|ig')
+    out = []
+    for k in range(n):
+        japan = (date.fromisoformat(d).toordinal() + k) % 3 != 0          # two in three Japanese, like the Daily Masterwork
+        order = (met_pick, cma_pick) if k % 2 == 0 else (cma_pick, met_pick)
+        im = None
+        for attempt in range(4):          # handscrolls and other very wide works do not fit a phone screen: try again
+            pick = None
+            for fn in order:
+                for jp in ((japan, False) if japan else (False,)):
+                    try:
+                        pick = fn(rng, seen, jp)
+                    except Exception as e:
+                        print('source failed:', fn.__name__, e)
+                    if pick:
+                        break
+                if pick:
+                    break
+            if not pick:
+                break
+            seen.add((pick['museum'], str(pick['id'])))
+            try:
+                im = Image.open(io.BytesIO(requests.get(pick['img'], headers=UA, timeout=120).content)).convert('RGB')
+            except Exception as e:
+                print('image failed:', pick['title'], e)
+                im = None
+                continue
+            if im.width / im.height <= 2.2:
+                break
+            im = None
+        if im is None:
+            continue
+        im.thumbnail((1400, 1400), Image.LANCZOS)
+        name = f'x{k + 1}.jpg'
+        im.save(cache.parent / name, 'JPEG', quality=90)
+        pick.pop('img')
+        pick.update({'file': str(cache.parent / name), 'w': im.width, 'h': im.height})
+        out.append(pick)
+    cache.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding='utf-8')
+    return out
+
+
+def art_slide(p, lab, sub):
+    """One artwork, as large as the page allows: the image area is 900 px tall, caption below."""
+    meta = ', '.join(x for x in (p.get('artist'), p.get('when')) if x)
+    img = Path(p['file']).as_uri() if '/' in p['file'] else (WORLD / 'media' / p['file']).as_uri()
+    wide = p.get('w', 1) / p.get('h', 1) > 1.4        # a wide work is shown as a detail that fills the frame, and says so
+    fit = 'cover' if wide else 'contain'
+    return f'''<div class="lab" style="margin-top:32px;display:flex;justify-content:space-between"><span>{lab}</span><span style="color:#8c8c8c;font-weight:400">{sub}</span></div>
+<div style="margin:12px -80px 0;height:900px;background:#f4f4f4"><img src="{img}" style="width:100%;height:100%;object-fit:{fit};display:block"></div>
+<div style="margin-top:26px;font-size:27px;letter-spacing:.05em;text-transform:uppercase;font-weight:500;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{E(short_title(p["title"]))}{' (detail)' if wide else ''}</div>
+<div style="margin-top:8px;font-size:20px;letter-spacing:.04em;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{E(meta)} · <span style="color:#8c8c8c;letter-spacing:.14em;text-transform:uppercase;font-size:16px">{E(p.get("license", ""))} · {E(p.get("credit", ""))}</span></div>'''
+
+
+def build(day, sig, post, extras):
     note = day.get('note')
-    plate = plate_for(day['date'])
-    stamp = date.fromisoformat(day['date']).strftime('%d %b %Y').upper()
-    weekday = date.fromisoformat(day['date']).strftime('%A').upper()
+    plate = plate_for(post)
+    stamp = date.fromisoformat(post).strftime('%d %b %Y').upper()
+    weekday = date.fromisoformat(post).strftime('%A').upper()
     no = f'No. {int(sig["no"]):03d}'
     css, base, em = HEADLINES[int(sig['no']) % len(HEADLINES)]
     word = sig['id'] if 'uppercase' in css else sig['id'].capitalize()
     style = f'{css};font-size:{min(base, int(900 / (len(word) * em)))}px'
     js = (WORLD / 'signal.js').as_uri()
+    sday = json.dumps(dict(day, date=post), ensure_ascii=False)   # the artwork is the post day's recipe, drawn from the day's stories
+    works = ([plate] if plate else []) + extras
     slides = [f'''<canvas id="sig" width="2160" height="1520" style="display:block;margin:44px -80px 0;width:1080px;height:760px;background:#000"></canvas>
-<script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);const DAY={json.dumps(day, ensure_ascii=False)};window.drawFrame=t=>SIGNAL.draw(c,1080,760,DAY,t,{{}});drawFrame(0);</script>
+<script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);const DAY={sday};window.drawFrame=t=>SIGNAL.draw(c,1080,760,DAY,t,{{}});drawFrame(0);</script>
 <div style="margin-top:40px;{style}">{E(word)}</div>
 <div style="margin-top:16px;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art by Kengo — {E(no)} · {weekday}</div>
-<div style="margin-top:22px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art{' / Daily Masterwork' if plate else ''}{' / Note' if note else ''} / Fashion / Music / Design</div>
-<div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアート{'、名作' if plate else ''}{'、ノート' if note else ''}と、世界のファッション・音楽・デザイン</div>''']
-    if plate:
-        meta = ', '.join(x for x in (plate.get('artist'), plate.get('when')) if x) + (' — ' + plate['medium'].lower() if plate.get('medium') else '')
-        img = (WORLD / 'media' / plate['file']).as_uri()
-        slides.append(f'''<div class="lab">Daily Masterwork</div>
-<div style="margin-top:14px;height:820px;display:flex;align-items:center;justify-content:center;background:#f4f4f4"><img src="{img}" style="width:100%;height:100%;object-fit:contain;display:block"></div>
-<div style="margin-top:30px;font-size:30px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.3">{E(short_title(plate["title"]))}</div>
-<div style="margin-top:10px;font-size:22px;letter-spacing:.04em;color:#555">{E(meta)}</div>
-<div class="src" style="margin-top:14px">{E(plate.get("license", ""))} · {E(plate.get("credit", ""))}</div>''')
+<div style="margin-top:22px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Digital Art / {len(works)} Masterworks{' / Note' if note else ''} / Fashion · Music · Design</div>
+<div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアート、名作{len(works)}点{'、ノート' if note else ''}と、世界のファッション・音楽・デザイン</div>''']
+    # 2: the same artwork again, full-bleed, a few seconds in
+    slides.append(f'''<canvas id="sig2" width="2160" height="2700" style="position:absolute;left:0;top:0;width:1080px;height:1350px;background:#000"></canvas>
+<script src="{js}"></script><script>const c2=document.getElementById("sig2").getContext("2d");c2.scale(2,2);SIGNAL.draw(c2,1080,1350,{sday},7.3,{{}});</script>
+<div style="position:absolute;left:80px;right:80px;bottom:72px;color:#fff;mix-blend-mode:difference">
+<div style="font-size:17px;letter-spacing:.16em;text-transform:uppercase">Synesthesia Digital Art by Kengo — {E(no)} · {E(sig["id"])}</div>
+<div style="margin-top:10px;font-family:Zen;font-size:22px;color:#fff">{E(sig.get("ja", ""))}</div></div>''')
+    for k, p in enumerate(works, 1):
+        slides.append(art_slide(p, 'Daily Masterwork' if k == 1 else 'Masterworks', f'{k} / {len(works)}'))
     if note:
-        slides.append(f'''<div class="lab">Kengo's Note</div><div style="font-size:30px;letter-spacing:.08em;text-transform:uppercase;font-weight:500">{E(note.get("title", ""))}</div>
-<p style="font-size:27px;line-height:1.6;margin-top:34px;letter-spacing:.01em">{E(note.get("en", ""))}</p>
-<p style="font-family:Zen;font-size:26px;line-height:1.85;margin-top:30px;color:#555;letter-spacing:.02em">{E(note["ja"])}</p>
-<div class="src">Source: {E(note.get("source", ""))}</div>''')
+        slides.append(f'''<div class="lab" style="margin-top:160px">Kengo's Note</div><div style="font-size:34px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.25">{E(note.get("title", ""))}</div>
+<p style="font-family:Zen;font-size:30px;line-height:1.9;margin-top:44px;letter-spacing:.02em;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden">{E(note["ja"])}</p>
+<div class="src" style="margin-top:34px">Source: {E(note.get("source", ""))} · 全文はプロフィールのリンクから</div>''')
+    rows = ''
     for cat, lab in (('fashion', 'Fashion'), ('music', 'Music'), ('design', 'Design')):
-        items = [i for i in day['items'] if i['cat'] == cat]
+        items = [i for i in day['items'] if i['cat'] == cat][:3]
         if items:
-            slides.append(f'<div class="lab">{lab}</div>' + ''.join(
-                f'<div class="it"><h3>{E(i["title"])}</h3><p>{E(i["ja"])}</p><i>{E(i["source"])}</i></div>' for i in items))
+            rows += f'<div class="lab" style="margin:38px 0 4px;font-size:18px">{lab}</div>' + ''.join(
+                f'<div style="padding:16px 0;border-bottom:1px solid #e3e3e3"><div style="font-size:26px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;font-weight:500">{E(i["title"])}</div>'
+                f'<div style="font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#8c8c8c;margin-top:6px">{E(i["source"])}</div></div>' for i in items)
+    slides.append(f'<div style="margin-top:8px;font-family:Zen;font-size:22px;color:#8c8c8c">今日の世界のニュース — 本文と元の記事はプロフィールのリンクから</div>{rows}')
     sources = sorted({i['source'] for i in day['items']} | ({note['source']} if note and note.get('source') else set()))
+    museums = sorted({p['credit'] for p in works})
     credit = f'Cover: {sig["label"]}, drawn from {sig["data"]}'
     slides.append(f'''<div style="margin-top:auto;margin-bottom:auto">
 <div style="font-size:64px;line-height:1.08;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Every story,<br>every morning.</div>
 <div style="font-family:Zen;font-size:28px;line-height:1.8;color:#555;margin-top:30px">元の記事へのリンクと過去のニュースは<br>プロフィールのリンクから。</div>
 <div style="font-size:26px;letter-spacing:.12em;margin-top:40px;text-transform:uppercase">kengo-umetani.com/synesthesia-world</div>
-<div style="font-size:17px;letter-spacing:.16em;text-transform:uppercase;color:#8c8c8c;margin-top:60px;line-height:1.8">Sources: {E(" / ".join(sources))}<br>{E(credit)}</div></div>''')
+<div style="font-size:17px;letter-spacing:.16em;text-transform:uppercase;color:#8c8c8c;margin-top:60px;line-height:1.8">Sources: {E(" / ".join(sources))}<br>Artworks: {E(" / ".join(museums))} — public domain / CC0<br>{E(credit)}</div></div>''')
     total = len(slides)
     pages = [frame(s, k, total, stamp) for k, s in enumerate(slides, 1)]
 
     others = [i['title'] for i in day['items'] if not (note and i['url'] == note.get('url'))][:6]
     cap = [f'{no} {sig["id"]} — {weekday}, {stamp}', '']
-    if plate:
-        cap += [f"Daily Masterwork: {short_title(plate['title'])} — {', '.join(x for x in (plate.get('artist'), plate.get('when')) if x)} ({plate.get('license', '')}, {plate.get('credit', '')})", '']
+    if works:
+        cap += ['Masterworks / 今日の名作:'] + [f"{k}. {short_title(p['title'])} — {', '.join(x for x in (p.get('artist'), p.get('when')) if x)} ({p.get('license', '')}, {p.get('credit', '')})"
+                                               for k, p in enumerate(works, 1)] + ['']
     if note:
         cap += [note.get('en', ''), '', note['ja'], '']
     cap += ['Also today / ほかに今日のニュース:'] + [f'— {t}' for t in others]
     day_url = f"https://www.kengo-umetani.com/synesthesia-world/{day['date'].replace('-', '/')}/"
     cap += ['', '元の記事へのリンクと過去のニュースは、プロフィールのリンクから。', f"This day's page / この日のページ: {day_url}", '',
             f'Sources: {" / ".join(sources)}', credit, '',
-            '#kengossynesthesia #fashion #music #design #architecture #art #建築 #アート']
+            '#kengossynesthesia #fashion #music #design #architecture #art #ukiyoe #museum #建築 #アート #浮世絵 #名画']
     return pages, '\n'.join(cap)
 
 
@@ -214,24 +341,27 @@ async def render_video(page_html, outdir, stem, seconds=10, fps=30, speed=2.0):
 
 def main():
     news = json.loads((WORLD / 'news.json').read_text(encoding='utf-8'))
-    want = sys.argv[1] if len(sys.argv) > 1 else None
-    day = next((d for d in news['days'] if d['date'] == want), None) if want else news['days'][0]
+    post = sys.argv[1] if len(sys.argv) > 1 else datetime.now(timezone(timedelta(hours=9))).date().isoformat()
+    day = max((d for d in news['days'] if d['date'] <= post), key=lambda d: d['date'], default=None)
     if not day:
-        sys.exit(f'no news for {want}')
+        sys.exit(f'no news on or before {post}')
+    if day['date'] != post:
+        print(f'note: newest news is {day["date"]}, posting as {post}')
     fonts()
-    sig = asyncio.run(signal_meta(day['date']))
-    pages, caption = build(day, sig)
-    outdir = OUT / day['date']
+    sig = asyncio.run(signal_meta(post))
+    outdir = OUT / post
     outdir.mkdir(parents=True, exist_ok=True)
-    files = asyncio.run(render(pages, outdir, f'kengos-synesthesia-{day["date"]}'))
+    extras = extra_plates(post, outdir)
+    pages, caption = build(day, sig, post, extras)
+    files = asyncio.run(render(pages, outdir, f'kengos-synesthesia-{post}'))
     (outdir / 'caption.txt').write_text(caption, encoding='utf-8')
-    story = WORLD / 'art' / f"{day['date']}-story.png"
+    story = WORLD / "art" / f"{post}-story.png"
     if story.exists():
         import shutil
         shutil.copy(story, outdir / 'story.png')
         print(outdir / 'story.png', 'ok (Stories, 1080x1920)')
     try:
-        print(asyncio.run(render_video(pages[0], outdir, f'kengos-synesthesia-{day["date"]}')), 'video ok')
+        print(asyncio.run(render_video(pages[0], outdir, f"kengos-synesthesia-{post}")), 'video ok')
     except Exception as e:
         print('video skipped:', e)
     for f, over in files:
