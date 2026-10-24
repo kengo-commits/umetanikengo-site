@@ -317,6 +317,19 @@ footer .bottom .c{font-family:var(--font-en)}
 #toTop:hover svg{transform:translateY(-3px)}
 #toTop:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 
+/* Japanese line breaking */
+:lang(ja),body{line-break:strict;word-break:normal;overflow-wrap:anywhere}
+.jp-serif,.biz .desc,.contact .desc,.topics .ttl,.topics .sub,.biz .jp-title,.company dd,footer dd,.thanks p,.field label{word-break:auto-phrase;text-wrap:pretty}
+.jp-serif p,.biz .desc,.contact .desc{text-wrap:pretty}
+.h-serif{text-wrap:balance}
+.nb{white-space:nowrap}
+@media(max-width:600px){
+  .jp-serif br,.biz .desc br,.contact .desc br,.message .lead-en br{display:none}
+  .jp-serif{font-size:15px;line-height:2.1;letter-spacing:.06em}
+  body{letter-spacing:.03em}
+}
+@media(min-width:601px) and (max-width:899px){.reel .note .jp-serif br{display:none}}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   #loader{display:none}
@@ -390,7 +403,7 @@ footer .bottom .c{font-family:var(--font-en)}
         <p class="lead-en rv tag">We build a bridge of trust<br>that creates the future</p>
         <div class="jp-serif lines">
           <p>未来を創る信頼のかけ橋。</p>
-          <p>人と人のつながりを大切に。<br>人財コーディネート・地方創生・不動産の<br>3つの軸でTReMは進んでまいります。</p>
+          <p>人と人のつながりを大切に。<br>人財コーディネート・地方創生・不動産の<br><span class="nb">3つの軸</span>でTReMは進んでまいります。</p>
           <p>東京と地方のかけ橋へ。<br>そして、世界との懸け橋を築きます。</p>
         </div>
         <div class="arrow-row rv"><a class="arrow" href="#business"><span class="t"><span>Our business<br>Our business</span></span><span class="c"><svg class="a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg><svg class="b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></a></div>
