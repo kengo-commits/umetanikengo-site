@@ -1,15 +1,13 @@
 """Make the daily Instagram carousel for KENGO'S SYNESTHESIA.
 
-A photo-led set of nine 1080x1350 images plus a caption, written to ig-out/<date>/ :
+Six 1080x1350 images (pictures only — the note, the headlines and the sources go in the caption) plus
+a caption, written to ig-out/<date>/ :
 
   1 cover: that day's SYNESTHESIA DIGITAL ART by KENGO (world/signal.js), a different data artwork every day (also a 10 s MP4)
   2 the same artwork, full-bleed second cut
   3 Daily Masterwork: that day's public-domain / CC0 masterpiece (world/plates.json)
   4-6 three more public-domain / CC0 works for the day (The Met Open Access, The Cleveland Museum of Art Open Access),
       fetched once and cached in ig-out/<date>/plates/
-  7 Kengo's Note (Japanese, short)
-  8 today's Fashion / Music / Design headlines on one page
-  9 link to the site, sources and credits
 
 The post is dated today (Asia/Tokyo); the text comes from the newest day in world/news.json on or before that date.
 Usage:  python scripts/make_instagram.py [YYYY-MM-DD]
@@ -233,8 +231,8 @@ def build(day, sig, post, extras):
 <script src="{js}"></script><script>const c=document.getElementById("sig").getContext("2d");c.scale(2,2);const DAY={sday};window.drawFrame=t=>SIGNAL.draw(c,1080,760,DAY,t,{{}});drawFrame(0);</script>
 <div style="margin-top:40px;{style}">{E(word)}</div>
 <div style="margin-top:16px;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c8c">Synesthesia Digital Art by Kengo — {E(no)} · {weekday}</div>
-<div style="margin-top:22px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Digital Art / {len(works)} Masterworks{' / Note' if note else ''} / Fashion · Music · Design</div>
-<div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアート、名作{len(works)}点{'、ノート' if note else ''}と、世界のファッション・音楽・デザイン</div>''']
+<div style="margin-top:22px;font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8c8c8c">Digital Art / {len(works)} Masterworks</div>
+<div style="margin-top:10px;font-family:Zen;font-size:24px;color:#8c8c8c">今日のデジタルアートと名作{len(works)}点 — ノートと世界のニュースはキャプションに</div>''']
     # 2: the same artwork again, full-bleed, a few seconds in
     slides.append(f'''<canvas id="sig2" width="2160" height="2700" style="position:absolute;left:0;top:0;width:1080px;height:1350px;background:#000"></canvas>
 <script src="{js}"></script><script>const c2=document.getElementById("sig2").getContext("2d");c2.scale(2,2);SIGNAL.draw(c2,1080,1350,{sday},7.3,{{}});</script>
@@ -243,26 +241,8 @@ def build(day, sig, post, extras):
 <div style="margin-top:10px;font-family:Zen;font-size:22px;color:#fff">{E(sig.get("ja", ""))}</div></div>''')
     for k, p in enumerate(works, 1):
         slides.append(art_slide(p, 'Daily Masterwork' if k == 1 else 'Masterworks', f'{k} / {len(works)}'))
-    if note:
-        slides.append(f'''<div class="lab" style="margin-top:160px">Kengo's Note</div><div style="font-size:34px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.25">{E(note.get("title", ""))}</div>
-<p style="font-family:Zen;font-size:30px;line-height:1.9;margin-top:44px;letter-spacing:.02em;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden">{E(note["ja"])}</p>
-<div class="src" style="margin-top:34px">Source: {E(note.get("source", ""))} · 全文はプロフィールのリンクから</div>''')
-    rows = ''
-    for cat, lab in (('fashion', 'Fashion'), ('music', 'Music'), ('design', 'Design')):
-        items = [i for i in day['items'] if i['cat'] == cat][:3]
-        if items:
-            rows += f'<div class="lab" style="margin:38px 0 4px;font-size:18px">{lab}</div>' + ''.join(
-                f'<div style="padding:16px 0;border-bottom:1px solid #e3e3e3"><div style="font-size:26px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;font-weight:500">{E(i["title"])}</div>'
-                f'<div style="font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#8c8c8c;margin-top:6px">{E(i["source"])}</div></div>' for i in items)
-    slides.append(f'<div style="margin-top:8px;font-family:Zen;font-size:22px;color:#8c8c8c">今日の世界のニュース — 本文と元の記事はプロフィールのリンクから</div>{rows}')
     sources = sorted({i['source'] for i in day['items']} | ({note['source']} if note and note.get('source') else set()))
-    museums = sorted({p['credit'] for p in works})
     credit = f'Cover: {sig["label"]}, drawn from {sig["data"]}'
-    slides.append(f'''<div style="margin-top:auto;margin-bottom:auto">
-<div style="font-size:64px;line-height:1.08;font-weight:700;letter-spacing:.02em;text-transform:uppercase">Every story,<br>every morning.</div>
-<div style="font-family:Zen;font-size:28px;line-height:1.8;color:#555;margin-top:30px">元の記事へのリンクと過去のニュースは<br>プロフィールのリンクから。</div>
-<div style="font-size:26px;letter-spacing:.12em;margin-top:40px;text-transform:uppercase">kengo-umetani.com/synesthesia-world</div>
-<div style="font-size:17px;letter-spacing:.16em;text-transform:uppercase;color:#8c8c8c;margin-top:60px;line-height:1.8">Sources: {E(" / ".join(sources))}<br>Artworks: {E(" / ".join(museums))} — public domain / CC0<br>{E(credit)}</div></div>''')
     total = len(slides)
     pages = [frame(s, k, total, stamp) for k, s in enumerate(slides, 1)]
 
@@ -276,7 +256,7 @@ def build(day, sig, post, extras):
     cap += ['Also today / ほかに今日のニュース:'] + [f'— {t}' for t in others]
     day_url = f"https://www.kengo-umetani.com/synesthesia-world/{day['date'].replace('-', '/')}/"
     cap += ['', '元の記事へのリンクと過去のニュースは、プロフィールのリンクから。', f"This day's page / この日のページ: {day_url}", '',
-            f'Sources: {" / ".join(sources)}', credit, '',
+            f'Sources: {" / ".join(sources)}', f'Artworks: {" / ".join(sorted({p["credit"] for p in works}))} — public domain / CC0', credit, '',
             '#kengossynesthesia #fashion #music #design #architecture #art #ukiyoe #museum #建築 #アート #浮世絵 #名画']
     return pages, '\n'.join(cap)
 
