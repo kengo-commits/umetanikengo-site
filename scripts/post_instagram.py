@@ -55,7 +55,9 @@ def stage(d):
         sys.exit(f'no rendered set in {src}')
     dst = IG / d
     dst.mkdir(parents=True, exist_ok=True)
-    for n in range(1, 8):
+    for old in dst.glob('*.jpg'):
+        old.unlink()
+    for n in range(1, 11):           # Instagram allows up to 10 carousel items
         png = src / f'{stem(d)}-{n}.png'
         if png.exists():
             im = Image.open(png).convert('RGB')
@@ -131,7 +133,8 @@ def publish(d):
     base = SITE + d + '/'
     caption = (folder / 'caption.txt').read_text(encoding='utf-8').strip()[:2200]
     has_video = (folder / '1.mp4').exists()
-    urls = [base + ('1.mp4' if has_video else '1.jpg')] + [base + f'{n}.jpg' for n in range(2, 8)]
+    count = len(list(folder.glob('[0-9]*.jpg')))
+    urls = [base + ('1.mp4' if has_video else '1.jpg')] + [base + f'{n}.jpg' for n in range(2, count + 1)]
     if not wait_online(urls):
         sys.exit('media is not online yet; try again later')
 
@@ -186,7 +189,7 @@ def threads(d):
     base = SITE + d + '/'
     cap = (folder / 'caption.txt').read_text(encoding='utf-8').strip().split('\n')
     day_url = f"https://www.kengo-umetani.com/synesthesia-world/{d.replace('-', '/')}/"
-    text = (cap[0] + '\n\n' + next((l for l in cap[1:] if l and not l.startswith(('Daily Masterwork:', '#', '—', 'Also', 'Sources', 'Cover', '元の', 'This day'))), '') + '\n\n' + day_url)[:500]
+    text = (cap[0] + '\n\n' + next((l for l in cap[1:] if l and not l.startswith(('Daily Masterwork:', 'Masterworks', '1.', '2.', '3.', '4.', '5.', '#', '—', 'Also', 'Sources', 'Cover', '元の', 'This day'))), '') + '\n\n' + day_url)[:500]
     r = requests.post(f'{THREADS}/me/threads', data={'media_type': 'IMAGE', 'image_url': base + '1.jpg', 'text': text, 'access_token': token}, timeout=60).json()
     cid = r.get('id')
     if not cid:
