@@ -208,5 +208,20 @@
   "file": "p-2026-10-27.webp",
   "w": 1026,
   "h": 1400
+ },
+ {
+  "museum": "cma",
+  "id": 101646,
+  "title": "After the Bath",
+  "artist": "Mary Cassatt",
+  "when": "1901",
+  "medium": "Drawing",
+  "credit": "The Cleveland Museum of Art",
+  "license": "CC0",
+  "url": "https://clevelandart.org/art/1920.379",
+  "date": "2026-10-28",
+  "file": "p-2026-10-28.webp",
+  "w": 900,
+  "h": 608
  }
 ]
