@@ -223,5 +223,20 @@
   "file": "p-2026-10-28.webp",
   "w": 900,
   "h": 608
+ },
+ {
+  "museum": "met",
+  "id": 54138,
+  "title": "A Poet and Mount Fuji\r\nFrom the Spring Rain Collection (Harusame shū), vol. 3",
+  "artist": "Yashima Gakutei",
+  "when": "ca. 1820s",
+  "medium": "Print",
+  "credit": "The Metropolitan Museum of Art",
+  "license": "Public domain",
+  "url": "https://www.metmuseum.org/art/collection/search/54138",
+  "date": "2026-10-29",
+  "file": "p-2026-10-29.webp",
+  "w": 1400,
+  "h": 829
  }
 ]
