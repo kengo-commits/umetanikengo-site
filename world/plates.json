@@ -253,5 +253,20 @@
   "file": "p-2026-10-30.webp",
   "w": 628,
   "h": 900
+ },
+ {
+  "museum": "met",
+  "id": 202718,
+  "title": "Saint John the Baptist",
+  "artist": "Juan Martínez Montañés",
+  "when": "ca. 1620–30",
+  "medium": "Sculpture",
+  "credit": "The Metropolitan Museum of Art",
+  "license": "Public domain",
+  "url": "https://www.metmuseum.org/art/collection/search/202718",
+  "date": "2026-10-31",
+  "file": "p-2026-10-31.webp",
+  "w": 1026,
+  "h": 1400
  }
 ]
