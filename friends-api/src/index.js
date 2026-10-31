@@ -5,8 +5,12 @@ const JSON_LIMIT = 256 * 1024;
 const DOC_LIMIT = 256 * 1024;
 const MEDIA_LIMIT = 20 * 1024 * 1024;
 const MEDIA_TYPES = new Set(['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'video/mp4', 'video/webm', 'audio/mpeg', 'audio/mp4', 'audio/x-m4a', 'audio/aac', 'audio/wav', 'audio/x-wav', 'audio/ogg', 'audio/flac', 'audio/webm']);
-const TOKEN_DAYS = 180;
-const PBKDF2_ITER = 6000;
+const TOKEN_DAYS = 30;
+const PBKDF2_ITER = 100000;          // current cost; stored hashes carry their own count ("pbkdf2$<iter>$<hex>")
+const LEGACY_PBKDF2_ITER = 6000;     // hashes written before the prefix existed (bare hex) used this count
+const MEDIA_TOKEN_WINDOW = 30 * 60 * 1000;   // a media token string is stable for 30 min (keeps browser cache keys stable)
+const MEDIA_TOKEN_TTL = 60 * 60 * 1000;      // ... and stays valid for 1 hour after the window starts
+const AUTH_RATE_LIMIT = 10;                  // /auth/signup + /auth/login attempts per IP per minute (per isolate; see README for the edge rule)
 const PUBLIC_COLS = ['users', 'posts', 'comments', 'likes', 'follows', 'stories', 'storyviews', 'tracks'];
 const SELF_COLS = new Set(['users', 'likes', 'follows', 'stories', 'storyviews']);
 const USERNAME_RE = /^[a-z0-9](?:[a-z0-9._]{1,28}[a-z0-9])?$/;
@@ -64,13 +68,65 @@ async function verifyToken(env, token) {
     return payload;
   } catch (e) { return null; }
 }
-async function hashPassword(env, password, saltHex) {
+async function pbkdf2Hex(env, password, saltHex, iterations) {
   const pepper = await getSecret(env);
   const key = await crypto.subtle.importKey('raw', enc.encode(password + '\u0000' + pepper), 'PBKDF2', false, ['deriveBits']);
-  const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: b64urlDecode(saltHex), iterations: PBKDF2_ITER }, key, 256);
+  const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: b64urlDecode(saltHex), iterations }, key, 256);
   return hex(bits);
 }
+/* New hashes are stored as "pbkdf2$<iterations>$<hex>" so the cost can be raised later without breaking old rows. */
+async function hashPassword(env, password, saltHex) { return `pbkdf2$${PBKDF2_ITER}$${await pbkdf2Hex(env, password, saltHex, PBKDF2_ITER)}`; }
+function parseHash(stored) {
+  const m = /^pbkdf2\$(\d+)\$([0-9a-f]+)$/.exec(String(stored || ''));
+  if (m) return { iterations: Number(m[1]), hex: m[2] };
+  return { iterations: LEGACY_PBKDF2_ITER, hex: String(stored || '') };   // bare hex written by the old code
+}
+/* Returns { ok, stale }: stale = verified but hashed with fewer iterations than PBKDF2_ITER, so the caller should re-hash. */
+async function verifyPassword(env, password, saltHex, stored) {
+  const { iterations, hex: expected } = parseHash(stored);
+  if (!iterations || !saltHex) return { ok: false, stale: false };
+  const got = await pbkdf2Hex(env, password, saltHex, iterations);
+  const ok = timingEqual(got, expected);
+  return { ok, stale: ok && iterations < PBKDF2_ITER };
+}
+async function rehashIfStale(env, m, password, verdict) {
+  if (!verdict.stale) return;
+  try {
+    const salt = b64url(crypto.getRandomValues(new Uint8Array(16)));
+    const hash = await hashPassword(env, password, salt);
+    await env.DB.prepare('UPDATE members SET pw_hash = ?, pw_salt = ?, updated_at = ? WHERE id = ? AND pw_hash = ?').bind(hash, salt, now(), m.id, m.pw_hash).run();
+  } catch (e) { /* best effort: the old hash still verifies */ }
+}
 function timingEqual(a, b) { if (a.length !== b.length) return false; let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i); return r === 0; }
+
+/* Short-lived media tokens: <img>/<video> cannot send a Bearer header, so media URLs carry ?t=<token> instead.
+   The token is signed with the same HMAC secret, scoped to "media", bound to the member (uid + token_version) and
+   expires after MEDIA_TOKEN_TTL. exp is aligned to MEDIA_TOKEN_WINDOW so the string (and the browser cache key) stays
+   the same across sync polls within a window. */
+async function issueMediaToken(env, me) {
+  const windowStart = Math.floor(now() / MEDIA_TOKEN_WINDOW) * MEDIA_TOKEN_WINDOW;
+  return signToken(env, { s: 'media', uid: me.uid, v: me.tokenVersion, exp: windowStart + MEDIA_TOKEN_TTL });
+}
+async function verifyMediaToken(env, token) {
+  const p = token ? await verifyToken(env, token) : null;
+  if (!p || p.s !== 'media') return null;
+  const m = await env.DB.prepare('SELECT id, disabled, token_version FROM members WHERE id = ?').bind(p.uid).first();
+  if (!m || m.disabled || m.token_version !== p.v) return null;
+  return m;
+}
+
+/* Per-isolate rate limiter for the password endpoints (defence in depth; the Cloudflare rate-limiting rule in the
+   README is the one that holds across isolates and colos). */
+const rateBuckets = new Map();
+function rateLimit(req, limit = AUTH_RATE_LIMIT, windowMs = 60000) {
+  const ip = req.headers.get('CF-Connecting-IP') || req.headers.get('X-Forwarded-For') || 'unknown';
+  const t = now();
+  if (rateBuckets.size > 5000) for (const [k, b] of rateBuckets) if (b.reset <= t) rateBuckets.delete(k);
+  let b = rateBuckets.get(ip);
+  if (!b || b.reset <= t) { b = { n: 0, reset: t + windowMs }; rateBuckets.set(ip, b); }
+  b.n++;
+  if (b.n > limit) throw new HttpError(429, '試行回数が多すぎます。しばらくしてからもう一度お試しください', 'rate_limited');
+}
 
 /* ---------- documents ---------- */
 function rowToDoc(r) { if (r.deleted) return { id: r.id, _deleted: true, updatedAt: r.updated_at }; const d = JSON.parse(r.data); d.id = r.id; return d; }
@@ -126,10 +182,10 @@ async function auth(req, env, required = true) {
   const token = h.startsWith('Bearer ') ? h.slice(7).trim() : '';
   if (!token) { if (required) throw new HttpError(401, 'サインインが必要です', 'unauthorized'); return null; }
   const p = await verifyToken(env, token);
-  if (!p) { if (required) throw new HttpError(401, 'サインインの有効期限が切れました', 'unauthorized'); return null; }
+  if (!p || p.s) { if (required) throw new HttpError(401, 'サインインの有効期限が切れました', 'unauthorized'); return null; }   // p.s: scoped (media) tokens are not sessions
   const m = await env.DB.prepare('SELECT id, username, is_owner, disabled, token_version, last_seen FROM members WHERE id = ?').bind(p.uid).first();
   if (!m || m.disabled || m.token_version !== p.v) { if (required) throw new HttpError(401, 'このアカウントは利用できません', 'unauthorized'); return null; }
-  return { uid: m.id, username: m.username, isOwner: !!m.is_owner, lastSeen: m.last_seen };
+  return { uid: m.id, username: m.username, isOwner: !!m.is_owner, lastSeen: m.last_seen, tokenVersion: m.token_version };
 }
 
 /* ---------- auth routes ---------- */
@@ -143,7 +199,14 @@ async function signup(req, env) {
   if (password.length < 8 || password.length > 200) throw bad('パスワードは8文字以上にしてください', 'password');
   const count = await memberCount(env);
   const isOwner = count === 0;
-  if (!isOwner) {
+  if (isOwner) {
+    // The very first account becomes the owner. That must not be a race anyone on the internet can win, so it needs
+    // the OWNER_SETUP_KEY secret (`wrangler secret put OWNER_SETUP_KEY`), sent as `setupKey` in the body or the X-Setup-Key header.
+    const expected = String(env.OWNER_SETUP_KEY || '');
+    const given = String(b.setupKey || req.headers.get('X-Setup-Key') || '').trim();
+    if (!expected) throw new HttpError(503, '初期設定キー（OWNER_SETUP_KEY）が未設定のため、最初のアカウントを作成できません', 'setup_key_missing');
+    if (!given || !timingEqual(given, expected)) throw new HttpError(403, '初期設定キーが違います', 'setup_key');
+  } else {
     const code = await getSetting(env, 'invite_code');
     if (!code || !timingEqual(String(b.invite || '').trim(), code)) throw new HttpError(403, '合言葉が違います', 'invite');
   }
@@ -167,17 +230,18 @@ async function login(req, env) {
   const username = String(b.username || '').toLowerCase().trim();
   const m = await env.DB.prepare('SELECT * FROM members WHERE username = ?').bind(username).first();
   if (!m) throw new HttpError(401, 'ユーザー名かパスワードが違います', 'bad_login');
-  const hash = await hashPassword(env, String(b.password || ''), m.pw_salt);
-  if (!timingEqual(hash, m.pw_hash)) throw new HttpError(401, 'ユーザー名かパスワードが違います', 'bad_login');
+  const password = String(b.password || '');
+  const verdict = await verifyPassword(env, password, m.pw_salt, m.pw_hash);
+  if (!verdict.ok) throw new HttpError(401, 'ユーザー名かパスワードが違います', 'bad_login');
   if (m.disabled) throw new HttpError(403, 'このアカウントは停止されています', 'disabled');
+  await rehashIfStale(env, m, password, verdict);   // transparently upgrade old 6000-iteration hashes
   const token = await issueToken(env, m);
   return json({ token, uid: m.id, isOwner: !!m.is_owner });
 }
 async function changePassword(req, env, me) {
   const b = await readJson(req);
   const m = await env.DB.prepare('SELECT * FROM members WHERE id = ?').bind(me.uid).first();
-  const cur = await hashPassword(env, String(b.current || ''), m.pw_salt);
-  if (!timingEqual(cur, m.pw_hash)) throw bad('現在のパスワードが違います', 'bad_password');
+  if (!(await verifyPassword(env, String(b.current || ''), m.pw_salt, m.pw_hash)).ok) throw bad('現在のパスワードが違います', 'bad_password');
   const next = String(b.next || ''); if (next.length < 8 || next.length > 200) throw bad('新しいパスワードは8文字以上にしてください', 'password');
   const salt = b64url(crypto.getRandomValues(new Uint8Array(16))); const hash = await hashPassword(env, next, salt);
   const v = m.token_version + 1;
@@ -193,7 +257,7 @@ async function whoami(env, me) {
   const user = await getDoc(env, 'users', me.uid);
   const privRow = await env.DB.prepare('SELECT data FROM priv WHERE user_id = ?').bind(me.uid).first();
   const invite = me.isOwner ? await getSetting(env, 'invite_code') : null;
-  return json({ uid: me.uid, isOwner: me.isOwner, user, priv: privRow ? JSON.parse(privRow.data) : null, invite, members: await memberCount(env) });
+  return json({ uid: me.uid, isOwner: me.isOwner, user, priv: privRow ? JSON.parse(privRow.data) : null, invite, members: await memberCount(env), mediaToken: await issueMediaToken(env, me) });
 }
 async function status(env) { const n = await memberCount(env); return json({ ok: true, open: n === 0, members: n }); }
 
@@ -218,7 +282,7 @@ async function sync(req, env, me, url) {
   const privRes = results[PUBLIC_COLS.length + 1].results[0];
   const online = results[PUBLIC_COLS.length + 2].results.map(r => r.id);
   if (url.searchParams.get('ping') === '1' && !online.includes(me.uid)) online.push(me.uid);
-  return json({ now: ts, cols, priv: privRes ? JSON.parse(privRes.data) : undefined, online, full: !since });
+  return json({ now: ts, cols, priv: privRes ? JSON.parse(privRes.data) : undefined, online, full: !since, mediaToken: await issueMediaToken(env, me) });
 }
 
 /* ---------- docs routes ---------- */
@@ -353,6 +417,7 @@ async function op(req, env, me, name) {
     }
     case 'story.add': {
       const media = cleanMedia(b.media); if (!media) throw bad('写真または動画がありません');
+      await assertOwnMedia(env, [media.id, media.poster], me.uid);
       const story = { id: 's' + uid(10), media, createdAt: ts, caption: clean(b.caption, 200) };
       return json({ doc: await mutateDoc(env, 'stories', me.uid, (cur, t) => M.storyAdd(cur, story, t), me.uid), story });
     }
@@ -382,9 +447,15 @@ async function op(req, env, me, name) {
       const tid = String(b.threadId || ''); await requireMember(env, tid, me.uid);
       const msg = { id: 'm' + uid(10), from: me.uid, createdAt: ts };
       if (b.text) msg.text = clean(b.text, 2000);
-      const media = cleanMedia(b.media); if (media) msg.media = media;
+      const media = cleanMedia(b.media); if (media) { await assertOwnMedia(env, [media.id, media.poster], me.uid); msg.media = media; }
       if (b.post) msg.post = String(b.post).slice(0, 40);
-      if (isPlainObject(b.story)) msg.story = { ownerId: String(b.story.ownerId || '').slice(0, 40), storyId: String(b.story.storyId || '').slice(0, 40), media: cleanMedia(b.story.media) };
+      if (isPlainObject(b.story)) {
+        // A forwarded story: take the media from the owner's stories doc rather than trusting the client's copy.
+        const ownerId = String(b.story.ownerId || '').slice(0, 40), storyId = String(b.story.storyId || '').slice(0, 40);
+        const stories = await getDoc(env, 'stories', ownerId);
+        const src = stories && Array.isArray(stories.items) ? stories.items.find(s => s.id === storyId) : null;
+        msg.story = { ownerId, storyId, media: src ? cleanMedia(src.media) : undefined };
+      }
       if (!msg.text && !msg.media && !msg.post && !msg.story) throw bad('メッセージが空です');
       return json({ doc: await mutateDoc(env, 'threads', tid, (cur, t) => M.threadSend(cur, msg, t)), msg });
     }
@@ -425,12 +496,15 @@ async function uploadMedia(req, env, me) {
   if (!buf.byteLength) throw bad('ファイルが空です');
   if (buf.byteLength > MEDIA_LIMIT) throw bad('ファイルが大きすぎます（20MBまで）', 'too_large');
   const id = 'm' + uid(23);
-  await env.MEDIA.put(id, buf, { httpMetadata: { contentType: type, cacheControl: 'public, max-age=31536000, immutable' } });
+  await env.MEDIA.put(id, buf, { httpMetadata: { contentType: type, cacheControl: 'private, max-age=3600' } });
   await env.DB.prepare('INSERT INTO media (id, owner_id, content_type, size, created_at) VALUES (?, ?, ?, ?, ?)').bind(id, me.uid, type, buf.byteLength, now()).run();
   return json({ id, url: '/media/' + id, size: buf.byteLength, contentType: type });
 }
-async function serveMedia(req, env, id) {
+async function serveMedia(req, env, id, url) {
   if (!/^m[a-z0-9]{10,40}$/.test(id)) throw notFound();
+  // Members only: a valid media token (?t=) from /auth/me or /sync, or a normal Bearer session for programmatic access.
+  const viewer = await verifyMediaToken(env, url.searchParams.get('t') || '') || await auth(req, env, false);
+  if (!viewer) throw new HttpError(401, 'サインインが必要です', 'unauthorized');
   const rangeHeader = req.headers.get('Range');
   let range;
   if (rangeHeader) { const m = /^bytes=(\d*)-(\d*)$/.exec(rangeHeader.trim()); if (m && (m[1] || m[2])) { if (m[1] && m[2]) range = { offset: Number(m[1]), length: Number(m[2]) - Number(m[1]) + 1 }; else if (m[1]) range = { offset: Number(m[1]) }; else range = { suffix: Number(m[2]) }; } }
@@ -440,7 +514,7 @@ async function serveMedia(req, env, id) {
   obj.writeHttpMetadata(headers);
   headers.set('ETag', obj.httpEtag);
   headers.set('Accept-Ranges', 'bytes');
-  headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  headers.set('Cache-Control', 'private, max-age=3600');   // authenticated content: never shared caches, re-check within the token lifetime
   headers.set('Content-Type', (obj.httpMetadata && obj.httpMetadata.contentType) || 'application/octet-stream');
   headers.set('X-Content-Type-Options', 'nosniff');
   if (range) {
@@ -500,9 +574,9 @@ export default {
       const [a, b, c] = parts;
       if (!a) res = json({ name: 'KENGO FRIEND SNS API', ok: true });
       else if (a === 'status') res = await status(env);
-      else if (a === 'media' && b && (req.method === 'GET' || req.method === 'HEAD')) res = await serveMedia(req, env, b);
-      else if (a === 'auth' && b === 'signup' && req.method === 'POST') res = await signup(req, env);
-      else if (a === 'auth' && b === 'login' && req.method === 'POST') res = await login(req, env);
+      else if (a === 'media' && b && (req.method === 'GET' || req.method === 'HEAD')) res = await serveMedia(req, env, b, url);
+      else if (a === 'auth' && b === 'signup' && req.method === 'POST') { rateLimit(req); res = await signup(req, env); }
+      else if (a === 'auth' && b === 'login' && req.method === 'POST') { rateLimit(req); res = await login(req, env); }
       else {
         const me = await auth(req, env, true);
         if (a === 'auth' && b === 'me') res = await whoami(env, me);

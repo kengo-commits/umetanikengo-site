@@ -23,6 +23,7 @@ function authView() {
       const form = el('form', { onsubmit: async e => { e.preventDefault(); btn.disabled = true; err.textContent = ''; try { await signIn(u.value, p.value); } catch (ex) { err.textContent = friendlyError(ex); btn.disabled = false; } } }, fu, fp, err, btn);
       body.append(form, el('p', { class: 'hint', style: 'text-align:center' }, 'パスワードを忘れたときは、管理者に再設定を依頼してください。'));
     } else {
+      const [fk, key] = first ? field('auth-setupkey', '初期設定キー（Cloudflare の Secret「OWNER_SETUP_KEY」の値）', 'password', '初期設定キー', { autocomplete: 'off' }) : [null, null];
       const [fi, inv] = first ? field('auth-newinvite', '合言葉を決める（友人に伝える参加用のことば）', 'text', '例：tomodachi2026', { autocapitalize: 'none' }) : field('auth-invite', '合言葉', 'text', '招待者から聞いた合言葉', { autocapitalize: 'none' });
       const [fu, u] = field('auth-newuser', 'ユーザー名（半角英数字・. _）', 'text', '例：kengo_umetani', { autocapitalize: 'none', spellcheck: 'false', maxlength: 30 });
       u.addEventListener('input', () => { u.value = normUsername(u.value); });
@@ -35,10 +36,11 @@ function authView() {
         if (!isValidUsername(un)) { err.textContent = 'ユーザー名は3〜30文字の半角英数字・ピリオド・アンダースコアで、先頭と末尾は英数字にしてください。'; return; }
         if (p.value.length < 8) { err.textContent = 'パスワードは8文字以上にしてください。'; return; }
         if (first && inv.value.trim().length < 4) { err.textContent = '合言葉は4文字以上にしてください。'; return; }
+        if (first && !key.value.trim()) { err.textContent = '初期設定キーを入力してください。'; return; }
         btn.disabled = true;
-        try { await signUp({ username: un, password: p.value, name: n.value.trim(), invite: first ? '' : inv.value.trim(), newInvite: first ? inv.value.trim() : '' }); }
+        try { await signUp({ username: un, password: p.value, name: n.value.trim(), invite: first ? '' : inv.value.trim(), newInvite: first ? inv.value.trim() : '', setupKey: first ? key.value.trim() : undefined }); }
         catch (ex) { err.textContent = friendlyError(ex); btn.disabled = false; }
-      } }, fi, fu, fn, fp, err, btn);
+      } }, ...(first ? [fk] : []), fi, fu, fn, fp, err, btn);
       body.append(form);
     }
   };
