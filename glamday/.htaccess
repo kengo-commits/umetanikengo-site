@@ -1,0 +1,50 @@
+# GLAMDAY STYLE - Ownership Page Redirects
+# /ownership/index.html を /ownership/ にリダイレクト
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# QRチラシURLの誤記救済: ? の代わりに & で刷られたQRを救う
+# 例) /ownership/&utm_source=atami&... → /ownership/?utm_source=atami&...
+# 6都市（atami/karuizawa/osaka/nagasaki/tokyo/okinawa）を1本で処理。UTMは維持。
+RewriteRule ^&(.+)$ https://glamday.jp/ownership/?$1 [R=301,L,NE]
+
+# /ownership/cp/ を一時的に非表示（403 Forbidden）
+# 復活させる場合はこのブロックを削除するだけ
+RewriteRule ^cp(/.*)?$ - [F,L]
+
+# /ownership/webleon_asamanouta/ は /ownership/webleon_2/ に移設（恒久）
+RewriteRule ^webleon_asamanouta(/.*)?$ https://glamday.jp/ownership/webleon_2/ [R=301,L]
+
+# /ownership/index.html へのリクエストを /ownership/ にリダイレクト
+# [R=301] = 恒久的リダイレクト（SEOに重要）
+# [L] = これが最後のルール（以降のルールは無視）
+RewriteCond %{THE_REQUEST} ^GET\ /ownership/index\.html [NC]
+RewriteRule ^index\.html$ /ownership/ [R=301,L]
+
+# セキュリティ: ディレクトリリスティングを無効化
+Options -Indexes
+
+</IfModule>
+
+# キャッシュ設定（オプション）
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/html "access plus 1 day"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/webp "access plus 1 month"
+</IfModule>
+
+# セキュリティヘッダー（2026-10 追加）
+# - HSTS: https を1年間強制（includeSubDomains / preload は付けない。他サブドメインに影響させないため）
+# - nosniff / Referrer-Policy / Permissions-Policy / X-Frame-Options は表示に影響しない安全側の設定
+<IfModule mod_headers.c>
+Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
