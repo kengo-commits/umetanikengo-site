@@ -195,7 +195,7 @@ class ApiStore {
     this.mode = 'api'; this.base = base.replace(/\/+$/, ''); this.token = token; this.uid = null; this.isOwner = false;
     this.cols = { users: {}, posts: {}, comments: {}, likes: {}, follows: {}, stories: {}, storyviews: {}, threads: {}, tracks: {} };
     this.subs = new Set(); this.privSubs = new Set(); this.priv = null; this.online = new Set();
-    this.since = 0; this.timer = null; this.polling = false; this.lastPing = 0; this.lastActivity = now(); this.onAuthLost = null; this.onOnline = null; this.started = false; this.invite = null; this.memberCount = 0;
+    this.since = 0; this.timer = null; this.polling = false; this.lastPing = 0; this.lastActivity = now(); this.onAuthLost = null; this.onOnline = null; this.started = false; this.invite = null; this.memberCount = 0; this.mediaToken = '';
   }
   async req(method, path, body, opts = {}) {
     const headers = {};
@@ -217,6 +217,7 @@ class ApiStore {
   async init() {
     const me = await this.req('GET', '/auth/me');
     this.uid = me.uid; this.isOwner = !!me.isOwner; this.invite = me.invite; this.memberCount = me.members;
+    if (me.mediaToken) this.mediaToken = me.mediaToken;
     if (me.user) this.cols.users[me.uid] = me.user;
     this.priv = me.priv || null;
     return this.uid;
@@ -242,6 +243,7 @@ class ApiStore {
       const data = await this.req('GET', `/sync?since=${this.since}&ping=${ping ? 1 : 0}`);
       if (ping) this.lastPing = now();
       this.since = data.now;
+      if (data.mediaToken) this.mediaToken = data.mediaToken;   // short-lived signed token for /media/:id (refreshed by every sync)
       const changed = this._merge(data.cols);
       if (data.full || !this.synced) { this.synced = true; for (const col of Object.keys(this.cols)) changed.add(col); }
       if (data.priv !== undefined) { this.priv = data.priv; for (const s of this.privSubs) s(clone(this.priv)); }
@@ -275,7 +277,7 @@ class ApiStore {
   async setPriv(data) { this.priv = clone(data); await this.req('PUT', '/priv', this.priv); }
   canUpload() { return true; }
   async upload(blob, type) { const r = await this.req('POST', '/media', blob, { type: type || blob.type }); return { id: r.id, url: this.mediaUrl(r.id) }; }
-  mediaUrl(id) { return id ? this.base + '/media/' + id : ''; }
+  mediaUrl(id) { return id ? this.base + '/media/' + id + (this.mediaToken ? '?t=' + encodeURIComponent(this.mediaToken) : '') : ''; }
   // semantic writes
   async saveProfile(doc) { const d = await this.req('PUT', `/docs/users/${this.uid}`, doc); this._apply('users', d); return d; }
   async createPost(id, doc) { const d = await this.req('PUT', `/docs/posts/${id}`, doc); this._apply('posts', d); return d; }

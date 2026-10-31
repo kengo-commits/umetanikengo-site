@@ -3,9 +3,12 @@ main = "src/index.js"
 compatibility_date = "2026-09-01"
 workers_dev = true
 
+# Production (what the deploy workflow publishes with plain `wrangler deploy`).
+# Secrets (set once with `wrangler secret put <NAME>`, never in this file):
+#   OWNER_SETUP_KEY — required to register the very first member (the owner). See README.
 [vars]
-# Browser origins allowed to call this API (comma separated).
-ALLOWED_ORIGINS = "https://www.kengo-umetani.com,https://kengo-umetani.com,https://kengo-commits.github.io,http://localhost:8788,http://127.0.0.1:8788"
+# Browser origins allowed to call this API (comma separated). No localhost here: use `wrangler dev --env dev` locally.
+ALLOWED_ORIGINS = "https://www.kengo-umetani.com,https://kengo-umetani.com,https://kengo-commits.github.io"
 
 [[d1_databases]]
 binding = "DB"
@@ -19,3 +22,19 @@ bucket_name = "kengo-friend-sns-media"
 
 [observability]
 enabled = true
+
+# Local development: `npm run dev` (= wrangler dev --env dev). Only this environment accepts localhost origins.
+[env.dev]
+[env.dev.vars]
+ALLOWED_ORIGINS = "http://localhost:8788,http://127.0.0.1:8788,http://localhost:8787,http://127.0.0.1:8787"
+OWNER_SETUP_KEY = "dev-setup-key"
+
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "kengo-friend-sns"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+[[env.dev.r2_buckets]]
+binding = "MEDIA"
+bucket_name = "kengo-friend-sns-media"

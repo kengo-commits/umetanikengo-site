@@ -101,10 +101,35 @@ Instagram アプリの「設定とアクティビティ」→「アカウント�
    | `CLOUDFLARE_API_TOKEN` | 手順4のトークン |
 
    Account ID（ダッシュボードのアドレスの先頭にある32文字）は `.github/workflows/friends-api.yml` の `CLOUDFLARE_ACCOUNT_ID` に書いてあります。アカウントを変えたときはそこを書き換えます。
-6. （この番号は欠番）
+6. **初期設定キー（`OWNER_SETUP_KEY`）を Worker の Secret に登録します。** 最初に登録した人が管理者になる仕組みなので、このキーを知らない人が先に管理者になれないようにするためのものです。
+   手元のPCで（`friends-api/` フォルダで `npm ci` を済ませてから）次を実行し、長めのランダムな文字列を入力します。入力した値は手順8で使うので控えておきます。
+
+   ```sh
+   cd friends-api
+   CLOUDFLARE_API_TOKEN=手順4のトークン CLOUDFLARE_ACCOUNT_ID=アカウントID npx wrangler secret put OWNER_SETUP_KEY
+   ```
+
+   （Cloudflare ダッシュボードの **Workers & Pages → kengo-friend-sns → Settings → Variables and Secrets** から `OWNER_SETUP_KEY` を Secret として追加しても同じです。）管理者の登録が終わったあとは、このキーは使われません。
 
 7. **Actions** タブで「Deploy FRIEND SNS API」を選び、**Run workflow** を押します。データベースと保存場所が自動で作られ、裏側が配備され、サイトが再公開されます（5分ほど）。
-8. `https://www.kengo-umetani.com/friends/app/` を開き、**最初のメンバー（管理者）として登録**します。このとき友人に伝える**合言葉**を決めます。
+8. `https://www.kengo-umetani.com/friends/app/` を開き、**最初のメンバー（管理者）として登録**します。このとき手順6の**初期設定キー**と、友人に伝える**合言葉**を入力します。
+9. **サインイン画面への総当たり対策（Cloudflare のレート制限ルール）を1つ追加します。** Worker の中にも簡易的な制限（同じIPから1分に10回まで）は入っていますが、Cloudflare 側のルールのほうが確実です。
+   ダッシュボードの **Security → WAF → Rate limiting rules → Create rule**（Workers の場合は **Workers & Pages → kengo-friend-sns → Settings → Triggers / Security** 配下に表示されることもあります）で次のように設定します。
+
+   | 項目 | 値 |
+   |---|---|
+   | Rule name | `friend-sns-auth` |
+   | If incoming requests match | URI Path **starts with** `/auth/` |
+   | With the same characteristics | IP |
+   | When rate exceeds | **10** requests per **1 minute** |
+   | Then take action | Block（期間 1 minute 以上） |
+
+### しくみのメモ（セキュリティ）
+
+- 写真・動画（`/media/:id`）はメンバー以外には配信されません。アプリが `/auth/me` と `/sync` で受け取る短命の署名付きトークン（有効1時間）を `?t=` として付けて取得します。
+- パスワードは PBKDF2-SHA256（100,000回）で保存します。以前の形式（6,000回）で保存されているメンバーは、次回サインインしたときに自動で新しい形式に置き換わります（本人の操作は不要）。
+- サインインの有効期限は30日です。期限が切れたら、ユーザー名とパスワードでサインインし直すだけです。
+- `wrangler.toml` の本番用の許可オリジンに `localhost` は含めていません。手元で動かすときは `npx wrangler dev --env dev` を使います。
 
 ### ふだんの使い方
 

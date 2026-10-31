@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parent
 D = json.load(open(ROOT / 'data/content.json', encoding='utf-8'))
 META = json.load(open(ROOT / 'data/imgmeta.json'))
 SITE = json.load(open(ROOT / 'data/site-settings.json', encoding='utf-8'))
-import hashlib
+import hashlib, base64
 ASSET_V = hashlib.sha1((ROOT / 'assets/site.css').read_bytes() + (ROOT / 'assets/site.js').read_bytes()).hexdigest()[:8]
 IGDATA = json.load(open(ROOT / 'data/instagram.json', encoding='utf-8'))
 for _p in IGDATA['posts']:
@@ -86,6 +86,34 @@ SITE_URL = f'https://{DOMAIN}/'
 # Cloudflare Web Analytics (cookie-free). Set "cf_beacon_token" in data/site-settings.json to switch it on.
 ANALYTICS = (f'<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{{"token":"{SITE["cf_beacon_token"]}"}}\'></script>'
              if SITE.get('cf_beacon_token') else '')
+# ---------- Content Security Policy (GitHub Pages cannot send headers, so it goes in a <meta> tag) ----------
+# What the generated pages load: own CSS/JS/images, Google Fonts, Cloudflare Web Analytics (optional) and, on HOME,
+# one inline script. Inline scripts are allowed by hash so 'unsafe-inline' is never needed for script-src.
+# style-src keeps 'unsafe-inline' because the pages use style="" attributes and element.style from JS.
+# frame-ancestors is omitted: browsers ignore it in a <meta> tag (header-only directive).
+def script_hash(code):
+    return "'sha256-" + base64.b64encode(hashlib.sha256(code.encode('utf-8')).digest()).decode('ascii') + "'"
+
+
+def csp_meta(script_hashes=(), connect=(), blob=False):
+    script = ' '.join(["'self'", 'https://static.cloudflareinsights.com', *script_hashes])
+    media_extra = ' blob:' if blob else ''
+    policy = '; '.join([
+        "default-src 'self'",
+        f'script-src {script}',
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com",
+        f"img-src 'self' data:{media_extra} https:",
+        f"media-src 'self'{media_extra} https:",
+        ' '.join(["connect-src 'self'", 'https://cloudflareinsights.com', *connect]),
+        "worker-src 'self' blob:" if blob else "worker-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+    ])
+    return f'<meta http-equiv="Content-Security-Policy" content="{policy}">'
+
+
 PERSON_ID = SITE_URL + '#person'
 PERSON_LD = {
     '@type': 'Person', '@id': PERSON_ID,
@@ -217,6 +245,20 @@ def page(key, title, desc, body, root, skeleton=True):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&amp;display=swap">
 <link rel="stylesheet" href="{root}assets/site.css?v={ASSET_V}">'''
+    # HOME only: the live artwork on the canvas. Kept as a plain string so its CSP hash can be computed.
+    home_script = f'''
+addEventListener("DOMContentLoaded",()=>{{
+  const cv=document.querySelector(".live-art");if(!cv||!window.SIGNAL)return;
+  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  fetch("{root}synesthesia-world/news.json",{{cache:"no-store"}}).then(r=>r.ok?r.json():null).then(N=>{{
+    if(!N||!N.days||!N.days.length)return;const day=N.days.slice().sort((a,b)=>a.date<b.date?1:-1)[0];
+    let ctx,W,H;const fit=()=>{{const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);ctx=cv.getContext("2d");ctx.setTransform(d,0,0,d,0,0);W=r.width;H=r.height}};
+    fit();addEventListener("resize",fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);let now=new Date(),last=0;
+    const loop=ts=>{{if(ts-last>30000){{now=new Date();last=ts}}SIGNAL.draw(ctx,W,H,day,ts/1000,{{when:now}});if(!still)requestAnimationFrame(loop)}};
+    requestAnimationFrame(loop);
+  }}).catch(()=>{{}});
+}});
+'''
     content = f'''<header class="top">
   <a class="mark" href="{root}index.html"{' aria-current="page"' if key == 'HOME' else ''}>KENGO UMETANI <span class="l2">OFFICIAL</span></a>
   <nav class="nav" aria-label="Main">{nav}</nav>
@@ -232,25 +274,14 @@ def page(key, title, desc, body, root, skeleton=True):
 </footer>
 <script src="{root}assets/site.js?v={ASSET_V}" defer></script>''' + (f'''
 <script src="{root}synesthesia-world/signal.js" defer></script>
-<script>
-addEventListener("DOMContentLoaded",()=>{{
-  const cv=document.querySelector(".live-art");if(!cv||!window.SIGNAL)return;
-  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
-  fetch("{root}synesthesia-world/news.json",{{cache:"no-store"}}).then(r=>r.ok?r.json():null).then(N=>{{
-    if(!N||!N.days||!N.days.length)return;const day=N.days.slice().sort((a,b)=>a.date<b.date?1:-1)[0];
-    let ctx,W,H;const fit=()=>{{const r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);ctx=cv.getContext("2d");ctx.setTransform(d,0,0,d,0,0);W=r.width;H=r.height}};
-    fit();addEventListener("resize",fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);let now=new Date(),last=0;
-    const loop=ts=>{{if(ts-last>30000){{now=new Date();last=ts}}SIGNAL.draw(ctx,W,H,day,ts/1000,{{when:now}});if(!still)requestAnimationFrame(loop)}};
-    requestAnimationFrame(loop);
-  }}).catch(()=>{{}});
-}});
-</script>''' if key == 'HOME' else '')
+<script>{home_script}</script>''' if key == 'HOME' else '')
     if not skeleton:
         return head + '\n' + content
     return f'''<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+{csp_meta([script_hash(home_script)] if key == 'HOME' else [])}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 {head}
 </head>
@@ -510,11 +541,20 @@ def friends_app():
     js += ''.join((src / f).read_text(encoding='utf-8') for f in FRIENDS_APP_SRC)
     cfg_path = ROOT / 'data/friends-api.json'
     cfg = json.load(open(cfg_path, encoding='utf-8')) if cfg_path.exists() else {}
-    setup = f'<script>window.KFS_API={json.dumps(cfg["url"])};</script>' if cfg.get('url') else '<script>window.KFS_PENDING=true;</script>'
+    setup_js = f'window.KFS_API={json.dumps(cfg["url"])};' if cfg.get('url') else 'window.KFS_PENDING=true;'
+    setup = f'<script>{setup_js}</script>'
+    js = '\n' + js + '\n'
+    # CSP: the app is two inline scripts (allowed by hash), talks only to its own API, and shows local files via blob: URLs.
+    api_origin = []
+    if cfg.get('url'):
+        from urllib.parse import urlsplit
+        u = urlsplit(cfg['url']); api_origin = [f'{u.scheme}://{u.netloc}']
+    csp = csp_meta([script_hash(setup_js), script_hash(js)], connect=[*api_origin, 'https://*.workers.dev'], blob=True)
     return f"""<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+{csp}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#f6f5f2">
@@ -525,9 +565,7 @@ def friends_app():
 <body>
 {body}
 {setup}
-<script>
-{js}
-</script>
+<script>{js}</script>
 </body>
 </html>
 """
