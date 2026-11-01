@@ -332,7 +332,7 @@
     function label() {
       var floor = selected ? selected.textContent.trim().toUpperCase() : '';
       var prop = doc.querySelector('.property-tab.active');
-      return (prop ? prop.textContent.trim() + ' / ' : '') + floor;
+      return (prop ? (prop.firstChild && prop.firstChild.nodeType === 3 ? prop.firstChild.textContent : prop.textContent).trim() + ' / ' : '') + floor;
     }
 
     function buildSeg() {

@@ -200,7 +200,7 @@
   }
 }
 </style>
-  <link rel='stylesheet' href='assets/css/top2026.css?v=202611011305' media='all' />
+  <link rel='stylesheet' href='assets/css/top2026.css?v=202611011310' media='all' />
   <link rel='stylesheet' href='assets/css/lineup2026.css?v=202610191525' media='all' />
   <link rel='stylesheet' href='assets/css/gallery2026.css?v=202610171945' media='all' />
 </head>
@@ -292,6 +292,7 @@
   <section class="gd-lp-intro">
     <h1 class="gd-lp-intro__logo"><img src="assets/images/yamanofumoto/logo-dark.webp?v=20261031" width="1251" height="576" alt=""><span class="gd-sr">GLAMDAY STYLE HOTEL SUITE 山ノ麓</span></h1>
     <p class="gd-lp-intro__copy">歴史ある避暑地 軽井沢<br>雄大な自然に包まれた魅力的なこの地で<br>心地よい時を遊する</p>
+    <p class="gd-lp-intro__note"><span class="gd-dog"><svg class="gd-dog__paw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="9" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="9" r="2.2"/><path d="M12 10.5c-3.2 0-6 3.6-6 6.2 0 1.8 1.4 2.8 3 2.8 1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-1 3-2.8 0-2.6-2.8-6.2-6-6.2z"/></svg>愛犬OK</span><span>FIR TREE は、愛犬とご一緒にご滞在いただけます</span></p>
   </section>
 
   <nav class="gd-lp-nav" aria-label="ページ内メニュー">
@@ -355,7 +356,7 @@
 <div class="gd-floorbar">
 <div class="property-tabs">
 <button class="property-tab active" data-property="maple">MAPLE</button>
-<button class="property-tab" data-property="firtree">FIRTREE</button>
+<button class="property-tab" data-property="firtree">FIRTREE<span class="gd-dog"><svg class="gd-dog__paw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="9" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="9" r="2.2"/><path d="M12 10.5c-3.2 0-6 3.6-6 6.2 0 1.8 1.4 2.8 3 2.8 1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-1 3-2.8 0-2.6-2.8-6.2-6-6.2z"/></svg>愛犬OK</span></button>
 </div>
 <div class="floor-level-tabs">
 <button class="floor-level-tab active" id="floor-selector">
@@ -449,7 +450,7 @@
 <h3 class="section-heading">物件詳細</h3>
 <div class="overview-tabs">
 <button class="overview-tab overview-tab-maple active" data-property="maple">MAPLE</button>
-<button class="overview-tab overview-tab-firtree" data-property="firtree">FIR TREE</button>
+<button class="overview-tab overview-tab-firtree" data-property="firtree">FIR TREE<span class="gd-dog"><svg class="gd-dog__paw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="9" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="9" r="2.2"/><path d="M12 10.5c-3.2 0-6 3.6-6 6.2 0 1.8 1.4 2.8 3 2.8 1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-1 3-2.8 0-2.6-2.8-6.2-6-6.2z"/></svg>愛犬OK</span></button>
 </div>
 <table class="overview-table">
 <tr>
@@ -471,6 +472,10 @@
 <tr>
 <th>構造</th>
 <td>RC造地上2階建</td>
+</tr>
+<tr>
+<th>ペット</th>
+<td>ご同伴不可</td>
 </tr>
 <tr>
 <th>分譲価格</th>
@@ -829,11 +834,13 @@
       const overviewPropertyData = {
         maple: {
           name: 'GLAMDAY STYLE HOTEL SUITE 山ノ麓 MAPLE',
-          area: '228.15㎡(≒69.01坪) / GREEN TERRACE 4.61㎡(≒1.39坪)'
+          area: '228.15㎡(≒69.01坪) / GREEN TERRACE 4.61㎡(≒1.39坪)',
+          pet: 'ご同伴不可'
         },
         firtree: {
           name: 'GLAMDAY STYLE HOTEL SUITE 山ノ麓 FIR TREE',
-          area: '202.09㎡(≒61.3坪) / GREEN TERRACE 27.54㎡(≒8.33坪)'
+          area: '202.09㎡(≒61.3坪) / GREEN TERRACE 27.54㎡(≒8.33坪)',
+          pet: '<span class="gd-dog is-inline"><svg class="gd-dog__paw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="9" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="9" r="2.2"/><path d="M12 10.5c-3.2 0-6 3.6-6 6.2 0 1.8 1.4 2.8 3 2.8 1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-1 3-2.8 0-2.6-2.8-6.2-6-6.2z"/></svg>愛犬OK</span>愛犬とご一緒にご滞在いただけます'
         }
       };
 
@@ -854,6 +861,8 @@
                   row.querySelector('td').textContent = data.name;
                 } else if (th.textContent === '建物面積') {
                   row.querySelector('td').innerHTML = data.area;
+                } else if (th.textContent === 'ペット' && data.pet) {
+                  row.querySelector('td').innerHTML = data.pet;
                 }
               }
             });
@@ -1102,7 +1111,7 @@
 })();
 </script>
 
-<script src="assets/js/gd-site.js?v=202611011300" defer></script>
+<script src="assets/js/gd-site.js?v=202611011310" defer></script>
 
 <script>
 (function() {
