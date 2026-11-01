@@ -1,0 +1,51 @@
+/* Request / inquiry / privacy pages in the GLAMDAY STYLE 2026 look
+   (header, menu and footer are the shared 2026 components; this file restyles the page body) */
+.gd-legacy .gd-header a, .gd-legacy .gd-menu a, .gd-legacy .gd-footer a { text-decoration: none; }
+.gd-legacy .gd-footer a { color: inherit; }
+.gd-legacy main { background: var(--gd-bg); }
+
+/* --- forms (request / inquiry) --- */
+.gd-legacy .page-container { background: var(--gd-bg); }
+.gd-legacy .visual-section { background: #ebe4d9; border-right: 0; }
+.gd-legacy .form-section { background: var(--gd-bg); }
+.gd-legacy .page-title { color: var(--gd-ink); font-family: var(--gd-mincho); font-weight: 400; letter-spacing: 0.08em; }
+.gd-legacy .form-title, .gd-legacy #formHeader { font-family: var(--gd-mincho); font-weight: 400; letter-spacing: 0.12em; color: var(--gd-ink); }
+.gd-legacy .visual-eyebrow { font-family: var(--gd-garamond); letter-spacing: 0.24em; color: var(--gd-gold); }
+.gd-legacy .visual-lead, .gd-legacy .benefit-note, .gd-legacy .help-text { color: #5f5850; }
+.gd-legacy .benefit-badge { background: var(--gd-ink); color: #ecd9a8; border-radius: 0; font-family: var(--gd-garamond); letter-spacing: 0.14em; }
+.gd-legacy .benefit-text { color: var(--gd-ink); }
+.gd-legacy .field-label, .gd-legacy .form-label { color: var(--gd-ink); letter-spacing: 0.06em; }
+.gd-legacy .required-mark, .gd-legacy .required { color: #9a5b3c; }
+.gd-legacy .field-input, .gd-legacy .field-textarea {
+  background: #fbf9f6; border: 1px solid rgba(49,49,49,.22); border-radius: 0; color: var(--gd-ink);
+  transition: border-color .2s, box-shadow .2s;
+}
+.gd-legacy .field-input:focus, .gd-legacy .field-textarea:focus { border-color: var(--gd-gold); box-shadow: 0 0 0 3px rgba(184,154,94,.18); outline: none; }
+.gd-legacy .field-input::placeholder, .gd-legacy .field-textarea::placeholder { color: #a39b90; }
+.gd-legacy .highlight-box { background: #ebe4d9; border: 1px solid rgba(184,154,94,.35); border-radius: 0; }
+.gd-legacy .choice-item { border-radius: 0; }
+.gd-legacy .choice-item:hover { background-color: rgba(184,154,94,.1); }
+.gd-legacy input[type="checkbox"], .gd-legacy input[type="radio"] { accent-color: var(--gd-ink); }
+.gd-legacy .submit-button {
+  background: var(--gd-ink); color: var(--gd-bg); border-radius: 0; font-family: var(--gd-mincho);
+  letter-spacing: 0.2em; box-shadow: inset 0 0 0 1px rgba(236,217,168,.35);
+  transition: background .3s, color .3s;
+}
+.gd-legacy .submit-button:hover { background: #1a1714; color: #ecd9a8; }
+.gd-legacy .visual-contact-label { font-family: var(--gd-garamond); letter-spacing: 0.24em; color: var(--gd-gold); }
+.gd-legacy .visual-contact-tel { font-family: var(--gd-garamond); color: var(--gd-ink); }
+
+/* --- privacy policy --- */
+.gd-legacy .main-content { padding-top: 40px; padding-bottom: 80px; }
+.gd-legacy .main-content .page-title { font-size: 28px; text-align: center; }
+.gd-legacy .page-subtitle { font-family: var(--gd-garamond); letter-spacing: 0.24em; color: var(--gd-gold); text-align: center; }
+.gd-legacy .content-section { background: #fbf9f6; border-radius: 0; box-shadow: none; border: 1px solid rgba(49,49,49,.08); font-family: var(--gd-mincho); }
+.gd-legacy .content-section h2, .gd-legacy .content-section h3 { font-family: var(--gd-mincho); font-weight: 400; color: var(--gd-ink); border-color: rgba(184,154,94,.55); }
+.gd-legacy .note { background: #ebe4d9; border-left-color: var(--gd-gold); }
+.gd-legacy main a { color: #7d6638; }
+.gd-legacy main a:hover { color: var(--gd-ink); }
+@media (max-width: 767px) { .gd-legacy .main-content .page-title { font-size: 22px; } }
+.gd-legacy .main-content { padding-top: 72px; }
+.gd-legacy .main-content .page-title { border-bottom-color: rgba(184,154,94,.6); padding-bottom: 18px; }
+.gd-legacy .content-section h2 { border-left-color: var(--gd-gold); }
+@media (max-width: 767px) { .gd-legacy .main-content { padding-top: 44px; } .gd-legacy .content-section { padding-left: 20px; padding-right: 20px; } }

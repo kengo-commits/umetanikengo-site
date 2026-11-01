@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>ご購入のお問い合わせ | 軽井沢・熱海の別荘 | GLAMDAY STYLE</title>
+  <meta name="description" content="GLAMDAY STYLEの別荘ご購入に関するお問い合わせページ。軽井沢・熱海の各物件について、価格・ご契約・所有スタイルまで専任のスタッフがご相談を承ります。お電話（0120-02-6058）でも受け付けております。" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta property="og:title" content="ご購入のお問い合わせ | GLAMDAY STYLE">
+  <meta property="og:description" content="GLAMDAY STYLEの別荘ご購入に関するお問い合わせページ。軽井沢・熱海の各物件について、価格・ご契約・所有スタイルまで専任のスタッフがご相談を承ります。お電話（0120-02-6058）でも受け付けております。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/ogp/top.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="GLAMDAY STYLE">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="assets/uploads/2025/03/512_512-150x150.png" sizes="32x32" />
+
+  <style>
+    /* Font loading optimization */
+    @font-face {
+      font-family: 'Yu Mincho';
+      font-display: swap;
+      src: local('Yu Mincho'), local('YuMincho'), local('游明朝');
+    }
+
+    :root {
+      --color-dark: #2c2c2c;
+      --color-gray: #666;
+      --color-gray-light: #e0e0e0;
+      --color-white: #ffffff;
+      --transition-base: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      font-size: 62.5%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Yu Mincho", "YuMincho", "游明朝", "Hiragino Mincho ProN", serif;
+      font-size: 1.6rem;
+      line-height: 1.7;
+      color: #2c2c2c;
+      background: #ffffff;
+      min-height: 100vh;
+    }
+
+    /* ヘッダー */
+    .page-header {
+      background: #444440;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .sp-br {
+      display: none;
+    }
+
+    .header-back {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      transition: var(--transition-base);
+    }
+
+    .header-back:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* メインコンテナ */
+    .page-container {
+      min-height: calc(100vh - 80px);
+      background: #ffffff;
+    }
+
+    .content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    /* 左側エリア（購入/ウェイティング ビジュアル — 物件モンタージュ） */
+    .visual-section {
+      position: relative;
+      padding: 0;
+      background-color: #ffffff;
+      border-right: 1px solid #ececec;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .visual-header {
+      padding: 72px 50px 44px;
+    }
+
+    .visual-eyebrow {
+      display: block;
+      color: #888888;
+      font-size: 12px;
+      letter-spacing: 0.32em;
+      font-weight: 500;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      color: #222222;
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+
+    .visual-lead {
+      color: #5a5a5a;
+      font-size: 14.5px;
+      line-height: 2.0;
+      letter-spacing: 0.03em;
+      margin-bottom: 36px;
+      max-width: 30em;
+    }
+
+    .visual-contact {
+      padding-top: 26px;
+      border-top: 1px solid #e3e3e3;
+    }
+
+    .visual-contact-label {
+      color: #777777;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .visual-contact-tel {
+      display: inline-block;
+      color: #222222;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+
+    .visual-contact-hours {
+      color: #999999;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      margin-top: 8px;
+    }
+
+    /* 物件モンタージュ */
+    .pm-row {
+      display: grid;
+      gap: 2px;
+      margin-top: 2px;
+    }
+    .pm-row:first-child { margin-top: 0; }
+    .pm-row.cols-1 { grid-template-columns: 1fr; }
+    .pm-row.cols-2 { grid-template-columns: 1fr 1fr; }
+
+    .pm-tile {
+      position: relative;
+      overflow: hidden;
+    }
+    .pm-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pm-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.18) 45%, transparent 75%);
+    }
+
+    .pm-label {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      z-index: 1;
+    }
+    .pm-series {
+      display: block;
+      color: rgba(255,255,255,0.8);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      margin-bottom: 3px;
+    }
+    .pm-name {
+      color: #ffffff;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+    .pm-name.sm { font-size: 16px; }
+
+    .pm-h-lg { height: 380px; }
+    .pm-h-md { height: 240px; }
+    .pm-h-sm { height: 200px; }
+
+    /* モバイルは物件モンタージュを隠してフォームへの導線を優先 */
+    @media (max-width: 900px) {
+      .visual-header { padding: 48px 28px 36px; }
+      .property-montage { display: none; }
+    }
+
+    /* 右側フォームエリア */
+    .form-section {
+      padding: 80px 60px 100px;
+      background: white;
+      overflow-y: auto;
+    }
+
+    .form-header {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: 35px;
+      text-align: left;
+    }
+
+    .field-group {
+      margin-bottom: 25px;
+    }
+
+    .field-label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: var(--color-dark);
+      font-size: 16px;
+    }
+
+    .required-mark {
+      color: red;
+      font-weight: bold;
+    }
+
+    .optional-mark {
+      color: #999;
+      font-size: 13px;
+      font-weight: normal;
+    }
+
+    .field-input,
+    .field-textarea {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid var(--color-gray-light);
+      border-radius: 8px;
+      font-size: 16px;
+      transition: var(--transition-base);
+      font-family: inherit;
+    }
+
+    .field-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .field-input:focus,
+    .field-textarea:focus {
+      outline: none;
+      border-color: #2c2c2c;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+    }
+
+    /* チェックボックス */
+    .choice-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .choice-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .choice-item:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    .choice-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: #2c2c2c;
+      flex-shrink: 0;
+    }
+
+    .choice-item span {
+      font-size: 15px;
+      color: var(--color-dark);
+      cursor: pointer;
+    }
+
+    /* 紙パンフレット希望ボックス */
+    .highlight-box {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 25px;
+    }
+
+    .highlight-box .choice-item {
+      margin-bottom: 0;
+    }
+
+    .highlight-box input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+
+    .highlight-box .choice-item span {
+      font-weight: 500;
+      font-size: 16px;
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    .help-text {
+      margin: 10px 0 0 30px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* 送信ボタン */
+    .submit-button {
+      width: 100%;
+      padding: 20px;
+      background: #2c2c2c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-base);
+      margin-top: 30px;
+      font-family: inherit;
+    }
+
+    .submit-button:hover {
+      background: #1a1a1a;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .submit-button:active {
+      transform: translateY(0);
+    }
+
+    /* フッター */
+    .footer {
+      background-color: #444440;
+      color: #FFFFFF;
+      padding: 6rem 4rem 2rem;
+    }
+
+    .footer-container {
+      max-width: 140rem;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-left {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-logo {
+      margin-bottom: 3.5rem;
+      text-align: center;
+    }
+
+    .footer-logo img {
+      width: 16rem;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .footer-request-button {
+      display: inline-block;
+      border: 1px solid #FFFFFF;
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 1.5rem 5rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 4rem;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .footer-request-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-contact {
+      margin-bottom: 0;
+      align-self: flex-start;
+    }
+
+    .footer-nav {
+      margin-top: 0;
+    }
+
+    .footer-nav-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #FFFFFF;
+      text-align: center;
+    }
+
+    .footer-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .footer-nav-link {
+      color: #999999;
+      text-decoration: none;
+      font-size: 1.3rem;
+      transition: color 0.3s;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .footer-nav-link:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-contact-label {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+    }
+
+    .footer-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer-contact-tel {
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-contact-tel a {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    .footer-contact-tel a:hover {
+      opacity: 0.8;
+    }
+
+    .footer-social-icons {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .footer-social-icon {
+      color: #FFFFFF;
+      transition: opacity 0.3s;
+      display: block;
+      width: 2.6rem;
+      height: 2.6rem;
+    }
+
+    .footer-social-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: #FFFFFF;
+    }
+
+    .footer-social-icon:hover {
+      opacity: 0.7;
+    }
+
+    .footer-center {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .footer-service {
+      text-align: left;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .footer-company-logo {
+      text-align: left;
+      width: 100%;
+    }
+
+    .footer-company-logo img {
+      width: 8rem;
+      height: auto;
+      display: block;
+      margin: 0;
+    }
+
+    .footer-company-info {
+      text-align: left;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    .footer-company-name {
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-office {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-postal {
+      font-size: 1rem;
+    }
+
+    .footer-address {
+      font-size: 1rem;
+    }
+
+    .footer-right {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+
+    .footer-top-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #FFFFFF;
+      transition: opacity 0.3s;
+      position: relative;
+    }
+
+    .footer-top-button:hover {
+      opacity: 0.8;
+    }
+
+    .footer-top-circle {
+      width: 9rem;
+      height: 9rem;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      background-color: transparent;
+      font-weight: 300;
+      padding-top: 0.5rem;
+    }
+
+    .footer-top-arrow {
+      font-size: 2rem;
+      font-weight: 100;
+      margin-bottom: 0.4rem;
+      line-height: 1;
+      transform: scaleX(1.5);
+    }
+
+    .footer-top-text {
+      line-height: 1;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      padding-top: 2.5rem;
+      border-top: none;
+      font-weight: 300;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 1200px) {
+      .visual-header {
+        padding: 64px 44px 40px;
+      }
+
+      .form-section {
+        padding: 60px 40px 80px;
+      }
+
+      .page-title {
+        font-size: 30px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-section {
+        padding: 50px 30px 80px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-header {
+        padding: 10px 20px;
+      }
+
+      .header-logo {
+        font-size: 14px;
+      }
+
+      .sp-br {
+        display: inline;
+      }
+
+      .header-back {
+        font-size: 12px;
+        padding: 6px 15px;
+      }
+
+      .content-wrapper {
+        margin: 20px auto;
+        padding: 0 10px;
+      }
+
+      .visual-header {
+        padding: 36px 24px 0;
+      }
+
+      .form-section {
+        padding: 30px 20px;
+      }
+
+      .page-title {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+
+      .form-header {
+        font-size: 20px;
+      }
+
+      .field-label {
+        font-size: 15px;
+      }
+
+      .field-input,
+      .field-textarea {
+        font-size: 15px;
+        padding: 14px;
+      }
+
+      .submit-button {
+        font-size: 16px;
+        padding: 18px;
+      }
+
+      /* フッターモバイル対応 */
+      .footer {
+        padding: 4rem 2rem 2rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-left {
+        align-items: center;
+        width: 100%;
+      }
+
+      .footer-logo {
+        margin-bottom: 2.5rem;
+      }
+
+      .footer-logo img {
+        width: 12rem;
+      }
+
+      .footer-request-button {
+        padding: 1.2rem 3rem;
+        font-size: 1.3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-contact {
+        align-self: center;
+        text-align: center;
+      }
+
+      .footer-contact-row {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .footer-contact-tel {
+        font-size: 2rem;
+      }
+
+      .footer-center {
+        width: 100%;
+      }
+
+      .footer-nav-title {
+        font-size: 1.1rem;
+      }
+
+      .footer-nav-links {
+        gap: 0.7rem;
+      }
+
+      .footer-nav-link {
+        font-size: 1.2rem;
+      }
+
+      .footer-right {
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+      }
+
+      .footer-service {
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .footer-company-logo {
+        text-align: center;
+      }
+
+      .footer-company-logo img {
+        width: 7rem;
+        margin: 0 auto;
+      }
+
+      .footer-company-info {
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .footer-top-button {
+        order: -1;
+      }
+
+      .footer-top-circle {
+        width: 8rem;
+        height: 8rem;
+        font-size: 1.1rem;
+      }
+
+      .footer-copyright {
+        font-size: 0.85rem;
+        padding-top: 2rem;
+      }
+
+      .footer-copyright div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 12px !important;
+      }
+
+      .footer-copyright a {
+        margin-right: 0 !important;
+      }
+    }
+  </style>
+<!-- Google Tag Manager -->
+<!-- End Google Tag Manager -->
+
+  <link rel='stylesheet' href='assets/css/top2026.css?v=202611011400' media='all' />
+  <link rel='stylesheet' href='assets/css/legacy2026.css?v=202611011400' media='all' />
+</head>
+<body class="gd-page gd-legacy"><!-- Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
+
+  <!-- ヘッダー -->
+  <header class="gd-header">
+      <div class="gd-header__inner">
+        <button class="gd-menu-btn" type="button" aria-controls="gd-menu" aria-expanded="false" data-gd-menu-open><span class="gd-menu-btn__bars" aria-hidden="true"></span><span class="gd-menu-btn__label">MENU</span></button>
+        <div class="gd-header__logo"><a href="./"><img src="assets/images/top2026/title_logo.webp?v=20261031" width="2721" height="401" alt="GLAMDAY STYLE RESIDENCE SALES 公式販売サイト"></a></div>
+        <div class="gd-header__nav">
+          <a class="gd-btn-head is-dark" href="request.html?from=inquiry">資料請求</a>
+          <a class="gd-btn-head is-light" href="https://timerex.net/s/info_f204_76eb/7f0ca53a" target="_blank" rel="noopener">オンライン商談</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="gd-menu" id="gd-menu" role="dialog" aria-modal="true" aria-label="メニュー" hidden data-lenis-prevent>
+      <div class="gd-menu__backdrop" data-gd-menu-close></div>
+      <div class="gd-menu__sheet">
+        <div class="gd-menu__main">
+          <a class="gd-menu__logo" href="./"><img src="assets/images/top2026/title_logo.webp?v=20261031" width="2721" height="401" alt="GLAMDAY STYLE RESIDENCE SALES"></a>
+          <div class="gd-menu__cols">
+            <ul class="gd-menu__list">
+              <li><button type="button" class="gd-menu__item has-sub" data-gd-sub="lineup">LINE UP<span class="gd-menu__chev" aria-hidden="true"></span></button></li>
+              <li><a class="gd-menu__item" href="./#about">GLAMDAYとは</a></li>
+              <li><a class="gd-menu__item" href="./#services">PRIVATE &amp; COMFORT</a></li>
+              <li><a class="gd-menu__item" href="./#special-service">SPECIAL SERVICE</a></li>
+              <li><a class="gd-menu__item" href="./#movie">MOVIES</a></li>
+              <li><a class="gd-menu__item" href="./#gallery">PHOTO GALLERY</a></li>
+              <li><a class="gd-menu__item" href="./#faq">FAQ</a></li>
+              <li class="gd-menu__gap"><a class="gd-menu__item" href="request.html?from=inquiry">資料請求</a></li>
+              <li><a class="gd-menu__item" href="https://timerex.net/s/info_f204_76eb/7f0ca53a" target="_blank" rel="noopener">オンライン商談</a></li>
+              <li><a class="gd-menu__item" href="inquiry.html">ご購入のお問い合わせ</a></li>
+            </ul>
+            <div class="gd-menu__sub" data-gd-panel="lineup">
+              <button type="button" class="gd-menu__back" data-gd-sub-back>戻る</button>
+              <p class="gd-menu__group">シェア別荘</p>
+              <ul>
+                <li><a href="uminonamioto-share.html">海ノ波音<span>静岡・熱海</span></a></li>
+                <li><a href="asamanouta-share.html">浅間ノ詩<span>長野・軽井沢</span></a></li>
+                <li><a href="yamanofumoto-share.html">山ノ麓<span>長野・軽井沢</span></a></li>
+                <li><a href="mizunohoshi-share.html">水ノ星<span>長野・軽井沢</span></a></li>
+                <li><a href="soranoniwa-share.html">空ノ庭<span>長野・軽井沢</span></a></li>
+              </ul>
+              <p class="gd-menu__group">ヴィラタイプホテルレジデンス</p>
+              <ul>
+                <li><a href="yamanofumoto-villa.html">山ノ麓 BIRCH<span>長野・軽井沢</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <aside class="gd-menu__aside">
+          <button type="button" class="gd-menu__close" data-gd-menu-close aria-label="メニューを閉じる"></button>
+          <div class="gd-menu__feature">
+            <p class="gd-menu__eyebrow">NEWS</p>
+            <a class="gd-menu__card" href="asamanouta-share.html">
+              <span class="gd-menu__card-img"><img src="assets/images/top2026/kv_asamanouta.webp" width="1400" height="1000" alt="" loading="lazy" srcset="assets/images/top2026/kv_asamanouta-w480.webp 480w, assets/images/top2026/kv_asamanouta-w768.webp 768w, assets/images/top2026/kv_asamanouta-w1080.webp 1080w, assets/images/top2026/kv_asamanouta.webp 1400w" sizes="(max-width: 767px) 100vw, 100vw"></span>
+              <span class="gd-menu__card-body">
+                <span class="gd-menu__card-area">長野・軽井沢</span>
+                <span class="gd-menu__card-title">浅間ノ詩</span>
+                <span class="gd-menu__card-text">浅間山を眼前に、揺らめく炎と語らうひととき。森に抱かれるシェア別荘です。</span>
+                <span class="gd-menu__card-link">VIEW MORE</span>
+              </span>
+            </a>
+            <a class="gd-menu__all" href="./#sales">すべての物件を見る</a>
+          </div>
+          <div class="gd-menu__contact">
+            <span class="gd-menu__eyebrow">CONTACT</span>
+            <a href="tel:0120-02-6058">0120-02-6058</a>
+            <span>受付時間 10:00〜18:00</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  <main class="gd-legacy__main">
+
+
+  <!-- メインコンテンツ -->
+  <div class="page-container">
+    <div class="content-wrapper">
+      <div class="content-grid">
+        
+        <!-- 左側: ビジュアルエリア（購入/ウェイティングで出し分け + 物件モンタージュ） -->
+        <div class="visual-section" id="visualSection">
+          <div class="visual-header">
+            <span class="visual-eyebrow" id="visualEyebrow">OWNERSHIP</span>
+            <h1 class="page-title" id="visualTitle">別荘のご購入について</h1>
+            <p class="visual-lead" id="visualLead">専任のスタッフが、ご購入に関するあらゆるご相談を承ります。価格・ご契約・所有スタイルまで、どうぞお気軽にお問い合わせください。</p>
+
+            <div class="visual-contact">
+              <p class="visual-contact-label">お電話でのお問い合わせ</p>
+              <a class="visual-contact-tel" href="tel:0120-02-6058">0120-02-6058</a>
+              <p class="visual-contact-hours">受付時間 10:00〜18:00 / 土日祝休</p>
+            </div>
+          </div>
+
+          <div class="property-montage">
+            <div class="pm-row cols-1">
+              <div class="pm-tile pm-h-lg">
+                <img src="assets/images/properties/yamanofumoto-birch-main.webp" alt="山ノ麓 BIRCH">
+                <div class="pm-label"><span class="pm-series">山ノ麓</span><span class="pm-name">BIRCH</span></div>
+              </div>
+            </div>
+            <div class="pm-row cols-2">
+              <div class="pm-tile pm-h-md">
+                <img src="assets/images/properties/yamanofumoto-maple-main.webp" alt="山ノ麓 MAPLE">
+                <div class="pm-label"><span class="pm-series">山ノ麓</span><span class="pm-name sm">MAPLE</span></div>
+              </div>
+              <div class="pm-tile pm-h-md">
+                <img src="assets/images/properties/yamanofumoto-fir-tree-main.webp" alt="山ノ麓 FIR TREE">
+                <div class="pm-label"><span class="pm-series">山ノ麓</span><span class="pm-name sm">FIR TREE</span></div>
+              </div>
+            </div>
+            <div class="pm-row cols-2">
+              <div class="pm-tile pm-h-md">
+                <img src="assets/images/properties/soranoniwa-main.webp" alt="空ノ庭">
+                <div class="pm-label"><span class="pm-name sm">空ノ庭</span></div>
+              </div>
+              <div class="pm-tile pm-h-md">
+                <img src="assets/images/properties/asamanouta-main.webp" alt="浅間ノ詩">
+                <div class="pm-label"><span class="pm-name sm">浅間ノ詩</span></div>
+              </div>
+            </div>
+            <div class="pm-row cols-1">
+              <div class="pm-tile pm-h-sm">
+                <img src="assets/images/properties/uminonamioto-main.webp" alt="海ノ波音">
+                <div class="pm-label"><span class="pm-name">海ノ波音</span></div>
+              </div>
+            </div>
+            <div class="pm-row cols-2">
+              <div class="pm-tile pm-h-sm">
+                <img src="assets/images/properties/mizunohoshi-vega-main.webp" alt="水ノ星 VEGA">
+                <div class="pm-label"><span class="pm-series">水ノ星</span><span class="pm-name sm">VEGA</span></div>
+              </div>
+              <div class="pm-tile pm-h-sm">
+                <img src="assets/images/properties/mizunohoshi-altair-main.webp" alt="水ノ星 ALTAIR">
+                <div class="pm-label"><span class="pm-series">水ノ星</span><span class="pm-name sm">ALTAIR</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側: フォームエリア -->
+        <div class="form-section">
+          <h2 class="form-header" id="formHeader">ご購入のお問い合わせ</h2>
+
+          <form id="requestForm" method="POST" action="#">
+            <input type="hidden" name="action" value="purchase_inquiry">
+            <input type="hidden" name="intent" value="purchase">
+
+            <div class="field-group">
+              <label class="field-label">ご興味のある物件 <span class="required-mark">*</span></label>
+              <select name="property" id="propertySelect" class="field-input" required>
+                <option value="">選択してください</option>
+                <option value="浅間ノ詩">浅間ノ詩</option>
+                <option value="海ノ波音">海ノ波音</option>
+                <option value="山ノ麓（シェア）">山ノ麓（シェア）</option>
+                <option value="水ノ星">水ノ星</option>
+                <option value="空ノ庭">空ノ庭</option>
+                <option value="山ノ麓（分譲・ホテルレジデンス）">山ノ麓（分譲・ホテルレジデンス）</option>
+                <option value="複数物件・未定">複数物件で検討中・未定</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">お名前 <span class="required-mark">*</span></label>
+              <input type="text" name="name" class="field-input" required placeholder="山田 太郎">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">生年月日（西暦） <span class="required-mark">*</span></label>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <input type="text" inputmode="numeric" pattern="\d*" maxlength="4" name="birthYear" class="field-input" style="width:5.5em; text-align:center;" placeholder="1975" required>
+                <span>年</span>
+                <input type="text" inputmode="numeric" pattern="\d*" maxlength="2" name="birthMonth" class="field-input" style="width:4em; text-align:center;" placeholder="3" required>
+                <span>月</span>
+                <input type="text" inputmode="numeric" pattern="\d*" maxlength="2" name="birthDay" class="field-input" style="width:4em; text-align:center;" placeholder="8" required>
+                <span>日</span>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">メールアドレス <span class="required-mark">*</span></label>
+              <input type="email" name="email" class="field-input" required placeholder="example@email.com">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">電話番号 <span class="required-mark">*</span></label>
+              <input type="tel" name="tel" class="field-input" required placeholder="090-1234-5678">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">お電話のご希望時間帯 <span class="optional-mark">(任意)</span></label>
+              <select name="callPreferredTime" class="field-input">
+                <option value="">選択してください</option>
+                <option value="午前 (9:00〜12:00)">午前 (9:00〜12:00)</option>
+                <option value="昼 (12:00〜15:00)">昼 (12:00〜15:00)</option>
+                <option value="午後 (15:00〜18:00)">午後 (15:00〜18:00)</option>
+                <option value="夜 (18:00〜20:00)">夜 (18:00〜20:00)</option>
+                <option value="いつでも可">いつでも可</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">郵便番号 <span class="required-mark">*</span></label>
+              <input type="text" name="postal" class="field-input" required placeholder="107-0062">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">ご住所 <span class="required-mark">*</span></label>
+              <textarea name="address" class="field-textarea" required placeholder="東京都港区南青山2-27-25"></textarea>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">勤務先 <span class="optional-mark">(任意)</span></label>
+              <input type="text" name="workplace" class="field-input" placeholder="株式会社〇〇">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">役職 <span class="optional-mark">(任意)</span></label>
+              <input type="text" name="position" class="field-input" placeholder="代表取締役 / 部長 など">
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">ご購入検討時期 <span class="required-mark">*</span></label>
+              <select name="purchaseTiming" class="field-input" required>
+                <option value="">選択してください</option>
+                <option value="すぐにでも">すぐにでも</option>
+                <option value="3ヶ月以内">3ヶ月以内</option>
+                <option value="半年以内">半年以内</option>
+                <option value="1年以内">1年以内</option>
+                <option value="未定 / 情報収集中">未定 / 情報収集中</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">他社の別荘 / シェア別荘 ご保有有無 <span class="optional-mark">(任意)</span></label>
+              <div class="choice-group">
+                <label class="choice-item"><input type="radio" name="otherVilla" value="有"><span>有</span></label>
+                <label class="choice-item"><input type="radio" name="otherVilla" value="無"><span>無</span></label>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">ご要望・メッセージ <span class="optional-mark">(任意)</span></label>
+              <textarea name="message" class="field-textarea" placeholder="ご質問やご要望がございましたらご記入ください"></textarea>
+            </div>
+
+            <div class="field-group highlight-box">
+              <label class="choice-item">
+                <input type="checkbox" id="kpgClubOptIn" name="kpgClubOptIn" value="yes">
+                <span>カトープレジャーグループ カスタマークラブ入会希望</span>
+              </label>
+              <p class="help-text">優待や限定イベントのご案内をお送りします（任意）</p>
+            </div>
+
+            <button type="submit" class="submit-button" id="submitBtn">送信する</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- フッター -->
+  </main>
+<footer class="gd-footer">
+  <div class="gd-footer__inner">
+    <div class="gd-footer__top">
+      <a class="gd-footer__logo" href="./"><img src="assets/images/top2026/title_logo.webp?v=20261031" width="2721" height="401" alt="GLAMDAY STYLE RESIDENCE SALES" loading="lazy"></a>
+      <ul class="gd-footer__menu">
+        <li><a href="./">TOP</a></li>
+        <li><a href="./#about">GLAMDAYとは - ABOUT GLAMDAY</a></li>
+        <li><a href="./#sales">現在販売中のGLAMDAY - NOW ON SALE</a></li>
+        <li><a href="./#styles">所有スタイル - OWNERSHIP STYLE</a></li>
+        <li><a href="./#benefits">オーナー様特典 - KPG EXECUTIVE OWNER’S CLUB</a></li>
+        <li><a href="./#movie">動画 - MOVIE</a></li>
+        <li><a href="./#gallery">フォトギャラリー - PHOTO GALLERY</a></li>
+        <li><a href="request.html?from=inquiry">資料請求</a></li>
+      </ul>
+      <div class="gd-footer__contact">
+        <span class="gd-footer__contact-label">CONTACT</span>
+        <div><a class="gd-footer__tel" href="tel:0120-02-6058">0120-02-6058</a><span class="gd-footer__hours">受付時間 10:00〜18:00</span></div>
+        <ul class="gd-sns">
+          <li><a href="https://www.instagram.com/glamdaystyle_teitaku/" target="_blank" rel="noopener"><img src="assets/images/top2026/icon_instagram_dark.svg" width="22" height="22" alt="Instagram" loading="lazy"></a></li>
+          <li><a href="https://www.facebook.com/glamdaystyleteitaku" target="_blank" rel="noopener"><img src="assets/images/top2026/icon_facebook_dark.svg" width="22" height="22" alt="Facebook" loading="lazy"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="gd-footer__bottom">
+      <a class="gd-footer__kpg" href="https://www.kpg.gr.jp/" target="_blank" rel="noopener"><img src="assets/images/top2026/logo_kpg_dark.svg" width="74" height="33" alt="Kato Pleasure Group" loading="lazy"></a>
+      <div class="gd-footer__links">
+        <a href="https://www.kpg.gr.jp/store/" target="_blank" rel="noopener">運営施設一覧</a>
+        <a href="https://kpg-recruit.com/" target="_blank" rel="noopener">採用情報</a>
+        <a href="privacy-policy.html">プライバシーポリシー</a>
+        <a href="https://glamday.jp/ownership/external-transmission-policy.html">外部送信ポリシー</a>
+      </div>
+      <small class="gd-footer__copy">COPYRIGHT &copy; KATO PLEASURE GROUP</small>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    // ========================================
+    // 流入元の取得（URLパラメータ from）
+    // ========================================
+    function getSourceFromUrl() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var from = urlParams.get('from');
+
+      // ページ名のマッピング
+      var sourceMap = {
+        // 公式ブランドサイト内の物件ページ
+        'top': 'トップ',
+        'asamanouta': '浅間ノ詩',
+        'uminonamioto': '海ノ波音',
+        'yamanofumoto-share': '山ノ麓（シェア）',
+        'mizunohoshi': '水ノ星',
+        'soranoniwa': '空ノ庭',
+        'yamanofumoto-villa': '山ノ麓（分譲）',
+        'karuizawa-share': '軽井沢シェアLP',
+        'karuizawa-villa': '軽井沢分譲LP',
+        'atami-share': '熱海シェアLP',
+        'goethe': 'ゲーテLP',
+        // キャンペーン・タイアップLPからの購入ボタン経由
+        'webleon-asamanouta': '浅間ノ詩LP',
+        'asamanouta-lp': '浅間ノ詩LP（タイアップなし）',  // /ownership/asamanouta-lp/ の「購入する」
+        'webleon-req':'ウェブレオンLPから資料請求',
+        'stay-req': 'STAY-LPから資料請求',
+        'karuizawa1-req': '軽井沢オーナー名刺LPから資料請求',
+        'karuizawa2-req': '軽井沢その他名刺LPから資料請求',
+        'atami-req': '熱海名刺LPから資料請求',
+        'tokyo-req': '東京本社名刺LPから資料請求',
+        'staff-req': 'スタッフLPから資料請求'
+      };
+
+      if (from && sourceMap[from]) {
+        return sourceMap[from];
+      }
+
+      // パラメータがない場合はデフォルト
+      return 'ブランドサイト';
+    }
+
+    function toggleAddress() {
+      const checkbox = document.getElementById('paperBrochure');
+      const postalGroup = document.getElementById('postalGroup');
+      const addressGroup = document.getElementById('addressGroup');
+      const postalField = document.getElementById('postalField');
+      const addressField = document.getElementById('addressField');
+
+      if (checkbox.checked) {
+        postalGroup.style.display = 'block';
+        addressGroup.style.display = 'block';
+        postalField.required = true;
+        addressField.required = true;
+      } else {
+        postalGroup.style.display = 'none';
+        addressGroup.style.display = 'none';
+        postalField.required = false;
+        addressField.required = false;
+        postalField.value = '';
+        addressField.value = '';
+      }
+    }
+
+    document.getElementById('requestForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // 送信ボタンを無効化
+      const submitBtn = document.querySelector('.submit-button');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+
+      try {
+        // row_id を先に生成（Apps Script と完全に同じロジック）
+        const rowId = 'INQ_' + new Date().getTime() + '_' + Math.random().toString(36).substr(2, 9);
+        console.log('生成したrow_id:', rowId);
+
+        // 流入元・問い合わせ種別（URLパラメータ from / intent）
+        const source = getSourceFromUrl();
+        const urlp = new URLSearchParams(window.location.search);
+        const intent = urlp.get('intent') || 'purchase'; // 'purchase' or 'waitlist'
+        console.log('流入元:', source, 'intent:', intent);
+
+        const formData = new FormData(e.target);
+
+        // 全角→半角の正規化
+        function han(v){ return (v||'').replace(/[０-９]/g, function(s){ return String.fromCharCode(s.charCodeAt(0) - 0xFEE0); }).replace(/[－ー−]/g, '-'); }
+        const tel = han(formData.get('tel'));
+        const postal = han(formData.get('postal'));
+
+        // 生年月日（西暦・3入力 → YYYY-MM-DD、揃わなければ空）
+        const by = (formData.get('birthYear')||'').trim(), bm = (formData.get('birthMonth')||'').trim(), bd = (formData.get('birthDay')||'').trim();
+        const birthdate = (/^\d{4}$/.test(by) && bm && bd) ? (by + '-' + String(bm).padStart(2,'0') + '-' + String(bd).padStart(2,'0')) : '';
+
+        const requestData = {
+          action: 'purchase_inquiry',
+          row_id: rowId,
+          source: source,
+          intent: intent,
+          property: formData.get('property') || '',
+          name: formData.get('name'),
+          birthdate: birthdate,
+          email: formData.get('email'),
+          tel: tel,
+          callPreferredTime: formData.get('callPreferredTime') || '',
+          postal: postal,
+          address: formData.get('address'),
+          workplace: formData.get('workplace') || '',
+          position: formData.get('position') || '',
+          purchaseTiming: formData.get('purchaseTiming') || '',
+          otherVilla: formData.get('otherVilla') || '',
+          message: formData.get('message') || '',
+          kpgClubOptIn: formData.get('kpgClubOptIn') || ''
+        };
+
+        // Google Apps Script に送信
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwXt0reUQWSFHLBKRfK305BQszYJTABHIZugSB3clUaozoViV3eXxWe1U6GO2IEDnw_/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestData)
+        });
+
+        // no-cors モードでは response.json() が使えないため、成功と見なす
+        // 実際のエラーは Google Apps Script のログで確認
+        console.log('資料請求送信完了');
+
+        // アンケートページに遷移（先ほど生成したrow_idを使用）
+        window.location.href = 'https://glamday.jp/ownership/survey.html?id=' + rowId;
+
+      } catch (error) {
+        console.error('送信エラー:', error);
+        alert('送信中にエラーが発生しました。もう一度お試しください。');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  </script>
+
+<script>
+  // intent（purchase / waitlist）でタイトル・見出し・送信ボタン・hidden + 左ビジュアルを出し分け
+  (function(){
+    var intent = new URLSearchParams(location.search).get('intent');
+    var isWait = (intent === 'waitlist');
+    var label = isWait ? 'ウェイティングリストに追加する' : 'ご購入のお問い合わせ';
+    var submitLabel = isWait ? 'この内容で送信する' : 'ご購入のお問い合わせを送信';
+    var h = document.getElementById('formHeader'); if (h) h.textContent = label;
+    document.title = label + ' | 軽井沢・熱海の別荘 | GLAMDAY STYLE';
+    var sb = document.getElementById('submitBtn'); if (sb) sb.textContent = submitLabel;
+    var hi = document.querySelector('input[name="intent"]'); if (hi) hi.value = isWait ? 'waitlist' : 'purchase';
+
+    // 左ビジュアルパネルの文言を intent で出し分け（写真は共通の物件モンタージュ）
+    var visual = {
+      purchase: {
+        eyebrow: 'OWNERSHIP',
+        title: '別荘のご購入について',
+        lead: '専任のスタッフが、ご購入に関するあらゆるご相談を承ります。価格・ご契約・所有スタイルまで、どうぞお気軽にお問い合わせください。'
+      },
+      waitlist: {
+        eyebrow: 'WAITING LIST',
+        title: 'ウェイティングリストについて',
+        lead: 'ご好評につき、現在は残りわずかとなっている人気の物件です。ウェイティングリストにご登録いただいた皆さまへ、最新の販売状況を優先的にお知らせいたします。'
+      }
+    };
+    var v = isWait ? visual.waitlist : visual.purchase;
+    var eb = document.getElementById('visualEyebrow'); if (eb) eb.textContent = v.eyebrow;
+    var ti = document.getElementById('visualTitle'); if (ti) ti.innerHTML = v.title;
+    var ld = document.getElementById('visualLead'); if (ld) ld.textContent = v.lead;
+
+    // 物件セレクトを intent に連動（購入とウェイティングで選べる物件が異なる）
+    var propMap = {
+      'asamanouta': '浅間ノ詩',
+      'asamanouta-lp': '浅間ノ詩',
+      'uminonamioto': '海ノ波音',
+      'yamanofumoto-share': '山ノ麓（シェア）',
+      'mizunohoshi': '水ノ星',
+      'soranoniwa': '空ノ庭',
+      'yamanofumoto-villa': '山ノ麓（分譲・ホテルレジデンス）'
+    };
+    // 各物件ページの CTA 配線に一致（purchase = 浅間ノ詩・山ノ麓シェア / waitlist = 海ノ波音・水ノ星・空ノ庭・山ノ麓分譲）
+    var propByIntent = {
+      purchase: ['浅間ノ詩', '山ノ麓（シェア）'],
+      waitlist: ['海ノ波音', '水ノ星', '空ノ庭', '山ノ麓（分譲・ホテルレジデンス）']
+    };
+    var allowed = isWait ? propByIntent.waitlist : propByIntent.purchase;
+    var ps = document.getElementById('propertySelect');
+    if (ps) {
+      // intent に該当しない物件を除去（placeholder と「複数物件・未定」は残す）
+      Array.prototype.slice.call(ps.options).forEach(function(opt){
+        if (opt.value === '' || opt.value === '複数物件・未定') return;
+        if (allowed.indexOf(opt.value) === -1) opt.remove();
+      });
+      // from パラメータで初期選択（該当 intent の物件のみ）
+      var from = new URLSearchParams(location.search).get('from');
+      if (from && propMap[from] && allowed.indexOf(propMap[from]) !== -1) ps.value = propMap[from];
+    }
+  })();
+</script>
+<script>
+(function () {
+  function initRail(rail) {
+    var down = false, startX = 0, startLeft = 0, moved = false;
+    rail.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.target.closest('video')) return;
+      down = true; moved = false; startX = e.clientX; startLeft = rail.scrollLeft;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) { moved = true; rail.classList.add('is-dragging'); }
+      rail.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return; down = false;
+      setTimeout(function () { rail.classList.remove('is-dragging'); }, 0);
+    });
+    rail.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    var pid = rail.getAttribute('data-progress');
+    var bar = pid && document.getElementById(pid);
+    if (bar) {
+      var update = function () {
+        var max = rail.scrollWidth - rail.clientWidth;
+        var n = rail.children.length, w = 100 / n;
+        var r = max > 0 ? rail.scrollLeft / max : 0;
+        bar.style.width = w + '%';
+        bar.style.left = (r * (100 - w)) + '%';
+      };
+      rail.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+  }
+  function init() {
+    document.querySelectorAll('.js-gd-rail').forEach(initRail);
+    document.querySelectorAll('.gd-movie').forEach(function (m) {
+      var v = m.querySelector('video'), b = m.querySelector('.gd-movie__play');
+      if (!v || !b) return;
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.gd-movie video').forEach(function (o) { if (o !== v) o.pause(); });
+        v.controls = true; m.classList.add('is-playing'); v.play();
+      });
+    });
+    document.querySelectorAll('.gd-photo[role="button"]').forEach(function (el) {
+      el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+(function () {
+  var hero = document.querySelector('.js-gd-hero');
+  if (!hero) return;
+  var slides = hero.querySelectorAll('.gd-hero__slide'), dots = hero.querySelectorAll('.gd-hero__dots button');
+  var cur = 0, timer = null, wait = 6500;
+  function show(n) {
+    slides[cur].classList.remove('is-active'); dots[cur].classList.remove('is-active');
+    cur = (n + slides.length) % slides.length;
+    var img = slides[cur].querySelector('img'); if (img && img.loading === 'lazy') img.loading = 'eager';
+    slides[cur].classList.add('is-active'); dots[cur].classList.add('is-active');
+  }
+  function start() { stop(); timer = setInterval(function () { show(cur + 1); }, wait); }
+  function stop() { if (timer) clearInterval(timer); timer = null; }
+  dots.forEach(function (d, i) { d.addEventListener('click', function () { show(i); start(); }); });
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  window.addEventListener('load', function () { slides.forEach(function (s) { var i = s.querySelector('img'); if (i) i.loading = 'eager'; }); });
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  start();
+})();
+
+(function () {
+  var menu = document.getElementById('gd-menu');
+  if (!menu) return;
+  var openers = document.querySelectorAll('[data-gd-menu-open]');
+  var last = null, timer = null;
+  function setSub(name) {
+    menu.classList.toggle('is-sub', !!name);
+    menu.querySelectorAll('[data-gd-sub]').forEach(function (b) {
+      var on = b.getAttribute('data-gd-sub') === name;
+      b.classList.toggle('is-current', on); b.setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+  function open(sub) {
+    last = document.activeElement;
+    clearTimeout(timer);
+    menu.hidden = false;
+    document.documentElement.classList.add('gd-menu-open');
+    requestAnimationFrame(function () { requestAnimationFrame(function () { menu.classList.add('is-open'); }); });
+    setSub(sub || null);
+    openers.forEach(function (b) { b.setAttribute('aria-expanded', 'true'); });
+    var f = menu.querySelector('.gd-menu__item'); if (f) f.focus({ preventScroll: true });
+  }
+  function close() {
+    menu.classList.remove('is-open');
+    document.documentElement.classList.remove('gd-menu-open');
+    openers.forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    timer = setTimeout(function () { menu.hidden = true; setSub(null); }, 600);
+    if (last && last.focus) last.focus({ preventScroll: true });
+  }
+  openers.forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); open(b.getAttribute('data-gd-menu-open') || null); }); });
+  menu.querySelectorAll('[data-gd-menu-close]').forEach(function (b) { b.addEventListener('click', close); });
+  menu.querySelectorAll('[data-gd-sub]').forEach(function (b) {
+    b.addEventListener('click', function () { setSub(b.classList.contains('is-current') ? null : b.getAttribute('data-gd-sub')); });
+  });
+  menu.querySelectorAll('[data-gd-sub-back]').forEach(function (b) { b.addEventListener('click', function () { setSub(null); }); });
+  menu.querySelectorAll('a[href^="#"]').forEach(function (a) { a.addEventListener('click', function () { close(); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('is-open')) close(); });
+})();
+
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none)').matches) return;
+  var imgs = document.querySelectorAll('.gd-page main .gd-card__img img, .gd-page main .gd-about__photo img, .gd-page main .gd-svc__img img, .gd-page main .gd-eoc-hero > img, .gd-page main .gd-benefit__img img, .gd-page main .gd-photo img');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var img = en.target; io.unobserve(img);
+      var show = function () { img.classList.add('is-shown'); };
+      if (img.complete && img.naturalWidth) show(); else { img.addEventListener('load', show, { once: true }); img.addEventListener('error', show, { once: true }); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  imgs.forEach(function (img) {
+    var r = img.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) return;
+    img.classList.add('gd-fade'); io.observe(img);
+  });
+})();
+</script>
+<script src="assets/js/gd-site.js?v=202611011310" defer></script>
+</body>
+</html>
