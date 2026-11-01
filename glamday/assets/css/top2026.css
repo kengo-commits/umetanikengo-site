@@ -1623,3 +1623,8 @@ a.gd-benefit .gd-benefit__text { margin-bottom: 0; }
 .gd-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 /* lineup card: property type under the name (e.g. 山ノ麓 シェア別荘 / ヴィラタイプ) */
 .gd-page .gd-card__sub { display: block; margin-top: 4px; font-family: var(--gd-mincho); font-size: 12px; font-weight: 400; letter-spacing: 0.14em; line-height: 1.4; color: var(--gd-gold, #b89a5e); }
+/* SOLD OUT / WAITING (2 lines) */
+.gd-page .gd-card > .gd-soldout.is-2line { flex-direction: column; gap: 3px; height: auto; padding: 9px 0 8px; line-height: 1.2; }
+.gd-page .gd-card > .gd-soldout.is-2line > span { position: relative; z-index: 1; display: block; }
+.gd-page .gd-card > .gd-soldout.is-2line > span:first-child { font-size: 12px; letter-spacing: 0.24em; opacity: .85; }
+.gd-page .gd-card:has(> .gd-soldout.is-2line) .gd-card__body { padding-top: 46px; }
