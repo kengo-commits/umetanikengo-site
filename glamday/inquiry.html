@@ -888,7 +888,8 @@
                 <li><a href="asamanouta-share.html">浅間ノ詩<span>長野・軽井沢</span></a></li>
                 <li><a href="yamanofumoto-share.html">山ノ麓 MAPLE<span>長野・軽井沢</span></a></li>
                 <li><a href="yamanofumoto-firtree.html">山ノ麓 FIR TREE<span>長野・軽井沢・愛犬OK</span></a></li>
-                <li><a href="mizunohoshi-share.html">水ノ星<span>長野・軽井沢</span></a></li>
+                <li><a href="mizunohoshi-share.html">水ノ星 VEGA<span>長野・軽井沢</span></a></li>
+                <li><a href="mizunohoshi-altair.html">水ノ星 ALTAIR<span>長野・軽井沢・愛犬OK</span></a></li>
                 <li><a href="soranoniwa-share.html">空ノ庭<span>長野・軽井沢</span></a></li>
               </ul>
               <p class="gd-menu__group">ヴィラタイプホテルレジデンス</p>
@@ -1005,7 +1006,8 @@
                 <option value="海ノ波音">海ノ波音</option>
                 <option value="山ノ麓 MAPLE（シェア）">山ノ麓 MAPLE（シェア）</option>
                 <option value="山ノ麓 FIR TREE（シェア）">山ノ麓 FIR TREE（シェア・愛犬OK）</option>
-                <option value="水ノ星">水ノ星</option>
+                <option value="水ノ星 VEGA">水ノ星 VEGA</option>
+                <option value="水ノ星 ALTAIR">水ノ星 ALTAIR（愛犬OK）</option>
                 <option value="空ノ庭">空ノ庭</option>
                 <option value="山ノ麓（分譲・ホテルレジデンス）">山ノ麓（分譲・ホテルレジデンス）</option>
                 <option value="複数物件・未定">複数物件で検討中・未定</option>
@@ -1167,6 +1169,8 @@
         'yamanofumoto-share': '山ノ麓 MAPLE（シェア）',
         'yamanofumoto-firtree': '山ノ麓 FIR TREE（シェア）',
         'mizunohoshi': '水ノ星',
+        'mizunohoshi-vega': '水ノ星 VEGA',
+        'mizunohoshi-altair': '水ノ星 ALTAIR',
         'soranoniwa': '空ノ庭',
         'yamanofumoto-villa': '山ノ麓（分譲）',
         'karuizawa-share': '軽井沢シェアLP',
@@ -1330,14 +1334,16 @@
       'uminonamioto': '海ノ波音',
       'yamanofumoto-share': '山ノ麓 MAPLE（シェア）',
       'yamanofumoto-firtree': '山ノ麓 FIR TREE（シェア）',
-      'mizunohoshi': '水ノ星',
+      'mizunohoshi': '水ノ星 VEGA',
+      'mizunohoshi-vega': '水ノ星 VEGA',
+      'mizunohoshi-altair': '水ノ星 ALTAIR',
       'soranoniwa': '空ノ庭',
       'yamanofumoto-villa': '山ノ麓（分譲・ホテルレジデンス）'
     };
-    // 各物件ページの CTA 配線に一致（purchase = 浅間ノ詩・山ノ麓シェア / waitlist = 海ノ波音・水ノ星・空ノ庭・山ノ麓分譲）
+    // 各物件ページの CTA 配線に一致（purchase = 浅間ノ詩・山ノ麓シェア / waitlist = 海ノ波音・水ノ星 VEGA／ALTAIR・空ノ庭・山ノ麓分譲）
     var propByIntent = {
       purchase: ['浅間ノ詩', '山ノ麓 MAPLE（シェア）', '山ノ麓 FIR TREE（シェア）'],
-      waitlist: ['海ノ波音', '水ノ星', '空ノ庭', '山ノ麓（分譲・ホテルレジデンス）']
+      waitlist: ['海ノ波音', '水ノ星 VEGA', '水ノ星 ALTAIR', '空ノ庭', '山ノ麓（分譲・ホテルレジデンス）']
     };
     var allowed = isWait ? propByIntent.waitlist : propByIntent.purchase;
     var ps = document.getElementById('propertySelect');
