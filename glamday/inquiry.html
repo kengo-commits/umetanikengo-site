@@ -886,7 +886,8 @@
               <ul>
                 <li><a href="uminonamioto-share.html">海ノ波音<span>静岡・熱海</span></a></li>
                 <li><a href="asamanouta-share.html">浅間ノ詩<span>長野・軽井沢</span></a></li>
-                <li><a href="yamanofumoto-share.html">山ノ麓<span>長野・軽井沢</span></a></li>
+                <li><a href="yamanofumoto-share.html">山ノ麓 MAPLE<span>長野・軽井沢</span></a></li>
+                <li><a href="yamanofumoto-firtree.html">山ノ麓 FIR TREE<span>長野・軽井沢・愛犬OK</span></a></li>
                 <li><a href="mizunohoshi-share.html">水ノ星<span>長野・軽井沢</span></a></li>
                 <li><a href="soranoniwa-share.html">空ノ庭<span>長野・軽井沢</span></a></li>
               </ul>
@@ -1002,7 +1003,8 @@
                 <option value="">選択してください</option>
                 <option value="浅間ノ詩">浅間ノ詩</option>
                 <option value="海ノ波音">海ノ波音</option>
-                <option value="山ノ麓（シェア）">山ノ麓（シェア）</option>
+                <option value="山ノ麓 MAPLE（シェア）">山ノ麓 MAPLE（シェア）</option>
+                <option value="山ノ麓 FIR TREE（シェア）">山ノ麓 FIR TREE（シェア・愛犬OK）</option>
                 <option value="水ノ星">水ノ星</option>
                 <option value="空ノ庭">空ノ庭</option>
                 <option value="山ノ麓（分譲・ホテルレジデンス）">山ノ麓（分譲・ホテルレジデンス）</option>
@@ -1162,7 +1164,8 @@
         'top': 'トップ',
         'asamanouta': '浅間ノ詩',
         'uminonamioto': '海ノ波音',
-        'yamanofumoto-share': '山ノ麓（シェア）',
+        'yamanofumoto-share': '山ノ麓 MAPLE（シェア）',
+        'yamanofumoto-firtree': '山ノ麓 FIR TREE（シェア）',
         'mizunohoshi': '水ノ星',
         'soranoniwa': '空ノ庭',
         'yamanofumoto-villa': '山ノ麓（分譲）',
@@ -1325,14 +1328,15 @@
       'asamanouta': '浅間ノ詩',
       'asamanouta-lp': '浅間ノ詩',
       'uminonamioto': '海ノ波音',
-      'yamanofumoto-share': '山ノ麓（シェア）',
+      'yamanofumoto-share': '山ノ麓 MAPLE（シェア）',
+      'yamanofumoto-firtree': '山ノ麓 FIR TREE（シェア）',
       'mizunohoshi': '水ノ星',
       'soranoniwa': '空ノ庭',
       'yamanofumoto-villa': '山ノ麓（分譲・ホテルレジデンス）'
     };
     // 各物件ページの CTA 配線に一致（purchase = 浅間ノ詩・山ノ麓シェア / waitlist = 海ノ波音・水ノ星・空ノ庭・山ノ麓分譲）
     var propByIntent = {
-      purchase: ['浅間ノ詩', '山ノ麓（シェア）'],
+      purchase: ['浅間ノ詩', '山ノ麓 MAPLE（シェア）', '山ノ麓 FIR TREE（シェア）'],
       waitlist: ['海ノ波音', '水ノ星', '空ノ庭', '山ノ麓（分譲・ホテルレジデンス）']
     };
     var allowed = isWait ? propByIntent.waitlist : propByIntent.purchase;
