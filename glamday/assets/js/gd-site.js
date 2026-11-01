@@ -423,3 +423,16 @@
     initGalleryMore();
   });
 })();
+
+/* measure VIEW MORE width so the card's type label never runs under it */
+(function () {
+  function fit() {
+    document.querySelectorAll('.gd-card__body').forEach(function (b) {
+      var m = b.querySelector('.gd-more'); if (!m) return;
+      b.style.setProperty('--gd-more-w', Math.ceil(m.getBoundingClientRect().width) + 'px');
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fit); else fit();
+  window.addEventListener('load', fit); window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();

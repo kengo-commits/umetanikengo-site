@@ -1628,3 +1628,6 @@ a.gd-benefit .gd-benefit__text { margin-bottom: 0; }
 .gd-page .gd-card > .gd-soldout.is-2line > span { position: relative; z-index: 1; display: block; }
 .gd-page .gd-card > .gd-soldout.is-2line > span:first-child { font-size: 12px; letter-spacing: 0.24em; opacity: .85; }
 .gd-page .gd-card:has(> .gd-soldout.is-2line) .gd-card__body { padding-top: 46px; }
+/* keep the property-type label clear of VIEW MORE */
+.gd-page .gd-card__body:has(.gd-more) .gd-card__sub { padding-right: calc(var(--gd-more-w, 190px) + 12px); }
+.gd-page .gd-card__sub > span { display: inline-block; white-space: nowrap; }
