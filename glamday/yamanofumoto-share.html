@@ -200,7 +200,7 @@
   }
 }
 </style>
-  <link rel='stylesheet' href='assets/css/top2026.css?v=202611011310' media='all' />
+  <link rel='stylesheet' href='assets/css/top2026.css?v=202611011330' media='all' />
   <link rel='stylesheet' href='assets/css/lineup2026.css?v=202610191525' media='all' />
   <link rel='stylesheet' href='assets/css/gallery2026.css?v=202610171945' media='all' />
 </head>
@@ -411,7 +411,7 @@
 
 <div class="info-row">
 <span class="info-label">SPEC</span>
-<span class="info-value">ご利用人数 2〜6名様<br/>2ベッド＆2バスルーム</span>
+<span class="info-value">ご利用人数 2〜6名様<br/>2ベッド＆2バスルーム<span class="gd-spec-dog" hidden><br/><span class="gd-dog is-spec"><svg class="gd-dog__paw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="9" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14" cy="5.5" r="2.2"/><circle cx="18" cy="9" r="2.2"/><path d="M12 10.5c-3.2 0-6 3.6-6 6.2 0 1.8 1.4 2.8 3 2.8 1.2 0 2-.6 3-.6s1.8.6 3 .6c1.6 0 3-1 3-2.8 0-2.6-2.8-6.2-6-6.2z"/></svg>愛犬OK</span></span></span>
 </div>
 
 <div class="info-row facility-row">
@@ -767,6 +767,7 @@
 
         document.getElementById('floor-area').textContent = data.floorArea;
         document.getElementById('terrace-area').textContent = data.terrace;
+        var specDog = document.querySelector('.gd-spec-dog'); if (specDog) specDog.hidden = (property !== 'firtree');
 
         const roomPhoto = document.querySelector('.room-photo');
         const photoPlaceholder = document.querySelector('.photo-placeholder');

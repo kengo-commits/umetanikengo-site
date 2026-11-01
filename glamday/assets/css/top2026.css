@@ -1641,3 +1641,5 @@ a.gd-benefit .gd-benefit__text { margin-bottom: 0; }
 .gd-lp-intro__note .gd-dog { margin: 0 10px 0 0; }
 .gd-page .gd-card__sub .gd-dog { margin: 4px 0 0; }
 @media (max-width: 767px) { .gd-lp-intro__note { font-size: 12px; margin-top: 18px; } .gd-dog { font-size: 10px; } }
+.gd-dog.is-spec { margin: 8px 0 0; font-size: 11.5px; padding: 3px 10px 3px 8px; }
+.gd-dog.is-spec .gd-dog__paw { width: 12px; height: 12px; }
