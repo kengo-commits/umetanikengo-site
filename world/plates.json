@@ -328,5 +328,20 @@
   "file": "p-2026-11-04.webp",
   "w": 946,
   "h": 1400
+ },
+ {
+  "museum": "cma",
+  "id": 148540,
+  "title": "The Eight Immortals of the Wine Cup",
+  "artist": "Soga Shōhaku",
+  "when": "later 1700s",
+  "medium": "Painting",
+  "credit": "The Cleveland Museum of Art",
+  "license": "CC0",
+  "url": "https://clevelandart.org/art/1976.11.2",
+  "date": "2026-11-05",
+  "file": "p-2026-11-05.webp",
+  "w": 1263,
+  "h": 442
  }
 ]
