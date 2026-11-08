@@ -388,5 +388,20 @@
   "file": "p-2026-11-08.webp",
   "w": 1400,
   "h": 670
+ },
+ {
+  "museum": "cma",
+  "id": 141549,
+  "title": "Portrait of the Jester Calabazas",
+  "artist": "Diego Velázquez",
+  "when": "c. 1631–32",
+  "medium": "Painting",
+  "credit": "The Cleveland Museum of Art",
+  "license": "CC0",
+  "url": "https://clevelandart.org/art/1965.15",
+  "date": "2026-11-09",
+  "file": "p-2026-11-09.webp",
+  "w": 553,
+  "h": 900
  }
 ]
