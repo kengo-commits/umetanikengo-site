@@ -433,5 +433,20 @@
   "file": "p-2026-11-11.webp",
   "w": 423,
   "h": 900
+ },
+ {
+  "museum": "met",
+  "id": 312781,
+  "title": "Standing figure",
+  "artist": "Teotihuacan artist(s)",
+  "when": "350–600 CE",
+  "medium": "Stone-Sculpture",
+  "credit": "The Metropolitan Museum of Art",
+  "license": "Public domain",
+  "url": "https://www.metmuseum.org/art/collection/search/312781",
+  "date": "2026-11-12",
+  "file": "p-2026-11-12.webp",
+  "w": 898,
+  "h": 1400
  }
 ]
