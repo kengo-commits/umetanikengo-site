@@ -478,5 +478,20 @@
   "file": "p-2026-11-14.webp",
   "w": 460,
   "h": 1400
+ },
+ {
+  "museum": "cma",
+  "id": 169187,
+  "title": "Indian Combat",
+  "artist": "Edmonia Lewis",
+  "when": "1868",
+  "medium": "Sculpture",
+  "credit": "The Cleveland Museum of Art",
+  "license": "CC0",
+  "url": "https://clevelandart.org/art/2011.110",
+  "date": "2026-11-15",
+  "file": "p-2026-11-15.webp",
+  "w": 741,
+  "h": 900
  }
 ]
